@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Pokedex</string>
+    <!-- Home -->
+    <string name="app_name" translatable="false">Pokédex</string>
+    <string name="subtitle">Search for Pokémon by name or using the National Pokédex number.</string>
+    <string name="placeholder_textfield">What Pokémon are you looking for?</string>
+
 </resources>

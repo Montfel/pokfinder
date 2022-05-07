@@ -1,4 +1,4 @@
-package com.montfel.pokedex.ui.theme
+package com.montfel.pokedex.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
