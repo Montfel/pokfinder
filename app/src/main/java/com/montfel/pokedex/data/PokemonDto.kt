@@ -6,9 +6,12 @@ import com.montfel.pokedex.domain.Pokemon
 
 data class PokemonDto(
     @SerializedName("height")
-    val height: Int
+    val height: Int,
+    @SerializedName("name")
+    val name: String
 ) : DtoMapper<Pokemon> {
     override fun toDomain() = Pokemon(
-        height = height
+        height = height,
+        name = name.replaceFirstChar { it.uppercase() }
     )
 }

@@ -1,6 +1,5 @@
 package com.montfel.pokedex.domain
 
-data class Pokemon(
-    val height: Int,
+data class Results(
     val name: String
 )

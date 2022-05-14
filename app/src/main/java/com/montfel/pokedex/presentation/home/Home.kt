@@ -22,25 +22,26 @@ import com.montfel.pokedex.presentation.theme.RedEA
 @Composable
 fun Home(
     navController: NavController,
-//    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
 
-//    val uiState by viewModel.uiState.collectAsState()
-//
-//    LaunchedEffect(key1 = Unit) {
-//        viewModel.getHeight()
-//    }
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getResults()
+    }
 
     Scaffold(
         topBar = { TopBar() }
     ) {
         Column(
             modifier = Modifier
+                .padding(it)
                 .padding(horizontal = 24.dp)
 //                .verticalScroll(rememberScrollState())
         ) {
             Text(
-                text = "uiState.height.toString()",
+                text = stringResource(id = R.string.app_name),
                 style = MaterialTheme.typography.h2,
                 color = Gray17,
             )
@@ -52,7 +53,7 @@ fun Home(
             )
             Spacer(modifier = Modifier.height(25.dp))
             CustomTextField()
-            PokemonCards()
+            PokemonCards(uiState.results ?: emptyList())
         }
     }
 }
