@@ -15,22 +15,33 @@ val font = FontFamily(
 )
 
 val Typography = Typography(
+    defaultFontFamily = font,
     h1 = TextStyle(
-        fontFamily = font,
         fontWeight = FontWeight.Bold,
+        fontSize = 100.sp
     ),
     h2 = TextStyle(
-        fontFamily = font,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp
     ),
     h3 = TextStyle(
-        fontFamily = font,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
+        fontSize = 26.sp
     ),
     h4 = TextStyle(
-        fontFamily = font,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp
+    ),
+    h5 = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
+    ),
+    h6 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp
+    ),
+    subtitle1 = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp
     )
-
 )
