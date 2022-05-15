@@ -63,6 +63,9 @@ dependencies {
     implementation "com.google.code.gson:gson:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
+    // Coil
+    implementation "io.coil-kt:coil-compose:2.0.0"
+
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'

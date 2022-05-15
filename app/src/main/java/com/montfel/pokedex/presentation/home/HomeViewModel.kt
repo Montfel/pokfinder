@@ -1,6 +1,7 @@
 package com.montfel.pokedex.presentation.home
 
 import androidx.lifecycle.ViewModel
+import com.montfel.pokedex.domain.Pokemon
 import com.montfel.pokedex.domain.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ data class HomeUiState(
     val id: Long? = null,
     val height: Int? = null,
     val name: String? = null,
-    val results: List<String> = emptyList()
+    val image: String? = null,
+    val results: List<Pokemon> = emptyList()
 )
 
 @HiltViewModel
@@ -28,16 +30,18 @@ class HomeViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 id = response.id,
-                name = response.name
+                name = response.name,
             )
         }
     }
 
     suspend fun getAllPokemons() {
-        val response = pokemonRepository.getAllPokemons()
+        val responseAll = pokemonRepository.getAllPokemons()
+        val response = responseAll.map { pokemonRepository.getPokemon(it.url) }
         _uiState.update {
-            it.copy(results = response.results)
+            it.copy(
+                results = response
+            )
         }
     }
-
 }

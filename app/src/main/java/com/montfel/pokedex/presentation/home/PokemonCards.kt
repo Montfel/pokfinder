@@ -16,13 +16,15 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.montfel.pokedex.R
+import com.montfel.pokedex.domain.Pokemon
 import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.Green62
 import com.montfel.pokedex.presentation.theme.Green8B
 
 @Composable
-fun PokemonCards(results: List<String>) {
+fun PokemonCards(results: List<Pokemon>) {
     LazyColumn(modifier = Modifier.padding(top = 20.dp)) {
         items(results) {
             Box(modifier = Modifier.height(140.dp)) {
@@ -36,19 +38,19 @@ fun PokemonCards(results: List<String>) {
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Text(
-                            text = "#001",
+                            text = "#${it.id}",
                             style = MaterialTheme.typography.h6,
                             color = Gray17,
                             modifier = Modifier.alpha(0.6f)
                         )
                         Text(
-                            text = it,
+                            text = it.name,
                             style = MaterialTheme.typography.h3,
                             color = Color.White,
                         )
                         Spacer(modifier = Modifier.height(5.dp))
-                        LazyRow {
-                            item {
+                        LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                            items(it.types) { type ->
                                 Card(
                                     shape = RoundedCornerShape(3.dp),
                                     backgroundColor = Green62,
@@ -65,7 +67,7 @@ fun PokemonCards(results: List<String>) {
                                             modifier = Modifier.size(15.dp)
                                         )
                                         Text(
-                                            text = "Grass",
+                                            text = type.name,
                                             style = MaterialTheme.typography.subtitle1,
                                             color = Color.White,
                                         )
@@ -94,8 +96,8 @@ fun PokemonCards(results: List<String>) {
                         .height(32.dp)
                         .alpha(0.3f)
                 )
-                Image(
-                    painter = painterResource(id = R.drawable.bulba),
+                AsyncImage(
+                    model = it.image,
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.TopEnd)

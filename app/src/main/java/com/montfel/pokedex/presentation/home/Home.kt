@@ -54,8 +54,8 @@ fun Home(
             )
             Spacer(modifier = Modifier.height(25.dp))
             CustomTextField(viewModel)
-//            PokemonCards(results = uiState.results)
-            PokemonCards(results = listOf(uiState.name ?: ""))
+            PokemonCards(results = uiState.results)
+//            PokemonCards(results = listOf(uiState.name ?: ""))
         }
     }
 }
