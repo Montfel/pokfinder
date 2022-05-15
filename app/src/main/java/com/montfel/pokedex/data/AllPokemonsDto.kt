@@ -9,6 +9,10 @@ data class AllPokemonsDto(
     val results: List<ResultsDto>,
 ) : DtoMapper<AllPokemons> {
     override fun toDomain() = AllPokemons(
-        results = results.map { it.name }
+        results = results.map {
+            it.name.replaceFirstChar{ first ->
+                first.uppercase()
+            }
+        }
     )
 }

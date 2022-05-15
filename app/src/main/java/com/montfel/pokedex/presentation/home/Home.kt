@@ -18,6 +18,7 @@ import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.Gray74
 import com.montfel.pokedex.presentation.theme.GrayF2
 import com.montfel.pokedex.presentation.theme.RedEA
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun Home(
@@ -28,7 +29,7 @@ fun Home(
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.getResults()
+        viewModel.getAllPokemons()
     }
 
     Scaffold(
@@ -52,19 +53,25 @@ fun Home(
                 color = Gray74,
             )
             Spacer(modifier = Modifier.height(25.dp))
-            CustomTextField()
-            PokemonCards(uiState.results ?: emptyList())
+            CustomTextField(viewModel)
+//            PokemonCards(results = uiState.results)
+            PokemonCards(results = listOf(uiState.name ?: ""))
         }
     }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CustomTextField() {
+fun CustomTextField(viewModel: HomeViewModel = hiltViewModel()) {
     val text = remember { mutableStateOf("") }
     TextField(
         value = text.value,
-        onValueChange = { text.value = it },
+        onValueChange = {
+            text.value = it
+            runBlocking {
+                viewModel.getPokemon(it)
+            }
+        },
         shape = RoundedCornerShape(10.dp),
         textStyle = MaterialTheme.typography.h5,
         leadingIcon = {
@@ -80,7 +87,6 @@ fun CustomTextField() {
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             cursorColor = RedEA,
-            focusedLabelColor = Color.Blue,
         ),
         placeholder = {
             Text(
@@ -90,6 +96,8 @@ fun CustomTextField() {
             )
         },
         modifier = Modifier.fillMaxWidth()
+//            .onFocusEvent {  }
+//            .onFocusChanged {  }
     )
 }
 

@@ -9,26 +9,31 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class HomeUiState(
+    val id: Long? = null,
     val height: Int? = null,
     val name: String? = null,
-    val results: List<String>? = emptyList()
+    val results: List<String> = emptyList()
 )
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val pokemonRepository: PokemonRepository
 ) : ViewModel() {
+
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
 
-    suspend fun getHeight() {
-        val response = pokemonRepository.getPokemon("bulbasaur")
+    suspend fun getPokemon(name: String) {
+        val response = pokemonRepository.getPokemon(name)
         _uiState.update {
-            it.copy(name = response.name)
+            it.copy(
+                id = response.id,
+                name = response.name
+            )
         }
     }
 
-    suspend fun getResults() {
+    suspend fun getAllPokemons() {
         val response = pokemonRepository.getAllPokemons()
         _uiState.update {
             it.copy(results = response.results)

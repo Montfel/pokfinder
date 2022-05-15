@@ -9,6 +9,6 @@ interface PokemonDataSource {
         @Path(value = "pokemonName") pokemonName: String
     ): PokemonDto
 
-    @GET("pokemon?limit=1126")
+    @GET("pokemon?limit=100")
     suspend fun getAllPokemons(): AllPokemonsDto
 }
