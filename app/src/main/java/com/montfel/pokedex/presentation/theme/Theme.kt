@@ -6,8 +6,10 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.montfel.pokedex.AssetHelper
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -53,3 +55,5 @@ fun PokedexTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
         content = content
     )
 }
+
+val LocalAssetHelper = staticCompositionLocalOf<AssetHelper> { error("No asset helper provided") }

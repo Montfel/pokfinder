@@ -14,23 +14,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.Pokemon
-import com.montfel.pokedex.presentation.theme.Gray17
-import com.montfel.pokedex.presentation.theme.Green62
-import com.montfel.pokedex.presentation.theme.Green8B
+import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun PokemonCards(results: List<Pokemon>) {
+
+    val assetHelper = LocalAssetHelper.current
+
     LazyColumn(modifier = Modifier.padding(top = 20.dp)) {
         items(results) {
+            val type = it.types.first { type -> type.slot == 1 }
+            val assetBackground = assetHelper.getAsset( type.name )
             Box(modifier = Modifier.height(140.dp)) {
                 Card(
                     shape = RoundedCornerShape(10.dp),
-                    backgroundColor = Green8B,
+                    backgroundColor = assetBackground.backgroundColor,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(115.dp)
@@ -51,9 +55,10 @@ fun PokemonCards(results: List<Pokemon>) {
                         Spacer(modifier = Modifier.height(5.dp))
                         LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
                             items(it.types) { type ->
+                                val assetType = assetHelper.getAsset(type.name)
                                 Card(
                                     shape = RoundedCornerShape(3.dp),
-                                    backgroundColor = Green62,
+                                    backgroundColor = assetType.typeColor,
                                     modifier = Modifier.height(25.dp)
                                 ) {
                                     Row(
@@ -62,8 +67,9 @@ fun PokemonCards(results: List<Pokemon>) {
                                         modifier = Modifier.padding(horizontal = 5.dp)
                                     ) {
                                         Image(
-                                            painter = painterResource(id = R.drawable.ic_grass),
+                                            painter = painterResource(id = assetType.icon),
                                             contentDescription = null,
+                                            colorFilter = ColorFilter.tint(Color.White),
                                             modifier = Modifier.size(15.dp)
                                         )
                                         Text(

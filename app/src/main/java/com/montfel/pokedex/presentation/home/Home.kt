@@ -14,10 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.theme.Gray17
-import com.montfel.pokedex.presentation.theme.Gray74
-import com.montfel.pokedex.presentation.theme.GrayF2
-import com.montfel.pokedex.presentation.theme.RedEA
+import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.runBlocking
 
 @Composable
@@ -86,7 +83,7 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel()) {
             textColor = Gray17,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = RedEA,
+            cursorColor = TypePsychic,
         ),
         placeholder = {
             Text(
@@ -96,8 +93,6 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel()) {
             )
         },
         modifier = Modifier.fillMaxWidth()
-//            .onFocusEvent {  }
-//            .onFocusChanged {  }
     )
 }
 
