@@ -1,5 +1,7 @@
-package com.montfel.pokedex.data
+package com.montfel.pokedex.data.datasource
 
+import com.montfel.pokedex.data.dto.AllPokemonsDto
+import com.montfel.pokedex.data.dto.PokemonDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 

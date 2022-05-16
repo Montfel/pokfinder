@@ -1,4 +1,4 @@
-package com.montfel.pokedex.data
+package com.montfel.pokedex.data.dto
 
 import com.google.gson.annotations.SerializedName
 

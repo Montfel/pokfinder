@@ -1,8 +1,8 @@
 package com.montfel.pokedex.presentation.home
 
 import androidx.lifecycle.ViewModel
-import com.montfel.pokedex.domain.Pokemon
-import com.montfel.pokedex.domain.PokemonRepository
+import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

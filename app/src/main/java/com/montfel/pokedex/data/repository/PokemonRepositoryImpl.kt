@@ -1,8 +1,9 @@
-package com.montfel.pokedex.data
+package com.montfel.pokedex.data.repository
 
-import com.montfel.pokedex.domain.Pokemon
-import com.montfel.pokedex.domain.PokemonRepository
-import com.montfel.pokedex.domain.Result
+import com.montfel.pokedex.data.datasource.PokemonDataSource
+import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.repository.PokemonRepository
+import com.montfel.pokedex.domain.model.Result
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton

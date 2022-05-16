@@ -1,4 +1,4 @@
-package com.montfel.pokedex.domain
+package com.montfel.pokedex.domain.model
 
 data class Type(
     val slot: Int,

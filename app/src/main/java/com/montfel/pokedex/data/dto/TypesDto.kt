@@ -1,8 +1,8 @@
-package com.montfel.pokedex.data
+package com.montfel.pokedex.data.dto
 
 import com.google.gson.annotations.SerializedName
 import com.montfel.pokedex.domain.DtoMapper
-import com.montfel.pokedex.domain.Type
+import com.montfel.pokedex.domain.model.Type
 
 data class TypesDto(
     @SerializedName("slot")

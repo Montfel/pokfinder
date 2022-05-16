@@ -1,6 +1,6 @@
 package com.montfel.pokedex.di
 
-import com.montfel.pokedex.data.PokemonDataSource
+import com.montfel.pokedex.data.datasource.PokemonDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
