@@ -16,9 +16,7 @@ import com.montfel.pokedex.R
 fun TopBar() {
     Row(
         horizontalArrangement = Arrangement.End,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 28.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
             IconButton(onClick = { /*TODO*/ }) {
