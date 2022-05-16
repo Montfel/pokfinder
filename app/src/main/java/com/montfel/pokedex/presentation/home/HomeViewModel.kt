@@ -10,10 +10,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class HomeUiState(
-    val id: Long? = null,
-    val height: Int? = null,
-    val name: String? = null,
-    val image: String? = null,
+    val pokemon: List<Pokemon> = emptyList(),
     val results: List<Pokemon> = emptyList()
 )
 
@@ -29,8 +26,7 @@ class HomeViewModel @Inject constructor(
         val response = pokemonRepository.getPokemon(name)
         _uiState.update {
             it.copy(
-                id = response.id,
-                name = response.name,
+                pokemon = listOf(response)
             )
         }
     }

@@ -29,9 +29,9 @@ fun Home(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
+    val text = remember { mutableStateOf("") }
 
     LaunchedEffect(key1 = Unit) {
         viewModel.getAllPokemons()
@@ -59,12 +59,9 @@ fun Home(
             )
         }
         item {
-            Spacer(modifier = Modifier.height(25.dp))
+            CustomTextField(viewModel, text)
         }
-        item {
-            CustomTextField(viewModel)
-        }
-        items(uiState.results) { pokemon ->
+        items(if (text.value.isBlank()) uiState.results else uiState.pokemon, key = { it.id }) { pokemon ->
             val type = pokemon.types.first { type -> type.slot == 1 }
             val assetBackground = assetHelper.getAsset(type.name)
             Box(modifier = Modifier.height(140.dp)) {
@@ -149,19 +146,19 @@ fun Home(
             }
         }
     }
-//            PokemonCards(results = listOf(uiState.name ?: ""))
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CustomTextField(viewModel: HomeViewModel = hiltViewModel()) {
-    val text = remember { mutableStateOf("") }
+fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableState<String>) {
     TextField(
         value = text.value,
         onValueChange = {
             text.value = it
-            runBlocking {
-                viewModel.getPokemon(it)
+            if (it.isNotBlank()) {
+                runBlocking {
+                    viewModel.getPokemon(it)
+                }
             }
         },
         shape = RoundedCornerShape(10.dp),
@@ -187,7 +184,9 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel()) {
                 color = Gray74
             )
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 25.dp)
     )
 }
 
