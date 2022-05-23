@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.montfel.pokedex.presentation.home.Home
+import com.montfel.pokedex.presentation.profile.Profile
 
 @Composable
 fun NavigationComponent() {
@@ -12,6 +13,9 @@ fun NavigationComponent() {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
             Home(navController = navController)
+        }
+        composable("profile/{id}") {
+            Profile(navController = navController)
         }
     }
 }

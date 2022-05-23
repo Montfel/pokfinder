@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        compose_version = '1.2.0-beta01'
+        compose_version = '1.2.0-beta02'
         retrofit = '2.9.0'
     }
     dependencies {

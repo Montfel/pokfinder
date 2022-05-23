@@ -16,14 +16,13 @@ class PokemonRepositoryImpl @Inject constructor(
         return try {
             val response = Response.success(pokemonDataSource.getPokemon(pokemonName))
             response.body()?.toDomain() ?: Pokemon(
-                height = 0,
                 name = "bla",
                 id = -1,
                 image = "",
                 types = emptyList()
             )
         } catch (e: Exception) {
-            Pokemon(height = 0, name = "bla", id = -1, image = "", types = emptyList())
+            Pokemon(name = "bla", id = -1, image = "", types = emptyList())
         }
 
     }

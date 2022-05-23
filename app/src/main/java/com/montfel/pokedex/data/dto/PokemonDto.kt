@@ -7,8 +7,6 @@ import com.montfel.pokedex.domain.model.Pokemon
 data class PokemonDto(
     @SerializedName("id")
     val id: Long,
-    @SerializedName("height")
-    val height: Int,
     @SerializedName("name")
     val name: String,
     @SerializedName("sprites")
@@ -18,7 +16,6 @@ data class PokemonDto(
 ) : DtoMapper<Pokemon> {
     override fun toDomain() = Pokemon(
         id = id,
-        height = height,
         name = name.replaceFirstChar { it.uppercase() },
         image = sprite.other.officialArtwork.frontDefault,
         types = types.map { it.toDomain() }

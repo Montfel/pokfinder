@@ -1,6 +1,7 @@
 package com.montfel.pokedex.presentation.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -15,7 +16,9 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Pokemon
@@ -23,7 +26,10 @@ import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
 
 @Composable
-fun PokemonCard (pokemon: Pokemon) {
+fun PokemonCard(
+    pokemon: Pokemon,
+    onClick: () -> Unit
+) {
     val assetHelper = LocalAssetHelper.current
     val type = pokemon.types.first { type -> type.slot == 1 }
     val assetBackground = assetHelper.getAsset(type.name)
@@ -35,6 +41,7 @@ fun PokemonCard (pokemon: Pokemon) {
                 .fillMaxWidth()
                 .height(115.dp)
                 .align(Alignment.BottomCenter)
+                .clickable(onClick = onClick)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(

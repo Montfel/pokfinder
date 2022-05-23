@@ -61,7 +61,10 @@ fun Home(
             CustomTextField(viewModel, text)
         }
         items(if (text.value.isBlank()) uiState.results else uiState.pokemon, key = { it.id }) { pokemon ->
-            PokemonCard(pokemon = pokemon)
+            PokemonCard(
+                pokemon = pokemon,
+                onClick = { navController.navigate("profile/1") }
+            )
         }
     }
 }
