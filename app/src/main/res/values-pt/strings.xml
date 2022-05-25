@@ -3,4 +3,14 @@
     <string name="subtitle">Encontre o Pokémon pelo nome ou usando o número da Pokédex Nacional.</string>
     <string name="placeholder_textfield">Qual Pokémon você está procurando?</string>
 
+    <!-- Profile -->
+    <string name="about">Sobre</string>
+    <string name="stats">Estatísticas</string>
+    <string name="evolution">Evolução</string>
+    <string name="species">Espécie</string>
+    <string name="height">Altura</string>
+    <string name="weight">Peso</string>
+    <string name="abilities">Abilidadeds</string>
+    <string name="weakeness">Fraquesas</string>
+    <string name="pokedex_data">Dados da Pokédex</string>
 </resources>
