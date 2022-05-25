@@ -1,6 +1,7 @@
 package com.montfel.pokedex.presentation.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -14,34 +15,58 @@ val font = FontFamily(
     Font(R.font.sf_pro_display_bold, FontWeight.Bold)
 )
 
-val Typography = Typography(
-    defaultFontFamily = font,
-    h1 = TextStyle(
+val Typography.title: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Bold,
         fontSize = 100.sp
-    ),
-    h2 = TextStyle(
+    )
+
+val Typography.applicationTitle: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp
-    ),
-    h3 = TextStyle(
+    )
+
+val Typography.pokemonName: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Bold,
         fontSize = 26.sp
-    ),
-    h4 = TextStyle(
+    )
+
+val Typography.filterTitle: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp
-    ),
-    h5 = TextStyle(
+    )
+
+val Typography.description: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
-    ),
-    h6 = TextStyle(
+    )
+
+val Typography.pokemonNumber: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Bold,
         fontSize = 12.sp
-    ),
-    subtitle1 = TextStyle(
+    )
+
+val Typography.pokemonType: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = font,
         fontWeight = FontWeight.Medium,
         fontSize = 12.sp
     )
-)
