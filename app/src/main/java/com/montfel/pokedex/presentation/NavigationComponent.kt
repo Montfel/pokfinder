@@ -15,7 +15,10 @@ fun NavigationComponent() {
             Home(navController = navController)
         }
         composable("profile/{id}") {
-            Profile(navController = navController)
+            Profile(
+                id = it.arguments?.getString("id")!!,
+                navController = navController
+            )
         }
     }
 }

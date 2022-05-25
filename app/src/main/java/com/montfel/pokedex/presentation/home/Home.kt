@@ -3,23 +3,21 @@ package com.montfel.pokedex.presentation.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ExposedDropdownMenuDefaults.textFieldColors
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.runBlocking
@@ -43,7 +41,7 @@ fun Home(
         item {
             Text(
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.applicationTitle,
                 color = Gray17,
             )
         }
@@ -53,18 +51,21 @@ fun Home(
         item {
             Text(
                 text = stringResource(id = R.string.subtitle),
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.description,
                 color = Gray74,
             )
         }
         item {
             CustomTextField(viewModel, text)
         }
-        items(if (text.value.isBlank()) uiState.results else uiState.pokemon, key = { it.id }) { pokemon ->
+        items(
+            if (text.value.isBlank()) uiState.results else uiState.pokemon
+        ) { pokemon ->
             PokemonCard(
-                pokemon = pokemon,
-                onClick = { navController.navigate("profile/1") }
-            )
+                pokemon = pokemon
+            ) {
+                navController.navigate("profile/${pokemon.id}")
+            }
         }
     }
 }
@@ -83,7 +84,7 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
             }
         },
         shape = RoundedCornerShape(10.dp),
-        textStyle = MaterialTheme.typography.h5,
+        textStyle = MaterialTheme.typography.description,
         leadingIcon = {
             Image(
                 painter = painterResource(id = R.drawable.ic_search),
@@ -101,7 +102,7 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
         placeholder = {
             Text(
                 text = stringResource(id = R.string.placeholder_textfield),
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.description,
                 color = Gray74
             )
         },
@@ -110,4 +111,3 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
             .padding(top = 25.dp)
     )
 }
-

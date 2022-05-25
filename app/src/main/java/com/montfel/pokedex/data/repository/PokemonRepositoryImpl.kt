@@ -2,8 +2,8 @@ package com.montfel.pokedex.data.repository
 
 import com.montfel.pokedex.data.datasource.PokemonDataSource
 import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.domain.repository.PokemonRepository
 import com.montfel.pokedex.domain.model.Result
+import com.montfel.pokedex.domain.repository.PokemonRepository
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,16 +15,20 @@ class PokemonRepositoryImpl @Inject constructor(
     override suspend fun getPokemon(pokemonName: String): Pokemon {
         return try {
             val response = Response.success(pokemonDataSource.getPokemon(pokemonName))
-            response.body()?.toDomain() ?: Pokemon(
-                name = "bla",
-                id = -1,
-                image = "",
-                types = emptyList()
-            )
+            response.body()?.toDomain() ?: Pokemon()
         } catch (e: Exception) {
-            Pokemon(name = "bla", id = -1, image = "", types = emptyList())
+            Pokemon()
         }
 
+    }
+
+    override suspend fun getPokemonProfile(pokemonName: String): Pokemon {
+        return try {
+            val response = Response.success(pokemonDataSource.getPokemonProfile(pokemonName))
+            response.body()?.toDomain() ?: Pokemon()
+        } catch (e: Exception) {
+            Pokemon()
+        }
     }
 
     override suspend fun getAllPokemons(): List<Result> {

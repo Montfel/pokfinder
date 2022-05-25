@@ -3,8 +3,6 @@ package com.montfel.pokedex.presentation.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -14,16 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.presentation.components.TypeCards
 import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
+import com.montfel.pokedex.presentation.theme.pokemonName
+import com.montfel.pokedex.presentation.theme.pokemonNumber
 
 @Composable
 fun PokemonCard(
@@ -46,44 +45,17 @@ fun PokemonCard(
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(
                     text = "#${pokemon.id}",
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.pokemonNumber,
                     color = Gray17,
                     modifier = Modifier.alpha(0.6f)
                 )
                 Text(
-                    text = pokemon.name,
-                    style = MaterialTheme.typography.h3,
+                    text = pokemon.name ?: "",
+                    style = MaterialTheme.typography.pokemonName,
                     color = Color.White,
                 )
                 Spacer(modifier = Modifier.height(5.dp))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                    items(pokemon.types) { type ->
-                        val assetType = assetHelper.getAsset(type.name)
-                        Card(
-                            shape = RoundedCornerShape(3.dp),
-                            backgroundColor = assetType.typeColor,
-                            modifier = Modifier.height(25.dp)
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(5.dp),
-                                modifier = Modifier.padding(horizontal = 5.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = assetType.icon),
-                                    contentDescription = null,
-                                    colorFilter = ColorFilter.tint(Color.White),
-                                    modifier = Modifier.size(15.dp)
-                                )
-                                Text(
-                                    text = type.name,
-                                    style = MaterialTheme.typography.subtitle1,
-                                    color = Color.White,
-                                )
-                            }
-                        }
-                    }
-                }
+                TypeCards(pokemon = pokemon)
             }
         }
         Image(
@@ -114,4 +86,17 @@ fun PokemonCard(
                 .size(130.dp)
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PokemonCardPreview() {
+    PokemonCard(
+        pokemon = Pokemon(
+            id = 1,
+            name = "Bulbasaur",
+            image = "",
+            types = emptyList()
+        )
+    ) {}
 }

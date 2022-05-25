@@ -50,7 +50,6 @@ fun PokedexTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
         shapes = Shapes,
         content = content
     )
