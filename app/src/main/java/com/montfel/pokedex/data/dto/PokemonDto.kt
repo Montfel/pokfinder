@@ -21,18 +21,3 @@ data class PokemonDto(
         types = types.map { it.toDomain() }
     )
 }
-
-data class SpriteDto(
-    @SerializedName("other")
-    val other: OtherDto,
-)
-
-data class OtherDto(
-    @SerializedName("official-artwork")
-    val officialArtwork: OfficialArtworkDto,
-)
-
-data class OfficialArtworkDto(
-    @SerializedName("front_default")
-    val frontDefault: String,
-)
