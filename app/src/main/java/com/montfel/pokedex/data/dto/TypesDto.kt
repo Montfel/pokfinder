@@ -15,8 +15,3 @@ data class TypesDto(
         name = type.name.replaceFirstChar { it.uppercase() }
     )
 }
-
-data class TypeDto(
-    @SerializedName("name")
-    val name: String
-)

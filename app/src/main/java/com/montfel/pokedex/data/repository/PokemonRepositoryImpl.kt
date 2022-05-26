@@ -31,6 +31,15 @@ class PokemonRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getPokemonSpeciesProfile(pokemonName: String): Pokemon {
+        return try {
+            val response = Response.success(pokemonDataSource.getPokemonSpeciesProfile(pokemonName))
+            response.body()?.toDomain() ?: Pokemon()
+        } catch (e: Exception) {
+            Pokemon()
+        }
+    }
+
     override suspend fun getAllPokemons(): List<Result> {
         return pokemonDataSource.getAllPokemons().results.map {
             it.toDomain()

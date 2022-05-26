@@ -7,10 +7,21 @@
     <string name="about">Sobre</string>
     <string name="stats">Estatísticas</string>
     <string name="evolution">Evolução</string>
+    <string name="pokedex_data">Dados da Pokédex</string>
     <string name="species">Espécie</string>
     <string name="height">Altura</string>
     <string name="weight">Peso</string>
-    <string name="abilities">Abilidadeds</string>
+    <string name="abilities">Abilidades</string>
     <string name="weakeness">Fraquesas</string>
-    <string name="pokedex_data">Dados da Pokédex</string>
+    <string name="training">Treinamento</string>
+    <string name="ev_yield">EV Yield</string>
+    <string name="catch_rate">Taxa de Pegar</string>
+    <string name="base_friendship">Amizade Base</string>
+    <string name="base_exp">Exp Base</string>
+    <string name="growth_rate">Taxa de crescimento</string>
+    <string name="breeding">Reprodução</string>
+    <string name="gender">Gênero</string>
+    <string name="egg_groups">Grupos de Ovos</string>
+    <string name="egg_cycles">Ciclos de Ovos</string>
+    <string name="location">Localização</string>
 </resources>

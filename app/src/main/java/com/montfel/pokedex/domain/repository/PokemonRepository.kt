@@ -6,5 +6,6 @@ import com.montfel.pokedex.domain.model.Result
 interface PokemonRepository {
     suspend fun getPokemon(pokemonName: String): Pokemon
     suspend fun getPokemonProfile(pokemonName: String): Pokemon
+    suspend fun getPokemonSpeciesProfile(pokemonName: String): Pokemon
     suspend fun getAllPokemons(): List<Result>
 }

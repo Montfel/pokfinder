@@ -8,10 +8,21 @@
     <string name="about">About</string>
     <string name="stats">Stats</string>
     <string name="evolution">Evolution</string>
+    <string name="pokedex_data">Pokédex Data</string>
     <string name="species">Species</string>
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="abilities">Abilities</string>
     <string name="weakeness">Weakeness</string>
-    <string name="pokedex_data">Pokédex Data</string>
+    <string name="training">Training</string>
+    <string name="ev_yield">EV Yield</string>
+    <string name="catch_rate">Catch Rate</string>
+    <string name="base_friendship">Base Friendship</string>
+    <string name="base_exp">Base Exp</string>
+    <string name="growth_rate">Growth Rate</string>
+    <string name="breeding">Breeding</string>
+    <string name="gender">Gender</string>
+    <string name="egg_groups">Egg Groups</string>
+    <string name="egg_cycles">Egg Cycles</string>
+    <string name="location">Location</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.montfel.pokedex.presentation.profile
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,12 +37,34 @@ fun Profile(
     val assetBackground = assetHelper.getAsset(type?.name ?: "")
     var state by remember { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
+    var abilities = ""
+    uiState.pokemon?.abilities?.forEach {
+        abilities += if (it.isHidden) {
+            "\n${it.ability.name} (hidden ability)"
+        } else {
+            "${it.slot}. ${it.ability.name}"
+        }
+    }
     val data = mapOf(
         R.string.species to "a",
-        R.string.height to uiState.pokemon?.height.toString(),
-        R.string.weight to uiState.pokemon?.weight.toString(),
-        R.string.abilities to "b",
+        R.string.height to "${uiState.pokemon?.height}m",
+        R.string.weight to "${uiState.pokemon?.weight}kg",
+        R.string.abilities to abilities,
         R.string.weakeness to "c"
+    )
+
+    val training = mapOf(
+        R.string.ev_yield to "a",
+        R.string.catch_rate to "b",
+        R.string.base_friendship to "c",
+        R.string.base_exp to uiState.pokemon?.baseExp.toString(),
+        R.string.growth_rate to "d"
+    )
+
+    val breeding = mapOf(
+        R.string.gender to "a",
+        R.string.egg_groups to "b",
+        R.string.egg_cycles to "c",
     )
 
     LaunchedEffect(key1 = Unit) {
@@ -115,23 +138,58 @@ fun Profile(
                 style = MaterialTheme.typography.filterTitle,
                 color = assetBackground.typeColor
             )
+            Spacer(modifier = Modifier.height(20.dp))
             data.forEach {
-                Row(
-                    verticalAlignment = CenterVertically
-                ) {
-                    Text(
-                        text = stringResource(id = it.key),
-                        style = MaterialTheme.typography.pokemonType,
-                        color = Gray17,
-                        modifier = Modifier.width(85.dp)
-                    )
-                    Text(
-                        text = it.value,
-                        style = MaterialTheme.typography.description,
-                        color = Gray74
-                    )
-                }
+                ProfileItem(map = it)
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = stringResource(id = R.string.training),
+                style = MaterialTheme.typography.filterTitle,
+                color = assetBackground.typeColor
+            )
+            training.forEach {
+                ProfileItem(map = it)
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = stringResource(id = R.string.breeding),
+                style = MaterialTheme.typography.filterTitle,
+                color = assetBackground.typeColor
+            )
+            breeding.forEach {
+                ProfileItem(map = it)
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = stringResource(id = R.string.location),
+                style = MaterialTheme.typography.filterTitle,
+                color = assetBackground.typeColor
+            )
+            breeding.forEach {
+                ProfileItem(map = it)
             }
         }
     }
+}
+
+@Composable
+fun ProfileItem(map: Map.Entry<Int, String>) {
+    Row(
+        verticalAlignment = CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Text(
+            text = stringResource(id = map.key),
+            style = MaterialTheme.typography.pokemonType,
+            color = Gray17,
+            modifier = Modifier.width(85.dp)
+        )
+        Text(
+            text = map.value,
+            style = MaterialTheme.typography.description,
+            color = Gray74
+        )
+    }
+    Spacer(modifier = Modifier.height(15.dp))
 }

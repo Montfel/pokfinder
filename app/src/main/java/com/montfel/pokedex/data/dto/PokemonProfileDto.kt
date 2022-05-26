@@ -14,11 +14,19 @@ data class PokemonProfileDto(
     @SerializedName("types")
     val types: List<TypesDto>,
     @SerializedName("height")
-    val height: Int,
+    val height: Float,
     @SerializedName("weight")
-    val weight: Int,
-//    @SerializedName("species")
-//    val species:
+    val weight: Float,
+    @SerializedName("base_experience")
+    val baseExp: Int,
+    @SerializedName("abilities")
+    val abilities: List<AbilitiesDto>,
+    @SerializedName("stats")
+    val stats: List<StatsDto>,
+    @SerializedName("species")
+    val species: SpeciesDto,
+    @SerializedName("location_area_encounters")
+    val locationUrl: String
 
 ) : DtoMapper<Pokemon> {
     override fun toDomain() = Pokemon(
@@ -26,7 +34,10 @@ data class PokemonProfileDto(
         name = name.replaceFirstChar { it.uppercase() },
         image = sprite.other.officialArtwork.frontDefault,
         types = types.map { it.toDomain() },
-        height = height,
-        weight = weight
+        height = height/10,
+        weight = weight/10,
+        baseExp = baseExp,
+        abilities = abilities,
+        stats = stats
     )
 }
