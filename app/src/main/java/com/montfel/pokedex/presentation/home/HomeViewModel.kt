@@ -33,10 +33,10 @@ class HomeViewModel @Inject constructor(
 
     suspend fun getAllPokemons() {
         val responseAll = pokemonRepository.getAllPokemons()
-        val response = responseAll.map { pokemonRepository.getPokemon(it.url) }
+//        val response = responseAll.map { pokemonRepository.getPokemon(it.url) }
         _uiState.update {
             it.copy(
-                results = response
+                results = responseAll
             )
         }
     }

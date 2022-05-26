@@ -2,7 +2,6 @@ package com.montfel.pokedex.data.repository
 
 import com.montfel.pokedex.data.datasource.PokemonDataSource
 import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.domain.model.Result
 import com.montfel.pokedex.domain.repository.PokemonRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -40,9 +39,11 @@ class PokemonRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAllPokemons(): List<Result> {
-        return pokemonDataSource.getAllPokemons().results.map {
-            it.toDomain()
+    override suspend fun getAllPokemons(): List<Pokemon> {
+        val pokemonList = mutableListOf<Pokemon>()
+        for (i in 1..151) {
+            pokemonList.add(pokemonDataSource.getPokemon(i.toString()).toDomain())
         }
+        return pokemonList
     }
 }

@@ -1,6 +1,5 @@
 package com.montfel.pokedex.data.datasource
 
-import com.montfel.pokedex.data.dto.AllPokemonsDto
 import com.montfel.pokedex.data.dto.PokemonDto
 import com.montfel.pokedex.data.dto.PokemonProfileDto
 import com.montfel.pokedex.data.dto.PokemonSpeciesProfileDto
@@ -22,7 +21,4 @@ interface PokemonDataSource {
     suspend fun getPokemonSpeciesProfile(
         @Path(value = "pokemonName") pokemonName: String
     ): PokemonSpeciesProfileDto
-
-    @GET("pokemon?limit=151")
-    suspend fun getAllPokemons(): AllPokemonsDto
 }
