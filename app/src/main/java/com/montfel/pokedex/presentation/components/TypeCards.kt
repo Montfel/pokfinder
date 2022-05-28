@@ -25,7 +25,7 @@ fun TypeCards(pokemon: Pokemon) {
 
     LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
         items(pokemon.types) { type ->
-            val assetType = assetHelper.getAsset(type.name)
+            val assetType = assetHelper.getAsset(type.name ?: "")
             Card(
                 shape = RoundedCornerShape(3.dp),
                 backgroundColor = assetType.typeColor,
@@ -43,7 +43,7 @@ fun TypeCards(pokemon: Pokemon) {
                         modifier = Modifier.size(15.dp)
                     )
                     Text(
-                        text = type.name,
+                        text = type.name ?: "",
                         style = MaterialTheme.typography.pokemonType,
                         color = Color.White,
                     )

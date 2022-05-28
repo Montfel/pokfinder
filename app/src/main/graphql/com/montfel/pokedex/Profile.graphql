@@ -1,0 +1,49 @@
+query Profile($id : Int!) {
+    pokemon_v2_pokemon_by_pk(id: $id) {
+        id
+        name
+        height
+        weight
+        base_experience
+        pokemon_v2_pokemontypes {
+            slot
+            pokemon_v2_type {
+                name
+            }
+        }
+        pokemon_v2_pokemonabilities {
+            is_hidden
+            slot
+            pokemon_v2_ability {
+                name
+            }
+        }
+        pokemon_v2_pokemonstats {
+            base_stat
+            effort
+            pokemon_v2_stat {
+                name
+            }
+        }
+        pokemon_v2_pokemonspecy {
+            capture_rate
+            gender_rate
+            hatch_counter
+            pokemon_v2_growthrate {
+                name
+            }
+            pokemon_v2_pokemonegggroups {
+                pokemon_v2_egggroup {
+                    name
+                }
+            }
+            pokemon_v2_pokemonspeciesflavortexts {
+                flavor_text
+                pokemon_v2_language {
+                    name
+                }
+            }
+        }
+    }
+}
+

@@ -31,7 +31,7 @@ fun PokemonCard(
 ) {
     val assetHelper = LocalAssetHelper.current
     val type = pokemon.types.first { type -> type.slot == 1 }
-    val assetBackground = assetHelper.getAsset(type.name)
+    val assetBackground = assetHelper.getAsset(type.name ?: "")
     Box(modifier = Modifier.height(140.dp)) {
         Card(
             shape = RoundedCornerShape(10.dp),

@@ -58,13 +58,11 @@ fun Home(
         item {
             CustomTextField(viewModel, text)
         }
-        items(
-            if (text.value.isBlank()) uiState.results else uiState.pokemon
-        ) { pokemon ->
-            PokemonCard(
-                pokemon = pokemon
-            ) {
-                navController.navigate("profile/${pokemon.id}")
+        uiState.pokemon?.let {
+            items(it) { pokemon ->
+                PokemonCard(pokemon = pokemon) {
+                    navController.navigate("profile/${pokemon.id}")
+                }
             }
         }
     }
@@ -77,11 +75,11 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
         value = text.value,
         onValueChange = {
             text.value = it
-            if (it.isNotBlank()) {
-                runBlocking {
-                    viewModel.getPokemon(it)
-                }
-            }
+//            if (it.isNotBlank()) {
+//                runBlocking {
+//                    viewModel.getPokemon(it)
+//                }
+//            }
         },
         shape = RoundedCornerShape(10.dp),
         textStyle = MaterialTheme.typography.description,

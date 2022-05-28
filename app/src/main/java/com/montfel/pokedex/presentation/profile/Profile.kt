@@ -1,9 +1,10 @@
 package com.montfel.pokedex.presentation.profile
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -33,18 +34,25 @@ fun Profile(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
-    val type = uiState.pokemon?.types?.first { type -> type.slot == 1 }
+    val type = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
     val assetBackground = assetHelper.getAsset(type?.name ?: "")
     var state by remember { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
     var abilities = ""
-    uiState.pokemon?.abilities?.forEach {
-        abilities += if (it.isHidden) {
-            "\n${it.ability.name} (hidden ability)"
-        } else {
-            "${it.slot}. ${it.ability.name}"
+//    uiState.pokemon?.abilities?.forEach {
+//        abilities += if (it.isHidden) {
+//            "\n${it.name} (hidden ability)"
+//        } else {
+//            "${it.slot}. ${it.ability.name}"
+//        }
+//    }
+    val gender = uiState.pokemon?.genderRate?.let {
+        if (it == -1) "Genderless"
+        else {
+            "♀ ${it.toFloat().div(8).times(100)}%, " +
+            "♂ ${(8 - it.toFloat()).div(8).times(100)}%"
         }
-    }
+    } ?: "Genderless"
     val data = mapOf(
         R.string.species to "a",
         R.string.height to "${uiState.pokemon?.height}m",
@@ -55,15 +63,15 @@ fun Profile(
 
     val training = mapOf(
         R.string.ev_yield to "a",
-        R.string.catch_rate to "b",
+        R.string.catch_rate to "${uiState.pokemon?.captureRate}",
         R.string.base_friendship to "c",
         R.string.base_exp to uiState.pokemon?.baseExp.toString(),
-        R.string.growth_rate to "d"
+        R.string.growth_rate to "${uiState.pokemon?.growthRate}"
     )
 
     val breeding = mapOf(
-        R.string.gender to "a",
-        R.string.egg_groups to "b",
+        R.string.gender to gender,
+        R.string.egg_groups to "${uiState.pokemon?.eggGroups?.joinToString()}",
         R.string.egg_cycles to "c",
     )
 
@@ -77,7 +85,7 @@ fun Profile(
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(25.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = CenterVertically
         ) {
             AsyncImage(
                 model = uiState.pokemon?.image,
@@ -125,12 +133,14 @@ fun Profile(
                 .background(color = Color.White)
                 .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
                 .padding(24.dp)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
             Text(
-                text = "Bulbasaur can be seen napping in bright sunlight. There is a seed on its " +
-                        "back. By soaking up the sun's rays, the seed grows progressively larger.",
+                text = uiState.pokemon?.flavorTexts?.random()?.flavorText ?: "",
                 style = MaterialTheme.typography.description,
-                color = Gray74
+                color = Gray74,
+                modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(30.dp))
             Text(
