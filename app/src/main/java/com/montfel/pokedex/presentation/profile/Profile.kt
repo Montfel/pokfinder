@@ -39,13 +39,13 @@ fun Profile(
     var state by remember { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
     var abilities = ""
-//    uiState.pokemon?.abilities?.forEach {
-//        abilities += if (it.isHidden) {
-//            "\n${it.name} (hidden ability)"
-//        } else {
-//            "${it.slot}. ${it.ability.name}"
-//        }
-//    }
+    uiState.pokemon?.abilities?.forEach {
+        abilities += if (it.isHidden) {
+            "\n${it.name} (hidden ability)"
+        } else {
+            "${it.slot}. ${it.name}"
+        }
+    }
     val gender = uiState.pokemon?.genderRate?.let {
         if (it == -1) "Genderless"
         else {
@@ -72,7 +72,7 @@ fun Profile(
     val breeding = mapOf(
         R.string.gender to gender,
         R.string.egg_groups to "${uiState.pokemon?.eggGroups?.joinToString()}",
-        R.string.egg_cycles to "c",
+        R.string.egg_cycles to "${uiState.pokemon?.hatchCounter} (${(uiState.pokemon?.hatchCounter?.plus(1))?.times(255)} steps)",
     )
 
     LaunchedEffect(key1 = Unit) {

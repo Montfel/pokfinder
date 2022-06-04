@@ -43,9 +43,12 @@ data class PokemonProfileDto(
             ?.sortedBy { it },
         flavorTexts = flavorTexts
             ?.filter { it.languageName.equals("en") || it.languageName.equals("pt-BR") }
-            ?.map { FlavorTextDto(
-                flavorText = it.flavorText.replace("\n", " "),
-                languageName = it.languageName
-            ) }
+            ?.map {
+                FlavorTextDto(
+                    flavorText = it.flavorText.replace("\n", " "),
+                    languageName = it.languageName
+                )
+            },
+        hatchCounter = hatchCounter
     )
 }

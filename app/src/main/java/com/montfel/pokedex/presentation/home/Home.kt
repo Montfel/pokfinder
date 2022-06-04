@@ -37,25 +37,17 @@ fun Home(
     LazyColumn(modifier = Modifier.padding(horizontal = 24.dp)) {
         item {
             TopBar()
-        }
-        item {
             Text(
                 text = stringResource(id = R.string.app_name),
                 style = MaterialTheme.typography.applicationTitle,
                 color = Gray17,
             )
-        }
-        item {
             Spacer(modifier = Modifier.height(10.dp))
-        }
-        item {
             Text(
                 text = stringResource(id = R.string.subtitle),
                 style = MaterialTheme.typography.description,
                 color = Gray74,
             )
-        }
-        item {
             CustomTextField(viewModel, text)
         }
         uiState.pokemon?.let {

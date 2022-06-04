@@ -77,14 +77,14 @@ fun PokemonCard(
                 .height(32.dp)
                 .alpha(0.3f)
         )
-        AsyncImage(
-            model = pokemon.image,
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(end = 10.dp, bottom = 10.dp)
-                .size(130.dp)
-        )
+//        AsyncImage(
+//            model = pokemon.image,
+//            contentDescription = null,
+//            modifier = Modifier
+//                .align(Alignment.TopEnd)
+//                .padding(end = 10.dp, bottom = 10.dp)
+//                .size(130.dp)
+//        )
     }
 }
 
