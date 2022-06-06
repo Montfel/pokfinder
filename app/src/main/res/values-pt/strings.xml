@@ -4,9 +4,8 @@
     <string name="placeholder_textfield">Qual Pokémon você está procurando?</string>
 
     <!-- Profile -->
+    <!-- About -->
     <string name="about">Sobre</string>
-    <string name="stats">Estatísticas</string>
-    <string name="evolution">Evolução</string>
     <string name="pokedex_data">Dados da Pokédex</string>
     <string name="species">Espécie</string>
     <string name="height">Altura</string>
@@ -14,7 +13,7 @@
     <string name="abilities">Abilidades</string>
     <string name="weakeness">Fraquesas</string>
     <string name="training">Treinamento</string>
-    <string name="ev_yield">EV Yield</string>
+    <string name="ev_yield">Pontos EV</string>
     <string name="catch_rate">Taxa de Pegar</string>
     <string name="base_friendship">Amizade Base</string>
     <string name="base_exp">Exp Base</string>
@@ -24,4 +23,17 @@
     <string name="egg_groups">Grupos de Ovos</string>
     <string name="egg_cycles">Ciclos de Ovos</string>
     <string name="location">Localização</string>
+
+    <!-- Stats -->
+    <string name="stats">Estatísticas</string>
+    <string name="base_stats">Estatísticas Base</string>
+    <string name="total">Total</string>
+    <string name="min">Mín</string>
+    <string name="max">Máx</string>
+    <string name="type_defenses">Defesas Tipo</string>
+    <string name="effectiveness">O efeito de cada tipo no %s.</string>
+
+    <!-- Evolution -->
+    <string name="evolution">Evolução</string>
+    <string name="evolution_chart">Gráfico de Evolução</string>
 </resources>

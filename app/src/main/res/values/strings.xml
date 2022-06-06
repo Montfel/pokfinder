@@ -5,9 +5,8 @@
     <string name="placeholder_textfield">What Pokémon are you looking for?</string>
 
     <!-- Profile -->
+    <!-- About -->
     <string name="about">About</string>
-    <string name="stats">Stats</string>
-    <string name="evolution">Evolution</string>
     <string name="pokedex_data">Pokédex Data</string>
     <string name="species">Species</string>
     <string name="height">Height</string>
@@ -25,4 +24,23 @@
     <string name="egg_groups">Egg Groups</string>
     <string name="egg_cycles">Egg Cycles</string>
     <string name="location">Location</string>
+
+    <!-- Stats -->
+    <string name="stats">Stats</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="hp" translatable="false">HP</string>
+    <string name="attack" translatable="false">Attack</string>
+    <string name="defense" translatable="false">Defense</string>
+    <string name="sp_atk" translatable="false">Special Attack</string>
+    <string name="sp_def" translatable="false">Special Defense</string>
+    <string name="speed" translatable="false">Speed</string>
+    <string name="total">Total</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="type_defenses">Type Defenses</string>
+    <string name="effectiveness">The effectiveness of each type on %s.</string>
+
+    <!-- Evolution -->
+    <string name="evolution">Evolution</string>
+    <string name="evolution_chart">Evolution Chart</string>
 </resources>

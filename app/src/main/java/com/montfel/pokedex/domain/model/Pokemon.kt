@@ -17,5 +17,6 @@ data class Pokemon(
     val growthRate: String? = null,
     val eggGroups: List<String?>? = emptyList(),
     val flavorTexts: List<FlavorTextDto>? = emptyList(),
-    val hatchCounter: Int? = null
+    val hatchCounter: Int? = null,
+    val evolutionChain: List<SpeciesDto>? = emptyList()
 )

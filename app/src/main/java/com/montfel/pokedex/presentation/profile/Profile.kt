@@ -1,26 +1,22 @@
 package com.montfel.pokedex.presentation.profile
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Pokemon
 import com.montfel.pokedex.presentation.components.TypeCards
@@ -36,7 +32,7 @@ fun Profile(
     val assetHelper = LocalAssetHelper.current
     val type = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
     val assetBackground = assetHelper.getAsset(type?.name ?: "")
-    var state by remember { mutableStateOf(0) }
+    var selectedTabIndex by remember { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
     var abilities = ""
     uiState.pokemon?.abilities?.forEach {
@@ -50,7 +46,7 @@ fun Profile(
         if (it == -1) "Genderless"
         else {
             "♀ ${it.toFloat().div(8).times(100)}%, " +
-            "♂ ${(8 - it.toFloat()).div(8).times(100)}%"
+                    "♂ ${(8 - it.toFloat()).div(8).times(100)}%"
         }
     } ?: "Genderless"
     val data = mapOf(
@@ -72,7 +68,11 @@ fun Profile(
     val breeding = mapOf(
         R.string.gender to gender,
         R.string.egg_groups to "${uiState.pokemon?.eggGroups?.joinToString()}",
-        R.string.egg_cycles to "${uiState.pokemon?.hatchCounter} (${(uiState.pokemon?.hatchCounter?.plus(1))?.times(255)} steps)",
+        R.string.egg_cycles to "${uiState.pokemon?.hatchCounter} (${
+            (uiState.pokemon?.hatchCounter?.plus(
+                1
+            ))?.times(255)
+        } steps)",
     )
 
     LaunchedEffect(key1 = Unit) {
@@ -84,11 +84,29 @@ fun Profile(
         modifier = Modifier.background(color = assetBackground.backgroundColor)
     ) {
         Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            IconButton(onClick = navController::popBackStack) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_back),
+                    contentDescription = null,
+                    tint = Color.White
+                )
+            }
+        }
+        Row(
             horizontalArrangement = Arrangement.spacedBy(25.dp),
             verticalAlignment = CenterVertically
         ) {
-            AsyncImage(
-                model = uiState.pokemon?.image,
+//            AsyncImage(
+//                model = uiState.pokemon?.image,
+//                contentDescription = null,
+//                modifier = Modifier.size(125.dp)
+//            )
+            Image(
+                painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,
                 modifier = Modifier.size(125.dp)
             )
@@ -109,19 +127,22 @@ fun Profile(
                 )
             }
         }
+
+        Spacer(modifier = Modifier.height(45.dp))
+
         TabRow(
-            selectedTabIndex = state,
+            selectedTabIndex = selectedTabIndex,
             backgroundColor = Color.Transparent,
         ) {
             titles.forEachIndexed { index, title ->
                 Tab(
-                    selected = state == index,
-                    onClick = { state = index },
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
                     unselectedContentColor = Color.White
                 ) {
                     Text(
                         text = stringResource(id = title),
-                        style = if (state == index) MaterialTheme.typography.filterTitle
+                        style = if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
                         else MaterialTheme.typography.description,
                         color = Color.White
                     )
@@ -131,75 +152,33 @@ fun Profile(
         Column(
             modifier = Modifier
                 .background(color = Color.White)
-                .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
-                .padding(24.dp)
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
         ) {
-            Text(
-                text = uiState.pokemon?.flavorTexts?.random()?.flavorText ?: "",
-                style = MaterialTheme.typography.description,
-                color = Gray74,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = stringResource(id = R.string.pokedex_data),
-                style = MaterialTheme.typography.filterTitle,
-                color = assetBackground.typeColor
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            data.forEach {
-                ProfileItem(map = it)
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(id = R.string.training),
-                style = MaterialTheme.typography.filterTitle,
-                color = assetBackground.typeColor
-            )
-            training.forEach {
-                ProfileItem(map = it)
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(id = R.string.breeding),
-                style = MaterialTheme.typography.filterTitle,
-                color = assetBackground.typeColor
-            )
-            breeding.forEach {
-                ProfileItem(map = it)
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(id = R.string.location),
-                style = MaterialTheme.typography.filterTitle,
-                color = assetBackground.typeColor
-            )
-            breeding.forEach {
-                ProfileItem(map = it)
+            when (selectedTabIndex) {
+                0 -> {
+                    About(
+                        flavorText = uiState.pokemon?.flavorTexts?.random()?.flavorText ?: "",
+                        data = data,
+                        training = training,
+                        breeding = breeding,
+                        typeColor = assetBackground.typeColor
+                    )
+                }
+                1 -> {
+                    Stats(
+                        stats = uiState.pokemon?.stats ?: emptyList(),
+                        typeColor = assetBackground.typeColor,
+                        pokemonName = uiState.pokemon?.name ?: ""
+                    )
+                }
+                2 -> {
+                    Evolution(
+                        typeColor = assetBackground.typeColor,
+                        evolutionChain = uiState.pokemon?.evolutionChain ?: emptyList()
+                    )
+                }
             }
         }
     }
-}
-
-@Composable
-fun ProfileItem(map: Map.Entry<Int, String>) {
-    Row(
-        verticalAlignment = CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        Text(
-            text = stringResource(id = map.key),
-            style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
-            modifier = Modifier.width(85.dp)
-        )
-        Text(
-            text = map.value,
-            style = MaterialTheme.typography.description,
-            color = Gray74
-        )
-    }
-    Spacer(modifier = Modifier.height(15.dp))
 }

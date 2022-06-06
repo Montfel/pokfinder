@@ -75,6 +75,13 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
                         languageName = flavor.pokemon_v2_language?.name
                     )
                 },
+                evolutionChain = species?.pokemon_v2_evolutionchain?.pokemon_v2_pokemonspecies?.map { specie ->
+                    SpeciesDto(
+                        id = specie.id,
+                        name = specie.name,
+                        minLevel = specie.pokemon_v2_pokemonevolutions.map { level -> level.min_level }
+                    )
+                }
             ).toDomain()
         }
 

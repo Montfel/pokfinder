@@ -34,7 +34,7 @@ fun Home(
         viewModel.getAllPokemons()
     }
 
-    LazyColumn(modifier = Modifier.padding(horizontal = 24.dp)) {
+    LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
         item {
             TopBar()
             Text(

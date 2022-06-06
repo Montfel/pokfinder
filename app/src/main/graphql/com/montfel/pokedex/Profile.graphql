@@ -43,6 +43,15 @@ query Profile($id : Int!) {
                     name
                 }
             }
+            pokemon_v2_evolutionchain {
+                pokemon_v2_pokemonspecies {
+                    name
+                    id
+                    pokemon_v2_pokemonevolutions {
+                        min_level
+                    }
+                }
+            }
         }
     }
 }

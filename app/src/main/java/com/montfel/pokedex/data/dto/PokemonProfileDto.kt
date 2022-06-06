@@ -15,7 +15,7 @@ data class PokemonProfileDto(
     val stats: List<StatsDto>,
 //    val species: SpeciesDto,
 //    val locationUrl: String
-//    val evolutionChain: Long,
+    val evolutionChain: List<SpeciesDto>?,
     val captureRate: Int?,
     val growthRate: String?,
     val eggGroups: List<String?>?,
@@ -49,6 +49,7 @@ data class PokemonProfileDto(
                     languageName = it.languageName
                 )
             },
-        hatchCounter = hatchCounter
+        hatchCounter = hatchCounter,
+        evolutionChain = evolutionChain
     )
 }
