@@ -60,7 +60,7 @@ fun Profile(
     val training = mapOf(
         R.string.ev_yield to "a",
         R.string.catch_rate to "${uiState.pokemon?.captureRate}",
-        R.string.base_friendship to "c",
+        R.string.base_friendship to "${uiState.pokemon?.baseHappiness}",
         R.string.base_exp to uiState.pokemon?.baseExp.toString(),
         R.string.growth_rate to "${uiState.pokemon?.growthRate}"
     )
@@ -154,6 +154,7 @@ fun Profile(
                 .background(color = Color.White)
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp)
         ) {
             when (selectedTabIndex) {
                 0 -> {

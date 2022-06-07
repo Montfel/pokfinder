@@ -27,6 +27,7 @@ query Profile($id : Int!) {
         }
         pokemon_v2_pokemonspecy {
             capture_rate
+            base_happiness
             gender_rate
             hatch_counter
             pokemon_v2_growthrate {

@@ -22,7 +22,8 @@ data class PokemonProfileDto(
     val flavorTexts: List<FlavorTextDto>?,
     val genderRate: Int?,
 //    val genera: List<GeneraDto>,
-    val hatchCounter: Int?
+    val hatchCounter: Int?,
+    val baseHappiness: Int?
 
 ) : DtoMapper<Pokemon> {
     override fun toDomain() = Pokemon(
@@ -50,6 +51,7 @@ data class PokemonProfileDto(
                 )
             },
         hatchCounter = hatchCounter,
-        evolutionChain = evolutionChain
+        evolutionChain = evolutionChain,
+        baseHappiness = baseHappiness
     )
 }

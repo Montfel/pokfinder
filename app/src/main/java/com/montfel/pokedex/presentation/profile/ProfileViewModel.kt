@@ -81,7 +81,8 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
                         name = specie.name,
                         minLevel = specie.pokemon_v2_pokemonevolutions.map { level -> level.min_level }
                     )
-                }
+                },
+                baseHappiness = species?.base_happiness
             ).toDomain()
         }
 

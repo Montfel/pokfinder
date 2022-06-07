@@ -26,40 +26,53 @@ fun About(
         color = Gray74,
         modifier = Modifier.fillMaxWidth()
     )
+
     Spacer(modifier = Modifier.height(30.dp))
+
     Text(
         text = stringResource(id = R.string.pokedex_data),
         style = MaterialTheme.typography.filterTitle,
         color = typeColor
     )
+
     Spacer(modifier = Modifier.height(20.dp))
+
     data.forEach {
         AboutItem(map = it)
     }
+
     Spacer(modifier = Modifier.height(20.dp))
+
     Text(
         text = stringResource(id = R.string.training),
         style = MaterialTheme.typography.filterTitle,
         color = typeColor
     )
+
     training.forEach {
         AboutItem(map = it)
     }
+
     Spacer(modifier = Modifier.height(20.dp))
+
     Text(
         text = stringResource(id = R.string.breeding),
         style = MaterialTheme.typography.filterTitle,
         color = typeColor
     )
+
     breeding.forEach {
         AboutItem(map = it)
     }
+
     Spacer(modifier = Modifier.height(20.dp))
+
     Text(
         text = stringResource(id = R.string.location),
         style = MaterialTheme.typography.filterTitle,
         color = typeColor
     )
+
     breeding.forEach {
         AboutItem(map = it)
     }

@@ -1,12 +1,15 @@
 package com.montfel.pokedex.presentation.profile
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -57,8 +60,9 @@ fun Stats(
 
     statsList.forEach {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
-            verticalAlignment = CenterVertically
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = CenterVertically,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text(
                 text = it.statName ?: "",
@@ -73,22 +77,35 @@ fun Stats(
                 textAlign = TextAlign.End,
                 modifier = Modifier.width(30.dp)
             )
+            LinearProgressIndicator(
+                progress = it.stat.toFloat() / 200,
+                color = typeColor,
+                backgroundColor = Color.Transparent,
+                modifier = Modifier
+                    .width(160.dp)
+                    .clip(RoundedCornerShape(2.dp))
+            )
             Text(
                 text = "200",
                 style = MaterialTheme.typography.description,
-                color = Gray74
+                color = Gray74,
+                textAlign = TextAlign.End,
+                modifier = Modifier.width(30.dp)
             )
             Text(
                 text = "294",
                 style = MaterialTheme.typography.description,
-                color = Gray74
+                color = Gray74,
+                textAlign = TextAlign.End,
+                modifier = Modifier.width(30.dp)
             )
         }
         Spacer(modifier = Modifier.height(15.dp))
     }
     Row(
-        horizontalArrangement = Arrangement.spacedBy(20.dp),
-        verticalAlignment = CenterVertically
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = CenterVertically,
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             text = stringResource(id = R.string.total),
@@ -100,17 +117,23 @@ fun Stats(
             text = total.toString(),
             style = MaterialTheme.typography.filterTitle,
             color = Gray74,
+            textAlign = TextAlign.End,
             modifier = Modifier.width(30.dp)
         )
+        Box(modifier = Modifier.width(160.dp))
         Text(
             text = stringResource(id = R.string.min),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17
+            color = Gray17,
+            textAlign = TextAlign.End,
+            modifier = Modifier.width(30.dp)
         )
         Text(
             text = stringResource(id = R.string.max),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17
+            color = Gray17,
+            textAlign = TextAlign.End,
+            modifier = Modifier.width(30.dp)
         )
     }
 
