@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -11,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -28,6 +31,7 @@ fun Profile(
     navController: NavController,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val language = Locale.current.language
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
     val type = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
@@ -45,12 +49,13 @@ fun Profile(
     val gender = uiState.pokemon?.genderRate?.let {
         if (it == -1) "Genderless"
         else {
-            "♀ ${it.toFloat().div(8).times(100)}%, " +
-                    "♂ ${(8 - it.toFloat()).div(8).times(100)}%"
+            "♂ ${(8 - it.toFloat()).div(8).times(100)}%, " +
+                    "♀ ${it.toFloat().div(8).times(100)}% "
+
         }
     } ?: "Genderless"
     val data = mapOf(
-        R.string.species to "a",
+        R.string.species to "${uiState.pokemon?.genera?.first() { lang -> lang.language.name == language }?.name}",
         R.string.height to "${uiState.pokemon?.height}m",
         R.string.weight to "${uiState.pokemon?.weight}kg",
         R.string.abilities to abilities,
@@ -79,105 +84,120 @@ fun Profile(
         viewModel.getProfile(id)
     }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.background(color = assetBackground.backgroundColor)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            IconButton(onClick = navController::popBackStack) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = null,
-                    tint = Color.White
-                )
+    Scaffold(
+        topBar = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                IconButton(onClick = navController::popBackStack) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_back),
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
             }
-        }
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(25.dp),
-            verticalAlignment = CenterVertically
+        },
+        backgroundColor = assetBackground.backgroundColor,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(it)
+                .verticalScroll(rememberScrollState())
         ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                verticalAlignment = CenterVertically
+            ) {
 //            AsyncImage(
 //                model = uiState.pokemon?.image,
 //                contentDescription = null,
 //                modifier = Modifier.size(125.dp)
 //            )
-            Image(
-                painter = painterResource(id = R.drawable.ic_pokeball),
-                contentDescription = null,
-                modifier = Modifier.size(125.dp)
-            )
-            Column() {
-                Text(
-                    text = "#${uiState.pokemon?.id}",
-                    style = MaterialTheme.typography.filterTitle,
-                    color = Gray17,
-                    modifier = Modifier.alpha(0.6f)
+                Image(
+                    painter = painterResource(id = R.drawable.ic_pokeball),
+                    contentDescription = null,
+                    modifier = Modifier.size(125.dp)
                 )
-                Text(
-                    text = uiState.pokemon?.name ?: "",
-                    style = MaterialTheme.typography.applicationTitle,
-                    color = Color.White,
-                )
-                TypeCards(
-                    pokemon = uiState.pokemon ?: Pokemon()
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(45.dp))
-
-        TabRow(
-            selectedTabIndex = selectedTabIndex,
-            backgroundColor = Color.Transparent,
-        ) {
-            titles.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    unselectedContentColor = Color.White
-                ) {
+                Column() {
                     Text(
-                        text = stringResource(id = title),
-                        style = if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
-                        else MaterialTheme.typography.description,
-                        color = Color.White
+                        text = "#${uiState.pokemon?.id}",
+                        style = MaterialTheme.typography.filterTitle,
+                        color = Gray17,
+                        modifier = Modifier.alpha(0.6f)
+                    )
+                    Text(
+                        text = uiState.pokemon?.name ?: "",
+                        style = MaterialTheme.typography.applicationTitle,
+                        color = Color.White,
+                    )
+                    TypeCards(
+                        pokemon = uiState.pokemon ?: Pokemon()
                     )
                 }
             }
-        }
-        Column(
-            modifier = Modifier
-                .background(color = Color.White)
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp)
-        ) {
-            when (selectedTabIndex) {
-                0 -> {
-                    About(
-                        flavorText = uiState.pokemon?.flavorTexts?.random()?.flavorText ?: "",
-                        data = data,
-                        training = training,
-                        breeding = breeding,
-                        typeColor = assetBackground.typeColor
-                    )
+
+            Spacer(modifier = Modifier.height(45.dp))
+
+            TabRow(
+                selectedTabIndex = selectedTabIndex,
+                backgroundColor = Color.Transparent,
+            ) {
+                titles.forEachIndexed { index, title ->
+                    Tab(
+                        selected = selectedTabIndex == index,
+                        onClick = { selectedTabIndex = index },
+                        unselectedContentColor = Color.White
+                    ) {
+                        Text(
+                            text = stringResource(id = title),
+                            style = if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
+                            else MaterialTheme.typography.description,
+                            color = Color.White
+                        )
+                    }
                 }
-                1 -> {
-                    Stats(
-                        stats = uiState.pokemon?.stats ?: emptyList(),
-                        typeColor = assetBackground.typeColor,
-                        pokemonName = uiState.pokemon?.name ?: ""
-                    )
-                }
-                2 -> {
-                    Evolution(
-                        typeColor = assetBackground.typeColor,
-                        evolutionChain = uiState.pokemon?.evolutionChain ?: emptyList()
-                    )
+            }
+
+            val a = uiState.pokemon?.flavorTexts?.filter { lang ->
+                lang.language.name == language
+            }?.random()
+
+            Column(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                    .background(color = Color.White)
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+            ) {
+                when (selectedTabIndex) {
+                    0 -> {
+                        About(
+                            flavorText = uiState.pokemon?.flavorTexts
+                                ?.filter { lang -> lang.language.name == language }
+                                ?.random()?.flavorText ?: "",
+                            data = data,
+                            training = training,
+                            breeding = breeding,
+                            typeColor = assetBackground.typeColor
+                        )
+                    }
+                    1 -> {
+                        Stats(
+                            stats = uiState.pokemon?.stats ?: emptyList(),
+                            typeColor = assetBackground.typeColor,
+                            pokemonName = uiState.pokemon?.name ?: ""
+                        )
+                    }
+                    2 -> {
+                        Evolution(
+                            typeColor = assetBackground.typeColor,
+                            evolutionChain = uiState.pokemon?.evolutionChain ?: emptyList()
+                        )
+                    }
                 }
             }
         }

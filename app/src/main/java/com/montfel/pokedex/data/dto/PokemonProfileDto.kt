@@ -21,7 +21,7 @@ data class PokemonProfileDto(
     val eggGroups: List<String?>?,
     val flavorTexts: List<FlavorTextDto>?,
     val genderRate: Int?,
-//    val genera: List<GeneraDto>,
+    val genera: List<GeneraDto>?,
     val hatchCounter: Int?,
     val baseHappiness: Int?
 
@@ -43,15 +43,16 @@ data class PokemonProfileDto(
             ?.map { it?.replaceFirstChar { first -> first.uppercase() } }
             ?.sortedBy { it },
         flavorTexts = flavorTexts
-            ?.filter { it.languageName.equals("en") || it.languageName.equals("pt-BR") }
+            ?.filter { it.language.name == "en" || it.language.name == ("pt-BR") }
             ?.map {
                 FlavorTextDto(
                     flavorText = it.flavorText.replace("\n", " "),
-                    languageName = it.languageName
+                    language = it.language
                 )
             },
         hatchCounter = hatchCounter,
         evolutionChain = evolutionChain,
-        baseHappiness = baseHappiness
+        baseHappiness = baseHappiness,
+        genera = genera?.filter { it.language.name == "en" || it.language.name == ("pt-BR") }
     )
 }

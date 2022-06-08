@@ -6,7 +6,6 @@ import com.montfel.pokedex.ProfileQuery
 import com.montfel.pokedex.data.datasource.apolloClient
 import com.montfel.pokedex.data.dto.*
 import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.domain.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,7 +71,9 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
                 flavorTexts = species?.pokemon_v2_pokemonspeciesflavortexts?.map { flavor ->
                     FlavorTextDto(
                         flavorText = flavor.flavor_text,
-                        languageName = flavor.pokemon_v2_language?.name
+                        language = LanguageDto(
+                            name = flavor.pokemon_v2_language?.name ?: ""
+                        )
                     )
                 },
                 evolutionChain = species?.pokemon_v2_evolutionchain?.pokemon_v2_pokemonspecies?.map { specie ->
@@ -82,7 +83,15 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
                         minLevel = specie.pokemon_v2_pokemonevolutions.map { level -> level.min_level }
                     )
                 },
-                baseHappiness = species?.base_happiness
+                baseHappiness = species?.base_happiness,
+                genera = species?.pokemon_v2_pokemonspeciesnames?.map { genera ->
+                    GeneraDto(
+                        name = genera.genus,
+                        language = LanguageDto(
+                            name = genera.pokemon_v2_language?.name ?: ""
+                        )
+                    )
+                }
             ).toDomain()
         }
 

@@ -19,5 +19,6 @@ data class Pokemon(
     val flavorTexts: List<FlavorTextDto>? = emptyList(),
     val hatchCounter: Int? = null,
     val evolutionChain: List<SpeciesDto>? = emptyList(),
-    val baseHappiness: Int? = null
+    val baseHappiness: Int? = null,
+    val genera: List<GeneraDto>? = emptyList()
 )

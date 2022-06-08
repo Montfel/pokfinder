@@ -9,6 +9,12 @@ query Profile($id : Int!) {
             slot
             pokemon_v2_type {
                 name
+                pokemon_v2_typeefficacies {
+                    damage_factor
+                    pokemonV2TypeByTargetTypeId {
+                        name
+                    }
+                }
             }
         }
         pokemon_v2_pokemonabilities {
@@ -51,6 +57,12 @@ query Profile($id : Int!) {
                     pokemon_v2_pokemonevolutions {
                         min_level
                     }
+                }
+            }
+            pokemon_v2_pokemonspeciesnames {
+                genus
+                pokemon_v2_language {
+                    name
                 }
             }
         }

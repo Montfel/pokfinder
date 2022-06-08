@@ -162,4 +162,50 @@ fun Stats(
     )
 
     Spacer(modifier = Modifier.height(20.dp))
+
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        repeat(9) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TypeEffectiveness(
+                    typeColor = TypeFire,
+                    image = R.drawable.ic_fire
+                )
+                Text(
+                    text = "1",
+                    style = MaterialTheme.typography.description,
+                    color = Gray74
+                )
+            }
+        }
+    }
+
+    Spacer(modifier = Modifier.height(20.dp))
+
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        repeat(9) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TypeEffectiveness(
+                    typeColor = TypeFire,
+                    image = R.drawable.ic_fire
+                )
+                Text(
+                    text = "1",
+                    style = MaterialTheme.typography.description,
+                    color = Gray74
+                )
+            }
+        }
+    }
 }
