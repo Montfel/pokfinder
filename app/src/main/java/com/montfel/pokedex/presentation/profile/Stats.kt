@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
 import com.montfel.pokedex.data.dto.StatsDto
+import com.montfel.pokedex.presentation.components.TypeEffectivenessItem
 import com.montfel.pokedex.presentation.theme.*
 
 sealed class StatsNames(val name: String) {
@@ -172,7 +173,7 @@ fun Stats(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TypeEffectiveness(
+                TypeEffectivenessItem(
                     typeColor = TypeFire,
                     image = R.drawable.ic_fire
                 )
@@ -196,7 +197,7 @@ fun Stats(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TypeEffectiveness(
+                TypeEffectivenessItem(
                     typeColor = TypeFire,
                     image = R.drawable.ic_fire
                 )
