@@ -33,6 +33,7 @@
     <string name="max">Máx</string>
     <string name="type_defenses">Defesas Tipo</string>
     <string name="effectiveness">O efeito de cada tipo no %s.</string>
+    <string name="stats_description">Os intervalos mostrados à direita são para um Pokémon de nível 100. Os valores máximos são baseados em natureza benéfica, 252 EVs, 31 IVs; os valores mínimos são baseados em natureza dificultadora, 0 EVs, 0 IVs.</string>
 
     <!-- Evolution -->
     <string name="evolution">Evolução</string>

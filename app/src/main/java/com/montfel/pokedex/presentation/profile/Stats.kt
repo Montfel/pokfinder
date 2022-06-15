@@ -141,7 +141,7 @@ fun Stats(
     Spacer(modifier = Modifier.height(20.dp))
 
     Text(
-        text = "The ranges shown on the right are for a level 100 Pokémon. Maximum values are based on a beneficial nature, 252 EVs, 31 IVs; minimum values are based on a hindering nature, 0 EVs, 0 IVs.",
+        text = stringResource(id = R.string.stats_description),
         style = MaterialTheme.typography.pokemonType,
         color = Gray74
     )

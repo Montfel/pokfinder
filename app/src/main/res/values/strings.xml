@@ -40,6 +40,7 @@
     <string name="max">Max</string>
     <string name="type_defenses">Type Defenses</string>
     <string name="effectiveness">The effectiveness of each type on %s.</string>
+    <string name="stats_description">The ranges shown on the right are for a level 100 Pokémon. Maximum values are based on a beneficial nature, 252 EVs, 31 IVs; minimum values are based on a hindering nature, 0 EVs, 0 IVs.</string>
 
     <!-- Evolution -->
     <string name="evolution">Evolution</string>

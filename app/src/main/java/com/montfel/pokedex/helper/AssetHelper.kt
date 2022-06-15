@@ -1,7 +1,8 @@
-package com.montfel.pokedex
+package com.montfel.pokedex.helper
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
+import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.theme.*
 import javax.inject.Inject
 import javax.inject.Singleton

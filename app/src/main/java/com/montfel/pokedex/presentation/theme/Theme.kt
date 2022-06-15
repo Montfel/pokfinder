@@ -9,7 +9,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.montfel.pokedex.AssetHelper
+import com.montfel.pokedex.helper.AssetHelper
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
