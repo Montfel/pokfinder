@@ -41,7 +41,16 @@ class ProfileViewModel @Inject constructor() : ViewModel() {
                 types = it.pokemon_v2_pokemontypes.map { type ->
                     TypesDto(
                         slot = type.slot,
-                        name = type.pokemon_v2_type?.name
+                        type =
+                        TypeDto(
+                            name = type.pokemon_v2_type?.name,
+                            typeEfficacies = type.pokemon_v2_type?.pokemon_v2_typeefficacies?.map { typeEfficacy ->
+                                TypeEfficacyDto(
+                                    damageFactor = typeEfficacy.damage_factor,
+                                    name = typeEfficacy.pokemonV2TypeByTargetTypeId?.name
+                                )
+                            }
+                        )
                     )
                 },
                 height = it.height,

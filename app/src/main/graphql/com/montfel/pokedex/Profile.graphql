@@ -68,4 +68,3 @@ query Profile($id : Int!) {
         }
     }
 }
-

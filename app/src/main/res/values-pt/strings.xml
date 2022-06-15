@@ -12,6 +12,7 @@
     <string name="weight">Peso</string>
     <string name="abilities">Abilidades</string>
     <string name="weakeness">Fraquesas</string>
+    <string name="strength">Forças</string>
     <string name="training">Treinamento</string>
     <string name="ev_yield">Pontos EV</string>
     <string name="catch_rate">Taxa de Pegar</string>

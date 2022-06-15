@@ -1,21 +1,16 @@
 package com.montfel.pokedex.presentation.profile
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
+import com.montfel.pokedex.presentation.components.TypeEffectivenessItem
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
@@ -24,10 +19,11 @@ fun About(
     data: Map<Int, String>,
     training: Map<Int, String>,
     breeding: Map<Int, String>,
-    typeColor: Color
+    typeColor: Color,
+    strength: List<String>? = emptyList(),
+    weakness: List<String>? = emptyList(),
 ) {
-//    WeaknessItem(typeColor = TypeFire, image = R.drawable.ic_fire)
-
+    val assetHelper = LocalAssetHelper.current
     Spacer(modifier = Modifier.height(40.dp))
 
     Text(
@@ -53,22 +49,39 @@ fun About(
 
     Spacer(modifier = Modifier.height(15.dp))
 
-//    Row(
-//        verticalAlignment = Alignment.CenterVertically,
-//        horizontalArrangement = Arrangement.spacedBy(10.dp)
-//    ) {
-//        Text(
-//            text = stringResource(id = map.key),
-//            style = MaterialTheme.typography.pokemonType,
-//            color = Gray17,
-//            modifier = Modifier.width(85.dp)
-//        )
-//        Text(
-//            text = map.value,
-//            style = MaterialTheme.typography.description,
-//            color = Gray74
-//        )
-//    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.weakeness),
+            style = MaterialTheme.typography.pokemonType,
+            color = Gray17,
+            modifier = Modifier.width(85.dp)
+        )
+        weakness?.forEach {
+            val asset = assetHelper.getAsset(it)
+            TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
+        }
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.strength),
+            style = MaterialTheme.typography.pokemonType,
+            color = Gray17,
+            modifier = Modifier.width(85.dp)
+        )
+        strength?.forEach {
+            val asset = assetHelper.getAsset(it)
+            TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
+        }
+    }
 
     Spacer(modifier = Modifier.height(20.dp))
 

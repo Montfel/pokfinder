@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
@@ -28,6 +29,7 @@ fun TypeEffectivenessItem(
         Image(
             painter = painterResource(id = image),
             contentDescription = null,
+            colorFilter = ColorFilter.tint(Color.White),
             modifier = Modifier
                 .size(15.dp)
                 .align(Alignment.Center)

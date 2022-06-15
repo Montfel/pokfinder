@@ -34,10 +34,16 @@ fun Profile(
     val language = Locale.current.language
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
-    val type = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
-    val assetBackground = assetHelper.getAsset(type?.name ?: "")
+    val mainType = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
+    val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
     var selectedTabIndex by remember { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
+    val strength = mainType?.type?.typeEfficacies
+        ?.filter { it.damageFactor == 200 }
+        ?.map { it.name }
+    val weakness = mainType?.type?.typeEfficacies
+        ?.filter { it.damageFactor == 0 }
+        ?.map { it.name }
     var abilities = ""
     uiState.pokemon?.abilities?.forEach {
         abilities += if (it.isHidden) {
@@ -59,7 +65,6 @@ fun Profile(
         R.string.height to "${uiState.pokemon?.height}m",
         R.string.weight to "${uiState.pokemon?.weight}kg",
         R.string.abilities to abilities,
-        R.string.weakeness to "c"
     )
 
     val training = mapOf(
@@ -182,7 +187,9 @@ fun Profile(
                             data = data,
                             training = training,
                             breeding = breeding,
-                            typeColor = assetBackground.typeColor
+                            typeColor = assetBackground.typeColor,
+                            strength = strength,
+                            weakness = weakness
                         )
                     }
                     1 -> {

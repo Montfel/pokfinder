@@ -42,7 +42,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 types = it.pokemon_v2_pokemontypes.map { type ->
                     TypesDto(
                         slot = type.slot,
-                        name = type.pokemon_v2_type?.name ?: ""
+                        type = TypeDto(
+                            name = type.pokemon_v2_type?.name
+                        )
                     )
                 }
             ).toDomain()

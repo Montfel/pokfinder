@@ -8,10 +8,13 @@
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_fighting.xml" value="0.3875" />
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_filter.xml" value="0.1995" />
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_fire.xml" value="0.2115" />
+        <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_flying.xml" value="0.175" />
+        <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_front.xml" value="0.175" />
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_generation.xml" value="0.1995" />
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_grass.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_pokeball.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_search.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/pokedex/app/src/main/res/drawable/ic_water.xml" value="0.321" />
       </map>
     </option>
   </component>

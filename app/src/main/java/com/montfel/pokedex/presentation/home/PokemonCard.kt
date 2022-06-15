@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Pokemon
 import com.montfel.pokedex.presentation.components.TypeCards
@@ -30,8 +29,8 @@ fun PokemonCard(
     onClick: () -> Unit
 ) {
     val assetHelper = LocalAssetHelper.current
-    val type = pokemon.types.first { type -> type.slot == 1 }
-    val assetBackground = assetHelper.getAsset(type.name ?: "")
+    val mainType = pokemon.types.first { type -> type.slot == 1 }
+    val assetBackground = assetHelper.getAsset(mainType.type.name)
     Box(modifier = Modifier.height(140.dp)) {
         Card(
             shape = RoundedCornerShape(10.dp),

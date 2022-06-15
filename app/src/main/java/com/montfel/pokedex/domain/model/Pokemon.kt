@@ -6,7 +6,7 @@ data class Pokemon(
     val id: Int? = null,
     val name: String? = null,
     val image: String? = null,
-    val types: List<Type> = emptyList(),
+    val types: List<Types> = emptyList(),
     val height: Float? = null,
     val weight: Float? = null,
     val baseExp: Int? = null,
