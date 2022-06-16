@@ -10,6 +10,7 @@ import com.montfel.pokedex.data.dto.TypeDto
 import com.montfel.pokedex.data.dto.TypesDto
 import com.montfel.pokedex.domain.model.Pokemon
 import com.montfel.pokedex.domain.repository.PokemonRepository
+import com.montfel.pokedex.helper.ApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,10 +64,14 @@ class HomeViewModel @Inject constructor(
 
     fun searchPokemon(pokemonName: String) {
         viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    pokemon = pokemonRepository.getPokemon(pokemonName)
-                )
+            val response = pokemonRepository.getPokemon(pokemonName)
+
+            if (response is ApiResponse.SuccessResult) {
+                _uiState.update {
+                    it.copy(
+                        pokemon = response.data
+                    )
+                }
             }
         }
     }

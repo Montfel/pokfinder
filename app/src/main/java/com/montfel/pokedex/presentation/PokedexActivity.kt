@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.tooling.preview.Preview
 import com.montfel.pokedex.helper.AssetHelper
+import com.montfel.pokedex.presentation.navigation.NavigationComponent
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
 import com.montfel.pokedex.presentation.theme.PokedexTheme
 import dagger.hilt.android.AndroidEntryPoint

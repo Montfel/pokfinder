@@ -1,28 +1,49 @@
 package com.montfel.pokedex.presentation.profile
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo3.exception.ApolloException
 import com.montfel.pokedex.ProfileQuery
 import com.montfel.pokedex.data.datasource.apolloClient
 import com.montfel.pokedex.data.dto.*
 import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.repository.PokemonRepository
+import com.montfel.pokedex.helper.ApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class ProfileUiState(
-    val pokemon: Pokemon? = null
+    val pokemon: Pokemon? = null,
+    val pokemonHeader: Pokemon? = null
 )
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor() : ViewModel() {
+class ProfileViewModel @Inject constructor(
+    private val pokemonRepository: PokemonRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState: StateFlow<ProfileUiState> = _uiState
+
+    fun getPokemonHeader(id: String) {
+        viewModelScope.launch {
+            val response = pokemonRepository.getPokemon(id)
+
+            if (response is ApiResponse.SuccessResult) {
+                _uiState.update {
+                    it.copy(
+                        pokemonHeader = response.data
+                    )
+                }
+            }
+        }
+    }
 
     suspend fun getProfile(id: String) {
         val response = withContext(Dispatchers.IO) {

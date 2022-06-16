@@ -13,15 +13,17 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.montfel.pokedex.R
-import com.montfel.pokedex.domain.model.Pokemon
 import com.montfel.pokedex.presentation.components.TypeCards
 import com.montfel.pokedex.presentation.theme.*
 
@@ -61,7 +63,7 @@ fun Profile(
         }
     } ?: "Genderless"
     val data = mapOf(
-        R.string.species to "${uiState.pokemon?.genera?.first() { lang -> lang.language.name == language }?.name}",
+        R.string.species to "${uiState.pokemon?.genera?.first { lang -> lang.language.name == language }?.name}",
         R.string.height to "${uiState.pokemon?.height}m",
         R.string.weight to "${uiState.pokemon?.weight}kg",
         R.string.abilities to abilities,
@@ -87,6 +89,7 @@ fun Profile(
 
     LaunchedEffect(key1 = Unit) {
         viewModel.getProfile(id)
+        viewModel.getPokemonHeader(id)
     }
 
     Scaffold(
@@ -117,29 +120,34 @@ fun Profile(
                 horizontalArrangement = Arrangement.spacedBy(25.dp),
                 verticalAlignment = CenterVertically
             ) {
-//            AsyncImage(
-//                model = uiState.pokemon?.image,
-//                contentDescription = null,
-//                modifier = Modifier.size(125.dp)
-//            )
-                Image(
-                    painter = painterResource(id = R.drawable.ic_pokeball),
-                    contentDescription = null,
-                    modifier = Modifier.size(125.dp)
-                )
-                Column() {
+                Box {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_circle),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(Color.White),
+                        modifier = Modifier
+                            .size(125.dp)
+                            .alpha(0.35f)
+                    )
+                    AsyncImage(
+                        model = uiState.pokemonHeader?.image,
+                        contentDescription = null,
+                        modifier = Modifier.size(125.dp)
+                    )
+                }
+                Column {
                     Text(
-                        text = "#${uiState.pokemon?.id}",
+                        text = "#${uiState.pokemonHeader?.id}",
                         style = MaterialTheme.typography.filterTitle,
                         color = Gray17,
                         modifier = Modifier.alpha(0.6f)
                     )
                     Text(
-                        text = uiState.pokemon?.name ?: "",
+                        text = uiState.pokemonHeader?.name ?: "",
                         style = MaterialTheme.typography.applicationTitle,
                         color = Color.White,
                     )
-                    TypeCards(types = uiState.pokemon?.types ?: emptyList())
+                    TypeCards(types = uiState.pokemonHeader?.types ?: emptyList())
                 }
             }
 
@@ -164,10 +172,6 @@ fun Profile(
                     }
                 }
             }
-
-            val a = uiState.pokemon?.flavorTexts?.filter { lang ->
-                lang.language.name == language
-            }?.random()
 
             Column(
                 modifier = Modifier

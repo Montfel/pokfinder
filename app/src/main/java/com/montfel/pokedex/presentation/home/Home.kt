@@ -20,7 +20,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.theme.*
-import kotlinx.coroutines.runBlocking
 
 @Composable
 fun Home(
@@ -60,9 +59,9 @@ fun Home(
             }
         } else {
             item {
-                uiState.pokemon?.let {
-                    PokemonCard(pokemon = it) {
-                        navController.navigate("profile/${it.id}")
+                uiState.pokemon?.let { pokemon ->
+                    PokemonCard(pokemon = pokemon) {
+                        navController.navigate("profile/${pokemon.id}")
                     }
                 }
             }
@@ -78,9 +77,7 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
         onValueChange = {
             text.value = it
             if (it.isNotBlank()) {
-                runBlocking {
-                    viewModel.searchPokemon(it)
-                }
+                viewModel.searchPokemon(it)
             }
         },
         shape = RoundedCornerShape(10.dp),
