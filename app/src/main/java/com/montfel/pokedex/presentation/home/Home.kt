@@ -31,7 +31,7 @@ fun Home(
     val text = remember { mutableStateOf("") }
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.getAllPokemons()
+        viewModel.showAllPokemons()
     }
 
     LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -50,10 +50,20 @@ fun Home(
             )
             CustomTextField(viewModel, text)
         }
-        uiState.pokemon?.let {
-            items(it) { pokemon ->
-                PokemonCard(pokemon = pokemon) {
-                    navController.navigate("profile/${pokemon.id}")
+        if (text.value.isBlank()) {
+            uiState.pokemonList?.let {
+                items(it) { pokemon ->
+                    PokemonCard(pokemon = pokemon) {
+                        navController.navigate("profile/${pokemon.id}")
+                    }
+                }
+            }
+        } else {
+            item {
+                uiState.pokemon?.let {
+                    PokemonCard(pokemon = it) {
+                        navController.navigate("profile/${it.id}")
+                    }
                 }
             }
         }
@@ -67,11 +77,11 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
         value = text.value,
         onValueChange = {
             text.value = it
-//            if (it.isNotBlank()) {
-//                runBlocking {
-//                    viewModel.getPokemon(it)
-//                }
-//            }
+            if (it.isNotBlank()) {
+                runBlocking {
+                    viewModel.searchPokemon(it)
+                }
+            }
         },
         shape = RoundedCornerShape(10.dp),
         textStyle = MaterialTheme.typography.description,

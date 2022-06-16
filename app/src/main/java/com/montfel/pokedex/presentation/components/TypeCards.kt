@@ -15,17 +15,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.model.Types
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
 import com.montfel.pokedex.presentation.theme.pokemonType
 
 @Composable
-fun TypeCards(pokemon: Pokemon) {
+fun TypeCards(types: List<Types>) {
     val assetHelper = LocalAssetHelper.current
 
     LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-        items(pokemon.types) { type ->
-            val assetType = assetHelper.getAsset(type.type.name)
+        items(types) {
+            val assetType = assetHelper.getAsset(it.type.name)
             Card(
                 shape = RoundedCornerShape(3.dp),
                 backgroundColor = assetType.typeColor,
@@ -43,7 +43,7 @@ fun TypeCards(pokemon: Pokemon) {
                         modifier = Modifier.size(15.dp)
                     )
                     Text(
-                        text = type.type.name,
+                        text = it.type.name,
                         style = MaterialTheme.typography.pokemonType,
                         color = Color.White,
                     )

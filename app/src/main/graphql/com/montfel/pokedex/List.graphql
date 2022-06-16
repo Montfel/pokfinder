@@ -1,4 +1,4 @@
-query Home {
+query List {
     pokemon_v2_pokemon {
         id
         name

@@ -5,14 +5,12 @@ import com.montfel.pokedex.domain.model.Pokemon
 
 data class PokemonDto(
     val id: Int,
-    val name: String?,
-//    val sprite: SpriteDto,
+    val name: String,
     val types: List<TypesDto>
 ) : DtoMapper<Pokemon> {
     override fun toDomain() = Pokemon(
         id = id,
-        name = name?.replaceFirstChar { it.uppercase() } ?: "",
-//        image = sprite.other.officialArtwork.frontDefault,
+        name = name.replaceFirstChar { it.uppercase() },
         types = types.map { it.toDomain() }
     )
 }

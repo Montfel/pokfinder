@@ -139,9 +139,7 @@ fun Profile(
                         style = MaterialTheme.typography.applicationTitle,
                         color = Color.White,
                     )
-                    TypeCards(
-                        pokemon = uiState.pokemon ?: Pokemon()
-                    )
+                    TypeCards(types = uiState.pokemon?.types ?: emptyList())
                 }
             }
 
