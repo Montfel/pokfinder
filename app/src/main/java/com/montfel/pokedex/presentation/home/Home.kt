@@ -24,7 +24,8 @@ import com.montfel.pokedex.presentation.theme.*
 @Composable
 fun Home(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    onClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val text = remember { mutableStateOf("") }
@@ -35,7 +36,7 @@ fun Home(
 
     LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
         item {
-            TopBar()
+            TopBar(onClick = onClick)
             Text(
                 text = stringResource(id = R.string.app_name),
                 style = MaterialTheme.typography.applicationTitle,

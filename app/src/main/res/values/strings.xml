@@ -45,4 +45,14 @@
     <!-- Evolution -->
     <string name="evolution">Evolution</string>
     <string name="evolution_chart">Evolution Chart</string>
+
+    <!-- Filters -->
+    <string name="filters">Filters</string>
+    <string name="filters_description">Use advanced search to explore Pokémon by type, weakness, height and more!</string>
+    <string name="types">Types</string>
+    <string name="heights">Heights</string>
+    <string name="weights">Weights</string>
+    <string name="number_range">Number Range</string>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
 </resources>

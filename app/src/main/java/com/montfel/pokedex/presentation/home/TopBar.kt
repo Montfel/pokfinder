@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
 
 @Composable
-fun TopBar() {
+fun TopBar(onClick: () -> Unit) {
     Row(
         horizontalArrangement = Arrangement.End,
         modifier = Modifier.fillMaxWidth()
@@ -30,7 +30,7 @@ fun TopBar() {
                     contentDescription = null
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = onClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_filter),
                     contentDescription = null

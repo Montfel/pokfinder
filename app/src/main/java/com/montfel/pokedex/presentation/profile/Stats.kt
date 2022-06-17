@@ -19,15 +19,6 @@ import com.montfel.pokedex.data.dto.StatsDto
 import com.montfel.pokedex.presentation.components.TypeEffectivenessItem
 import com.montfel.pokedex.presentation.theme.*
 
-sealed class StatsNames(val name: String) {
-    object Hp : StatsNames("HP")
-    object Attack : StatsNames("Attack")
-    object Defense : StatsNames("Defense")
-    object SpecialAttack : StatsNames("Sp. Atk")
-    object SpecialDefense : StatsNames("Sp. Def")
-    object Speed : StatsNames("Speed")
-}
-
 data class Stats(
     val statName: String?,
     val stat: Int,
@@ -76,14 +67,14 @@ fun Stats(
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
-                modifier = Modifier.width(30.dp)
+                modifier = Modifier.width(35.dp)
             )
             LinearProgressIndicator(
                 progress = it.stat.toFloat() / 200,
                 color = typeColor,
                 backgroundColor = Color.Transparent,
                 modifier = Modifier
-                    .width(160.dp)
+                    .width(150.dp)
                     .clip(RoundedCornerShape(2.dp))
             )
             Text(
@@ -91,14 +82,14 @@ fun Stats(
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
-                modifier = Modifier.width(30.dp)
+                modifier = Modifier.width(35.dp)
             )
             Text(
                 text = "294",
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
-                modifier = Modifier.width(30.dp)
+                modifier = Modifier.width(35.dp)
             )
         }
         Spacer(modifier = Modifier.height(15.dp))
@@ -119,7 +110,7 @@ fun Stats(
             style = MaterialTheme.typography.filterTitle,
             color = Gray74,
             textAlign = TextAlign.End,
-            modifier = Modifier.width(30.dp)
+            modifier = Modifier.width(35.dp)
         )
         Box(modifier = Modifier.width(160.dp))
         Text(
@@ -127,14 +118,14 @@ fun Stats(
             style = MaterialTheme.typography.pokemonType,
             color = Gray17,
             textAlign = TextAlign.End,
-            modifier = Modifier.width(30.dp)
+            modifier = Modifier.width(35.dp)
         )
         Text(
             text = stringResource(id = R.string.max),
             style = MaterialTheme.typography.pokemonType,
             color = Gray17,
             textAlign = TextAlign.End,
-            modifier = Modifier.width(30.dp)
+            modifier = Modifier.width(35.dp)
         )
     }
 
