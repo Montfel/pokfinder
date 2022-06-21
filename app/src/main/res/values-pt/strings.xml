@@ -48,4 +48,14 @@
     <string name="number_range">Intervalo de números</string>
     <string name="reset">Redefinir</string>
     <string name="apply">Aplicar</string>
+
+    <!-- Sort -->
+    <string name="sort">Ordenar</string>
+    <string name="sort_description">Sort Pokémons alphabetically or by National Pokédex number!</string>
+    <string name="smallest">Menores números primeiro</string>
+    <string name="highest">Maiores números primeiro</string>
+
+    <!-- Generations -->
+    <string name="generations">Gerações</string>
+    <string name="generations_description">Use o filtro de gerações para explorar seu Pokémon!</string>
 </resources>

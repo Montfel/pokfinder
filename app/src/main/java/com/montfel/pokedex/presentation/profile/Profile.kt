@@ -3,6 +3,8 @@ package com.montfel.pokedex.presentation.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -13,7 +15,6 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -24,7 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.components.TypeCards
+import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
@@ -117,7 +118,7 @@ fun Profile(
                 .verticalScroll(rememberScrollState())
         ) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                horizontalArrangement = Arrangement.spacedBy(24.dp),
                 verticalAlignment = CenterVertically
             ) {
                 Box {
@@ -147,11 +148,17 @@ fun Profile(
                         style = MaterialTheme.typography.applicationTitle,
                         color = Color.White,
                     )
-                    TypeCards(types = uiState.pokemonHeader?.types ?: emptyList())
+                    uiState.pokemonHeader?.types?.let { types ->
+                        LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            items(types) { type ->
+                                TypeCard(typeName = type.type.name)
+                            }
+                        }
+                    }
                 }
             }
 
-            Spacer(modifier = Modifier.height(45.dp))
+            Spacer(modifier = Modifier.height(44.dp))
 
             TabRow(
                 selectedTabIndex = selectedTabIndex,

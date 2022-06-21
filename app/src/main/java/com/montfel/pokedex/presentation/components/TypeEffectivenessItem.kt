@@ -23,7 +23,7 @@ fun TypeEffectivenessItem(
     Box(
         modifier = Modifier
             .size(25.dp)
-            .clip(RoundedCornerShape(3.dp))
+            .clip(RoundedCornerShape(4.dp))
             .background(typeColor)
     ) {
         Image(

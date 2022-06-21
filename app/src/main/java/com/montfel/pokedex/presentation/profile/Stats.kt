@@ -67,7 +67,7 @@ fun Stats(
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
-                modifier = Modifier.width(35.dp)
+                modifier = Modifier.width(36.dp)
             )
             LinearProgressIndicator(
                 progress = it.stat.toFloat() / 200,
@@ -82,17 +82,17 @@ fun Stats(
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
-                modifier = Modifier.width(35.dp)
+                modifier = Modifier.width(36.dp)
             )
             Text(
                 text = "294",
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
-                modifier = Modifier.width(35.dp)
+                modifier = Modifier.width(36.dp)
             )
         }
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(16.dp))
     }
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -110,7 +110,7 @@ fun Stats(
             style = MaterialTheme.typography.filterTitle,
             color = Gray74,
             textAlign = TextAlign.End,
-            modifier = Modifier.width(35.dp)
+            modifier = Modifier.width(36.dp)
         )
         Box(modifier = Modifier.width(160.dp))
         Text(
@@ -125,7 +125,7 @@ fun Stats(
             style = MaterialTheme.typography.pokemonType,
             color = Gray17,
             textAlign = TextAlign.End,
-            modifier = Modifier.width(35.dp)
+            modifier = Modifier.width(36.dp)
         )
     }
 

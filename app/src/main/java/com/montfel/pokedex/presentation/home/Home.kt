@@ -19,13 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
+import com.montfel.pokedex.presentation.navigation.BottomSheetFilter
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun Home(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel(),
-    onClick: () -> Unit
+    onClick: (BottomSheetFilter) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val text = remember { mutableStateOf("") }
@@ -106,6 +107,6 @@ fun CustomTextField(viewModel: HomeViewModel = hiltViewModel(), text: MutableSta
         },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 25.dp)
+            .padding(top = 24.dp)
     )
 }

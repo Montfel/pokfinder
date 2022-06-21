@@ -47,7 +47,7 @@ fun About(
         AboutItem(map = it)
     }
 
-    Spacer(modifier = Modifier.height(15.dp))
+    Spacer(modifier = Modifier.height(16.dp))
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -65,7 +65,7 @@ fun About(
         }
     }
 
-    Spacer(modifier = Modifier.height(15.dp))
+    Spacer(modifier = Modifier.height(16.dp))
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -144,5 +144,5 @@ fun AboutItem(map: Map.Entry<Int, String>) {
             color = Gray74
         )
     }
-    Spacer(modifier = Modifier.height(15.dp))
+    Spacer(modifier = Modifier.height(16.dp))
 }

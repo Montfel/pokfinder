@@ -55,4 +55,16 @@
     <string name="number_range">Number Range</string>
     <string name="reset">Reset</string>
     <string name="apply">Apply</string>
+
+    <!-- Sort -->
+    <string name="sort">Sort</string>
+    <string name="sort_description">Sort Pokémons alphabetically or by National Pokédex number!</string>
+    <string name="smallest">Smallest number first</string>
+    <string name="highest">Highest number first</string>
+    <string name="a_z" translatable="false">A-Z</string>
+    <string name="z_a" translatable="false">Z-A</string>
+
+    <!-- Generations -->
+    <string name="generations">Generations</string>
+    <string name="generations_description">Use search for generations to explore your Pokémon!</string>
 </resources>

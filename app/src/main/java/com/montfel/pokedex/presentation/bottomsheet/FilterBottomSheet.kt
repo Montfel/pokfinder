@@ -1,77 +1,45 @@
 package com.montfel.pokedex.presentation.bottomsheet
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.components.TypeEffectivenessItem
+import com.montfel.pokedex.presentation.components.BottomSheetHeader
+import com.montfel.pokedex.presentation.components.FilterItem
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun FilterBottomSheet() {
     Column(
+        verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(top = 30.dp)
-            .padding(bottom = 50.dp)
+            .padding(vertical = 30.dp)
+            .verticalScroll(rememberScrollState())
     ) {
-        Text(
-            text = stringResource(id = R.string.filters),
-            style = MaterialTheme.typography.pokemonName,
-            color = Gray17,
-        )
-        Text(
-            text = stringResource(id = R.string.filters_description),
-            style = MaterialTheme.typography.description,
-            color = Gray74,
+        BottomSheetHeader(
+            title = R.string.filters,
+            description = R.string.filters_description
         )
 
-        Spacer(modifier = Modifier.height(35.dp))
+        FilterSection(title = R.string.types)
 
-        Text(
-            text = stringResource(id = R.string.types),
-            style = MaterialTheme.typography.filterTitle,
-            color = Gray17,
-        )
-        Row() {
-            TypeEffectivenessItem(typeColor = TypeFire, image = R.drawable.ic_fire)
-        }
+        FilterSection(title = R.string.weakeness)
 
-        Spacer(modifier = Modifier.height(35.dp))
+        FilterSection(title = R.string.heights)
 
-        Text(
-            text = stringResource(id = R.string.heights),
-            style = MaterialTheme.typography.filterTitle,
-            color = Gray17,
-        )
-        Row() {
-            TypeEffectivenessItem(typeColor = TypeFire, image = R.drawable.ic_fire)
-        }
+        FilterSection(title = R.string.weights)
 
-        Spacer(modifier = Modifier.height(35.dp))
-
-        Text(
-            text = stringResource(id = R.string.weights),
-            style = MaterialTheme.typography.filterTitle,
-            color = Gray17,
-        )
-        Row() {
-            TypeEffectivenessItem(typeColor = TypeFire, image = R.drawable.ic_fire)
-        }
-
-        Spacer(modifier = Modifier.height(35.dp))
-
-        Text(
-            text = stringResource(id = R.string.number_range),
-            style = MaterialTheme.typography.filterTitle,
-            color = Gray17,
-        )
+        FilterRange()
 
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
@@ -113,3 +81,47 @@ fun FilterBottomSheet() {
     }
 }
 
+@Composable
+fun FilterSection(
+    @StringRes title: Int,
+//    items: List<Any>
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(
+            text = stringResource(id = title),
+            style = MaterialTheme.typography.filterTitle,
+            color = Gray17,
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+//            items.forEach {
+                FilterItem(icon = R.drawable.ic_fire, typeColor = TypeFire)
+//            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun FilterRange() {
+    val range = 1f..100f
+    var sliderPosition by remember { mutableStateOf(range) }
+
+    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        Text(
+            text = stringResource(id = R.string.number_range),
+            style = MaterialTheme.typography.filterTitle,
+            color = Gray17,
+        )
+
+        RangeSlider(
+            values = sliderPosition,
+            onValueChange = { sliderPosition = it },
+            onValueChangeFinished = {},
+            colors = SliderDefaults.colors(
+                activeTrackColor = TypePsychic,
+                inactiveTrackColor = GrayF2,
+                thumbColor = TypePsychic
+            )
+        )
+    }
+}

@@ -3,6 +3,8 @@ package com.montfel.pokedex.presentation.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -18,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.presentation.components.TypeCards
+import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
 import com.montfel.pokedex.presentation.theme.pokemonName
@@ -54,8 +56,12 @@ fun PokemonCard(
                     style = MaterialTheme.typography.pokemonName,
                     color = Color.White,
                 )
-                Spacer(modifier = Modifier.height(5.dp))
-                TypeCards(types = pokemon.types)
+                Spacer(modifier = Modifier.height(4.dp))
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    items(pokemon.types) {
+                        TypeCard(typeName = it.type.name)
+                    }
+                }
             }
         }
         Image(
@@ -64,7 +70,7 @@ fun PokemonCard(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .size(145.dp)
-                .offset(x = 15.dp, y = 15.dp)
+                .offset(x = 16.dp, y = 16.dp)
                 .alpha(0.3f)
         )
         Image(

@@ -1,17 +1,25 @@
 package com.montfel.pokedex.presentation.navigation
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
+import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
+import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
 import com.montfel.pokedex.presentation.home.Home
 import com.montfel.pokedex.presentation.profile.Profile
 import kotlinx.coroutines.launch
+
+enum class BottomSheetFilter {
+    Generation, Sort, Filter
+}
 
 @ExperimentalMaterialApi
 @Composable
@@ -19,10 +27,16 @@ fun NavigationComponent() {
     val coroutineScope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val navController = rememberNavController()
+    var filter by remember { mutableStateOf(BottomSheetFilter.Filter) }
+
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetContent = {
-            FilterBottomSheet()
+            when (filter) {
+                BottomSheetFilter.Generation -> GenerationBottomSheet()
+                BottomSheetFilter.Sort -> SortBottomSheet()
+                BottomSheetFilter.Filter -> FilterBottomSheet()
+            }
         },
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
     ) {
@@ -31,6 +45,7 @@ fun NavigationComponent() {
                 Home(
                     navController = navController,
                     onClick = {
+                        filter = it
                         coroutineScope.launch {
                             sheetState.show()
                         }

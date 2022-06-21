@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("com.apollographql.apollo3").version('3.3.1')
+    id("com.apollographql.apollo3").version('3.3.2')
 }
 
 apply plugin: 'kotlin-kapt'
@@ -71,7 +71,7 @@ dependencies {
     implementation "io.coil-kt:coil-compose:$coil"
 
     // Apollo
-    implementation("com.apollographql.apollo3:apollo-runtime:3.3.1")
+    implementation('com.apollographql.apollo3:apollo-runtime:3.3.2')
     
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
     implementation 'androidx.core:core-ktx:1.8.0'
