@@ -3,8 +3,6 @@ package com.montfel.pokedex.presentation.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -57,8 +55,8 @@ fun PokemonCard(
                     color = Color.White,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    items(pokemon.types) {
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    pokemon.types.forEach {
                         TypeCard(typeName = it.type.name)
                     }
                 }

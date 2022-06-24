@@ -3,7 +3,7 @@ package com.montfel.pokedex.domain.model
 import com.montfel.pokedex.data.dto.*
 
 data class Pokemon(
-    val id: Int? = null,
+    val id: Int,
     val name: String? = null,
     val image: String? = null,
     val types: List<Types> = emptyList(),

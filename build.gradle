@@ -3,6 +3,7 @@ buildscript {
         coil = '2.1.0'
         compose = '1.2.0-rc01'
         retrofit = '2.9.0'
+        okhttp = '4.10.0'
     }
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'

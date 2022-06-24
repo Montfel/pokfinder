@@ -3,8 +3,6 @@ package com.montfel.pokedex.presentation.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -23,7 +21,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.theme.*
@@ -130,9 +128,10 @@ fun Profile(
                             .size(125.dp)
                             .alpha(0.35f)
                     )
-                    AsyncImage(
+                    SubcomposeAsyncImage(
                         model = uiState.pokemonHeader?.image,
                         contentDescription = null,
+                        loading = { CircularProgressIndicator(color = assetBackground.typeColor) },
                         modifier = Modifier.size(125.dp)
                     )
                 }
@@ -149,8 +148,8 @@ fun Profile(
                         color = Color.White,
                     )
                     uiState.pokemonHeader?.types?.let { types ->
-                        LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            items(types) { type ->
+                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            types.forEach { type ->
                                 TypeCard(typeName = type.type.name)
                             }
                         }

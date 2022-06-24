@@ -7,6 +7,7 @@ import com.montfel.pokedex.domain.model.Types
 data class TypesRestDto(
     @SerializedName("slot")
     val slot: Int,
+
     @SerializedName("type")
     val type: TypeRestDto
 ) : DtoMapper<Types> {

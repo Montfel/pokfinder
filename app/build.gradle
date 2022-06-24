@@ -67,6 +67,10 @@ dependencies {
     implementation "com.google.code.gson:gson:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
+
     // Coil
     implementation "io.coil-kt:coil-compose:$coil"
 

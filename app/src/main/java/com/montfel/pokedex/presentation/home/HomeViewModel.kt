@@ -9,8 +9,6 @@ import com.montfel.pokedex.data.dto.PokemonDto
 import com.montfel.pokedex.data.dto.TypeDto
 import com.montfel.pokedex.data.dto.TypesDto
 import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.domain.repository.PokemonRepository
-import com.montfel.pokedex.helper.ApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,16 +20,15 @@ import javax.inject.Inject
 
 data class HomeUiState(
     val pokemonList: List<Pokemon>? = emptyList(),
-    val pokemon: Pokemon? = null
 )
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val pokemonRepository: PokemonRepository
-) : ViewModel() {
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
+
+    private var pokemons = emptyList<Pokemon>()
 
     suspend fun showAllPokemons() {
         val response = withContext(Dispatchers.IO) {
@@ -55,24 +52,22 @@ class HomeViewModel @Inject constructor(
                 }
             ).toDomain()
         }
-        _uiState.update {
-            it.copy(
-                pokemonList = pokemonList
-            )
-        }
+        pokemons = pokemonList ?: emptyList()
+        _uiState.update { it.copy(pokemonList = pokemonList) }
     }
 
-    fun searchPokemon(pokemonName: String) {
-        viewModelScope.launch {
-            val response = pokemonRepository.getPokemon(pokemonName)
-
-            if (response is ApiResponse.SuccessResult) {
-                _uiState.update {
-                    it.copy(
-                        pokemon = response.data
-                    )
-                }
+    fun searchPokemon(query: String) {
+        if (query.isNotBlank()) {
+            viewModelScope.launch(Dispatchers.Default) {
+                val result = pokemons
+                    .filter {
+                        it.name?.contains(query.trim(), ignoreCase = true) ?: false
+                                || it.id.toString() == query.trim()
+                    }
+                _uiState.update { it.copy(pokemonList = result) }
             }
+        } else {
+            _uiState.update { it.copy(pokemonList = pokemons) }
         }
     }
 }

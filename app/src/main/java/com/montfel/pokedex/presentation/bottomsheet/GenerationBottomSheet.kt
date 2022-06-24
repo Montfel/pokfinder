@@ -1,9 +1,6 @@
 package com.montfel.pokedex.presentation.bottomsheet
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
@@ -16,11 +13,10 @@ import com.montfel.pokedex.presentation.components.BottomSheetHeader
 @Composable
 fun GenerationBottomSheet() {
     Column(
-        verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(vertical = 30.dp)
+            .padding(top = 30.dp)
     ) {
         BottomSheetHeader(
             title = R.string.generations,
@@ -30,7 +26,8 @@ fun GenerationBottomSheet() {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(vertical = 32.dp)
         ) {
             item {
                 BottomSheetButton(title = R.string.generations)

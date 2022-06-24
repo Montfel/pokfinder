@@ -7,9 +7,11 @@ import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
@@ -40,7 +42,10 @@ fun NavigationComponent() {
         },
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)
     ) {
-        NavHost(navController = navController, startDestination = Route.Home.route) {
+        NavHost(
+            navController = navController,
+            startDestination = Route.Home.route
+        ) {
             composable(Route.Home.route) {
                 Home(
                     navController = navController,
@@ -52,7 +57,14 @@ fun NavigationComponent() {
                     }
                 )
             }
-            composable("profile/{id}") {
+            composable(
+                route = "profile/{id}",
+                arguments = listOf(
+                    navArgument("id") {
+                        type = NavType.StringType
+                    }
+                )
+            ) {
                 Profile(
                     id = it.arguments?.getString("id")!!,
                     navController = navController

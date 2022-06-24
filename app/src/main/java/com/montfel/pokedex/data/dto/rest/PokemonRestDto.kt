@@ -7,10 +7,13 @@ import com.montfel.pokedex.domain.model.Pokemon
 data class PokemonRestDto(
     @SerializedName("id")
     val id: Int,
+
     @SerializedName("name")
     val name: String,
+
     @SerializedName("sprites")
     val sprite: SpriteDto,
+
     @SerializedName("types")
     val types: List<TypesRestDto>
 ) : DtoMapper<Pokemon> {

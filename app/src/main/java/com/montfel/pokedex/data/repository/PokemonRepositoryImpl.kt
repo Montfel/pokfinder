@@ -2,6 +2,7 @@ package com.montfel.pokedex.data.repository
 
 import com.montfel.pokedex.data.datasource.PokemonDataSource
 import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.model.PokemonList
 import com.montfel.pokedex.domain.repository.PokemonRepository
 import com.montfel.pokedex.helper.ApiResponse
 import com.montfel.pokedex.helper.requestWrapper
@@ -14,5 +15,9 @@ class PokemonRepositoryImpl @Inject constructor(
 ) : PokemonRepository {
     override suspend fun getPokemon(pokemonName: String): ApiResponse<Pokemon> {
         return requestWrapper { pokemonDataSource.getPokemon(pokemonName).toDomain() }
+    }
+
+    override suspend fun getPokemonList(limit: Int, offset: Int): ApiResponse<PokemonList> {
+        return requestWrapper { pokemonDataSource.getPokemonList(limit, offset).toDomain() }
     }
 }
