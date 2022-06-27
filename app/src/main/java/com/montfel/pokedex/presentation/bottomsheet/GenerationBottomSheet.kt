@@ -30,19 +30,19 @@ fun GenerationBottomSheet() {
             contentPadding = PaddingValues(vertical = 32.dp)
         ) {
             item {
-                BottomSheetButton(title = R.string.generations)
+                BottomSheetButton(title = R.string.generations) {}
             }
             item {
-                BottomSheetButton(title = R.string.generations)
+                BottomSheetButton(title = R.string.generations){}
             }
             item {
-                BottomSheetButton(title = R.string.generations)
+                BottomSheetButton(title = R.string.generations){}
             }
             item {
-                BottomSheetButton(title = R.string.generations)
+                BottomSheetButton(title = R.string.generations){}
             }
             item {
-                BottomSheetButton(title = R.string.generations)
+                BottomSheetButton(title = R.string.generations){}
             }
         }
     }
