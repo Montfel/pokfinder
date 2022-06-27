@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.floor
 
 data class ProfileUiState(
     val pokemon: Pokemon? = null,
@@ -88,7 +89,19 @@ class ProfileViewModel @Inject constructor(
                     StatsDto(
                         baseStat = stat.base_stat,
                         effort = stat.effort,
-                        name = stat.pokemon_v2_stat?.name
+                        name = when (stat.pokemon_v2_stat?.name) {
+                            "hp" -> "HP"
+                            "attack" -> "Attack"
+                            "defense" -> "Defense"
+                            "special-attack" -> "Sp. Atk"
+                            "special-defense" -> "Sp. Def"
+                            "speed" -> "Speed"
+                            else -> "Unknown"
+                        },
+                        min = if (stat.pokemon_v2_stat?.name == "hp") stat.base_stat * 2 + 110
+                        else stat.base_stat.times(2),
+                        max = if (stat.pokemon_v2_stat?.name == "hp") stat.base_stat * 2 + 204
+                        else floor(stat.base_stat.times(2.2).plus(108.9)).toInt()
                     )
                 },
                 captureRate = species?.capture_rate,

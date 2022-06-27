@@ -8,7 +8,8 @@ import com.montfel.pokedex.data.datasource.apolloClient
 import com.montfel.pokedex.data.dto.PokemonDto
 import com.montfel.pokedex.data.dto.TypeDto
 import com.montfel.pokedex.data.dto.TypesDto
-import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.model.PokemonHome
+import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class HomeUiState(
-    val pokemonList: List<Pokemon>? = emptyList(),
+    val pokemonList: List<PokemonHome>? = emptyList(),
 )
 
 @HiltViewModel
@@ -28,7 +29,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
 
-    private var pokemons = emptyList<Pokemon>()
+    private var pokemons = emptyList<PokemonHome>()
 
     suspend fun showAllPokemons() {
         val response = withContext(Dispatchers.IO) {
@@ -61,7 +62,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             viewModelScope.launch(Dispatchers.Default) {
                 val result = pokemons
                     .filter {
-                        it.name?.contains(query.trim(), ignoreCase = true) ?: false
+                        it.name.contains(query.trim(), ignoreCase = true)
                                 || it.id.toString() == query.trim()
                     }
                 _uiState.update { it.copy(pokemonList = result) }
@@ -69,5 +70,15 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         } else {
             _uiState.update { it.copy(pokemonList = pokemons) }
         }
+    }
+
+    fun sortPokemons(option: SortOptions) {
+        val sortedPokemons = when (option) {
+            SortOptions.SmallestNumber -> _uiState.value.pokemonList?.sortedBy { it.id }
+            SortOptions.HighestNumber -> _uiState.value.pokemonList?.sortedByDescending { it.id }
+            SortOptions.Alphabetical -> _uiState.value.pokemonList?.sortedBy { it.name }
+            SortOptions.ReverseAlphabetical -> _uiState.value.pokemonList?.sortedByDescending { it.name }
+        }
+        _uiState.update { it.copy(pokemonList = sortedPokemons) }
     }
 }

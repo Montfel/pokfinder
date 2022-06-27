@@ -7,4 +7,5 @@ import com.montfel.pokedex.helper.ApiResponse
 interface PokemonRepository {
     suspend fun getPokemon(pokemonName: String): ApiResponse<Pokemon>
     suspend fun getPokemonList(limit: Int, offset: Int): ApiResponse<PokemonList>
+    suspend fun getPokemonCount(): ApiResponse<PokemonList>
 }

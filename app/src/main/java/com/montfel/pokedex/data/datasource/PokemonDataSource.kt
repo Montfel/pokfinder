@@ -17,4 +17,7 @@ interface PokemonDataSource {
         @Query(value = "limit") limit: Int,
         @Query(value = "offset") offset: Int
     ): PokemonListDto
+
+    @GET("pokemon?limit=1")
+    suspend fun getPokemonCount(): PokemonListDto
 }

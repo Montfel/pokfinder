@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
+import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import com.montfel.pokedex.presentation.navigation.BottomSheetFilter
 import com.montfel.pokedex.presentation.theme.*
 
@@ -29,6 +30,7 @@ import com.montfel.pokedex.presentation.theme.*
 fun Home(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel(),
+    sortOption: SortOptions,
     onClick: (BottomSheetFilter) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -37,6 +39,8 @@ fun Home(
     LaunchedEffect(key1 = Unit) {
         viewModel.showAllPokemons()
     }
+
+    viewModel.sortPokemons(sortOption)
 
     LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
         item {

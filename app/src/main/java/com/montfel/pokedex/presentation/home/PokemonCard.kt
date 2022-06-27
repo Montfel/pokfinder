@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
-import com.montfel.pokedex.domain.model.Pokemon
+import com.montfel.pokedex.domain.model.PokemonHome
 import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
@@ -26,7 +26,7 @@ import com.montfel.pokedex.presentation.theme.pokemonNumber
 
 @Composable
 fun PokemonCard(
-    pokemon: Pokemon,
+    pokemon: PokemonHome,
     onClick: () -> Unit
 ) {
     val assetHelper = LocalAssetHelper.current
@@ -50,7 +50,7 @@ fun PokemonCard(
                     modifier = Modifier.alpha(0.6f)
                 )
                 Text(
-                    text = pokemon.name ?: "",
+                    text = pokemon.name,
                     style = MaterialTheme.typography.pokemonName,
                     color = Color.White,
                 )
@@ -96,7 +96,7 @@ fun PokemonCard(
 @Composable
 fun PokemonCardPreview() {
     PokemonCard(
-        pokemon = Pokemon(
+        pokemon = PokemonHome(
             id = 1,
             name = "Bulbasaur",
             image = "",

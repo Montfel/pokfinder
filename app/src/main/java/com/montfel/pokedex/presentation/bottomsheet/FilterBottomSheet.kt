@@ -16,14 +16,18 @@ import com.montfel.pokedex.presentation.components.BottomSheetHeader
 import com.montfel.pokedex.presentation.components.FilterItem
 import com.montfel.pokedex.presentation.theme.*
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FilterBottomSheet() {
+    val range = 1f..100f
+    var sliderPosition by remember { mutableStateOf(range) }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(vertical = 30.dp)
+            .padding(top = 30.dp)
             .verticalScroll(rememberScrollState())
     ) {
         BottomSheetHeader(
@@ -39,7 +43,25 @@ fun FilterBottomSheet() {
 
         FilterSection(title = R.string.weights)
 
-        FilterRange()
+        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+            Text(
+                text = stringResource(id = R.string.number_range),
+                style = MaterialTheme.typography.filterTitle,
+                color = Gray17,
+            )
+
+            RangeSlider(
+                values = sliderPosition,
+                onValueChange = { sliderPosition = it },
+                valueRange = range,
+                onValueChangeFinished = {},
+                colors = SliderDefaults.colors(
+                    activeTrackColor = TypePsychic,
+                    inactiveTrackColor = GrayF2,
+                    thumbColor = TypePsychic
+                )
+            )
+        }
 
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
@@ -78,6 +100,7 @@ fun FilterBottomSheet() {
                 )
             }
         }
+        Spacer(modifier = Modifier.height(1.dp))
     }
 }
 
@@ -94,34 +117,8 @@ fun FilterSection(
         )
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
 //            items.forEach {
-                FilterItem(icon = R.drawable.ic_fire, typeColor = TypeFire)
+            FilterItem(icon = R.drawable.ic_fire, typeColor = TypeFire)
 //            }
         }
-    }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-fun FilterRange() {
-    val range = 1f..100f
-    var sliderPosition by remember { mutableStateOf(range) }
-
-    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        Text(
-            text = stringResource(id = R.string.number_range),
-            style = MaterialTheme.typography.filterTitle,
-            color = Gray17,
-        )
-
-        RangeSlider(
-            values = sliderPosition,
-            onValueChange = { sliderPosition = it },
-            onValueChangeFinished = {},
-            colors = SliderDefaults.colors(
-                activeTrackColor = TypePsychic,
-                inactiveTrackColor = GrayF2,
-                thumbColor = TypePsychic
-            )
-        )
     }
 }

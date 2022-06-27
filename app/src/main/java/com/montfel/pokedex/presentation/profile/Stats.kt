@@ -19,25 +19,12 @@ import com.montfel.pokedex.data.dto.StatsDto
 import com.montfel.pokedex.presentation.components.TypeEffectivenessItem
 import com.montfel.pokedex.presentation.theme.*
 
-data class Stats(
-    val statName: String?,
-    val stat: Int,
-//    val statMin: Int,
-//    val statMax: Int
-)
-
 @Composable
 fun Stats(
     stats: List<StatsDto>,
     typeColor: Color,
     pokemonName: String
 ) {
-    val statsList = stats.map {
-        Stats(
-            statName = it.name,
-            stat = it.baseStat
-        )
-    }
     val total = stats.sumOf { it.baseStat }
 
     Spacer(modifier = Modifier.height(30.dp))
@@ -50,27 +37,27 @@ fun Stats(
 
     Spacer(modifier = Modifier.height(20.dp))
 
-    statsList.forEach {
+    stats.forEach {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = it.statName ?: "",
+                text = it.name ?: "",
                 style = MaterialTheme.typography.pokemonType,
                 color = Gray17,
                 modifier = Modifier.width(50.dp)
             )
             Text(
-                text = it.stat.toString(),
+                text = it.baseStat.toString(),
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
                 modifier = Modifier.width(36.dp)
             )
             LinearProgressIndicator(
-                progress = it.stat.toFloat() / 200,
+                progress = it.baseStat.toFloat() / ((it.min + it.max) / 2).toFloat(),
                 color = typeColor,
                 backgroundColor = Color.Transparent,
                 modifier = Modifier
@@ -78,14 +65,14 @@ fun Stats(
                     .clip(RoundedCornerShape(2.dp))
             )
             Text(
-                text = "200",
+                text = it.min.toString(),
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,
                 modifier = Modifier.width(36.dp)
             )
             Text(
-                text = "294",
+                text = it.max.toString(),
                 style = MaterialTheme.typography.description,
                 color = Gray74,
                 textAlign = TextAlign.End,

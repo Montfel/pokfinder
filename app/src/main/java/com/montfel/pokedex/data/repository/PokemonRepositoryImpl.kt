@@ -20,4 +20,8 @@ class PokemonRepositoryImpl @Inject constructor(
     override suspend fun getPokemonList(limit: Int, offset: Int): ApiResponse<PokemonList> {
         return requestWrapper { pokemonDataSource.getPokemonList(limit, offset).toDomain() }
     }
+
+    override suspend fun getPokemonCount(): ApiResponse<PokemonList> {
+        return requestWrapper { pokemonDataSource.getPokemonCount().toDomain() }
+    }
 }
