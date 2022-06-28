@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
-import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.presentation.components.TypeCards
+import com.montfel.pokedex.domain.model.PokemonHome
+import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.theme.Gray17
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
 import com.montfel.pokedex.presentation.theme.pokemonName
@@ -26,12 +26,12 @@ import com.montfel.pokedex.presentation.theme.pokemonNumber
 
 @Composable
 fun PokemonCard(
-    pokemon: Pokemon,
+    pokemon: PokemonHome,
     onClick: () -> Unit
 ) {
     val assetHelper = LocalAssetHelper.current
-    val type = pokemon.types.first { type -> type.slot == 1 }
-    val assetBackground = assetHelper.getAsset(type.name)
+    val mainType = pokemon.types.firstOrNull { type -> type.slot == 1 }
+    val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
     Box(modifier = Modifier.height(140.dp)) {
         Card(
             shape = RoundedCornerShape(10.dp),
@@ -50,12 +50,16 @@ fun PokemonCard(
                     modifier = Modifier.alpha(0.6f)
                 )
                 Text(
-                    text = pokemon.name ?: "",
+                    text = pokemon.name,
                     style = MaterialTheme.typography.pokemonName,
                     color = Color.White,
                 )
-                Spacer(modifier = Modifier.height(5.dp))
-                TypeCards(pokemon = pokemon)
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    pokemon.types.forEach {
+                        TypeCard(typeName = it.type.name)
+                    }
+                }
             }
         }
         Image(
@@ -64,7 +68,7 @@ fun PokemonCard(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .size(145.dp)
-                .offset(x = 15.dp, y = 15.dp)
+                .offset(x = 16.dp, y = 16.dp)
                 .alpha(0.3f)
         )
         Image(
@@ -92,7 +96,7 @@ fun PokemonCard(
 @Composable
 fun PokemonCardPreview() {
     PokemonCard(
-        pokemon = Pokemon(
+        pokemon = PokemonHome(
             id = 1,
             name = "Bulbasaur",
             image = "",

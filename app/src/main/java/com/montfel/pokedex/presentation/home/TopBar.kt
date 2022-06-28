@@ -12,31 +12,30 @@ import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
 
 @Composable
-fun TopBar() {
+fun TopBar(onClick: (BottomSheetFilter) -> Unit) {
     Row(
         horizontalArrangement = Arrangement.End,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-            IconButton(onClick = { /*TODO*/ }) {
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            IconButton(onClick = { onClick(BottomSheetFilter.Generation) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_generation),
                     contentDescription = null
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { onClick(BottomSheetFilter.Sort) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_sort),
                     contentDescription = null
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { onClick(BottomSheetFilter.Filter) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_filter),
                     contentDescription = null
                 )
             }
-
         }
     }
 }

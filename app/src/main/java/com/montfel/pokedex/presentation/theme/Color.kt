@@ -11,6 +11,7 @@ val Teal200 = Color(0xFF03DAC5)
 val Gray17 = Color(0xFF17171B)
 val Gray74 = Color(0xFF747476)
 val GrayF2 = Color(0xFFF2F2F2)
+val GrayF5 = Color(0xFFF5F5F5)
 
 // Type
 val TypeBug = Color(0xFF8CB230)

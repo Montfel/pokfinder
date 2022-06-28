@@ -102,3 +102,5 @@ lint/tmp/
 local.properties
 
 .idea/misc.xml
+.idea/deploymentTargetDropDown.xml
+.idea\.name

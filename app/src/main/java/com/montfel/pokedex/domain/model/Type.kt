@@ -1,6 +1,6 @@
 package com.montfel.pokedex.domain.model
 
 data class Type(
-    val slot: Int,
-    val name: String
+    val name: String,
+    val typeEfficacies: List<TypeEfficacy>? = emptyList()
 )
