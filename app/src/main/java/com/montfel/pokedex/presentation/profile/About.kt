@@ -57,7 +57,7 @@ fun About(
             text = stringResource(id = R.string.weakeness),
             style = MaterialTheme.typography.pokemonType,
             color = Gray17,
-            modifier = Modifier.width(85.dp)
+            modifier = Modifier.width(100.dp)
         )
         weakness?.forEach {
             val asset = assetHelper.getAsset(it)
@@ -75,7 +75,7 @@ fun About(
             text = stringResource(id = R.string.strength),
             style = MaterialTheme.typography.pokemonType,
             color = Gray17,
-            modifier = Modifier.width(85.dp)
+            modifier = Modifier.width(100.dp)
         )
         strength?.forEach {
             val asset = assetHelper.getAsset(it)
@@ -136,7 +136,7 @@ fun AboutItem(map: Map.Entry<Int, String>) {
             text = stringResource(id = map.key),
             style = MaterialTheme.typography.pokemonType,
             color = Gray17,
-            modifier = Modifier.width(85.dp)
+            modifier = Modifier.width(100.dp)
         )
         Text(
             text = map.value,

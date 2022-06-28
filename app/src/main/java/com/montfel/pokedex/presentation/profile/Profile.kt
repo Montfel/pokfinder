@@ -62,7 +62,11 @@ fun Profile(
         }
     } ?: "Genderless"
     val data = mapOf(
-        R.string.species to "${uiState.pokemon?.genera?.first { lang -> lang.language.name == language }?.name}",
+        R.string.species to "${
+            uiState.pokemon?.genera
+                ?.firstOrNull { lang -> lang.language.name == language }?.name
+                ?: uiState.pokemon?.genera?.first { lang -> lang.language.name == "en" }?.name
+        }",
         R.string.height to "${uiState.pokemon?.height}m",
         R.string.weight to "${uiState.pokemon?.weight}kg",
         R.string.abilities to abilities,
@@ -191,7 +195,11 @@ fun Profile(
                         About(
                             flavorText = uiState.pokemon?.flavorTexts
                                 ?.filter { lang -> lang.language.name == language }
-                                ?.random()?.flavorText ?: "",
+                                ?.takeIf { list -> list.isNotEmpty() }
+                                ?.random()?.flavorText
+                                ?: uiState.pokemon?.flavorTexts
+                                    ?.filter { lang -> lang.language.name == "en" }
+                                    ?.random()?.flavorText ?: "",
                             data = data,
                             training = training,
                             breeding = breeding,

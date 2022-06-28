@@ -43,26 +43,6 @@ fun FilterBottomSheet() {
 
         FilterSection(title = R.string.weights)
 
-        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-            Text(
-                text = stringResource(id = R.string.number_range),
-                style = MaterialTheme.typography.filterTitle,
-                color = Gray17,
-            )
-
-            RangeSlider(
-                values = sliderPosition,
-                onValueChange = { sliderPosition = it },
-                valueRange = range,
-                onValueChangeFinished = {},
-                colors = SliderDefaults.colors(
-                    activeTrackColor = TypePsychic,
-                    inactiveTrackColor = GrayF2,
-                    thumbColor = TypePsychic
-                )
-            )
-        }
-
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier.fillMaxWidth()
