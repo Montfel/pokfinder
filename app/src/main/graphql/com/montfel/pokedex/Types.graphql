@@ -1,0 +1,5 @@
+query Types {
+    pokemon_v2_type {
+        name
+    }
+}

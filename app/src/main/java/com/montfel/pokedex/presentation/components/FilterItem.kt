@@ -20,8 +20,8 @@ fun FilterItem(
     @DrawableRes icon: Int,
     typeColor: Color,
 ) {
-    var isEnabled by remember { mutableStateOf(false) }
-    val color = if (isEnabled) Color.White else typeColor
+    var isEnabled by remember { mutableStateOf(false) } //TODO: move state to parent
+    val color = if (isEnabled) Color.White else typeColor ///TODO: change to MaterialTheme.colors
     Box(
         contentAlignment = Alignment.Center,
         modifier =

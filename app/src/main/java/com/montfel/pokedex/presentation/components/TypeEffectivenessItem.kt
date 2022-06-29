@@ -29,7 +29,7 @@ fun TypeEffectivenessItem(
         Image(
             painter = painterResource(id = image),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(Color.White),
+            colorFilter = ColorFilter.tint(Color.White), //TODO: change to MaterialTheme.colors
             modifier = Modifier
                 .size(15.dp)
                 .align(Alignment.Center)

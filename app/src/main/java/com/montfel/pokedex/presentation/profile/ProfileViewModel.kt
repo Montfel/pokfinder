@@ -107,7 +107,13 @@ class ProfileViewModel @Inject constructor(
                 captureRate = species?.capture_rate,
                 genderRate = species?.gender_rate,
                 hatchCounter = species?.hatch_counter,
-                growthRate = species?.pokemon_v2_growthrate?.name?.split("-")?.joinToString(separator = " ") { it.replaceFirstChar { it.uppercase() } },
+                growthRate = species?.pokemon_v2_growthrate?.name
+                    ?.split("-")
+                    ?.joinToString(separator = " ") { word ->
+                        word.replaceFirstChar { letter ->
+                            letter.uppercase()
+                        }
+                    },
                 eggGroups = species?.pokemon_v2_pokemonegggroups?.map { egg ->
                     egg.pokemon_v2_egggroup?.name
                 },

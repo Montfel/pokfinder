@@ -1,17 +1,52 @@
 package com.montfel.pokedex.presentation.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Colors.primaryText: Color
+    get() = if (isLight) Gray17 else Gray17
+
+val Colors.primaryVariantText: Color
+    get() = if (isLight) Gray74 else Gray74
+
+val Colors.secondaryText: Color
+    get() = if (isLight) Color.White else Color.White
+
+val Colors.primaryInput: Color
+    get() = if (isLight) TypePsychic else TypePsychic
+
+val Colors.secondaryInput: Color
+    get() = if (isLight) GrayF2 else GrayF2
+
+val Colors.secondaryVariantInput: Color
+    get() = if (isLight) GrayE2 else GrayE2
 
 // Text
-val Gray17 = Color(0xFF17171B)
-val Gray74 = Color(0xFF747476)
-val GrayF2 = Color(0xFFF2F2F2)
+private val Gray17 = Color(0xFF17171B)
+private val Gray74 = Color(0xFF747476)
+private val GrayE2 = Color(0xFFE2E2E2)
+private val GrayF2 = Color(0xFFF2F2F2)
 val GrayF5 = Color(0xFFF5F5F5)
+
+val LightColorPalette = lightColors(
+    onSurface = Gray17.copy(alpha = 0.5f),
+)
+
+val DarkColorPalette = darkColors(
+    onSurface = Gray17.copy(alpha = 0.5f),
+)
+
+// Height
+val HeightShort = Color(0xFFFFC5E6)
+val HeightMedium = Color(0xFFAEBFD7)
+val HeightTall = Color(0xFFAAACB8)
+
+// Weight
+val WeightLight = Color(0xFF99CD7C)
+val WeightNormal = Color(0xFF57B2DC)
+val WeightHeavy = Color(0xFF5A92A5)
 
 // Type
 val TypeBug = Color(0xFF8CB230)

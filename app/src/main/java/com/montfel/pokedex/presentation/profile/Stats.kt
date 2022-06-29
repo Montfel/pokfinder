@@ -46,13 +46,13 @@ fun Stats(
             Text(
                 text = it.name ?: "",
                 style = MaterialTheme.typography.pokemonType,
-                color = Gray17,
+                color = MaterialTheme.colors.primaryText,
                 modifier = Modifier.width(50.dp)
             )
             Text(
                 text = it.baseStat.toString(),
                 style = MaterialTheme.typography.description,
-                color = Gray74,
+                color = MaterialTheme.colors.primaryVariantText,
                 textAlign = TextAlign.End,
                 modifier = Modifier.width(36.dp)
             )
@@ -67,14 +67,14 @@ fun Stats(
             Text(
                 text = it.min.toString(),
                 style = MaterialTheme.typography.description,
-                color = Gray74,
+                color = MaterialTheme.colors.primaryVariantText,
                 textAlign = TextAlign.End,
                 modifier = Modifier.width(36.dp)
             )
             Text(
                 text = it.max.toString(),
                 style = MaterialTheme.typography.description,
-                color = Gray74,
+                color = MaterialTheme.colors.primaryVariantText,
                 textAlign = TextAlign.End,
                 modifier = Modifier.width(36.dp)
             )
@@ -89,13 +89,13 @@ fun Stats(
         Text(
             text = stringResource(id = R.string.total),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
+            color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(50.dp)
         )
         Text(
             text = total.toString(),
             style = MaterialTheme.typography.filterTitle,
-            color = Gray74,
+            color = MaterialTheme.colors.primaryVariantText,
             textAlign = TextAlign.End,
             modifier = Modifier.width(36.dp)
         )
@@ -103,14 +103,14 @@ fun Stats(
         Text(
             text = stringResource(id = R.string.min),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
+            color = MaterialTheme.colors.primaryText,
             textAlign = TextAlign.End,
             modifier = Modifier.width(35.dp)
         )
         Text(
             text = stringResource(id = R.string.max),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
+            color = MaterialTheme.colors.primaryText,
             textAlign = TextAlign.End,
             modifier = Modifier.width(36.dp)
         )
@@ -121,7 +121,7 @@ fun Stats(
     Text(
         text = stringResource(id = R.string.stats_description),
         style = MaterialTheme.typography.pokemonType,
-        color = Gray74
+        color = MaterialTheme.colors.primaryVariantText
     )
 
     Spacer(modifier = Modifier.height(20.dp))
@@ -137,7 +137,7 @@ fun Stats(
     Text(
         text = stringResource(id = R.string.effectiveness).format(pokemonName),
         style = MaterialTheme.typography.description,
-        color = Gray74
+        color = MaterialTheme.colors.primaryVariantText
     )
 
     Spacer(modifier = Modifier.height(20.dp))
@@ -158,7 +158,7 @@ fun Stats(
                 Text(
                     text = "1",
                     style = MaterialTheme.typography.description,
-                    color = Gray74
+                    color = MaterialTheme.colors.primaryVariantText
                 )
             }
         }
@@ -182,7 +182,7 @@ fun Stats(
                 Text(
                     text = "1",
                     style = MaterialTheme.typography.description,
-                    color = Gray74
+                    color = MaterialTheme.colors.primaryVariantText
                 )
             }
         }

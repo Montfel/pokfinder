@@ -29,7 +29,7 @@ fun About(
     Text(
         text = flavorText,
         style = MaterialTheme.typography.description,
-        color = Gray74,
+        color = MaterialTheme.colors.primaryVariantText,
         modifier = Modifier.fillMaxWidth()
     )
 
@@ -56,7 +56,7 @@ fun About(
         Text(
             text = stringResource(id = R.string.weakeness),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
+            color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
         weakness?.forEach {
@@ -74,7 +74,7 @@ fun About(
         Text(
             text = stringResource(id = R.string.strength),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
+            color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
         strength?.forEach {
@@ -135,13 +135,13 @@ fun AboutItem(map: Map.Entry<Int, String>) {
         Text(
             text = stringResource(id = map.key),
             style = MaterialTheme.typography.pokemonType,
-            color = Gray17,
+            color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
         Text(
             text = map.value,
             style = MaterialTheme.typography.description,
-            color = Gray74
+            color = MaterialTheme.colors.primaryVariantText
         )
     }
     Spacer(modifier = Modifier.height(16.dp))

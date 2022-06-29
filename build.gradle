@@ -1,7 +1,8 @@
 buildscript {
     ext {
         coil = '2.1.0'
-        compose = '1.2.0-rc02'
+        compose = '1.2.0-rc03'
+        compose_compiler = '1.2.0-rc02'
         retrofit = '2.9.0'
         okhttp = '4.10.0'
     }

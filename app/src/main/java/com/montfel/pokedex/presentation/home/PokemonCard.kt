@@ -10,8 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,10 +17,7 @@ import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.PokemonHome
 import com.montfel.pokedex.presentation.components.TypeCard
-import com.montfel.pokedex.presentation.theme.Gray17
-import com.montfel.pokedex.presentation.theme.LocalAssetHelper
-import com.montfel.pokedex.presentation.theme.pokemonName
-import com.montfel.pokedex.presentation.theme.pokemonNumber
+import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun PokemonCard(
@@ -46,13 +41,12 @@ fun PokemonCard(
                 Text(
                     text = "#${pokemon.id}",
                     style = MaterialTheme.typography.pokemonNumber,
-                    color = Gray17,
-                    modifier = Modifier.alpha(0.6f)
+                    color = MaterialTheme.colors.primaryText.copy(alpha = 0.6f)
                 )
                 Text(
                     text = pokemon.name,
                     style = MaterialTheme.typography.pokemonName,
-                    color = Color.White,
+                    color = MaterialTheme.colors.secondaryText,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -65,21 +59,21 @@ fun PokemonCard(
         Image(
             painter = painterResource(id = R.drawable.ic_pokeball),
             contentDescription = null,
+            alpha = 0.3f,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .size(145.dp)
                 .offset(x = 16.dp, y = 16.dp)
-                .alpha(0.3f)
         )
         Image(
             painter = painterResource(id = R.drawable.ic_6x3),
             contentDescription = null,
+            alpha = 0.3f,
             modifier = Modifier
                 .align(Alignment.Center)
-                .offset(x = (-37).dp, y = (-18).dp)
+                .offset(x = (-36).dp, y = (-18).dp)
                 .width(74.dp)
                 .height(32.dp)
-                .alpha(0.3f)
         )
         AsyncImage(
             model = pokemon.image,

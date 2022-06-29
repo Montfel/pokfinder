@@ -11,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -106,7 +105,7 @@ fun Profile(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
                         contentDescription = null,
-                        tint = Color.White
+                        tint = Color.White //TODO: change to MaterialTheme.colors
                     )
                 }
             }
@@ -127,10 +126,9 @@ fun Profile(
                     Image(
                         painter = painterResource(id = R.drawable.ic_circle),
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(Color.White),
-                        modifier = Modifier
-                            .size(125.dp)
-                            .alpha(0.35f)
+                        colorFilter = ColorFilter.tint(Color.White), //TODO: change to MaterialTheme.colors
+                        alpha = 0.35f,
+                        modifier = Modifier.size(125.dp)
                     )
                     SubcomposeAsyncImage(
                         model = uiState.pokemonHeader?.image,
@@ -143,13 +141,12 @@ fun Profile(
                     Text(
                         text = "#${uiState.pokemonHeader?.id}",
                         style = MaterialTheme.typography.filterTitle,
-                        color = Gray17,
-                        modifier = Modifier.alpha(0.6f)
+                        color = MaterialTheme.colors.primaryText.copy(alpha = 0.6f)
                     )
                     Text(
                         text = uiState.pokemonHeader?.name ?: "",
                         style = MaterialTheme.typography.applicationTitle,
-                        color = Color.White,
+                        color = MaterialTheme.colors.secondaryText,
                     )
                     uiState.pokemonHeader?.types?.let { types ->
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -171,13 +168,13 @@ fun Profile(
                     Tab(
                         selected = selectedTabIndex == index,
                         onClick = { selectedTabIndex = index },
-                        unselectedContentColor = Color.White
                     ) {
                         Text(
                             text = stringResource(id = title),
-                            style = if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
+                            style =
+                            if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
                             else MaterialTheme.typography.description,
-                            color = Color.White
+                            color = MaterialTheme.colors.secondaryText
                         )
                     }
                 }
@@ -186,7 +183,7 @@ fun Profile(
             Column(
                 modifier = Modifier
                     .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                    .background(color = Color.White)
+                    .background(color = Color.White) //TODO: change to MaterialTheme.colors
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {

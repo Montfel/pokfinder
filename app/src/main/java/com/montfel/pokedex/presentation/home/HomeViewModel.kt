@@ -4,11 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo3.exception.ApolloException
 import com.montfel.pokedex.ListQuery
+import com.montfel.pokedex.TypesQuery
 import com.montfel.pokedex.data.datasource.apolloClient
 import com.montfel.pokedex.data.dto.PokemonDto
 import com.montfel.pokedex.data.dto.TypeDto
 import com.montfel.pokedex.data.dto.TypesDto
 import com.montfel.pokedex.domain.model.PokemonHome
+import com.montfel.pokedex.domain.model.Type
+import com.montfel.pokedex.helper.Asset
+import com.montfel.pokedex.helper.AssetHelper
 import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +25,7 @@ import javax.inject.Inject
 
 data class HomeUiState(
     val pokemonList: List<PokemonHome>? = emptyList(),
+    val assetList: List<Asset>? = emptyList(),
 )
 
 @HiltViewModel
@@ -55,6 +60,23 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
         pokemons = pokemonList ?: emptyList()
         _uiState.update { it.copy(pokemonList = pokemonList) }
+    }
+
+    suspend fun saveAllTypes(assetHelper: AssetHelper) {
+        val response = withContext(Dispatchers.IO) {
+            try {
+                apolloClient.query(TypesQuery()).execute()
+            } catch (e: ApolloException) {
+                throw Exception()
+            }
+        }
+        val typesList = response.data?.pokemon_v2_type
+            ?.map { TypeDto(name = it.name).toDomain() }
+            ?.filter { it.name != "Unknown" && it.name != "Shadow" }
+            ?.sortedBy { it.name }
+            ?.map { assetHelper.getAsset(it.name) }
+
+        _uiState.update { it.copy(assetList = typesList) }
     }
 
     fun searchPokemon(query: String) {

@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -42,13 +41,13 @@ fun Evolution(
                     Image(
                         painter = painterResource(id = R.drawable.ic_front),
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(Gray74),
-                        modifier = Modifier.alpha(0.1f)
+                        colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
+                        alpha = 0.1f,
                     )
                     Text(
                         text = "(Level ${evolutionChain[index + 1].minLevel})",
                         style = MaterialTheme.typography.pokemonNumber,
-                        color = Gray17
+                        color = MaterialTheme.colors.primaryText
                     )
                 }
                 PokemonEvolution(specie = evolutionChain[index + 1])
@@ -66,7 +65,7 @@ fun PokemonEvolution(specie: SpeciesDto) {
                 painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,
                 modifier = Modifier.size(100.dp),
-                colorFilter = ColorFilter.tint(GrayF5)
+                colorFilter = ColorFilter.tint(GrayF5) //TODO: change to MaterialTheme.colors
             )
             Image(
                 painter = painterResource(id = R.drawable.bulba),
@@ -77,12 +76,12 @@ fun PokemonEvolution(specie: SpeciesDto) {
         Text(
             text = "#${specie.id}",
             style = MaterialTheme.typography.pokemonType,
-            color = Gray74
+            color = MaterialTheme.colors.primaryVariantText
         )
         Text(
             text = specie.name,
             style = MaterialTheme.typography.filterTitle,
-            color = Gray17
+            color = MaterialTheme.colors.primaryText
         )
     }
 }
