@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.montfel.pokedex.presentation.theme.primaryIcon
 
 @Composable
 fun FilterItem(
@@ -21,7 +23,7 @@ fun FilterItem(
     typeColor: Color,
 ) {
     var isEnabled by remember { mutableStateOf(false) } //TODO: move state to parent
-    val color = if (isEnabled) Color.White else typeColor ///TODO: change to MaterialTheme.colors
+    val color = if (isEnabled) MaterialTheme.colors.primaryIcon else typeColor
     Box(
         contentAlignment = Alignment.Center,
         modifier =

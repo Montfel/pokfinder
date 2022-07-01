@@ -3,15 +3,17 @@ package com.montfel.pokedex.presentation.bottomsheet
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.components.BottomSheetButton
+import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.presentation.components.BottomSheetHeader
+import com.montfel.pokedex.presentation.components.GenerationButton
 
 @Composable
-fun GenerationBottomSheet() {
+fun GenerationBottomSheet(generationList: List<Generation>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,20 +31,8 @@ fun GenerationBottomSheet() {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(vertical = 32.dp)
         ) {
-            item {
-                BottomSheetButton(title = R.string.generations) {}
-            }
-            item {
-                BottomSheetButton(title = R.string.generations){}
-            }
-            item {
-                BottomSheetButton(title = R.string.generations){}
-            }
-            item {
-                BottomSheetButton(title = R.string.generations){}
-            }
-            item {
-                BottomSheetButton(title = R.string.generations){}
+            items(generationList) {
+                GenerationButton(it.name) {}
             }
         }
     }

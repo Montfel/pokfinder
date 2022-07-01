@@ -26,6 +26,7 @@ import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
 import com.montfel.pokedex.presentation.theme.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 enum class BottomSheetFilter {
@@ -52,17 +53,20 @@ fun Home(
     LaunchedEffect(key1 = Unit) {
         viewModel.showAllPokemons()
         viewModel.saveAllTypes(assetHelper)
+        viewModel.saveAllGenerations()
     }
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetContent = {
             when (filter) {
-                BottomSheetFilter.Generation -> GenerationBottomSheet()
+                BottomSheetFilter.Generation -> GenerationBottomSheet(
+                    generationList = uiState.generationList ?: emptyList(),
+                )
                 BottomSheetFilter.Sort -> SortBottomSheet(
                     sortOption = {
                         viewModel.sortPokemons(it)
-                        scope.launch {
+                        scope.launch(Dispatchers.Main) {
                             sheetState.hide()
                         }
                     }
@@ -74,7 +78,11 @@ fun Home(
         },
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
     ) {
-        Box {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colors.background)
+                .fillMaxSize()
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,
@@ -101,7 +109,7 @@ fun Home(
                     TopBar(
                         onClick = {
                             filter = it
-                            scope.launch {
+                            scope.launch(Dispatchers.Main) {
                                 sheetState.show()
                             }
                         }

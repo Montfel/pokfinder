@@ -105,7 +105,7 @@ fun Profile(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
                         contentDescription = null,
-                        tint = Color.White //TODO: change to MaterialTheme.colors
+                        tint = MaterialTheme.colors.primaryIcon
                     )
                 }
             }
@@ -126,7 +126,7 @@ fun Profile(
                     Image(
                         painter = painterResource(id = R.drawable.ic_circle),
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(Color.White), //TODO: change to MaterialTheme.colors
+                        colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
                         alpha = 0.35f,
                         modifier = Modifier.size(125.dp)
                     )
@@ -183,7 +183,7 @@ fun Profile(
             Column(
                 modifier = Modifier
                     .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                    .background(color = Color.White) //TODO: change to MaterialTheme.colors
+                    .background(color = MaterialTheme.colors.surface)
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {

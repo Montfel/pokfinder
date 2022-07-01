@@ -32,10 +32,10 @@ fun PokemonCard(
             shape = RoundedCornerShape(10.dp),
             backgroundColor = assetBackground.backgroundColor,
             modifier = Modifier
+                .clickable(onClick = onClick)
                 .fillMaxWidth()
                 .height(115.dp)
                 .align(Alignment.BottomCenter)
-                .clickable(onClick = onClick)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Text(

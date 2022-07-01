@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
 import com.montfel.pokedex.presentation.theme.pokemonType
+import com.montfel.pokedex.presentation.theme.primaryIcon
 import com.montfel.pokedex.presentation.theme.secondaryText
 
 @Composable
@@ -35,7 +36,7 @@ fun TypeCard(typeName: String) {
             Image(
                 painter = painterResource(id = assetType.icon),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(Color.White), //TODO: change to MaterialTheme.colors
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
                 modifier = Modifier.size(15.dp)
             )
             Text(

@@ -1,0 +1,5 @@
+query Generations {
+    pokemon_v2_generation {
+        name
+    }
+}

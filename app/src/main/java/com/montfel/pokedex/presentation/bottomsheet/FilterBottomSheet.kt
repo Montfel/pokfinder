@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
@@ -23,6 +24,42 @@ import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun FilterBottomSheet(assetList: List<Asset>) {
+    val heightList = listOf(
+        Asset(
+            typeColor = HeightShort,
+            icon = R.drawable.ic_resource_short,
+            backgroundColor = Color.White
+        ),
+        Asset(
+            typeColor = HeightMedium,
+            icon = R.drawable.ic_medium,
+            backgroundColor = Color.White
+        ),
+        Asset(
+            typeColor = HeightTall,
+            icon = R.drawable.ic_tall,
+            backgroundColor = Color.White
+        )
+    )
+
+    val weightList = listOf(
+        Asset(
+            typeColor = WeightLight,
+            icon = R.drawable.ic_light,
+            backgroundColor = Color.White
+        ),
+        Asset(
+            typeColor = WeightNormal,
+            icon = R.drawable.ic_normal,
+            backgroundColor = Color.White
+        ),
+        Asset(
+            typeColor = WeightHeavy,
+            icon = R.drawable.ic_heavy,
+            backgroundColor = Color.White
+        )
+    )
+
     Column(
         verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
@@ -48,12 +85,12 @@ fun FilterBottomSheet(assetList: List<Asset>) {
 
         FilterSection(
             title = R.string.heights,
-            items = emptyList()
+            items = heightList
         )
 
         FilterSection(
             title = R.string.weights,
-            items = emptyList()
+            items = weightList
         )
 
         Row(
@@ -112,7 +149,10 @@ fun FilterSection(
             color = MaterialTheme.colors.primaryText,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp)
+        ) {
             items(items) {
                 FilterItem(icon = it.icon, typeColor = it.typeColor)
             }

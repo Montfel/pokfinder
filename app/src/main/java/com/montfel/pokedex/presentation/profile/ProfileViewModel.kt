@@ -33,7 +33,7 @@ class ProfileViewModel @Inject constructor(
     val uiState: StateFlow<ProfileUiState> = _uiState
 
     fun getPokemonHeader(id: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val response = pokemonRepository.getPokemon(id)
 
             if (response is ApiResponse.SuccessResult) {

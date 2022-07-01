@@ -6,10 +6,10 @@ import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 val Colors.primaryText: Color
-    get() = if (isLight) Gray17 else Gray17
+    get() = if (isLight) Gray17 else Color.White.copy(alpha = 0.87f)
 
 val Colors.primaryVariantText: Color
-    get() = if (isLight) Gray74 else Gray74
+    get() = if (isLight) Gray74 else Color.White.copy(alpha = 0.6f)
 
 val Colors.secondaryText: Color
     get() = if (isLight) Color.White else Color.White
@@ -23,20 +23,20 @@ val Colors.secondaryInput: Color
 val Colors.secondaryVariantInput: Color
     get() = if (isLight) GrayE2 else GrayE2
 
+val Colors.primaryIcon: Color
+    get() = if (isLight) Color.White else Color.White
+
+val Colors.onTypeColor: Color
+    get() = Color.White
+
 // Text
-private val Gray17 = Color(0xFF17171B)
-private val Gray74 = Color(0xFF747476)
-private val GrayE2 = Color(0xFFE2E2E2)
-private val GrayF2 = Color(0xFFF2F2F2)
+internal val Gray17 = Color(0xFF17171B)
+internal val Gray74 = Color(0xFF747476)
+internal val GrayE2 = Color(0xFFE2E2E2)
+internal val GrayE5 = Color(0xFFE5E5E5)
+internal val GrayEC = Color(0xFFECECEC)
+internal val GrayF2 = Color(0xFFF2F2F2)
 val GrayF5 = Color(0xFFF5F5F5)
-
-val LightColorPalette = lightColors(
-    onSurface = Gray17.copy(alpha = 0.5f),
-)
-
-val DarkColorPalette = darkColors(
-    onSurface = Gray17.copy(alpha = 0.5f),
-)
 
 // Height
 val HeightShort = Color(0xFFFFC5E6)
