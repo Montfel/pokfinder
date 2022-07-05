@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,8 +21,9 @@ import com.montfel.pokedex.presentation.theme.primaryIcon
 fun FilterItem(
     @DrawableRes icon: Int,
     typeColor: Color,
+    isEnabled: Boolean,
+    onClick: () -> Unit
 ) {
-    var isEnabled by remember { mutableStateOf(false) } //TODO: move state to parent
     val color = if (isEnabled) MaterialTheme.colors.primaryIcon else typeColor
     Box(
         contentAlignment = Alignment.Center,
@@ -32,7 +33,7 @@ fun FilterItem(
             .background(typeColor, CircleShape)
         else Modifier.size(50.dp)
     ) {
-        IconButton(onClick = { isEnabled = !isEnabled }) {
+        IconButton(onClick = onClick) {
             Image(
                 painter = painterResource(id = icon),
                 contentDescription = null,

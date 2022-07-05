@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -20,15 +21,18 @@ import com.montfel.pokedex.presentation.theme.*
 @Composable
 fun GenerationButton(
     title: String,
+    isEnabled: Boolean,
     onClick: () -> Unit
 ) {
-    var isEnabled by remember { mutableStateOf(false) }
     val backgroundColor =
         if (isEnabled) MaterialTheme.colors.primaryInput
         else MaterialTheme.colors.secondaryInput
     val textColor =
         if (isEnabled) MaterialTheme.colors.secondaryText
         else MaterialTheme.colors.primaryVariantText
+    val patternColor =
+        if (isEnabled) Color.White.copy(alpha = 0.1f)
+        else GrayE5
 
     Box(
         modifier = Modifier
@@ -40,7 +44,7 @@ fun GenerationButton(
         Image(
             painter = painterResource(id = R.drawable.ic_pokeball),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(GrayEC),
+            colorFilter = ColorFilter.tint(patternColor),
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .size(110.dp)
@@ -49,7 +53,7 @@ fun GenerationButton(
         Image(
             painter = painterResource(id = R.drawable.ic_6x3),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(GrayE5),
+            colorFilter = ColorFilter.tint(patternColor),
             modifier = Modifier
                 .align(Alignment.TopStart)
                 .width(80.dp)

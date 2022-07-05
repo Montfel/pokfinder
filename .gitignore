@@ -57,7 +57,7 @@ captures/
 #*.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
-.externalNativeBuild
+
 .cxx/
 
 # Google Services (e.g. APIs or Firebase)
@@ -84,8 +84,6 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
-
-*.iml
 .gradle
 /local.properties
 /.idea/caches

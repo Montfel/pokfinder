@@ -25,6 +25,7 @@ import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
+import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,10 +42,16 @@ fun Home(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
-    var text by remember { mutableStateOf("") }
-    val scope = rememberCoroutineScope()
-    var filter by remember { mutableStateOf(BottomSheetFilter.Filter) }
     val gradientColors = listOf(GrayF5, Color.White) //TODO: change to MaterialTheme.colors
+    var text by remember { mutableStateOf("") }
+    var filter by remember { mutableStateOf(BottomSheetFilter.Filter) }
+    var generationSelected by remember { mutableStateOf("") }
+    var sortSelectedOption by remember { mutableStateOf(SortOptions.SmallestNumber) }
+//    var typesSelected = remember { mutableStateListOf<Int>() }
+//    var weaknessesSelected = remember { mutableStateListOf<Int>() }
+//    var heightsSelected = remember { mutableStateListOf<Int>() }
+//    var weightsSelected = remember { mutableStateListOf<Int>() }
+    val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
@@ -62,17 +69,33 @@ fun Home(
             when (filter) {
                 BottomSheetFilter.Generation -> GenerationBottomSheet(
                     generationList = uiState.generationList ?: emptyList(),
+                    generationSelected = generationSelected,
+                    onGenerationSelected = { generation ->
+                        generationSelected = generation.name
+                        viewModel.filterByGeneration(generation)
+                        scope.launch(Dispatchers.Main) {
+                            sheetState.hide()
+                        }
+                    }
                 )
                 BottomSheetFilter.Sort -> SortBottomSheet(
-                    sortOption = {
-                        viewModel.sortPokemons(it)
+                    sortSelectedOption = sortSelectedOption,
+                    onSortOptionSelected = { sortOption ->
+                        sortSelectedOption = sortOption
+                        viewModel.sortPokemons(sortOption)
                         scope.launch(Dispatchers.Main) {
                             sheetState.hide()
                         }
                     }
                 )
                 BottomSheetFilter.Filter -> FilterBottomSheet(
-                    assetList = uiState.assetList ?: emptyList()
+                    assetList = uiState.assetList ?: emptyList(),
+                    onFilterApplied = {
+//                        viewModel.filterByAsset(it)
+                        scope.launch(Dispatchers.Main) {
+                            sheetState.hide()
+                        }
+                    }
                 )
             }
         },
@@ -125,40 +148,12 @@ fun Home(
                         style = MaterialTheme.typography.description,
                         color = MaterialTheme.colors.primaryVariantText,
                     )
-                    TextField(
-                        value = text,
-                        onValueChange = {
+                    SearchField(
+                        text = text,
+                        onType = {
                             text = it
                             viewModel.searchPokemon(it)
-                        },
-                        maxLines = 1,
-                        shape = RoundedCornerShape(10.dp),
-                        textStyle = MaterialTheme.typography.description,
-                        leadingIcon = {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_search),
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp),
-                            )
-                        },
-                        colors = textFieldColors(
-                            backgroundColor = MaterialTheme.colors.secondaryInput,
-                            textColor = MaterialTheme.colors.primaryText,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            cursorColor = MaterialTheme.colors.primaryInput,
-                        ),
-                        placeholder = {
-                            Text(
-                                text = stringResource(id = R.string.placeholder_textfield),
-                                style = MaterialTheme.typography.description,
-                                color = MaterialTheme.colors.primaryVariantText
-                            )
-                        },
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 24.dp)
+                        }
                     )
                 }
                 uiState.pokemonList?.let { pokemonList ->
@@ -174,4 +169,44 @@ fun Home(
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun SearchField(
+    text: String,
+    onType: (String) -> Unit,
+) {
+    TextField(
+        value = text,
+        onValueChange = { onType(it) },
+        maxLines = 1,
+        shape = RoundedCornerShape(10.dp),
+        textStyle = MaterialTheme.typography.description,
+        leadingIcon = {
+            Image(
+                painter = painterResource(id = R.drawable.ic_search),
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+            )
+        },
+        colors = textFieldColors(
+            backgroundColor = MaterialTheme.colors.secondaryInput,
+            textColor = MaterialTheme.colors.primaryText,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            cursorColor = MaterialTheme.colors.primaryInput,
+        ),
+        placeholder = {
+            Text(
+                text = stringResource(id = R.string.placeholder_textfield),
+                style = MaterialTheme.typography.description,
+                color = MaterialTheme.colors.primaryVariantText
+            )
+        },
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 24.dp)
+    )
 }

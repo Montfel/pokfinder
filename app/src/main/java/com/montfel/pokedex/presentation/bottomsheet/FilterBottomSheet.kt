@@ -3,7 +3,7 @@ package com.montfel.pokedex.presentation.bottomsheet
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -12,6 +12,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -23,7 +25,15 @@ import com.montfel.pokedex.presentation.components.FilterItem
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
-fun FilterBottomSheet(assetList: List<Asset>) {
+fun FilterBottomSheet(
+    assetList: List<Asset>,
+    onFilterApplied: () -> Unit
+) {
+    val typesSelected = remember { mutableStateListOf<Int>() }
+    val weaknessesSelected = remember { mutableStateListOf<Int>() }
+    val heightsSelected = remember { mutableStateListOf<Int>() }
+    val weightsSelected = remember { mutableStateListOf<Int>() }
+
     val heightList = listOf(
         Asset(
             typeColor = HeightShort,
@@ -75,22 +85,54 @@ fun FilterBottomSheet(assetList: List<Asset>) {
 
         FilterSection(
             title = R.string.types,
-            items = assetList
+            items = assetList,
+            itemsSelected = typesSelected,
+            onFilterSelected = {
+                if (typesSelected.contains(it)) {
+                    typesSelected.remove(it)
+                } else {
+                    typesSelected.add(it)
+                }
+            }
         )
 
         FilterSection(
             title = R.string.weakeness,
-            items = assetList
+            items = assetList,
+            itemsSelected = weaknessesSelected,
+            onFilterSelected = {
+                if (weaknessesSelected.contains(it)) {
+                    weaknessesSelected.remove(it)
+                } else {
+                    weaknessesSelected.add(it)
+                }
+            }
         )
 
         FilterSection(
             title = R.string.heights,
-            items = heightList
+            items = heightList,
+            itemsSelected = heightsSelected,
+            onFilterSelected = {
+                if (heightsSelected.contains(it)) {
+                    heightsSelected.remove(it)
+                } else {
+                    heightsSelected.add(it)
+                }
+            }
         )
 
         FilterSection(
             title = R.string.weights,
-            items = weightList
+            items = weightList,
+            itemsSelected = weightsSelected,
+            onFilterSelected = {
+                if (weightsSelected.contains(it)) {
+                    weightsSelected.remove(it)
+                } else {
+                    weightsSelected.add(it)
+                }
+            }
         )
 
         Row(
@@ -117,7 +159,7 @@ fun FilterBottomSheet(assetList: List<Asset>) {
                 )
             }
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onFilterApplied() },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = MaterialTheme.colors.primaryInput,
                     contentColor = MaterialTheme.colors.secondaryText
@@ -140,7 +182,9 @@ fun FilterBottomSheet(assetList: List<Asset>) {
 @Composable
 fun FilterSection(
     @StringRes title: Int,
-    items: List<Asset>
+    items: List<Asset>,
+    itemsSelected: MutableList<Int>,
+    onFilterSelected: (Int) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
@@ -153,8 +197,13 @@ fun FilterSection(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            items(items) {
-                FilterItem(icon = it.icon, typeColor = it.typeColor)
+            itemsIndexed(items) { index, item ->
+                FilterItem(
+                    icon = item.icon,
+                    typeColor = item.typeColor,
+                    isEnabled = itemsSelected.contains(index),
+                    onClick = { onFilterSelected(index) },
+                )
             }
         }
     }

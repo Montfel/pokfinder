@@ -5,13 +5,15 @@ import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.Type
 
 data class GenerationDto(
-    val name: String?,
+    val name: String,
+    val id: List<Int>
 ) : DtoMapper<Generation> {
-    val split = name?.split("-")
-    val first = split?.first()?.replaceFirstChar { it.uppercase() }
-    val last = split?.last()?.uppercase()
+    private val split = name.split("-")
+    val first = split.first().replaceFirstChar { it.uppercase() }
+    val last = split.last().uppercase()
 
     override fun toDomain() = Generation(
-        name = "$first $last"
+        name = "$first $last",
+        id = id
     )
 }

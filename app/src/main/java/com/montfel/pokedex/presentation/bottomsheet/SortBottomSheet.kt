@@ -3,19 +3,22 @@ package com.montfel.pokedex.presentation.bottomsheet
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.components.BottomSheetButton
 import com.montfel.pokedex.presentation.components.BottomSheetHeader
+import com.montfel.pokedex.presentation.components.SortButton
 
 enum class SortOptions {
     SmallestNumber, HighestNumber, Alphabetical, ReverseAlphabetical
 }
 
 @Composable
-fun SortBottomSheet(sortOption: (SortOptions) -> Unit) {
+fun SortBottomSheet(
+    sortSelectedOption: SortOptions,
+    onSortOptionSelected: (SortOptions) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,25 +37,29 @@ fun SortBottomSheet(sortOption: (SortOptions) -> Unit) {
             verticalArrangement = Arrangement.spacedBy(20.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
-            BottomSheetButton(
+            SortButton(
                 title = R.string.smallest,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { sortOption(SortOptions.SmallestNumber) }
+                isEnabled = sortSelectedOption == SortOptions.SmallestNumber,
+                onClick = { onSortOptionSelected(SortOptions.SmallestNumber) },
+                modifier = Modifier.fillMaxWidth()
             )
-            BottomSheetButton(
+            SortButton(
                 title = R.string.highest,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { sortOption(SortOptions.HighestNumber) }
+                isEnabled = sortSelectedOption == SortOptions.HighestNumber,
+                onClick = { onSortOptionSelected(SortOptions.HighestNumber) },
+                modifier = Modifier.fillMaxWidth()
             )
-            BottomSheetButton(
+            SortButton(
                 title = R.string.a_z,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { sortOption(SortOptions.Alphabetical)}
+                isEnabled = sortSelectedOption == SortOptions.Alphabetical,
+                onClick = { onSortOptionSelected(SortOptions.Alphabetical) },
+                modifier = Modifier.fillMaxWidth()
             )
-            BottomSheetButton(
+            SortButton(
                 title = R.string.z_a,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { sortOption(SortOptions.ReverseAlphabetical) }
+                isEnabled = sortSelectedOption == SortOptions.ReverseAlphabetical,
+                onClick = { onSortOptionSelected(SortOptions.ReverseAlphabetical) },
+                modifier = Modifier.fillMaxWidth()
             )
         }
 

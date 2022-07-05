@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
@@ -13,7 +13,12 @@ import com.montfel.pokedex.presentation.components.BottomSheetHeader
 import com.montfel.pokedex.presentation.components.GenerationButton
 
 @Composable
-fun GenerationBottomSheet(generationList: List<Generation>) {
+fun GenerationBottomSheet(
+    generationList: List<Generation>,
+    generationSelected: String,
+    onGenerationSelected: (Generation) -> Unit
+) {
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -32,7 +37,11 @@ fun GenerationBottomSheet(generationList: List<Generation>) {
             contentPadding = PaddingValues(vertical = 32.dp)
         ) {
             items(generationList) {
-                GenerationButton(it.name) {}
+                GenerationButton(
+                    title = it.name,
+                    isEnabled = generationSelected == it.name,
+                    onClick = { onGenerationSelected(it) }
+                )
             }
         }
     }

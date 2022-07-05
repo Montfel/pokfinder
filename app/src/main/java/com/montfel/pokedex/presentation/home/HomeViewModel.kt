@@ -13,7 +13,6 @@ import com.montfel.pokedex.data.dto.TypeDto
 import com.montfel.pokedex.data.dto.TypesDto
 import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.PokemonHome
-import com.montfel.pokedex.domain.model.Type
 import com.montfel.pokedex.helper.Asset
 import com.montfel.pokedex.helper.AssetHelper
 import com.montfel.pokedex.presentation.bottomsheet.SortOptions
@@ -56,7 +55,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                     TypesDto(
                         slot = type.slot,
                         type = TypeDto(
-                            name = type.pokemon_v2_type?.name ?: ""
+                            name = type.pokemon_v2_type?.name
                         )
                     )
                 }
@@ -92,7 +91,14 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             }
         }
         val generationList = response.data?.pokemon_v2_generation
-            ?.map { GenerationDto(name = it.name).toDomain() }
+            ?.map {
+                GenerationDto(
+                    name = it.name,
+                    id = it.pokemon_v2_pokemonspecies.map { pokemonId ->
+                        pokemonId.id
+                    }
+                ).toDomain()
+            }
 
         _uiState.update { it.copy(generationList = generationList) }
     }
@@ -113,12 +119,22 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     fun sortPokemons(option: SortOptions) {
-        val sortedPokemons = when (option) {
-            SortOptions.SmallestNumber -> _uiState.value.pokemonList?.sortedBy { it.id }
-            SortOptions.HighestNumber -> _uiState.value.pokemonList?.sortedByDescending { it.id }
-            SortOptions.Alphabetical -> _uiState.value.pokemonList?.sortedBy { it.name }
-            SortOptions.ReverseAlphabetical -> _uiState.value.pokemonList?.sortedByDescending { it.name }
+        viewModelScope.launch(Dispatchers.Default) {
+            val sortedPokemons = when (option) {
+                SortOptions.SmallestNumber -> _uiState.value.pokemonList?.sortedBy { it.id }
+                SortOptions.HighestNumber -> _uiState.value.pokemonList?.sortedByDescending { it.id }
+                SortOptions.Alphabetical -> _uiState.value.pokemonList?.sortedBy { it.name }
+                SortOptions.ReverseAlphabetical -> _uiState.value.pokemonList?.sortedByDescending { it.name }
+            }
+            _uiState.update { it.copy(pokemonList = sortedPokemons) }
         }
-        _uiState.update { it.copy(pokemonList = sortedPokemons) }
+    }
+
+    fun filterByGeneration(generation: Generation) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val result = pokemons.filter { it.id in generation.id }
+
+            _uiState.update { it.copy(pokemonList = result) }
+        }
     }
 }

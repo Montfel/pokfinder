@@ -1,5 +1,8 @@
 query Generations {
     pokemon_v2_generation {
         name
+        pokemon_v2_pokemonspecies {
+            id
+        }
     }
 }
