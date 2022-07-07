@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -36,7 +37,7 @@ fun Profile(
     val assetHelper = LocalAssetHelper.current
     val mainType = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
     val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
-    var selectedTabIndex by remember { mutableStateOf(0) }
+    var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
     val strength = mainType?.type?.typeEfficacies
         ?.filter { it.damageFactor == 200 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.ExposedDropdownMenuDefaults.textFieldColors
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -43,10 +44,10 @@ fun Home(
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
     val gradientColors = listOf(GrayF5, Color.White) //TODO: change to MaterialTheme.colors
-    var text by remember { mutableStateOf("") }
-    var filter by remember { mutableStateOf(BottomSheetFilter.Filter) }
-    var generationSelected by remember { mutableStateOf("") }
-    var sortSelectedOption by remember { mutableStateOf(SortOptions.SmallestNumber) }
+    var text by rememberSaveable { mutableStateOf("") }
+    var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Filter) }
+    var generationSelected by rememberSaveable { mutableStateOf("") }
+    var sortSelectedOption by rememberSaveable { mutableStateOf(SortOptions.SmallestNumber) }
 //    var typesSelected = remember { mutableStateListOf<Int>() }
 //    var weaknessesSelected = remember { mutableStateListOf<Int>() }
 //    var heightsSelected = remember { mutableStateListOf<Int>() }
