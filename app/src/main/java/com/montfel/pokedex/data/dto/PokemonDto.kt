@@ -1,7 +1,6 @@
 package com.montfel.pokedex.data.dto
 
 import com.montfel.pokedex.domain.DtoMapper
-import com.montfel.pokedex.domain.model.Pokemon
 import com.montfel.pokedex.domain.model.PokemonHome
 
 data class PokemonDto(
