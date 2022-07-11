@@ -29,6 +29,7 @@ import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 enum class BottomSheetFilter {
@@ -72,9 +73,15 @@ fun Home(
                     generationList = uiState.generationList ?: emptyList(),
                     generationSelected = generationSelected,
                     onGenerationSelected = { generation ->
-                        generationSelected = generation.name
-                        viewModel.filterByGeneration(generation)
+                        if (generation.name != generationSelected) {
+                            generationSelected = generation.name
+                            viewModel.filterByGeneration(generation.id)
+                        } else {
+                            generationSelected = ""
+                            viewModel.filterByGeneration(emptyList())
+                        }
                         scope.launch(Dispatchers.Main) {
+                            delay(500)
                             sheetState.hide()
                         }
                     }
@@ -85,6 +92,7 @@ fun Home(
                         sortSelectedOption = sortOption
                         viewModel.sortPokemons(sortOption)
                         scope.launch(Dispatchers.Main) {
+                            delay(500)
                             sheetState.hide()
                         }
                     }
@@ -94,6 +102,7 @@ fun Home(
                     onFilterApplied = {
 //                        viewModel.filterByAsset(it)
                         scope.launch(Dispatchers.Main) {
+                            delay(500)
                             sheetState.hide()
                         }
                     }

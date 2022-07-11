@@ -130,9 +130,13 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun filterByGeneration(generation: Generation) {
+    fun filterByGeneration(pokemonsGeneration: List<Int>) {
         viewModelScope.launch(Dispatchers.Default) {
-            val result = pokemons.filter { it.id in generation.id }
+            var result = pokemons.filter { it.id in pokemonsGeneration }
+
+            if (result.isEmpty()) {
+                result = pokemons
+            }
 
             _uiState.update { it.copy(pokemonList = result) }
         }

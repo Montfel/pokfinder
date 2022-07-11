@@ -2,6 +2,7 @@ package com.montfel.pokedex.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -17,6 +18,7 @@ val font = FontFamily(
 
 val Typography.title: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Bold,
@@ -25,6 +27,7 @@ val Typography.title: TextStyle
 
 val Typography.applicationTitle: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Bold,
@@ -33,6 +36,7 @@ val Typography.applicationTitle: TextStyle
 
 val Typography.pokemonName: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Bold,
@@ -41,6 +45,7 @@ val Typography.pokemonName: TextStyle
 
 val Typography.filterTitle: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Bold,
@@ -49,6 +54,7 @@ val Typography.filterTitle: TextStyle
 
 val Typography.description: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Normal,
@@ -57,6 +63,7 @@ val Typography.description: TextStyle
 
 val Typography.pokemonNumber: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Bold,
@@ -65,6 +72,7 @@ val Typography.pokemonNumber: TextStyle
 
 val Typography.pokemonType: TextStyle
     @Composable
+    @ReadOnlyComposable
     get() = TextStyle(
         fontFamily = font,
         fontWeight = FontWeight.Medium,
