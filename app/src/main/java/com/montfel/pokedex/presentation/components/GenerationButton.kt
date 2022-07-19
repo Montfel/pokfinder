@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,12 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun GenerationButton(
     title: String,
+    firstPokemons: List<Int>,
     isEnabled: Boolean,
     onClick: () -> Unit
 ) {
@@ -66,21 +68,13 @@ fun GenerationButton(
             modifier = Modifier.fillMaxSize()
         ) {
             Row {
-                Image(
-                    painter = painterResource(id = R.drawable.bulba),
-                    contentDescription = null,
-                    modifier = Modifier.size(45.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.bulba),
-                    contentDescription = null,
-                    modifier = Modifier.size(45.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.bulba),
-                    contentDescription = null,
-                    modifier = Modifier.size(45.dp)
-                )
+                firstPokemons.forEach {
+                    AsyncImage(
+                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${it}.png",
+                        contentDescription = null,
+                        modifier = Modifier.size(45.dp)
+                    )
+                }
             }
             Text(
                 text = title,
