@@ -10,7 +10,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.components.TypeEffectivenessItem
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable

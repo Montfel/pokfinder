@@ -1,8 +1,6 @@
 package com.montfel.pokedex.presentation.theme
 
 import androidx.compose.material.Colors
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 val Colors.primaryText: Color

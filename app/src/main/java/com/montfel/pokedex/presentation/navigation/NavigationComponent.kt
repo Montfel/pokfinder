@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.montfel.pokedex.presentation.home.Home
 import com.montfel.pokedex.presentation.profile.Profile
+import com.montfel.pokedex.presentation.splash.Splash
 
 @ExperimentalMaterialApi
 @Composable
@@ -17,13 +18,16 @@ fun NavigationComponent() {
 
     NavHost(
         navController = navController,
-        startDestination = Route.Home.route
+        startDestination = Screen.Home.route
     ) {
-        composable(Route.Home.route) {
+//        composable(Screen.Splash.route) {
+//            Splash(navController = navController)
+//        }
+        composable(Screen.Home.route) {
             Home(navController = navController)
         }
         composable(
-            route = "profile/{id}",
+            route = Screen.Profile.route,
             arguments = listOf(
                 navArgument("id") {
                     type = NavType.StringType

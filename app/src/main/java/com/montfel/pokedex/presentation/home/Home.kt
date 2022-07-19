@@ -23,10 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
+import com.montfel.pokedex.domain.usecase.SortOptions
 import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
-import com.montfel.pokedex.presentation.bottomsheet.SortOptions
+import com.montfel.pokedex.presentation.navigation.Screen
 import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -48,7 +49,6 @@ fun Home(
     var text by rememberSaveable { mutableStateOf("") }
     var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Filter) }
     var generationSelected by rememberSaveable { mutableStateOf("") }
-    var sortSelectedOption by rememberSaveable { mutableStateOf(SortOptions.SmallestNumber) }
 //    var typesSelected = remember { mutableStateListOf<Int>() }
 //    var weaknessesSelected = remember { mutableStateListOf<Int>() }
 //    var heightsSelected = remember { mutableStateListOf<Int>() }
@@ -70,7 +70,7 @@ fun Home(
         sheetContent = {
             when (filter) {
                 BottomSheetFilter.Generation -> GenerationBottomSheet(
-                    generationList = uiState.generationList ?: emptyList(),
+                    generationList = uiState.generationList,
                     generationSelected = generationSelected,
                     onGenerationSelected = { generation ->
                         if (generation.name != generationSelected) {
@@ -87,9 +87,8 @@ fun Home(
                     }
                 )
                 BottomSheetFilter.Sort -> SortBottomSheet(
-                    sortSelectedOption = sortSelectedOption,
+                    sortSelectedOption = uiState.sortOption,
                     onSortOptionSelected = { sortOption ->
-                        sortSelectedOption = sortOption
                         viewModel.sortPokemons(sortOption)
                         scope.launch(Dispatchers.Main) {
                             delay(500)
@@ -98,7 +97,7 @@ fun Home(
                     }
                 )
                 BottomSheetFilter.Filter -> FilterBottomSheet(
-                    assetList = uiState.assetList ?: emptyList(),
+                    assetList = uiState.assetList,
                     onFilterApplied = {
 //                        viewModel.filterByAsset(it)
                         scope.launch(Dispatchers.Main) {
@@ -166,14 +165,12 @@ fun Home(
                         }
                     )
                 }
-                uiState.pokemonList?.let { pokemonList ->
-                    items(
-                        items = pokemonList,
-                        key = { it.id }
-                    ) { pokemon ->
-                        PokemonCard(pokemon = pokemon) {
-                            navController.navigate("profile/${pokemon.id}")
-                        }
+                items(
+                    items = uiState.pokemonList,
+                    key = { it.id }
+                ) { pokemon ->
+                    PokemonCard(pokemon = pokemon) {
+                        navController.navigate(Screen.Profile.createRoute(pokemon.id))
                     }
                 }
             }

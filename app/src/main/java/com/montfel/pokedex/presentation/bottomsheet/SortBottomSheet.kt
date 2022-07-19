@@ -7,12 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
+import com.montfel.pokedex.domain.usecase.SortOptions
 import com.montfel.pokedex.presentation.components.BottomSheetHeader
 import com.montfel.pokedex.presentation.components.SortButton
-
-enum class SortOptions {
-    SmallestNumber, HighestNumber, Alphabetical, ReverseAlphabetical
-}
 
 @Composable
 fun SortBottomSheet(

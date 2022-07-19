@@ -13,9 +13,10 @@ import com.montfel.pokedex.data.dto.TypeDto
 import com.montfel.pokedex.data.dto.TypesDto
 import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.PokemonHome
+import com.montfel.pokedex.domain.usecase.HomeUseCases
+import com.montfel.pokedex.domain.usecase.SortOptions
 import com.montfel.pokedex.helper.Asset
 import com.montfel.pokedex.helper.AssetHelper
-import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,13 +27,16 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class HomeUiState(
-    val pokemonList: List<PokemonHome>? = emptyList(),
-    val assetList: List<Asset>? = emptyList(),
-    val generationList: List<Generation>? = emptyList(),
+    val pokemonList: List<PokemonHome> = emptyList(),
+    val assetList: List<Asset> = emptyList(),
+    val generationList: List<Generation> = emptyList(),
+    val sortOption: SortOptions = SortOptions.SmallestNumber,
 )
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val homeUseCases: HomeUseCases
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
@@ -47,22 +51,25 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 throw Exception()
             }
         }
-        val pokemonList = response.data?.pokemon_v2_pokemon?.map {
-            PokemonDto(
-                id = it.id,
-                name = it.name,
-                types = it.pokemon_v2_pokemontypes.map { type ->
-                    TypesDto(
-                        slot = type.slot,
-                        type = TypeDto(
-                            name = type.pokemon_v2_type?.name
+
+        response.data?.let { data ->
+            val pokemonList = data.pokemon_v2_pokemon.map {
+                PokemonDto(
+                    id = it.id,
+                    name = it.name,
+                    types = it.pokemon_v2_pokemontypes.map { type ->
+                        TypesDto(
+                            slot = type.slot,
+                            type = TypeDto(
+                                name = type.pokemon_v2_type?.name
+                            )
                         )
-                    )
-                }
-            ).toDomain()
+                    }
+                ).toDomain()
+            }
+            pokemons = pokemonList
+            _uiState.update { it.copy(pokemonList = pokemonList) }
         }
-        pokemons = pokemonList ?: emptyList()
-        _uiState.update { it.copy(pokemonList = pokemonList) }
     }
 
     suspend fun saveAllTypes(assetHelper: AssetHelper) {
@@ -73,13 +80,16 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 throw Exception()
             }
         }
-        val typesList = response.data?.pokemon_v2_type
-            ?.map { TypeDto(name = it.name).toDomain() }
-            ?.filter { it.name != "Unknown" && it.name != "Shadow" }
-            ?.sortedBy { it.name }
-            ?.map { assetHelper.getAsset(it.name) }
 
-        _uiState.update { it.copy(assetList = typesList) }
+        response.data?.let { data ->
+            val typesList = data.pokemon_v2_type
+                .map { TypeDto(name = it.name).toDomain() }
+                .filter { it.name != "Unknown" && it.name != "Shadow" }
+                .sortedBy { it.name }
+                .map { assetHelper.getAsset(it.name) }
+
+            _uiState.update { it.copy(assetList = typesList) }
+        }
     }
 
     suspend fun saveAllGenerations() {
@@ -90,8 +100,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 throw Exception()
             }
         }
-        val generationList = response.data?.pokemon_v2_generation
-            ?.map {
+
+        response.data?.let { data ->
+            val generationList = data.pokemon_v2_generation.map {
                 GenerationDto(
                     name = it.name,
                     id = it.pokemon_v2_pokemonspecies.map { pokemonId ->
@@ -100,17 +111,17 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 ).toDomain()
             }
 
-        _uiState.update { it.copy(generationList = generationList) }
+            _uiState.update { it.copy(generationList = generationList) }
+        }
     }
 
     fun searchPokemon(query: String) {
         if (query.isNotBlank()) {
             viewModelScope.launch(Dispatchers.Default) {
-                val result = pokemons
-                    .filter {
-                        it.name.contains(query.trim(), ignoreCase = true)
-                                || it.id.toString() == query.trim()
-                    }
+                val result = pokemons.filter {
+                    it.name.contains(query.trim(), ignoreCase = true)
+                            || it.id.toString() == query.trim()
+                }
                 _uiState.update { it.copy(pokemonList = result) }
             }
         } else {
@@ -118,15 +129,17 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun sortPokemons(option: SortOptions) {
-        viewModelScope.launch(Dispatchers.Default) {
-            val sortedPokemons = when (option) {
-                SortOptions.SmallestNumber -> _uiState.value.pokemonList?.sortedBy { it.id }
-                SortOptions.HighestNumber -> _uiState.value.pokemonList?.sortedByDescending { it.id }
-                SortOptions.Alphabetical -> _uiState.value.pokemonList?.sortedBy { it.name }
-                SortOptions.ReverseAlphabetical -> _uiState.value.pokemonList?.sortedByDescending { it.name }
+    fun sortPokemons(sortOption: SortOptions) {
+        if (sortOption != uiState.value.sortOption) {
+            val sortedPokemons =
+                homeUseCases.sortPokemonsUseCase(sortOption, uiState.value.pokemonList)
+
+            _uiState.update {
+                it.copy(
+                    pokemonList = sortedPokemons,
+                    sortOption = sortOption
+                )
             }
-            _uiState.update { it.copy(pokemonList = sortedPokemons) }
         }
     }
 

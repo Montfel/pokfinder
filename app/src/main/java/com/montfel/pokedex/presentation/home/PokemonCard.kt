@@ -77,7 +77,7 @@ fun PokemonCard(
                 .height(32.dp)
         )
         AsyncImage(
-            model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png",
+            model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png",
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

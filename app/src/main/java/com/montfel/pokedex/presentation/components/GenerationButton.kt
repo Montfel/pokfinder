@@ -65,7 +65,7 @@ fun GenerationButton(
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxSize()
         ) {
-            Row() {
+            Row {
                 Image(
                     painter = painterResource(id = R.drawable.bulba),
                     contentDescription = null,

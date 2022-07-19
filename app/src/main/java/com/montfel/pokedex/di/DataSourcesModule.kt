@@ -1,6 +1,8 @@
 package com.montfel.pokedex.di
 
 import com.montfel.pokedex.data.datasource.PokemonDataSource
+import com.montfel.pokedex.domain.usecase.HomeUseCases
+import com.montfel.pokedex.domain.usecase.SortPokemonsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +18,12 @@ internal object DataSourcesModule {
     @Provides
     fun providesPokemonDataSource(retrofit: Retrofit): PokemonDataSource =
         retrofit.create(PokemonDataSource::class.java)
+
+    @Provides
+    @Singleton
+    fun provideHomeUseCases() : HomeUseCases {
+        return HomeUseCases(
+            sortPokemonsUseCase = SortPokemonsUseCase()
+        )
+    }
 }
