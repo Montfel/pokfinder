@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
-import com.montfel.pokedex.domain.usecase.SortOptions
 import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
@@ -48,11 +47,6 @@ fun Home(
     val gradientColors = listOf(GrayF5, Color.White) //TODO: change to MaterialTheme.colors
     var text by rememberSaveable { mutableStateOf("") }
     var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Filter) }
-    var generationSelected by rememberSaveable { mutableStateOf("") }
-//    var typesSelected = remember { mutableStateListOf<Int>() }
-//    var weaknessesSelected = remember { mutableStateListOf<Int>() }
-//    var heightsSelected = remember { mutableStateListOf<Int>() }
-//    var weightsSelected = remember { mutableStateListOf<Int>() }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -71,15 +65,9 @@ fun Home(
             when (filter) {
                 BottomSheetFilter.Generation -> GenerationBottomSheet(
                     generationList = uiState.generationList,
-                    generationSelected = generationSelected,
+                    generationSelected = uiState.generationSelected,
                     onGenerationSelected = { generation ->
-                        if (generation.name != generationSelected) {
-                            generationSelected = generation.name
-                            viewModel.filterByGeneration(generation.id)
-                        } else {
-                            generationSelected = ""
-                            viewModel.filterByGeneration(emptyList())
-                        }
+                        viewModel.filterByGeneration(generation)
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()
@@ -87,9 +75,9 @@ fun Home(
                     }
                 )
                 BottomSheetFilter.Sort -> SortBottomSheet(
-                    sortSelectedOption = uiState.sortOption,
-                    onSortOptionSelected = { sortOption ->
-                        viewModel.sortPokemons(sortOption)
+                    sortOptionSelected = uiState.sortOptionSelected,
+                    onSortOptionSelected = { sortOptionSelected ->
+                        viewModel.sortPokemons(sortOptionSelected)
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()

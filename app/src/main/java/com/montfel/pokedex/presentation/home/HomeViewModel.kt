@@ -30,7 +30,8 @@ data class HomeUiState(
     val pokemonList: List<PokemonHome> = emptyList(),
     val assetList: List<Asset> = emptyList(),
     val generationList: List<Generation> = emptyList(),
-    val sortOption: SortOptions = SortOptions.SmallestNumber,
+    val generationSelected: String = "",
+    val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
 )
 
 @HiltViewModel
@@ -130,28 +131,36 @@ class HomeViewModel @Inject constructor(
     }
 
     fun sortPokemons(sortOption: SortOptions) {
-        if (sortOption != uiState.value.sortOption) {
+        if (sortOption != uiState.value.sortOptionSelected) {
             val sortedPokemons =
                 homeUseCases.sortPokemonsUseCase(sortOption, uiState.value.pokemonList)
 
             _uiState.update {
                 it.copy(
                     pokemonList = sortedPokemons,
-                    sortOption = sortOption
+                    sortOptionSelected = sortOption
                 )
             }
         }
     }
 
-    fun filterByGeneration(pokemonsGeneration: List<Int>) {
-        viewModelScope.launch(Dispatchers.Default) {
-            var result = pokemons.filter { it.id in pokemonsGeneration }
+    fun filterByGeneration(generation: Generation) {
+        if (generation.name != uiState.value.generationSelected) {
+            val result = pokemons.filter { it.id in generation.id }
 
-            if (result.isEmpty()) {
-                result = pokemons
+            _uiState.update {
+                it.copy(
+                    generationSelected = generation.name,
+                    pokemonList = result,
+                )
             }
-
-            _uiState.update { it.copy(pokemonList = result) }
+        } else {
+            _uiState.update {
+                it.copy(
+                    generationSelected = "",
+                    pokemonList = pokemons,
+                )
+            }
         }
     }
 }

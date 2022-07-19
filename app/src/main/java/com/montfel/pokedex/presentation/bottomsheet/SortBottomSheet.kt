@@ -13,7 +13,7 @@ import com.montfel.pokedex.presentation.components.SortButton
 
 @Composable
 fun SortBottomSheet(
-    sortSelectedOption: SortOptions,
+    sortOptionSelected: SortOptions,
     onSortOptionSelected: (SortOptions) -> Unit
 ) {
     Column(
@@ -36,25 +36,25 @@ fun SortBottomSheet(
         ) {
             SortButton(
                 title = R.string.smallest,
-                isEnabled = sortSelectedOption == SortOptions.SmallestNumber,
+                isEnabled = sortOptionSelected == SortOptions.SmallestNumber,
                 onClick = { onSortOptionSelected(SortOptions.SmallestNumber) },
                 modifier = Modifier.fillMaxWidth()
             )
             SortButton(
                 title = R.string.highest,
-                isEnabled = sortSelectedOption == SortOptions.HighestNumber,
+                isEnabled = sortOptionSelected == SortOptions.HighestNumber,
                 onClick = { onSortOptionSelected(SortOptions.HighestNumber) },
                 modifier = Modifier.fillMaxWidth()
             )
             SortButton(
                 title = R.string.a_z,
-                isEnabled = sortSelectedOption == SortOptions.Alphabetical,
+                isEnabled = sortOptionSelected == SortOptions.Alphabetical,
                 onClick = { onSortOptionSelected(SortOptions.Alphabetical) },
                 modifier = Modifier.fillMaxWidth()
             )
             SortButton(
                 title = R.string.z_a,
-                isEnabled = sortSelectedOption == SortOptions.ReverseAlphabetical,
+                isEnabled = sortOptionSelected == SortOptions.ReverseAlphabetical,
                 onClick = { onSortOptionSelected(SortOptions.ReverseAlphabetical) },
                 modifier = Modifier.fillMaxWidth()
             )

@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
@@ -68,9 +69,9 @@ fun GenerationButton(
             modifier = Modifier.fillMaxSize()
         ) {
             Row {
-                firstPokemons.forEach {
+                firstPokemons.forEach { pokemonId ->
                     AsyncImage(
-                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${it}.png",
+                        model = stringResource(id = R.string.pokemon_image_url, pokemonId),
                         contentDescription = null,
                         modifier = Modifier.size(45.dp)
                     )
