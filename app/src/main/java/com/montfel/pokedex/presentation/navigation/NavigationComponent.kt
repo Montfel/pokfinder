@@ -9,7 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.montfel.pokedex.presentation.home.Home
 import com.montfel.pokedex.presentation.profile.Profile
-import com.montfel.pokedex.presentation.splash.Splash
 
 @ExperimentalMaterialApi
 @Composable

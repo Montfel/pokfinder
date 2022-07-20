@@ -85,7 +85,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 .gradle
-/local.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
