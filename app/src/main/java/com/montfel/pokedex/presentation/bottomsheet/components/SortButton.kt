@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.components
+package com.montfel.pokedex.presentation.bottomsheet.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.height

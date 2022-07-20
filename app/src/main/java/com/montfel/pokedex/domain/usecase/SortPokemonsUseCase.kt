@@ -1,6 +1,7 @@
 package com.montfel.pokedex.domain.usecase
 
 import com.montfel.pokedex.domain.model.PokemonHome
+import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 
 class SortPokemonsUseCase {
 

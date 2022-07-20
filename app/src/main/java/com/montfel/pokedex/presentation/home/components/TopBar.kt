@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.home
+package com.montfel.pokedex.presentation.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
+import com.montfel.pokedex.presentation.home.BottomSheetFilter
 
 @Composable
 fun TopBar(onClick: (BottomSheetFilter) -> Unit) {

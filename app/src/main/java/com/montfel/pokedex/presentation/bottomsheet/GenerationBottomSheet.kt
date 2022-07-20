@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Generation
-import com.montfel.pokedex.presentation.components.BottomSheetHeader
-import com.montfel.pokedex.presentation.components.GenerationButton
+import com.montfel.pokedex.presentation.bottomsheet.components.BottomSheetHeader
+import com.montfel.pokedex.presentation.bottomsheet.components.GenerationButton
 
 @Composable
 fun GenerationBottomSheet(

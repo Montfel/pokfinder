@@ -26,6 +26,8 @@ import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
+import com.montfel.pokedex.presentation.home.components.PokemonCard
+import com.montfel.pokedex.presentation.home.components.TopBar
 import com.montfel.pokedex.presentation.navigation.Screen
 import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.Dispatchers

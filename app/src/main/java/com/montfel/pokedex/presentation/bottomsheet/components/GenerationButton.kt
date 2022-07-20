@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.components
+package com.montfel.pokedex.presentation.bottomsheet.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.home
+package com.montfel.pokedex.presentation.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

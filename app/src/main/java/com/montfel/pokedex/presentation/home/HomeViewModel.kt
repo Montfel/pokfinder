@@ -14,9 +14,9 @@ import com.montfel.pokedex.data.dto.TypesDto
 import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.PokemonHome
 import com.montfel.pokedex.domain.usecase.HomeUseCases
-import com.montfel.pokedex.domain.usecase.SortOptions
 import com.montfel.pokedex.helper.Asset
 import com.montfel.pokedex.helper.AssetHelper
+import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -130,20 +130,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun sortPokemons(sortOption: SortOptions) {
-        if (sortOption != uiState.value.sortOptionSelected) {
-            val sortedPokemons =
-                homeUseCases.sortPokemonsUseCase(sortOption, uiState.value.pokemonList)
-
-            _uiState.update {
-                it.copy(
-                    pokemonList = sortedPokemons,
-                    sortOptionSelected = sortOption
-                )
-            }
-        }
-    }
-
     fun filterByGeneration(generation: Generation) {
         if (generation.name != uiState.value.generationSelected) {
             val result = pokemons.filter { it.id in generation.id }
@@ -159,6 +145,20 @@ class HomeViewModel @Inject constructor(
                 it.copy(
                     generationSelected = "",
                     pokemonList = pokemons,
+                )
+            }
+        }
+    }
+
+    fun sortPokemons(sortOption: SortOptions) {
+        if (sortOption != uiState.value.sortOptionSelected) {
+            val sortedPokemons =
+                homeUseCases.sortPokemonsUseCase(sortOption, uiState.value.pokemonList)
+
+            _uiState.update {
+                it.copy(
+                    pokemonList = sortedPokemons,
+                    sortOptionSelected = sortOption
                 )
             }
         }
