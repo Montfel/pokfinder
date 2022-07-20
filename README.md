@@ -48,13 +48,22 @@
 The following tools were used in the construction of the project:
 
 -   **[Kotlin](https://kotlinlang.org/)**
--   **[Android](https://www.android.com/intl/pt-BR_br/)**
+-   **[Android](https://www.android.com/)**
 
+#### Libraries
 
-#### [](https://github.com/tgmarinho/Ecoleta#utilit%C3%A1rios)**Utilitários**
+-   **[Hilt](https://dagger.dev/hilt/)**
+-   **[Apollo](https://www.apollographql.com/)**
+-   **[Retrofit](https://square.github.io/retrofit/)**
+-   **[Jetpack Compose](https://developer.android.com/jetpack/compose)**
+-   **[Coil](https://coil-kt.github.io/coil/)**
+-   **[Accompanist](https://google.github.io/accompanist/)**
+
+#### Util
 
 -   IDE:  **[Android Studio](https://developer.android.com/studio)**
 -   Icons:  **[Flaticons](https://www.flaticon.com/)**
+-   API:  **[PokeAPI](https://pokeapi.co/)**
 
 ---
 
