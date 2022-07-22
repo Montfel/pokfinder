@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -65,12 +66,14 @@ fun PokemonEvolution(specie: SpeciesDto) {
                 painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,
                 modifier = Modifier.size(100.dp),
-                colorFilter = ColorFilter.tint(GrayF5) //TODO: change to MaterialTheme.colors
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.pokeballIcon)
             )
             Image(
                 painter = painterResource(id = R.drawable.bulba),
                 contentDescription = null,
-                modifier = Modifier.size(75.dp)
+                modifier = Modifier
+                    .size(75.dp)
+                    .align(Alignment.Center)
             )
         }
         Text(

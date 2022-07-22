@@ -4,37 +4,54 @@ import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
 
 val Colors.primaryText: Color
-    get() = if (isLight) Gray17 else Color.White.copy(alpha = 0.87f)
+    get() = if (isLight) Gray17 else White87
 
 val Colors.primaryVariantText: Color
-    get() = if (isLight) Gray74 else Color.White.copy(alpha = 0.6f)
+    get() = if (isLight) Gray74 else White60
 
 val Colors.secondaryText: Color
-    get() = if (isLight) Color.White else Color.White
-
-val Colors.primaryInput: Color
-    get() = if (isLight) TypePsychic else TypePsychic
-
-val Colors.secondaryInput: Color
-    get() = if (isLight) GrayF2 else GrayF2
-
-val Colors.secondaryVariantInput: Color
-    get() = if (isLight) GrayE2 else GrayE2
-
-val Colors.primaryIcon: Color
-    get() = if (isLight) Color.White else Color.White
-
-val Colors.onTypeColor: Color
     get() = Color.White
 
-// Text
-internal val Gray17 = Color(0xFF17171B)
-internal val Gray74 = Color(0xFF747476)
-internal val GrayE2 = Color(0xFFE2E2E2)
-internal val GrayE5 = Color(0xFFE5E5E5)
-internal val GrayEC = Color(0xFFECECEC)
-internal val GrayF2 = Color(0xFFF2F2F2)
-val GrayF5 = Color(0xFFF5F5F5)
+val Colors.primaryInput: Color
+    get() = TypePsychic
+
+val Colors.secondaryInput: Color
+    get() = if (isLight) GrayF2 else Gray20
+
+val Colors.secondaryVariantInput: Color
+    get() = GrayE2
+
+val Colors.primaryIcon: Color
+    get() = Color.White
+
+val Colors.numberOverBackgroundColor: Color
+    get() = Gray17.copy(alpha = 0.6f)
+
+val Colors.pokeballIcon: Color
+    get() = if (isLight) GrayF5 else Gray20
+
+val Colors.primaryPattern: Color
+    get() = White10
+
+val Colors.secondaryPattern: Color
+    get() = if (isLight) GrayEC else Gray20
+
+val Colors.topBarIcon: Color
+    get() = if (isLight) Gray12 else White87
+
+private val Gray12 = Color(0xFF121212)
+val Gray17 = Color(0xFF17171B)
+private val Gray20 = Color(0xFF202020)
+private val Gray74 = Color(0xFF747476)
+private val GrayE2 = Color(0xFFE2E2E2)
+private val GrayE5 = Color(0xFFE5E5E5)
+private val GrayEC = Color(0xFFECECEC)
+private val GrayF2 = Color(0xFFF2F2F2)
+private val GrayF5 = Color(0xFFF5F5F5)
+
+private val White10 = Color.White.copy(alpha = 0.1f)
+private val White60 = Color.White.copy(alpha = 0.6f)
+private val White87 = Color.White.copy(alpha = 0.87f)
 
 // Height
 val HeightShort = Color(0xFFFFC5E6)

@@ -142,7 +142,7 @@ fun Profile(
                     Text(
                         text = "#${uiState.pokemonHeader?.id}",
                         style = MaterialTheme.typography.filterTitle,
-                        color = MaterialTheme.colors.primaryText.copy(alpha = 0.6f)
+                        color = MaterialTheme.colors.numberOverBackgroundColor
                     )
                     Text(
                         text = uiState.pokemonHeader?.name ?: "",

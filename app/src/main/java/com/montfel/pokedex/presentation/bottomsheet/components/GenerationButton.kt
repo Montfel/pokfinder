@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,8 +34,8 @@ fun GenerationButton(
         if (isEnabled) MaterialTheme.colors.secondaryText
         else MaterialTheme.colors.primaryVariantText
     val patternColor =
-        if (isEnabled) Color.White.copy(alpha = 0.1f)
-        else GrayE5
+        if (isEnabled) MaterialTheme.colors.primaryPattern
+        else MaterialTheme.colors.secondaryPattern
 
     Box(
         modifier = Modifier
@@ -43,6 +43,7 @@ fun GenerationButton(
             .clickable(onClick = onClick)
             .aspectRatio(1.25f)
             .background(backgroundColor)
+            .clipToBounds()
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_pokeball),

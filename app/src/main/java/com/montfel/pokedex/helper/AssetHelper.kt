@@ -148,7 +148,7 @@ class AssetHelper @Inject constructor() {
             else -> Asset(
                 typeColor = TypeDark,
                 backgroundColor = BackgroundDark,
-                icon = R.drawable.ic_dark
+                icon = R.drawable.ic_pokeball
             )
         }
     }

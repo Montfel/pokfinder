@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,7 +30,14 @@ fun PokemonCard(
     val assetHelper = LocalAssetHelper.current
     val mainType = pokemon.types.firstOrNull { type -> type.slot == 1 }
     val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
-    Box(modifier = Modifier.height(140.dp)) {
+
+    Spacer(modifier = Modifier.height(4.dp))
+
+    Box(
+        modifier = Modifier
+            .height(140.dp)
+            .clipToBounds()
+    ) {
         Card(
             shape = RoundedCornerShape(10.dp),
             backgroundColor = assetBackground.backgroundColor,
@@ -43,7 +51,7 @@ fun PokemonCard(
                 Text(
                     text = "#${pokemon.id}",
                     style = MaterialTheme.typography.pokemonNumber,
-                    color = MaterialTheme.colors.primaryText.copy(alpha = 0.6f)
+                    color = MaterialTheme.colors.numberOverBackgroundColor
                 )
                 Text(
                     text = pokemon.name,
@@ -64,8 +72,8 @@ fun PokemonCard(
             alpha = 0.3f,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .size(145.dp)
-                .offset(x = 16.dp, y = 16.dp)
+                .size(140.dp)
+                .offset(x = 15.dp, y = 15.dp)
         )
         Image(
             painter = painterResource(id = R.drawable.ic_6x3),
@@ -83,7 +91,7 @@ fun PokemonCard(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(end = 10.dp, bottom = 10.dp)
+                .padding(end = 10.dp)
                 .size(130.dp)
         )
     }

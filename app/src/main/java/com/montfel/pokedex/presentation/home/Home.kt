@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -46,7 +45,6 @@ fun Home(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
-    val gradientColors = listOf(GrayF5, Color.White) //TODO: change to MaterialTheme.colors
     var text by rememberSaveable { mutableStateOf("") }
     var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Filter) }
     val scope = rememberCoroutineScope()
@@ -108,23 +106,12 @@ fun Home(
             Image(
                 painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(GrayF5), //TODO: change to MaterialTheme.colors
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.pokeballIcon),
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .align(Alignment.TopCenter)
                     .offset(y = (-205).dp) //TODO: fix this
-            )
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .offset(y = (-205).dp) //TODO: fix this
-                    .background(
-                        brush = Brush.verticalGradient(gradientColors),
-                        alpha = 0.1f
-                    )
             )
             LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
                 item {
