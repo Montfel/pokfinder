@@ -97,10 +97,10 @@ fun Profile(
 
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+            TopAppBar(
+                backgroundColor = assetBackground.backgroundColor,
+                elevation = 0.dp,
+                modifier = Modifier.statusBarsPadding()
             ) {
                 IconButton(onClick = navController::popBackStack) {
                     Icon(
