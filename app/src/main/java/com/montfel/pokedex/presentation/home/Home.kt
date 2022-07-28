@@ -41,6 +41,7 @@ enum class BottomSheetFilter {
 @Composable
 fun Home(
     navController: NavController,
+    deviceWidth: Float,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -52,6 +53,7 @@ fun Home(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
+    val halfWidth = deviceWidth / 2
 
     LaunchedEffect(key1 = Unit) {
         viewModel.showAllPokemons()
@@ -111,7 +113,7 @@ fun Home(
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .align(Alignment.TopCenter)
-                    .offset(y = (-205).dp) //TODO: fix this
+                    .offset(y = (-halfWidth).dp)
             )
             LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
                 item {

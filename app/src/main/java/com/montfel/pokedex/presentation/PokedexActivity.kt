@@ -7,6 +7,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.window.layout.WindowMetricsCalculator
 import com.montfel.pokedex.helper.AssetHelper
 import com.montfel.pokedex.presentation.navigation.NavigationComponent
 import com.montfel.pokedex.presentation.theme.LocalAssetHelper
@@ -28,11 +29,21 @@ class PokedexActivity : ComponentActivity() {
                 LocalAssetHelper provides assetHelper
             ) {
                 PokedexTheme {
-                    NavigationComponent()
+                    NavigationComponent(
+                        getWidth()
+                    )
                 }
             }
         }
     }
+
+    private fun getWidth(): Float {
+        val metrics = WindowMetricsCalculator.getOrCreate()
+            .computeCurrentWindowMetrics(this)
+
+        return (metrics.bounds.width() / resources.displayMetrics.density)
+    }
+
 }
 
 @Preview(showBackground = true)

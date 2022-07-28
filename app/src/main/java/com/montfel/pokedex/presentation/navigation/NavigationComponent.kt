@@ -12,7 +12,7 @@ import com.montfel.pokedex.presentation.profile.Profile
 
 @ExperimentalMaterialApi
 @Composable
-fun NavigationComponent() {
+fun NavigationComponent(deviceWidth: Float) {
     val navController = rememberNavController()
 
     NavHost(
@@ -23,7 +23,10 @@ fun NavigationComponent() {
 //            Splash(navController = navController)
 //        }
         composable(Screen.Home.route) {
-            Home(navController = navController)
+            Home(
+                navController = navController,
+                deviceWidth = deviceWidth
+            )
         }
         composable(
             route = Screen.Profile.route,

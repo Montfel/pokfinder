@@ -65,6 +65,9 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose"
 
+    // Window
+    implementation 'androidx.window:window:1.0.0'
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.google.code.gson:gson:$retrofit"
