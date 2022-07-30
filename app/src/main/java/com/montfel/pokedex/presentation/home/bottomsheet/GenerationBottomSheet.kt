@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.bottomsheet
+package com.montfel.pokedex.presentation.home.bottomsheet
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.model.Generation
-import com.montfel.pokedex.presentation.bottomsheet.components.BottomSheetHeader
-import com.montfel.pokedex.presentation.bottomsheet.components.GenerationButton
+import com.montfel.pokedex.presentation.home.bottomsheet.components.BottomSheetHeader
+import com.montfel.pokedex.presentation.home.bottomsheet.components.GenerationButton
 
 @Composable
 fun GenerationBottomSheet(

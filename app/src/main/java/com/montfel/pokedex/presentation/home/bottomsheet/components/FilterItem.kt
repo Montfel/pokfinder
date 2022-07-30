@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.bottomsheet.components
+package com.montfel.pokedex.presentation.home.bottomsheet.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

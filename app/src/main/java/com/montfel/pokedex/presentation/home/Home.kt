@@ -7,31 +7,31 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.ExposedDropdownMenuDefaults.textFieldColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.bottomsheet.FilterBottomSheet
-import com.montfel.pokedex.presentation.bottomsheet.GenerationBottomSheet
-import com.montfel.pokedex.presentation.bottomsheet.SortBottomSheet
+import com.montfel.pokedex.presentation.home.bottomsheet.FilterBottomSheet
+import com.montfel.pokedex.presentation.home.bottomsheet.GenerationBottomSheet
+import com.montfel.pokedex.presentation.home.bottomsheet.SortBottomSheet
+import com.montfel.pokedex.presentation.home.components.HomeHeader
 import com.montfel.pokedex.presentation.home.components.PokemonCard
+import com.montfel.pokedex.presentation.home.components.SearchField
 import com.montfel.pokedex.presentation.home.components.TopBar
 import com.montfel.pokedex.presentation.navigation.Screen
-import com.montfel.pokedex.presentation.theme.*
+import com.montfel.pokedex.presentation.theme.LocalAssetHelper
+import com.montfel.pokedex.presentation.theme.fabBackground
+import com.montfel.pokedex.presentation.theme.fabContent
+import com.montfel.pokedex.presentation.theme.pokeballIcon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -133,19 +133,7 @@ fun Home(
                         }
                     )
 
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        style = MaterialTheme.typography.applicationTitle,
-                        color = MaterialTheme.colors.primaryText,
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = stringResource(id = R.string.subtitle),
-                        style = MaterialTheme.typography.description,
-                        color = MaterialTheme.colors.primaryVariantText,
-                    )
+                    HomeHeader()
 
                     SearchField(
                         text = text,
@@ -155,9 +143,10 @@ fun Home(
                         }
                     )
                 }
+
                 items(
                     items = uiState.pokemonList,
-                    key = { it.id }
+                    key = { it.id },
                 ) { pokemon ->
                     PokemonCard(pokemon = pokemon) {
                         navController.navigate(Screen.Profile.createRoute(pokemon.id))
@@ -165,63 +154,27 @@ fun Home(
                 }
             }
 
-            FloatingActionButton(
-                onClick = {
-                    scope.launch {
-                        lazyListState.scrollToItem(0)
-                    }
-                },
-                backgroundColor = MaterialTheme.colors.fabBackground,
-                contentColor = MaterialTheme.colors.fabContent,
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(16.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
-                    contentDescription = null
-                )
+            val showButton by remember { derivedStateOf { lazyListState.firstVisibleItemIndex > 0 } }
+
+            if (showButton) {
+                FloatingActionButton(
+                    onClick = {
+                        scope.launch {
+                            lazyListState.scrollToItem(0)
+                        }
+                    },
+                    backgroundColor = MaterialTheme.colors.fabBackground,
+                    contentColor = MaterialTheme.colors.fabContent,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(16.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowUp,
+                        contentDescription = null
+                    )
+                }
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-private fun SearchField(
-    text: String,
-    onType: (String) -> Unit,
-) {
-    TextField(
-        value = text,
-        onValueChange = { onType(it) },
-        maxLines = 1,
-        shape = RoundedCornerShape(10.dp),
-        textStyle = MaterialTheme.typography.description,
-        leadingIcon = {
-            Image(
-                painter = painterResource(id = R.drawable.ic_search),
-                contentDescription = null,
-                modifier = Modifier.size(20.dp),
-            )
-        },
-        colors = textFieldColors(
-            backgroundColor = MaterialTheme.colors.secondaryInput,
-            textColor = MaterialTheme.colors.primaryText,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colors.primaryInput,
-        ),
-        placeholder = {
-            Text(
-                text = stringResource(id = R.string.placeholder_textfield),
-                style = MaterialTheme.typography.description,
-                color = MaterialTheme.colors.primaryVariantText
-            )
-        },
-        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 24.dp)
-    )
 }

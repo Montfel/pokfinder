@@ -16,7 +16,7 @@ import com.montfel.pokedex.domain.model.PokemonHome
 import com.montfel.pokedex.domain.usecase.HomeUseCases
 import com.montfel.pokedex.helper.Asset
 import com.montfel.pokedex.helper.AssetHelper
-import com.montfel.pokedex.presentation.bottomsheet.SortOptions
+import com.montfel.pokedex.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
