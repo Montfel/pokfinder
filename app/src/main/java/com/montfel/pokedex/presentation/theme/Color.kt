@@ -39,6 +39,12 @@ val Colors.secondaryPattern: Color
 val Colors.topBarIcon: Color
     get() = if (isLight) Gray12 else White87
 
+val Colors.fabBackground: Color
+    get() = if (isLight) Color.White else Gray12
+
+val Colors.fabContent: Color
+    get() = if (isLight) Gray12 else Color.White
+
 private val Gray12 = Color(0xFF121212)
 val Gray17 = Color(0xFF17171B)
 private val Gray20 = Color(0xFF202020)

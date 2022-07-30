@@ -5,10 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.ExposedDropdownMenuDefaults.textFieldColors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -54,6 +57,7 @@ fun Home(
         skipHalfExpanded = true
     )
     val halfWidth = deviceWidth / 2
+    val lazyListState = rememberLazyListState()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.showAllPokemons()
@@ -115,7 +119,10 @@ fun Home(
                     .align(Alignment.TopCenter)
                     .offset(y = (-halfWidth).dp)
             )
-            LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
+            LazyColumn(
+                state = lazyListState,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
                 item {
                     TopBar(
                         onClick = {
@@ -125,17 +132,21 @@ fun Home(
                             }
                         }
                     )
+
                     Text(
                         text = stringResource(id = R.string.app_name),
                         style = MaterialTheme.typography.applicationTitle,
                         color = MaterialTheme.colors.primaryText,
                     )
+
                     Spacer(modifier = Modifier.height(10.dp))
+
                     Text(
                         text = stringResource(id = R.string.subtitle),
                         style = MaterialTheme.typography.description,
                         color = MaterialTheme.colors.primaryVariantText,
                     )
+
                     SearchField(
                         text = text,
                         onType = {
@@ -152,6 +163,24 @@ fun Home(
                         navController.navigate(Screen.Profile.createRoute(pokemon.id))
                     }
                 }
+            }
+
+            FloatingActionButton(
+                onClick = {
+                    scope.launch {
+                        lazyListState.scrollToItem(0)
+                    }
+                },
+                backgroundColor = MaterialTheme.colors.fabBackground,
+                contentColor = MaterialTheme.colors.fabContent,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowUp,
+                    contentDescription = null
+                )
             }
         }
     }
