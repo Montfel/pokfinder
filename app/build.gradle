@@ -2,10 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id("com.apollographql.apollo3").version('3.4.0')
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
-
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdk 32
@@ -79,6 +80,11 @@ dependencies {
 
     // Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Dagger
     implementation "com.google.dagger:hilt-android:2.43.1"
