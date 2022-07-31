@@ -5,6 +5,7 @@ buildscript {
         compose_compiler = '1.2.0-rc02'
         retrofit = '2.9.0'
         okhttp = '4.10.0'
+        accompanist = '0.25.0'
     }
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
