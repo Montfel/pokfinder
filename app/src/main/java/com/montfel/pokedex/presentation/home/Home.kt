@@ -56,9 +56,7 @@ fun Home(
     val halfWidth = deviceWidth / 2
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.showAllPokemons()
         viewModel.saveAllTypes(assetHelper)
-        viewModel.saveAllGenerations()
     }
 
     ModalBottomSheetLayout(

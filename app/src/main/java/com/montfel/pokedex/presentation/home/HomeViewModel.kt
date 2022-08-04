@@ -12,6 +12,7 @@ import com.montfel.pokedex.helper.AssetHelper
 import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -37,34 +38,32 @@ class HomeViewModel @Inject constructor(
 
     private var pokemons = emptyList<PokemonHome>()
 
-    fun showAllPokemons() {
+    init {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getPokemonList()
+            val pokemonListDeferred = async { repository.getPokemonList() }
+            val generationListDeferred = async { repository.getGenerationList() }
 
-            if (response is ApiResponse.SuccessResult) {
-                pokemons = response.data
-                _uiState.update { it.copy(pokemonList = response.data) }
+            val pokemonList = pokemonListDeferred.await()
+            val generationList = generationListDeferred.await()
+
+            if (pokemonList is ApiResponse.SuccessResult) {
+                pokemons = pokemonList.data
+                _uiState.update { it.copy(pokemonList = pokemonList.data) }
+            }
+
+            if (generationList is ApiResponse.SuccessResult) {
+                _uiState.update { it.copy(generationList = generationList.data) }
             }
         }
     }
 
-    suspend fun saveAllTypes(assetHelper: AssetHelper) {
+    fun saveAllTypes(assetHelper: AssetHelper) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getTypeList()
 
             if (response is ApiResponse.SuccessResult) {
                 val assetList = response.data.map { assetHelper.getAsset(it.name) }
                 _uiState.update { it.copy(assetList = assetList) }
-            }
-        }
-    }
-
-    fun saveAllGenerations() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getGenerationList()
-
-            if (response is ApiResponse.SuccessResult) {
-                _uiState.update { it.copy(generationList = response.data) }
             }
         }
     }
