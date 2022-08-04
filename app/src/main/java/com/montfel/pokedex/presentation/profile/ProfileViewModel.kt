@@ -7,7 +7,7 @@ import com.montfel.pokedex.ProfileQuery
 import com.montfel.pokedex.data.datasource.apolloClient
 import com.montfel.pokedex.data.dto.*
 import com.montfel.pokedex.domain.model.Pokemon
-import com.montfel.pokedex.domain.repository.PokemonRepository
+import com.montfel.pokedex.domain.profile.repository.ProfileRepository
 import com.montfel.pokedex.helper.ApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +26,7 @@ data class ProfileUiState(
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val pokemonRepository: PokemonRepository
+    private val repository: ProfileRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProfileUiState())
@@ -34,7 +34,7 @@ class ProfileViewModel @Inject constructor(
 
     fun getPokemonHeader(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = pokemonRepository.getPokemon(id)
+            val response = repository.getPokemon(id)
 
             if (response is ApiResponse.SuccessResult) {
                 _uiState.update {

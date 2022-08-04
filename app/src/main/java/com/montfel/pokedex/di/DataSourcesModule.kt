@@ -1,6 +1,8 @@
 package com.montfel.pokedex.di
 
-import com.montfel.pokedex.data.datasource.PokemonDataSource
+import com.apollographql.apollo3.ApolloClient
+import com.montfel.pokedex.data.profile.datasource.ProfileDataSource
+import com.montfel.pokedex.data.home.datasource.HomeDataSource
 import com.montfel.pokedex.domain.usecase.HomeUseCases
 import com.montfel.pokedex.domain.usecase.SortPokemonsUseCase
 import dagger.Module
@@ -16,14 +18,15 @@ internal object DataSourcesModule {
 
     @Singleton
     @Provides
-    fun providesPokemonDataSource(retrofit: Retrofit): PokemonDataSource =
-        retrofit.create(PokemonDataSource::class.java)
+    fun providesPokemonDataSource(retrofit: Retrofit): ProfileDataSource =
+        retrofit.create(ProfileDataSource::class.java)
+
+    @Singleton
+    @Provides
+    fun providesPokemonGraphqlDataSource(apolloClient: ApolloClient) =
+        HomeDataSource(apolloClient)
 
     @Provides
     @Singleton
-    fun provideHomeUseCases() : HomeUseCases {
-        return HomeUseCases(
-            sortPokemonsUseCase = SortPokemonsUseCase()
-        )
-    }
+    fun providesHomeUseCases() = HomeUseCases(sortPokemonsUseCase = SortPokemonsUseCase())
 }
