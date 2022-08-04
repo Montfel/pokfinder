@@ -1,4 +1,4 @@
-package com.montfel.pokedex.domain.usecase
+package com.montfel.pokedex.domain.home.usecase
 
 data class HomeUseCases(
     val sortPokemonsUseCase: SortPokemonsUseCase

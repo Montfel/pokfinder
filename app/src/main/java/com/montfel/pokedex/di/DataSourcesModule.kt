@@ -3,8 +3,8 @@ package com.montfel.pokedex.di
 import com.apollographql.apollo3.ApolloClient
 import com.montfel.pokedex.data.profile.datasource.ProfileDataSource
 import com.montfel.pokedex.data.home.datasource.HomeDataSource
-import com.montfel.pokedex.domain.usecase.HomeUseCases
-import com.montfel.pokedex.domain.usecase.SortPokemonsUseCase
+import com.montfel.pokedex.domain.home.usecase.HomeUseCases
+import com.montfel.pokedex.domain.home.usecase.SortPokemonsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

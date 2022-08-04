@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.montfel.pokedex.domain.home.repository.HomeRepository
 import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.PokemonHome
-import com.montfel.pokedex.domain.usecase.HomeUseCases
+import com.montfel.pokedex.domain.home.usecase.HomeUseCases
 import com.montfel.pokedex.helper.ApiResponse
 import com.montfel.pokedex.helper.Asset
 import com.montfel.pokedex.helper.AssetHelper
