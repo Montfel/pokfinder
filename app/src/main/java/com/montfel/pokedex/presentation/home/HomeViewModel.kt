@@ -8,7 +8,7 @@ import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.PokemonHome
 import com.montfel.pokedex.domain.model.Type
 import com.montfel.pokedex.helper.ApiResponse
-import com.montfel.pokedex.presentation.bottomsheet.SortOptions
+import com.montfel.pokedex.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

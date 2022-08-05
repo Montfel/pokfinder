@@ -13,14 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokedex.helper.Asset
+import com.montfel.pokedex.helper.AssetFromType
 import com.montfel.pokedex.presentation.theme.filterTitle
 import com.montfel.pokedex.presentation.theme.primaryText
 
 @Composable
 fun FilterSection(
     @StringRes title: Int,
-    items: List<Asset>,
+    items: List<AssetFromType>,
     itemsSelected: MutableList<Int>,
     onFilterSelected: (Int) -> Unit
 ) {
