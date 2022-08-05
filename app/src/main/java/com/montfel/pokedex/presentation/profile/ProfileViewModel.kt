@@ -6,6 +6,7 @@ import com.apollographql.apollo3.exception.ApolloException
 import com.montfel.pokedex.ProfileQuery
 import com.montfel.pokedex.data.datasource.apolloClient
 import com.montfel.pokedex.data.dto.*
+import com.montfel.pokedex.data.profile.dto.*
 import com.montfel.pokedex.domain.model.Pokemon
 import com.montfel.pokedex.domain.profile.repository.ProfileRepository
 import com.montfel.pokedex.helper.ApiResponse

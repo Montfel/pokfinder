@@ -1,6 +1,6 @@
 package com.montfel.pokedex.domain.model
 
-import com.montfel.pokedex.data.dto.*
+import com.montfel.pokedex.data.profile.dto.*
 
 data class Pokemon(
     val id: Int,

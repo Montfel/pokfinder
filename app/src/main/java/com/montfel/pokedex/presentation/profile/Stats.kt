@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.data.dto.StatsDto
+import com.montfel.pokedex.data.profile.dto.StatsDto
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable

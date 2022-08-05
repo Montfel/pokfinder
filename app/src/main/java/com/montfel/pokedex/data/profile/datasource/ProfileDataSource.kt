@@ -1,6 +1,6 @@
 package com.montfel.pokedex.data.profile.datasource
 
-import com.montfel.pokedex.data.dto.rest.PokemonRestDto
+import com.montfel.pokedex.data.profile.dto.rest.PokemonRestDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 

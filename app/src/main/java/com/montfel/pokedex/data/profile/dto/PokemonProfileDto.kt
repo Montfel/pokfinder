@@ -1,4 +1,4 @@
-package com.montfel.pokedex.data.dto
+package com.montfel.pokedex.data.profile.dto
 
 import com.montfel.pokedex.helper.DtoMapper
 import com.montfel.pokedex.domain.model.Pokemon
