@@ -1,4 +1,4 @@
-package com.montfel.pokedex.data.datasource
+package com.montfel.pokedex.data
 
 import com.apollographql.apollo3.ApolloClient
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo3.exception.ApolloException
 import com.montfel.pokedex.ProfileQuery
-import com.montfel.pokedex.data.datasource.apolloClient
+import com.montfel.pokedex.data.apolloClient
 import com.montfel.pokedex.data.dto.*
 import com.montfel.pokedex.data.profile.dto.*
 import com.montfel.pokedex.domain.model.Pokemon
