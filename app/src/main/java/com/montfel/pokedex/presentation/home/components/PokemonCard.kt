@@ -29,18 +29,17 @@ fun PokemonCard(
 ) {
     val assetHelper = LocalAssetHelper.current
     val mainType = pokemon.types.firstOrNull { type -> type.slot == 1 }
-    val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
-
-    Spacer(modifier = Modifier.height(4.dp))
+    val assetFromType = assetHelper.getAsset(mainType?.type?.name ?: "")
 
     Box(
         modifier = Modifier
+            .padding(top = 4.dp)
             .height(140.dp)
             .clipToBounds()
     ) {
         Card(
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = assetBackground.backgroundColor,
+            backgroundColor = assetFromType.backgroundColor,
             modifier = Modifier
                 .clickable(onClick = onClick)
                 .fillMaxWidth()

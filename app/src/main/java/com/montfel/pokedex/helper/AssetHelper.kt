@@ -7,7 +7,7 @@ import com.montfel.pokedex.presentation.theme.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-data class Asset(
+data class AssetFromType(
     val typeColor: Color,
     val backgroundColor: Color,
     @DrawableRes val icon: Int
@@ -16,73 +16,73 @@ data class Asset(
 @Singleton
 class AssetHelper @Inject constructor() {
 
-    fun getAsset(type: String): Asset {
+    fun getAsset(type: String): AssetFromType {
         return when (type) {
             "Bug" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeBug,
                     backgroundColor = BackgroundBug,
                     icon = R.drawable.ic_bug
                 )
             }
             "Dark" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeDark,
                     backgroundColor = BackgroundDark,
                     icon = R.drawable.ic_dark
                 )
             }
             "Dragon" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeDragon,
                     backgroundColor = BackgroundDragon,
                     icon = R.drawable.ic_dragon
                 )
             }
             "Electric" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeElectric,
                     backgroundColor = BackgroundElectric,
                     icon = R.drawable.ic_electric
                 )
             }
             "Fairy" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeFairy,
                     backgroundColor = BackgroundFairy,
                     icon = R.drawable.ic_fairy
                 )
             }
             "Fighting" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeFighting,
                     backgroundColor = BackgroundFighting,
                     icon = R.drawable.ic_fighting
                 )
             }
             "Fire" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeFire,
                     backgroundColor = BackgroundFire,
                     icon = R.drawable.ic_fire
                 )
             }
             "Flying" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeFlying,
                     backgroundColor = BackgroundFlying,
                     icon = R.drawable.ic_flying
                 )
             }
             "Ghost" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeGhost,
                     backgroundColor = BackgroundGhost,
                     icon = R.drawable.ic_ghost
                 )
             }
             "Grass" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeGrass,
                     backgroundColor = BackgroundGrass,
                     icon = R.drawable.ic_grass
@@ -90,62 +90,62 @@ class AssetHelper @Inject constructor() {
 
             }
             "Ground" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeGround,
                     backgroundColor = BackgroundGround,
                     icon = R.drawable.ic_ground
                 )
             }
             "Ice" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeIce,
                     backgroundColor = BackgroundIce,
                     icon = R.drawable.ic_ice
                 )
             }
             "Normal" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeNormal,
                     backgroundColor = BackgroundNormal,
                     icon = R.drawable.ic_normal
                 )
             }
             "Poison" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypePoison,
                     backgroundColor = BackgroundPoison,
                     icon = R.drawable.ic_poison
                 )
             }
             "Psychic" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypePsychic,
                     backgroundColor = BackgroundPsychic,
                     icon = R.drawable.ic_psychic
                 )
             }
             "Rock" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeRock,
                     backgroundColor = BackgroundRock,
                     icon = R.drawable.ic_rock
                 )
             }
             "Steel" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeSteel,
                     backgroundColor = BackgroundSteel,
                     icon = R.drawable.ic_steel
                 )
             }
             "Water" -> {
-                Asset(
+                AssetFromType(
                     typeColor = TypeWater,
                     backgroundColor = BackgroundWater,
                     icon = R.drawable.ic_water
                 )
             }
-            else -> Asset(
+            else -> AssetFromType(
                 typeColor = TypeDark,
                 backgroundColor = BackgroundDark,
                 icon = R.drawable.ic_pokeball

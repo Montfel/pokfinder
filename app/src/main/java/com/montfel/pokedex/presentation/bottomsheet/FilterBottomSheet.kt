@@ -19,14 +19,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.helper.Asset
+import com.montfel.pokedex.helper.AssetFromType
 import com.montfel.pokedex.presentation.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokedex.presentation.bottomsheet.components.FilterItem
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun FilterBottomSheet(
-    assetList: List<Asset>,
+    assetFromTypeList: List<AssetFromType>,
     onFilterApplied: () -> Unit
 ) {
     val typesSelected = remember { mutableStateListOf<Int>() }
@@ -35,17 +35,17 @@ fun FilterBottomSheet(
     val weightsSelected = remember { mutableStateListOf<Int>() }
 
     val heightList = listOf(
-        Asset(
+        AssetFromType(
             typeColor = HeightShort,
             icon = R.drawable.ic_resource_short,
             backgroundColor = Color.White
         ),
-        Asset(
+        AssetFromType(
             typeColor = HeightMedium,
             icon = R.drawable.ic_medium,
             backgroundColor = Color.White
         ),
-        Asset(
+        AssetFromType(
             typeColor = HeightTall,
             icon = R.drawable.ic_tall,
             backgroundColor = Color.White
@@ -53,17 +53,17 @@ fun FilterBottomSheet(
     )
 
     val weightList = listOf(
-        Asset(
+        AssetFromType(
             typeColor = WeightLight,
             icon = R.drawable.ic_light,
             backgroundColor = Color.White
         ),
-        Asset(
+        AssetFromType(
             typeColor = WeightNormal,
             icon = R.drawable.ic_normal,
             backgroundColor = Color.White
         ),
-        Asset(
+        AssetFromType(
             typeColor = WeightHeavy,
             icon = R.drawable.ic_heavy,
             backgroundColor = Color.White
@@ -85,7 +85,7 @@ fun FilterBottomSheet(
 
         FilterSection(
             title = R.string.types,
-            items = assetList,
+            items = assetFromTypeList,
             itemsSelected = typesSelected,
             onFilterSelected = {
                 if (typesSelected.contains(it)) {
@@ -98,7 +98,7 @@ fun FilterBottomSheet(
 
         FilterSection(
             title = R.string.weakeness,
-            items = assetList,
+            items = assetFromTypeList,
             itemsSelected = weaknessesSelected,
             onFilterSelected = {
                 if (weaknessesSelected.contains(it)) {
@@ -182,7 +182,7 @@ fun FilterBottomSheet(
 @Composable
 fun FilterSection(
     @StringRes title: Int,
-    items: List<Asset>,
+    items: List<AssetFromType>,
     itemsSelected: MutableList<Int>,
     onFilterSelected: (Int) -> Unit
 ) {

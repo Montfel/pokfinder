@@ -55,10 +55,6 @@ fun Home(
     )
     val halfWidth = deviceWidth / 2
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.saveAllTypes(assetHelper)
-    }
-
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetContent = {
@@ -85,7 +81,7 @@ fun Home(
                     }
                 )
                 BottomSheetFilter.Filter -> FilterBottomSheet(
-                    assetList = uiState.assetList,
+                    assetFromTypeList = uiState.typeList.map { assetHelper.getAsset(it.name) },
                     onFilterApplied = {
 //                        viewModel.filterByAsset(it)
                         scope.launch(Dispatchers.Main) {

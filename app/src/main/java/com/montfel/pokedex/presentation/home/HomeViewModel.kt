@@ -3,12 +3,11 @@ package com.montfel.pokedex.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.montfel.pokedex.domain.home.repository.HomeRepository
+import com.montfel.pokedex.domain.home.usecase.HomeUseCases
 import com.montfel.pokedex.domain.model.Generation
 import com.montfel.pokedex.domain.model.PokemonHome
-import com.montfel.pokedex.domain.home.usecase.HomeUseCases
+import com.montfel.pokedex.domain.model.Type
 import com.montfel.pokedex.helper.ApiResponse
-import com.montfel.pokedex.helper.Asset
-import com.montfel.pokedex.helper.AssetHelper
 import com.montfel.pokedex.presentation.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +20,7 @@ import javax.inject.Inject
 
 data class HomeUiState(
     val pokemonList: List<PokemonHome> = emptyList(),
-    val assetList: List<Asset> = emptyList(),
+    val typeList: List<Type> = emptyList(),
     val generationList: List<Generation> = emptyList(),
     val generationSelected: String = "",
     val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
@@ -42,28 +41,21 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val pokemonListDeferred = async { repository.getPokemonList() }
             val generationListDeferred = async { repository.getGenerationList() }
+            val typeListDeferred = async { repository.getTypeList() }
 
             val pokemonList = pokemonListDeferred.await()
             val generationList = generationListDeferred.await()
+            val typeList = typeListDeferred.await()
 
             if (pokemonList is ApiResponse.SuccessResult) {
                 pokemons = pokemonList.data
                 _uiState.update { it.copy(pokemonList = pokemonList.data) }
             }
-
             if (generationList is ApiResponse.SuccessResult) {
                 _uiState.update { it.copy(generationList = generationList.data) }
             }
-        }
-    }
-
-    fun saveAllTypes(assetHelper: AssetHelper) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getTypeList()
-
-            if (response is ApiResponse.SuccessResult) {
-                val assetList = response.data.map { assetHelper.getAsset(it.name) }
-                _uiState.update { it.copy(assetList = assetList) }
+            if (typeList is ApiResponse.SuccessResult) {
+                _uiState.update { it.copy(typeList = typeList.data) }
             }
         }
     }

@@ -37,11 +37,7 @@ class ProfileViewModel @Inject constructor(
             val response = repository.getPokemon(id)
 
             if (response is ApiResponse.SuccessResult) {
-                _uiState.update {
-                    it.copy(
-                        pokemonHeader = response.data
-                    )
-                }
+                _uiState.update { it.copy(pokemonHeader = response.data) }
             }
         }
     }
