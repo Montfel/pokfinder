@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "779841327164",
+    "project_id": "pokedex-3ccb0",
+    "storage_bucket": "pokedex-3ccb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779841327164:android:506e14eddc7bbedf00f339",
+        "android_client_info": {
+          "package_name": "com.montfel.pokedex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779841327164-forj2bp9hn267qrqhhejpi675fvngi92.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.montfel.pokedex",
+            "certificate_hash": "e2ca7be2758a19c3535e82c394ef143a20237174"
+          }
+        },
+        {
+          "client_id": "779841327164-if94c5g3oiahbam2rdtmhq0ps13kf7cj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA47HOz-wi186Is1sj2hDZ_4sduiPRhGIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779841327164-if94c5g3oiahbam2rdtmhq0ps13kf7cj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.bottomsheet
+package com.montfel.pokedex.presentation.home.bottomsheet
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.bottomsheet.components.BottomSheetHeader
-import com.montfel.pokedex.presentation.bottomsheet.components.SortButton
+import com.montfel.pokedex.presentation.home.bottomsheet.components.BottomSheetHeader
+import com.montfel.pokedex.presentation.home.bottomsheet.components.SortButton
 
 @Composable
 fun SortBottomSheet(

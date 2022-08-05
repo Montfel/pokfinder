@@ -7,7 +7,6 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.montfel.pokedex.helper.AssetHelper
 
@@ -34,9 +33,9 @@ fun PokedexTheme(
     val systemUiController = rememberSystemUiController()
 
     SideEffect {
-        systemUiController.setStatusBarColor(
-            color = Color.Transparent,
-            darkIcons = true
+        systemUiController.setSystemBarsColor(
+            color = colors.systemBar,
+            darkIcons = !darkTheme
         )
     }
 
