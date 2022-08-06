@@ -84,7 +84,7 @@ fun Profile(
 
     val breeding = mapOf(
         R.string.gender to gender,
-        R.string.egg_groups to "${uiState.pokemonSpecies?.eggGroups?.joinToString() { it.name }}",
+        R.string.egg_groups to "${uiState.pokemonSpecies?.eggGroups?.joinToString { it.name }}",
         R.string.egg_cycles to "${uiState.pokemonSpecies?.hatchCounter} (${
             (uiState.pokemonSpecies?.hatchCounter?.plus(
                 1
