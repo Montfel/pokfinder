@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.profile
+package com.montfel.pokedex.presentation.profile.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

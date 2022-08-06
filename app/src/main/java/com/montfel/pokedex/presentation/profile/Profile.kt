@@ -24,6 +24,9 @@ import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.components.TypeCard
+import com.montfel.pokedex.presentation.profile.components.About
+import com.montfel.pokedex.presentation.profile.components.Evolution
+import com.montfel.pokedex.presentation.profile.components.Stats
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable

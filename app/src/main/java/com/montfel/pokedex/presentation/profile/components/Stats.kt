@@ -1,4 +1,4 @@
-package com.montfel.pokedex.presentation.profile
+package com.montfel.pokedex.presentation.profile.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
