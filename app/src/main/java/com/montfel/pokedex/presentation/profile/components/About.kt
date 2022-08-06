@@ -19,8 +19,8 @@ fun About(
     training: Map<Int, String>,
     breeding: Map<Int, String>,
     typeColor: Color,
-    strength: List<String>? = emptyList(),
-    weakness: List<String>? = emptyList(),
+//    strength: List<String>? = emptyList(),
+//    weakness: List<String>? = emptyList(),
 ) {
     val assetHelper = LocalAssetHelper.current
     Spacer(modifier = Modifier.height(40.dp))
@@ -58,10 +58,10 @@ fun About(
             color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
-        weakness?.forEach {
-            val asset = assetHelper.getAsset(it)
-            TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
-        }
+//        weakness?.forEach {
+//            val asset = assetHelper.getAsset(it)
+//            TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
+//        }
     }
 
     Spacer(modifier = Modifier.height(16.dp))
@@ -76,10 +76,10 @@ fun About(
             color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
-        strength?.forEach {
-            val asset = assetHelper.getAsset(it)
-            TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
-        }
+//        strength?.forEach {
+//            val asset = assetHelper.getAsset(it)
+//            TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
+//        }
     }
 
     Spacer(modifier = Modifier.height(20.dp))

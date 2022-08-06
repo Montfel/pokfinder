@@ -1,8 +1,8 @@
-package com.montfel.pokedex.domain.model
+package com.montfel.pokedex.domain.home.model
 
 data class PokemonHome(
     val id: Int,
     val name: String,
-    val types: List<Types>,
+    val types: List<TypesHome>,
     val image: String? = null
 )

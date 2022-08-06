@@ -25,7 +25,6 @@ import coil.compose.SubcomposeAsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.profile.components.About
-import com.montfel.pokedex.presentation.profile.components.Evolution
 import com.montfel.pokedex.presentation.profile.components.Stats
 import com.montfel.pokedex.presentation.theme.*
 
@@ -38,64 +37,63 @@ fun Profile(
     val language = Locale.current.language
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
-    val mainType = uiState.pokemon?.types?.firstOrNull { type -> type.slot == 1 }
+    val mainType = uiState.pokemonProfile?.types?.firstOrNull { type -> type.slot == 1 }
     val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
-    val strength = mainType?.type?.typeEfficacies
-        ?.filter { it.damageFactor == 200 }
-        ?.map { it.name }
-    val weakness = mainType?.type?.typeEfficacies
-        ?.filter { it.damageFactor == 0 }
-        ?.map { it.name }
+//    val strength = mainType?.type2?.typeEfficacies
+//        ?.filter { it.damageFactor == 200 }
+//        ?.map { it.name }
+//    val weakness = mainType?.type2?.typeEfficacies
+//        ?.filter { it.damageFactor == 0 }
+//        ?.map { it.name }
     var abilities = ""
-    uiState.pokemon?.abilities?.forEach {
+    uiState.pokemonProfile?.abilities?.forEach {
         abilities += if (it.isHidden) {
-            "\n${it.name} (hidden ability)"
+            "\n${it.ability.name} (hidden ability)"
         } else {
-            "${it.slot}. ${it.name}"
+            "${it.slot}. ${it.ability.name}"
         }
     }
-    val gender = uiState.pokemon?.genderRate?.let {
+    val gender = uiState.pokemonSpecies?.genderRate?.let {
         if (it == -1) "Genderless"
         else {
-            "♂ ${(8 - it.toFloat()).div(8).times(100)}%, " +
+            "♂ ${(8 - it.toFloat()).div(8).times(100)}% | " +
                     "♀ ${it.toFloat().div(8).times(100)}% "
 
         }
     } ?: "Genderless"
     val data = mapOf(
         R.string.species to "${
-            uiState.pokemon?.genera
-                ?.firstOrNull { lang -> lang.language.name == language }?.name
-                ?: uiState.pokemon?.genera?.first { lang -> lang.language.name == "en" }?.name
+            uiState.pokemonSpecies?.genera
+                ?.firstOrNull { lang -> lang.language == language }?.name
+                ?: uiState.pokemonSpecies?.genera?.first { lang -> lang.language == "en" }?.name
         }",
-        R.string.height to "${uiState.pokemon?.height}m",
-        R.string.weight to "${uiState.pokemon?.weight}kg",
+        R.string.height to "${uiState.pokemonProfile?.height}m",
+        R.string.weight to "${uiState.pokemonProfile?.weight}kg",
         R.string.abilities to abilities,
     )
 
     val training = mapOf(
         R.string.ev_yield to "a",
-        R.string.catch_rate to "${uiState.pokemon?.captureRate}",
-        R.string.base_friendship to "${uiState.pokemon?.baseHappiness}",
-        R.string.base_exp to uiState.pokemon?.baseExp.toString(),
-        R.string.growth_rate to "${uiState.pokemon?.growthRate}"
+        R.string.catch_rate to "${uiState.pokemonSpecies?.captureRate}",
+        R.string.base_friendship to "${uiState.pokemonSpecies?.baseHappiness}",
+        R.string.base_exp to uiState.pokemonProfile?.baseExp.toString(),
+        R.string.growth_rate to "${uiState.pokemonSpecies?.growthRate}"
     )
 
     val breeding = mapOf(
         R.string.gender to gender,
-        R.string.egg_groups to "${uiState.pokemon?.eggGroups?.joinToString()}",
-        R.string.egg_cycles to "${uiState.pokemon?.hatchCounter} (${
-            (uiState.pokemon?.hatchCounter?.plus(
+        R.string.egg_groups to "${uiState.pokemonSpecies?.eggGroups?.joinToString() { it.name }}",
+        R.string.egg_cycles to "${uiState.pokemonSpecies?.hatchCounter} (${
+            (uiState.pokemonSpecies?.hatchCounter?.plus(
                 1
             ))?.times(255)
         } steps)",
     )
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.getProfile(id)
-        viewModel.getPokemonHeader(id)
+        viewModel.getPokemonProfile(id)
     }
 
     Scaffold(
@@ -135,7 +133,7 @@ fun Profile(
                         modifier = Modifier.size(125.dp)
                     )
                     SubcomposeAsyncImage(
-                        model = uiState.pokemonHeader?.image,
+                        model = uiState.pokemonProfile?.image,
                         contentDescription = null,
                         loading = { CircularProgressIndicator(color = assetBackground.typeColor) },
                         modifier = Modifier.size(125.dp)
@@ -143,16 +141,16 @@ fun Profile(
                 }
                 Column {
                     Text(
-                        text = "#${uiState.pokemonHeader?.id}",
+                        text = "#${uiState.pokemonProfile?.id}",
                         style = MaterialTheme.typography.filterTitle,
                         color = MaterialTheme.colors.numberOverBackgroundColor
                     )
                     Text(
-                        text = uiState.pokemonHeader?.name ?: "",
+                        text = uiState.pokemonProfile?.name ?: "",
                         style = MaterialTheme.typography.applicationTitle,
                         color = MaterialTheme.colors.secondaryText,
                     )
-                    uiState.pokemonHeader?.types?.let { types ->
+                    uiState.pokemonProfile?.types?.let { types ->
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                             types.forEach { type ->
                                 TypeCard(typeName = type.type.name)
@@ -194,34 +192,34 @@ fun Profile(
                 when (selectedTabIndex) {
                     0 -> {
                         About(
-                            flavorText = uiState.pokemon?.flavorTexts
-                                ?.filter { lang -> lang.language.name == language }
+                            flavorText = uiState.pokemonSpecies?.flavorTexts
+                                ?.filter { lang -> lang.language == language }
                                 ?.takeIf { list -> list.isNotEmpty() }
                                 ?.random()?.flavorText
-                                ?: uiState.pokemon?.flavorTexts
-                                    ?.filter { lang -> lang.language.name == "en" }
+                                ?: uiState.pokemonSpecies?.flavorTexts
+                                    ?.filter { lang -> lang.language == "en" }
                                     ?.random()?.flavorText ?: "",
                             data = data,
                             training = training,
                             breeding = breeding,
                             typeColor = assetBackground.typeColor,
-                            strength = strength,
-                            weakness = weakness
+//                            strength = strength,
+//                            weakness = weakness
                         )
                     }
                     1 -> {
                         Stats(
-                            stats = uiState.pokemon?.stats ?: emptyList(),
+                            stats = uiState.pokemonProfile?.stats ?: emptyList(),
                             typeColor = assetBackground.typeColor,
-                            pokemonName = uiState.pokemon?.name ?: ""
+                            pokemonName = uiState.pokemonProfile?.name ?: ""
                         )
                     }
-                    2 -> {
-                        Evolution(
-                            typeColor = assetBackground.typeColor,
-                            evolutionChain = uiState.pokemon?.evolutionChain ?: emptyList()
-                        )
-                    }
+//                    2 -> {
+//                        Evolution(
+//                            typeColor = assetBackground.typeColor,
+//                            evolutionChain = uiState.pokemonSpecies?.evolutionChain ?: emptyList()
+//                        )
+//                    }
                 }
             }
         }

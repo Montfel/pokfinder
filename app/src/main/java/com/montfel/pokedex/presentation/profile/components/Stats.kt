@@ -15,12 +15,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.data.profile.dto.StatsDto
+import com.montfel.pokedex.domain.profile.model.Stats
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun Stats(
-    stats: List<StatsDto>,
+    stats: List<Stats>,
     typeColor: Color,
     pokemonName: String
 ) {
@@ -43,7 +43,7 @@ fun Stats(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = it.name ?: "",
+                text = it.stat.name,
                 style = MaterialTheme.typography.pokemonType,
                 color = MaterialTheme.colors.primaryText,
                 modifier = Modifier.width(50.dp)
