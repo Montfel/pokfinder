@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.data.profile.dto.SpeciesDto
 import com.montfel.pokedex.presentation.theme.*
@@ -68,8 +69,8 @@ fun PokemonEvolution(specie: SpeciesDto) {
                 modifier = Modifier.size(100.dp),
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.pokeballIcon)
             )
-            Image(
-                painter = painterResource(id = R.drawable.bulba),
+            AsyncImage(
+                model = null,
                 contentDescription = null,
                 modifier = Modifier
                     .size(75.dp)
