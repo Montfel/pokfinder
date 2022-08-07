@@ -1,6 +1,5 @@
 package com.montfel.pokedex.domain.profile.model
 
 data class EggGroup(
-    val name: String,
-    val url: String
+    val name: String
 )

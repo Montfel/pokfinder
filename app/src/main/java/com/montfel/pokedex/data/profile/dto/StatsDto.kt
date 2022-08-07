@@ -20,8 +20,8 @@ data class StatsDto(
         baseStat = baseStat,
         effort = effort,
         stat = stat.toDomain(),
-        min = if (stat.toDomain().name == "hp") baseStat * 2 + 110 else baseStat.times(2),
-        max = if (stat.toDomain().name == "hp") baseStat * 2 + 204
+        min = if (stat.toDomain().name == "HP") baseStat * 2 + 110 else baseStat.times(2),
+        max = if (stat.toDomain().name == "HP") baseStat * 2 + 204
         else floor(baseStat.times(2.2).plus(108.9)).toInt()
     )
 }

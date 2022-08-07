@@ -6,14 +6,10 @@ import com.montfel.pokedex.helper.DtoMapper
 
 data class EggGroupDto(
     @SerializedName("name")
-    val name: String,
-
-    @SerializedName("url")
-    val url: String,
+    val name: String
 
 ) : DtoMapper<EggGroup> {
     override fun toDomain() = EggGroup(
-        name = name.replaceFirstChar { it.uppercase() },
-        url = url,
+        name = name.replaceFirstChar { it.uppercase() }
     )
 }

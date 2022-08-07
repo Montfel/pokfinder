@@ -5,15 +5,11 @@ import com.montfel.pokedex.domain.profile.model.Chain
 import com.montfel.pokedex.helper.DtoMapper
 
 data class ChainDto(
-    @SerializedName("evolution_details")
-    val evolutionDetails: List<Any>,
-
     @SerializedName("evolves_to")
-    val evolvesTo: List<Any>,
+    val evolvesTo: List<Any>
 
-    ) : DtoMapper<Chain> {
+) : DtoMapper<Chain> {
     override fun toDomain() = Chain(
-        evolutionDetails = evolutionDetails,
-        evolvesTo = evolvesTo,
+        evolvesTo = evolvesTo
     )
 }

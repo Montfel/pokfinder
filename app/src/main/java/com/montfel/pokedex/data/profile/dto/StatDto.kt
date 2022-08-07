@@ -6,12 +6,9 @@ import com.montfel.pokedex.helper.DtoMapper
 
 data class StatDto(
     @SerializedName("name")
-    val name: String,
+    val name: String
 
-    @SerializedName("url")
-    val url: String,
-
-    ) : DtoMapper<Stat> {
+) : DtoMapper<Stat> {
     override fun toDomain() = Stat(
         name = when (name) {
             "hp" -> "HP"
@@ -21,7 +18,6 @@ data class StatDto(
             "special-defense" -> "Sp. Def"
             "speed" -> "Speed"
             else -> "Unknown"
-        },
-        url = url,
+        }
     )
 }

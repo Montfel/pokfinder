@@ -6,14 +6,10 @@ import com.montfel.pokedex.helper.DtoMapper
 
 data class AbilityDto(
     @SerializedName("name")
-    val name: String,
-
-    @SerializedName("url")
-    val url: String,
+    val name: String
 
 ) : DtoMapper<Ability> {
     override fun toDomain() = Ability(
-        name = name,
-        url = url,
+        name = name
     )
 }

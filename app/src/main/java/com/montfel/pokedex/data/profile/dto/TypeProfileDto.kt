@@ -6,14 +6,10 @@ import com.montfel.pokedex.domain.profile.model.TypeProfile
 
 data class TypeProfileDto(
     @SerializedName("name")
-    val name: String?,
-
-    @SerializedName("url")
-    val url: String?
+    val name: String
 
 ) : DtoMapper<TypeProfile> {
     override fun toDomain() = TypeProfile(
-        name = name?.replaceFirstChar { it.uppercase() } ?: "",
-        url = url ?: ""
+        name = name.replaceFirstChar { it.uppercase() }
     )
 }

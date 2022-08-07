@@ -6,12 +6,9 @@ import com.montfel.pokedex.helper.DtoMapper
 
 data class GrowthRateDto(
     @SerializedName("name")
-    val name: String,
+    val name: String
 
-    @SerializedName("url")
-    val url: String,
-
-    ) : DtoMapper<GrowthRate> {
+) : DtoMapper<GrowthRate> {
     override fun toDomain() = GrowthRate(
         name = name
             .split("-")
@@ -19,7 +16,6 @@ data class GrowthRateDto(
                 word.replaceFirstChar { letter ->
                     letter.uppercase()
                 }
-            },
-        url = url,
+            }
     )
 }

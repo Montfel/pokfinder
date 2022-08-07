@@ -102,3 +102,4 @@ lint/tmp/
 .idea/deploymentTargetDropDown.xml
 .idea\.name
 .idea/inspectionProfiles/Project_Default.xml
+.idea/compiler.xml
