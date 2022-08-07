@@ -1,6 +1,7 @@
 package com.montfel.pokedex.data.profile.dto
 
 import com.google.gson.annotations.SerializedName
+import com.montfel.pokedex.domain.profile.model.EV
 import com.montfel.pokedex.domain.profile.model.PokemonProfile
 import com.montfel.pokedex.helper.DtoMapper
 
@@ -43,6 +44,13 @@ data class PokemonProfileDto(
         baseExp = baseExp,
         abilities = abilities.map { it.toDomain() },
         stats = stats.map { it.toDomain() },
-        ev = stats.filter { it.effort == 1 }.map { it.stat.toDomain().name }
+        ev = stats
+            .filter { it.effort > 0 }
+            .map {
+                EV(
+                    name = it.stat.toDomain().name,
+                    effort = it.effort
+                )
+            }
     )
 }

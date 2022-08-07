@@ -69,7 +69,8 @@ fun Profile(
     )
 
     val training = mapOf(
-        R.string.ev_yield to "${uiState.pokemonProfile?.ev}",
+        R.string.ev_yield to (uiState.pokemonProfile?.ev?.joinToString("\n") { "${it.effort} ${it.name}" }
+            ?: ""),
         R.string.catch_rate to "${uiState.pokemonSpecies?.captureRate}",
         R.string.base_friendship to "${uiState.pokemonSpecies?.baseHappiness}",
         R.string.base_exp to uiState.pokemonProfile?.baseExp.toString(),
