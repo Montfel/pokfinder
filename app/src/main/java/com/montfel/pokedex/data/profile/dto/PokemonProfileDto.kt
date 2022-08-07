@@ -30,12 +30,9 @@ data class PokemonProfileDto(
     val abilities: List<AbilitiesDto>,
 
     @SerializedName("stats")
-    val stats: List<StatsDto>,
+    val stats: List<StatsDto>
 
-    @SerializedName("location_area_encounters")
-    val locationUrl: String,
-
-    ) : DtoMapper<PokemonProfile> {
+) : DtoMapper<PokemonProfile> {
     override fun toDomain() = PokemonProfile(
         id = id,
         name = name.replaceFirstChar { it.uppercase() },
@@ -46,6 +43,6 @@ data class PokemonProfileDto(
         baseExp = baseExp,
         abilities = abilities.map { it.toDomain() },
         stats = stats.map { it.toDomain() },
-        locationUrl = locationUrl,
+        ev = stats.filter { it.effort == 1 }.map { it.stat.toDomain().name }
     )
 }

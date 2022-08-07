@@ -33,7 +33,7 @@ data class PokemonSpeciesDto(
     override fun toDomain() = PokemonSpecies(
         baseHappiness = baseHappiness,
         captureRate = captureRate,
-        eggGroups = eggGroups.map { it.toDomain() }.sortedBy { it.name },
+        eggGroups = eggGroups.sortedBy { it.name }.map { it.toDomain() },
         flavorTexts = flavorTexts
             .map { it.toDomain() }
             .filter { it.language == "en" || it.language == "pt-BR" },

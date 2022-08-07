@@ -10,5 +10,5 @@ data class PokemonProfile(
     val baseExp: Int,
     val abilities: List<Abilities>,
     val stats: List<Stats>,
-    val locationUrl: String
+    val ev: List<String>
 )
