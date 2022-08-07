@@ -1,5 +1,6 @@
 package com.montfel.pokedex.data.profile.datasource
 
+import com.montfel.pokedex.data.profile.dto.PokemonDamageRelationsDto
 import com.montfel.pokedex.data.profile.dto.PokemonEvolutionChainDto
 import com.montfel.pokedex.data.profile.dto.PokemonProfileDto
 import com.montfel.pokedex.data.profile.dto.PokemonSpeciesDto
@@ -21,4 +22,9 @@ interface ProfileDataSource {
     suspend fun getPokemonEvolutionChain(
         @Path(value = "pokemonId") pokemonId: String
     ): PokemonEvolutionChainDto
+
+    @GET("type/{typeId}")
+    suspend fun getPokemonDamageRelations(
+        @Path(value = "typeId") typeId: String
+    ): PokemonDamageRelationsDto
 }

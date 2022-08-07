@@ -41,12 +41,6 @@ fun Profile(
     val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats, R.string.evolution)
-//    val strength = mainType?.type2?.typeEfficacies
-//        ?.filter { it.damageFactor == 200 }
-//        ?.map { it.name }
-//    val weakness = mainType?.type2?.typeEfficacies
-//        ?.filter { it.damageFactor == 0 }
-//        ?.map { it.name }
     var abilities = ""
     uiState.pokemonProfile?.abilities?.forEach {
         abilities += if (it.isHidden) {
@@ -203,8 +197,10 @@ fun Profile(
                             training = training,
                             breeding = breeding,
                             typeColor = assetBackground.typeColor,
-//                            strength = strength,
-//                            weakness = weakness
+                            strengths = uiState.pokemonDamageRelations?.damageRelations?.doubleDamageTo
+                                ?: emptyList(),
+                            weaknesses = uiState.pokemonDamageRelations?.damageRelations?.doubleDamageFrom
+                                ?: emptyList()
                         )
                     }
                     1 -> {

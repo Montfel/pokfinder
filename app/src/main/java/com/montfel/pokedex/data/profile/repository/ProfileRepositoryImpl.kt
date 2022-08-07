@@ -1,6 +1,7 @@
 package com.montfel.pokedex.data.profile.repository
 
 import com.montfel.pokedex.data.profile.datasource.ProfileDataSource
+import com.montfel.pokedex.domain.profile.model.PokemonDamageRelations
 import com.montfel.pokedex.domain.profile.model.PokemonEvolutionChain
 import com.montfel.pokedex.domain.profile.model.PokemonProfile
 import com.montfel.pokedex.domain.profile.model.PokemonSpecies
@@ -24,5 +25,9 @@ class ProfileRepositoryImpl @Inject constructor(
 
     override suspend fun getPokemonEvolutionChain(pokemonId: String): ApiResponse<PokemonEvolutionChain> {
         return requestWrapper { dataSource.getPokemonEvolutionChain(pokemonId).toDomain() }
+    }
+
+    override suspend fun getPokemonDamageRelations(typeId: String): ApiResponse<PokemonDamageRelations> {
+        return requestWrapper { dataSource.getPokemonDamageRelations(typeId).toDomain() }
     }
 }
