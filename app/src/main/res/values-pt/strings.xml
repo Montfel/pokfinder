@@ -30,7 +30,9 @@
     <string name="height">Altura</string>
     <string name="weight">Peso</string>
     <string name="abilities">Habilidades</string>
-    <string name="weakeness">Fraquesas</string>
+    <string name="none">Nenhum</string>
+    <string name="immunity">Imunidade</string>
+    <string name="weakeness">Fraquezas</string>
     <string name="strength">Forças</string>
     <string name="training">Treinamento</string>
     <string name="ev_yield">Pontos EV</string>

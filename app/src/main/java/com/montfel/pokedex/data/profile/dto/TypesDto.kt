@@ -1,14 +1,18 @@
 package com.montfel.pokedex.data.profile.dto
 
-import com.montfel.pokedex.data.dto.TypeDto
+import com.google.gson.annotations.SerializedName
+import com.montfel.pokedex.domain.profile.model.TypesProfile
 import com.montfel.pokedex.helper.DtoMapper
-import com.montfel.pokedex.domain.model.Types
 
 data class TypesDto(
+    @SerializedName("slot")
     val slot: Int,
-    val type: TypeDto
-) : DtoMapper<Types> {
-    override fun toDomain() = Types(
+
+    @SerializedName("type")
+    val type: TypeProfileDto
+
+) : DtoMapper<TypesProfile> {
+    override fun toDomain() = TypesProfile(
         slot = slot,
         type = type.toDomain()
     )

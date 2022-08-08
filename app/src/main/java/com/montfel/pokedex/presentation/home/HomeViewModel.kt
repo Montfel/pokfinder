@@ -2,11 +2,11 @@ package com.montfel.pokedex.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.montfel.pokedex.domain.home.model.Generation
+import com.montfel.pokedex.domain.home.model.PokemonHome
+import com.montfel.pokedex.domain.home.model.TypeHome
 import com.montfel.pokedex.domain.home.repository.HomeRepository
 import com.montfel.pokedex.domain.home.usecase.HomeUseCases
-import com.montfel.pokedex.domain.model.Generation
-import com.montfel.pokedex.domain.model.PokemonHome
-import com.montfel.pokedex.domain.model.Type
 import com.montfel.pokedex.helper.ApiResponse
 import com.montfel.pokedex.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 data class HomeUiState(
     val pokemonList: List<PokemonHome> = emptyList(),
-    val typeList: List<Type> = emptyList(),
+    val typeList: List<TypeHome> = emptyList(),
     val generationList: List<Generation> = emptyList(),
     val generationSelected: String = "",
     val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,

@@ -15,12 +15,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.data.profile.dto.StatsDto
+import com.montfel.pokedex.domain.profile.model.Stats
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun Stats(
-    stats: List<StatsDto>,
+    stats: List<Stats>,
     typeColor: Color,
     pokemonName: String
 ) {
@@ -43,7 +43,7 @@ fun Stats(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = it.name ?: "",
+                text = it.stat.name,
                 style = MaterialTheme.typography.pokemonType,
                 color = MaterialTheme.colors.primaryText,
                 modifier = Modifier.width(50.dp)
@@ -125,65 +125,65 @@ fun Stats(
 
     Spacer(modifier = Modifier.height(20.dp))
 
-    Text(
-        text = stringResource(id = R.string.type_defenses),
-        style = MaterialTheme.typography.filterTitle,
-        color = typeColor
-    )
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Text(
-        text = stringResource(id = R.string.effectiveness).format(pokemonName),
-        style = MaterialTheme.typography.description,
-        color = MaterialTheme.colors.primaryVariantText
-    )
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        repeat(9) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TypeEffectivenessItem(
-                    typeColor = TypeFire,
-                    image = R.drawable.ic_fire
-                )
-                Text(
-                    text = "1",
-                    style = MaterialTheme.typography.description,
-                    color = MaterialTheme.colors.primaryVariantText
-                )
-            }
-        }
-    }
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        repeat(9) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TypeEffectivenessItem(
-                    typeColor = TypeFire,
-                    image = R.drawable.ic_fire
-                )
-                Text(
-                    text = "1",
-                    style = MaterialTheme.typography.description,
-                    color = MaterialTheme.colors.primaryVariantText
-                )
-            }
-        }
-    }
+//    Text(
+//        text = stringResource(id = R.string.type_defenses),
+//        style = MaterialTheme.typography.filterTitle,
+//        color = typeColor
+//    )
+//
+//    Spacer(modifier = Modifier.height(20.dp))
+//
+//    Text(
+//        text = stringResource(id = R.string.effectiveness).format(pokemonName),
+//        style = MaterialTheme.typography.description,
+//        color = MaterialTheme.colors.primaryVariantText
+//    )
+//
+//    Spacer(modifier = Modifier.height(20.dp))
+//
+//    Row(
+//        horizontalArrangement = Arrangement.SpaceBetween,
+//        modifier = Modifier.fillMaxWidth()
+//    ) {
+//        repeat(9) {
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(10.dp),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                TypeEffectivenessItem(
+//                    typeColor = TypeFire,
+//                    image = R.drawable.ic_fire
+//                )
+//                Text(
+//                    text = "1",
+//                    style = MaterialTheme.typography.description,
+//                    color = MaterialTheme.colors.primaryVariantText
+//                )
+//            }
+//        }
+//    }
+//
+//    Spacer(modifier = Modifier.height(20.dp))
+//
+//    Row(
+//        horizontalArrangement = Arrangement.SpaceBetween,
+//        modifier = Modifier.fillMaxWidth()
+//    ) {
+//        repeat(9) {
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(10.dp),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                TypeEffectivenessItem(
+//                    typeColor = TypeFire,
+//                    image = R.drawable.ic_fire
+//                )
+//                Text(
+//                    text = "1",
+//                    style = MaterialTheme.typography.description,
+//                    color = MaterialTheme.colors.primaryVariantText
+//                )
+//            }
+//        }
+//    }
 }

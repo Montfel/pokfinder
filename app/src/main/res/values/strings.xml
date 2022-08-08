@@ -33,6 +33,8 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="abilities">Abilities</string>
+    <string name="none">None</string>
+    <string name="immunity">Immunity</string>
     <string name="weakeness">Weaknesses</string>
     <string name="strength">Strengths</string>
     <string name="training">Training</string>
@@ -50,12 +52,6 @@
     <!-- Stats -->
     <string name="stats">Stats</string>
     <string name="base_stats">Base Stats</string>
-    <string name="hp" translatable="false">HP</string>
-    <string name="attack" translatable="false">Attack</string>
-    <string name="defense" translatable="false">Defense</string>
-    <string name="sp_atk" translatable="false">Special Attack</string>
-    <string name="sp_def" translatable="false">Special Defense</string>
-    <string name="speed" translatable="false">Speed</string>
     <string name="total">Total</string>
     <string name="min">Min</string>
     <string name="max">Max</string>

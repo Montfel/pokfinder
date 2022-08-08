@@ -16,13 +16,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
-import com.montfel.pokedex.data.profile.dto.SpeciesDto
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun Evolution(
     typeColor: Color,
-    evolutionChain: List<SpeciesDto>
+    evolutionChain: List<Any>
 ) {
     Spacer(modifier = Modifier.height(30.dp))
     Text(
@@ -46,11 +45,11 @@ fun Evolution(
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
                         alpha = 0.1f,
                     )
-                    Text(
-                        text = "(Level ${evolutionChain[index + 1].minLevel})",
-                        style = MaterialTheme.typography.pokemonNumber,
-                        color = MaterialTheme.colors.primaryText
-                    )
+//                    Text(
+//                        text = "(Level ${evolutionChain[index + 1].minLevel})",
+//                        style = MaterialTheme.typography.pokemonNumber,
+//                        color = MaterialTheme.colors.primaryText
+//                    )
                 }
                 PokemonEvolution(specie = evolutionChain[index + 1])
             }
@@ -60,7 +59,7 @@ fun Evolution(
 }
 
 @Composable
-fun PokemonEvolution(specie: SpeciesDto) {
+fun PokemonEvolution(specie: Any) {
     Column(horizontalAlignment = CenterHorizontally) {
         Box(modifier = Modifier.size(100.dp)) {
             Image(
@@ -77,15 +76,15 @@ fun PokemonEvolution(specie: SpeciesDto) {
                     .align(Alignment.Center)
             )
         }
-        Text(
-            text = "#${specie.id}",
-            style = MaterialTheme.typography.pokemonType,
-            color = MaterialTheme.colors.primaryVariantText
-        )
-        Text(
-            text = specie.name,
-            style = MaterialTheme.typography.filterTitle,
-            color = MaterialTheme.colors.primaryText
-        )
+//        Text(
+//            text = "#${specie.id}",
+//            style = MaterialTheme.typography.pokemonType,
+//            color = MaterialTheme.colors.primaryVariantText
+//        )
+//        Text(
+//            text = specie.name,
+//            style = MaterialTheme.typography.filterTitle,
+//            color = MaterialTheme.colors.primaryText
+//        )
     }
 }

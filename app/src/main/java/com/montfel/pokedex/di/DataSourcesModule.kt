@@ -18,13 +18,12 @@ internal object DataSourcesModule {
 
     @Singleton
     @Provides
-    fun providesPokemonDataSource(retrofit: Retrofit): ProfileDataSource =
+    fun providesProfileDataSource(retrofit: Retrofit): ProfileDataSource =
         retrofit.create(ProfileDataSource::class.java)
 
     @Singleton
     @Provides
-    fun providesPokemonGraphqlDataSource(apolloClient: ApolloClient) =
-        HomeDataSource(apolloClient)
+    fun providesHomeDataSource(apolloClient: ApolloClient) = HomeDataSource(apolloClient)
 
     @Provides
     @Singleton

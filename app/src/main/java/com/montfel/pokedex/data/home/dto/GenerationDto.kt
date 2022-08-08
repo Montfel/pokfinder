@@ -1,7 +1,7 @@
 package com.montfel.pokedex.data.home.dto
 
 import com.montfel.pokedex.GenerationsQuery
-import com.montfel.pokedex.domain.model.Generation
+import com.montfel.pokedex.domain.home.model.Generation
 
 fun GenerationsQuery.Pokemon_v2_generation.toDomain(): Generation {
     val split = name.split("-")

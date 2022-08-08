@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
-import com.montfel.pokedex.domain.model.PokemonHome
+import com.montfel.pokedex.domain.home.model.PokemonHome
 import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.theme.*
 
