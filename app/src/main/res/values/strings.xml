@@ -33,6 +33,8 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="abilities">Abilities</string>
+    <string name="none">None</string>
+    <string name="immunity">Immunity</string>
     <string name="weakeness">Weaknesses</string>
     <string name="strength">Strengths</string>
     <string name="training">Training</string>

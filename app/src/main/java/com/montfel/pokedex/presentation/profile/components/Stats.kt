@@ -125,65 +125,65 @@ fun Stats(
 
     Spacer(modifier = Modifier.height(20.dp))
 
-    Text(
-        text = stringResource(id = R.string.type_defenses),
-        style = MaterialTheme.typography.filterTitle,
-        color = typeColor
-    )
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Text(
-        text = stringResource(id = R.string.effectiveness).format(pokemonName),
-        style = MaterialTheme.typography.description,
-        color = MaterialTheme.colors.primaryVariantText
-    )
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        repeat(9) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TypeEffectivenessItem(
-                    typeColor = TypeFire,
-                    image = R.drawable.ic_fire
-                )
-                Text(
-                    text = "1",
-                    style = MaterialTheme.typography.description,
-                    color = MaterialTheme.colors.primaryVariantText
-                )
-            }
-        }
-    }
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        repeat(9) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TypeEffectivenessItem(
-                    typeColor = TypeFire,
-                    image = R.drawable.ic_fire
-                )
-                Text(
-                    text = "1",
-                    style = MaterialTheme.typography.description,
-                    color = MaterialTheme.colors.primaryVariantText
-                )
-            }
-        }
-    }
+//    Text(
+//        text = stringResource(id = R.string.type_defenses),
+//        style = MaterialTheme.typography.filterTitle,
+//        color = typeColor
+//    )
+//
+//    Spacer(modifier = Modifier.height(20.dp))
+//
+//    Text(
+//        text = stringResource(id = R.string.effectiveness).format(pokemonName),
+//        style = MaterialTheme.typography.description,
+//        color = MaterialTheme.colors.primaryVariantText
+//    )
+//
+//    Spacer(modifier = Modifier.height(20.dp))
+//
+//    Row(
+//        horizontalArrangement = Arrangement.SpaceBetween,
+//        modifier = Modifier.fillMaxWidth()
+//    ) {
+//        repeat(9) {
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(10.dp),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                TypeEffectivenessItem(
+//                    typeColor = TypeFire,
+//                    image = R.drawable.ic_fire
+//                )
+//                Text(
+//                    text = "1",
+//                    style = MaterialTheme.typography.description,
+//                    color = MaterialTheme.colors.primaryVariantText
+//                )
+//            }
+//        }
+//    }
+//
+//    Spacer(modifier = Modifier.height(20.dp))
+//
+//    Row(
+//        horizontalArrangement = Arrangement.SpaceBetween,
+//        modifier = Modifier.fillMaxWidth()
+//    ) {
+//        repeat(9) {
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(10.dp),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                TypeEffectivenessItem(
+//                    typeColor = TypeFire,
+//                    image = R.drawable.ic_fire
+//                )
+//                Text(
+//                    text = "1",
+//                    style = MaterialTheme.typography.description,
+//                    color = MaterialTheme.colors.primaryVariantText
+//                )
+//            }
+//        }
+//    }
 }

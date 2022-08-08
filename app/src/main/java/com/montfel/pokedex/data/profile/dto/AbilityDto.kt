@@ -10,6 +10,6 @@ data class AbilityDto(
 
 ) : DtoMapper<Ability> {
     override fun toDomain() = Ability(
-        name = name
+        name = name.replaceFirstChar { it.uppercase() }
     )
 }

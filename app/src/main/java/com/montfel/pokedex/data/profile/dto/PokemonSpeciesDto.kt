@@ -1,6 +1,7 @@
 package com.montfel.pokedex.data.profile.dto
 
 import com.google.gson.annotations.SerializedName
+import com.montfel.pokedex.domain.profile.model.HatchCounter
 import com.montfel.pokedex.domain.profile.model.PokemonSpecies
 import com.montfel.pokedex.helper.DtoMapper
 
@@ -42,6 +43,9 @@ data class PokemonSpeciesDto(
             .map { it.toDomain() }
             .filter { it.language == "en" || it.language == "pt-BR" },
         growthRate = growthRate.toDomain().name,
-        hatchCounter = hatchCounter
+        hatchCounter = HatchCounter(
+            cycles = hatchCounter,
+            steps = hatchCounter.plus(1).times(255)
+        )
     )
 }

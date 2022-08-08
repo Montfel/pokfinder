@@ -25,11 +25,11 @@ data class DamageRelationsDto(
 
 ) : DtoMapper<DamageRelations> {
     override fun toDomain() = DamageRelations(
-        doubleDamageFrom = doubleDamageFrom.map { it.toDomain().name },
-        doubleDamageTo = doubleDamageTo.map { it.toDomain().name },
-        halfDamageFrom = halfDamageFrom.map { it.toDomain().name },
-        halfDamageTo = halfDamageTo.map { it.toDomain().name },
-        noDamageFrom = noDamageFrom.map { it.toDomain().name },
-        noDamageTo = noDamageTo.map { it.toDomain().name }
+        doubleDamageFrom = doubleDamageFrom.map { it.toDomain().name }.sorted(),
+        doubleDamageTo = doubleDamageTo.map { it.toDomain().name }.sorted(),
+        halfDamageFrom = halfDamageFrom.map { it.toDomain().name }.sorted(),
+        halfDamageTo = halfDamageTo.map { it.toDomain().name }.sorted(),
+        noDamageFrom = noDamageFrom.map { it.toDomain().name }.sorted(),
+        noDamageTo = noDamageTo.map { it.toDomain().name }.sorted()
     )
 }

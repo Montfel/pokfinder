@@ -9,22 +9,22 @@ import retrofit2.http.Path
 
 interface ProfileDataSource {
     @GET("pokemon/{pokemonId}")
-    suspend fun getPokemonProfile(
+    suspend fun getProfile(
         @Path(value = "pokemonId") pokemonId: String
     ): PokemonProfileDto
 
     @GET("pokemon-species/{pokemonId}")
-    suspend fun getPokemonSpecies(
+    suspend fun getSpecies(
         @Path(value = "pokemonId") pokemonId: String
     ): PokemonSpeciesDto
 
     @GET("evolution-chain/{pokemonId}")
-    suspend fun getPokemonEvolutionChain(
+    suspend fun getEvolutionChain(
         @Path(value = "pokemonId") pokemonId: String
     ): PokemonEvolutionChainDto
 
     @GET("type/{typeId}")
-    suspend fun getPokemonDamageRelations(
+    suspend fun getDamageRelations(
         @Path(value = "typeId") typeId: String
     ): PokemonDamageRelationsDto
 }
