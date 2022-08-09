@@ -24,6 +24,8 @@ data class HomeUiState(
     val generationList: List<Generation> = emptyList(),
     val generationSelected: String = "",
     val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
+    val isLoading: Boolean = true,
+    val hasError: Boolean = false
 )
 
 @HiltViewModel
@@ -57,15 +59,16 @@ class HomeViewModel @Inject constructor(
             if (typeList is ApiResponse.SuccessResult) {
                 _uiState.update { it.copy(typeList = typeList.data) }
             }
+            _uiState.update { it.copy(isLoading = false) }
         }
     }
 
     fun searchPokemon(query: String) {
         if (query.isNotBlank()) {
             viewModelScope.launch(Dispatchers.Default) {
+                val text = query.trim()
                 val result = pokemons.filter {
-                    it.name.contains(query.trim(), ignoreCase = true)
-                            || it.id.toString() == query.trim()
+                    it.name.contains(text, ignoreCase = true) || it.id.toString() == text
                 }
                 _uiState.update { it.copy(pokemonList = result) }
             }

@@ -17,10 +17,12 @@ import javax.inject.Inject
 data class ProfileUiState(
     val profile: PokemonProfile? = null,
     val species: PokemonSpecies? = null,
-    val evolutionChain: PokemonEvolutionChain? = null,
+//    val evolutionChain: PokemonEvolutionChain? = null,
     val strengths: List<String> = emptyList(),
     val weaknesses: List<String> = emptyList(),
-    val immunity: List<String> = emptyList()
+    val immunity: List<String> = emptyList(),
+    val isLoading: Boolean = true,
+    val hasError: Boolean = false
 )
 
 @HiltViewModel
@@ -35,11 +37,11 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val profileDeferred = async { repository.getProfile(pokemonId) }
             val speciesDeferred = async { repository.getSpecies(pokemonId) }
-            val evolutionChainDeferred = async { repository.getEvolutionChain(pokemonId) }
+//            val evolutionChainDeferred = async { repository.getEvolutionChain(pokemonId) }
 
             val profile = profileDeferred.await()
             val species = speciesDeferred.await()
-            val evolutionChain = evolutionChainDeferred.await()
+//            val evolutionChain = evolutionChainDeferred.await()
 
             if (profile is ApiResponse.SuccessResult) {
                 getDamageRelations(profile.data.types)
@@ -48,9 +50,10 @@ class ProfileViewModel @Inject constructor(
             if (species is ApiResponse.SuccessResult) {
                 _uiState.update { it.copy(species = species.data) }
             }
-            if (evolutionChain is ApiResponse.SuccessResult) {
-                _uiState.update { it.copy(evolutionChain = evolutionChain.data) }
-            }
+//            if (evolutionChain is ApiResponse.SuccessResult) {
+//                _uiState.update { it.copy(evolutionChain = evolutionChain.data) }
+//            }
+            _uiState.update { it.copy(isLoading = false) }
         }
     }
 

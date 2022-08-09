@@ -118,113 +118,122 @@ fun Profile(
         },
         backgroundColor = assetBackground.backgroundColor,
     ) { paddingValues ->
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(24.dp),
-                verticalAlignment = CenterVertically
+        if (uiState.isLoading) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.primaryText,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+        } else {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .verticalScroll(rememberScrollState())
             ) {
-                Box {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_circle),
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
-                        alpha = 0.35f,
-                        modifier = Modifier.size(125.dp)
-                    )
-                    SubcomposeAsyncImage(
-                        model = uiState.profile?.image,
-                        contentDescription = null,
-                        loading = { CircularProgressIndicator(color = assetBackground.typeColor) },
-                        modifier = Modifier.size(125.dp)
-                    )
-                }
-                Column {
-                    Text(
-                        text = "#${uiState.profile?.id}",
-                        style = MaterialTheme.typography.filterTitle,
-                        color = MaterialTheme.colors.numberOverBackgroundColor
-                    )
-                    Text(
-                        text = uiState.profile?.name ?: "",
-                        style = MaterialTheme.typography.applicationTitle,
-                        color = MaterialTheme.colors.secondaryText,
-                    )
-                    uiState.profile?.types?.let { types ->
-                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            types.forEach { type ->
-                                TypeCard(typeName = type.type.name)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(24.dp),
+                    verticalAlignment = CenterVertically
+                ) {
+                    Box {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_circle),
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
+                            alpha = 0.35f,
+                            modifier = Modifier.size(125.dp)
+                        )
+                        SubcomposeAsyncImage(
+                            model = uiState.profile?.image,
+                            contentDescription = null,
+                            loading = { CircularProgressIndicator(color = assetBackground.typeColor) },
+                            modifier = Modifier.size(125.dp)
+                        )
+                    }
+                    Column {
+                        Text(
+                            text = "#${uiState.profile?.id}",
+                            style = MaterialTheme.typography.filterTitle,
+                            color = MaterialTheme.colors.numberOverBackgroundColor
+                        )
+                        Text(
+                            text = uiState.profile?.name ?: "",
+                            style = MaterialTheme.typography.applicationTitle,
+                            color = MaterialTheme.colors.secondaryText,
+                        )
+                        uiState.profile?.types?.let { types ->
+                            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                types.forEach { type ->
+                                    TypeCard(typeName = type.type.name)
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(44.dp))
+                Spacer(modifier = Modifier.height(44.dp))
 
-            TabRow(
-                selectedTabIndex = selectedTabIndex,
-                backgroundColor = Color.Transparent,
-            ) {
-                titles.forEachIndexed { index, title ->
-                    Tab(
-                        selected = selectedTabIndex == index,
-                        onClick = { selectedTabIndex = index },
-                    ) {
-                        Text(
-                            text = stringResource(id = title),
-                            style =
-                            if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
-                            else MaterialTheme.typography.description,
-                            color = MaterialTheme.colors.secondaryText
-                        )
+                TabRow(
+                    selectedTabIndex = selectedTabIndex,
+                    backgroundColor = Color.Transparent,
+                ) {
+                    titles.forEachIndexed { index, title ->
+                        Tab(
+                            selected = selectedTabIndex == index,
+                            onClick = { selectedTabIndex = index },
+                        ) {
+                            Text(
+                                text = stringResource(id = title),
+                                style =
+                                if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
+                                else MaterialTheme.typography.description,
+                                color = MaterialTheme.colors.secondaryText
+                            )
+                        }
                     }
                 }
-            }
 
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                    .background(color = MaterialTheme.colors.surface)
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-            ) {
-                when (selectedTabIndex) {
-                    0 -> {
-                        About(
-                            flavorText = uiState.species?.flavorTexts
-                                ?.filter { lang -> lang.language == language }
-                                ?.takeIf { list -> list.isNotEmpty() }
-                                ?.random()?.flavorText
-                                ?: uiState.species?.flavorTexts
-                                    ?.filter { lang -> lang.language == "en" }
-                                    ?.random()?.flavorText ?: "",
-                            data = data,
-                            training = training,
-                            breeding = breeding,
-                            typeColor = assetBackground.typeColor,
-                            strengths = uiState.strengths,
-                            weaknesses = uiState.weaknesses,
-                            immunity = uiState.immunity,
-                        )
-                    }
-                    1 -> {
-                        Stats(
-                            stats = uiState.profile?.stats ?: emptyList(),
-                            typeColor = assetBackground.typeColor,
-                            pokemonName = uiState.profile?.name ?: ""
-                        )
-                    }
+                Column(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                        .background(color = MaterialTheme.colors.surface)
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    when (selectedTabIndex) {
+                        0 -> {
+                            About(
+                                flavorText = uiState.species?.flavorTexts
+                                    ?.filter { lang -> lang.language == language }
+                                    ?.takeIf { list -> list.isNotEmpty() }
+                                    ?.random()?.flavorText
+                                    ?: uiState.species?.flavorTexts
+                                        ?.filter { lang -> lang.language == "en" }
+                                        ?.random()?.flavorText ?: "",
+                                data = data,
+                                training = training,
+                                breeding = breeding,
+                                typeColor = assetBackground.typeColor,
+                                strengths = uiState.strengths,
+                                weaknesses = uiState.weaknesses,
+                                immunity = uiState.immunity,
+                            )
+                        }
+                        1 -> {
+                            Stats(
+                                stats = uiState.profile?.stats ?: emptyList(),
+                                typeColor = assetBackground.typeColor,
+                                pokemonName = uiState.profile?.name ?: ""
+                            )
+                        }
 //                    2 -> {
 //                        Evolution(
 //                            typeColor = assetBackground.typeColor,
 //                            evolutionChain = uiState.pokemonSpecies?.evolutionChain ?: emptyList()
 //                        )
 //                    }
+                    }
                 }
             }
         }

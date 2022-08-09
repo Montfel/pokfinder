@@ -28,10 +28,7 @@ import com.montfel.pokedex.presentation.home.components.PokemonCard
 import com.montfel.pokedex.presentation.home.components.SearchField
 import com.montfel.pokedex.presentation.home.components.TopBar
 import com.montfel.pokedex.presentation.navigation.Screen
-import com.montfel.pokedex.presentation.theme.LocalAssetHelper
-import com.montfel.pokedex.presentation.theme.fabBackground
-import com.montfel.pokedex.presentation.theme.fabContent
-import com.montfel.pokedex.presentation.theme.pokeballIcon
+import com.montfel.pokedex.presentation.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -138,12 +135,27 @@ fun Home(
                     )
                 }
 
-                items(
-                    items = uiState.pokemonList,
-                    key = { it.id },
-                ) { pokemon ->
-                    PokemonCard(pokemon = pokemon) {
-                        navController.navigate(Screen.Profile.createRoute(pokemon.id))
+                if (uiState.isLoading) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = 32.dp)
+                        ) {
+                            CircularProgressIndicator(
+                                color = MaterialTheme.colors.primaryText,
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    }
+                } else {
+                    items(
+                        items = uiState.pokemonList,
+                        key = { it.id },
+                    ) { pokemon ->
+                        PokemonCard(pokemon = pokemon) {
+                            navController.navigate(Screen.Profile.createRoute(pokemon.id))
+                        }
                     }
                 }
             }
