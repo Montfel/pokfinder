@@ -3,7 +3,6 @@ package com.montfel.pokedex.domain.profile.usecase
 import com.montfel.pokedex.domain.profile.model.TypesProfile
 import com.montfel.pokedex.domain.profile.repository.ProfileRepository
 import com.montfel.pokedex.helper.ApiResponse
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 class GetTypesStrengthsUseCase @Inject constructor(

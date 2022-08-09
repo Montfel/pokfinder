@@ -16,13 +16,13 @@ abstract class RepositoriesModule {
 
     @Singleton
     @Binds
-    internal abstract fun bindPokemonRepository(
+    internal abstract fun bindsPokemonRepository(
         profileRepositoryImpl: ProfileRepositoryImpl
     ): ProfileRepository
 
     @Singleton
     @Binds
-    internal abstract fun bindPokemonHomeRepository(
+    internal abstract fun bindsPokemonHomeRepository(
         homeRepositoryImpl: HomeRepositoryImpl
     ): HomeRepository
 }

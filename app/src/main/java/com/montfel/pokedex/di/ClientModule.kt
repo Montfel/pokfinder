@@ -26,7 +26,7 @@ object ClientModule {
 
     @Singleton
     @Provides
-    fun provideApolloClient(): ApolloClient =
+    fun providesApolloClient(): ApolloClient =
         ApolloClient
             .Builder()
             .serverUrl(APOLLO_BASE_URL)
