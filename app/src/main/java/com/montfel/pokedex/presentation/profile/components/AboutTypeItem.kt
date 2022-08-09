@@ -38,8 +38,11 @@ fun AboutTypeItem(@StringRes title: Int, typesList: List<String>) {
             )
         } else {
             typesList.forEach {
-                val asset = assetHelper.getAsset(it)
-                TypeEffectivenessItem(typeColor = asset.typeColor, image = asset.icon)
+                val assetFromType = assetHelper.getAsset(it)
+                TypeEffectivenessItem(
+                    typeColor = assetFromType.typeColor,
+                    image = assetFromType.icon
+                )
             }
         }
     }

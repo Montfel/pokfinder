@@ -20,11 +20,11 @@ import com.montfel.pokedex.presentation.theme.secondaryText
 @Composable
 fun TypeCard(typeName: String) {
     val assetHelper = LocalAssetHelper.current
-    val assetType = assetHelper.getAsset(typeName)
+    val assetFromType = assetHelper.getAsset(typeName)
 
     Card(
         shape = RoundedCornerShape(4.dp),
-        backgroundColor = assetType.typeColor,
+        backgroundColor = assetFromType.typeColor,
         modifier = Modifier.height(24.dp)
     ) {
         Row(
@@ -33,7 +33,7 @@ fun TypeCard(typeName: String) {
             modifier = Modifier.padding(horizontal = 4.dp)
         ) {
             Image(
-                painter = painterResource(id = assetType.icon),
+                painter = painterResource(id = assetFromType.icon),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
                 modifier = Modifier.size(15.dp)

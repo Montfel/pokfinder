@@ -21,7 +21,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.SubcomposeAsyncImage
+import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.profile.model.AboutData
 import com.montfel.pokedex.presentation.components.TypeCard
@@ -39,7 +39,7 @@ fun Profile(
     val uiState by viewModel.uiState.collectAsState()
     val assetHelper = LocalAssetHelper.current
     val mainType = uiState.profile?.types?.firstOrNull { type -> type.slot == 1 }
-    val assetBackground = assetHelper.getAsset(mainType?.type?.name ?: "")
+    val assetFromType = assetHelper.getAsset(mainType?.type?.name ?: "")
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats)
     var abilities = ""
@@ -103,7 +103,7 @@ fun Profile(
     Scaffold(
         topBar = {
             TopAppBar(
-                backgroundColor = assetBackground.backgroundColor,
+                backgroundColor = Color.Transparent,
                 elevation = 0.dp,
                 modifier = Modifier.statusBarsPadding()
             ) {
@@ -116,7 +116,8 @@ fun Profile(
                 }
             }
         },
-        backgroundColor = assetBackground.backgroundColor,
+        backgroundColor =
+        if (uiState.isLoading) MaterialTheme.colors.fabBackground else assetFromType.backgroundColor
     ) { paddingValues ->
         if (uiState.isLoading) {
             Box(modifier = Modifier.fillMaxSize()) {
@@ -144,10 +145,9 @@ fun Profile(
                             alpha = 0.35f,
                             modifier = Modifier.size(125.dp)
                         )
-                        SubcomposeAsyncImage(
+                        AsyncImage(
                             model = uiState.profile?.image,
                             contentDescription = null,
-                            loading = { CircularProgressIndicator(color = assetBackground.typeColor) },
                             modifier = Modifier.size(125.dp)
                         )
                     }
@@ -214,7 +214,7 @@ fun Profile(
                                 data = data,
                                 training = training,
                                 breeding = breeding,
-                                typeColor = assetBackground.typeColor,
+                                typeColor = assetFromType.typeColor,
                                 strengths = uiState.strengths,
                                 weaknesses = uiState.weaknesses,
                                 immunity = uiState.immunity,
@@ -223,7 +223,7 @@ fun Profile(
                         1 -> {
                             Stats(
                                 stats = uiState.profile?.stats ?: emptyList(),
-                                typeColor = assetBackground.typeColor,
+                                typeColor = assetFromType.typeColor,
                                 pokemonName = uiState.profile?.name ?: ""
                             )
                         }
