@@ -2,7 +2,7 @@ package com.montfel.pokedex.domain.profile.usecase
 
 import com.montfel.pokedex.domain.profile.model.Types
 import com.montfel.pokedex.domain.profile.repository.ProfileRepository
-import com.montfel.pokedex.helper.ApiResponse
+import com.montfel.pokedex.helper.Response
 import javax.inject.Inject
 
 class GetTypesWeaknessesUseCase @Inject constructor(
@@ -11,14 +11,14 @@ class GetTypesWeaknessesUseCase @Inject constructor(
     suspend operator fun invoke(types: List<Types>): List<String> {
         if (types.size == 1) {
             val response = repository.getDamageRelations(types.first().type.name)
-            if (response is ApiResponse.SuccessResult) {
+            if (response is Response.Success) {
                 return response.data.damageRelations.doubleDamageFrom
             }
         } else {
             val firstType = repository.getDamageRelations(types.first().type.name)
             val secondType = repository.getDamageRelations(types.last().type.name)
 
-            if (firstType is ApiResponse.SuccessResult && secondType is ApiResponse.SuccessResult) {
+            if (firstType is Response.Success && secondType is Response.Success) {
                 val firstWeaknesses = firstType.data.damageRelations.doubleDamageFrom
                     .filter { it !in secondType.data.damageRelations.doubleDamageTo }
                 val secondWeaknesses = secondType.data.damageRelations.doubleDamageFrom

@@ -7,7 +7,7 @@ import com.montfel.pokedex.domain.home.model.PokemonHome
 import com.montfel.pokedex.domain.home.repository.HomeRepository
 import com.montfel.pokedex.domain.home.usecase.HomeUseCases
 import com.montfel.pokedex.domain.profile.model.Type
-import com.montfel.pokedex.helper.ApiResponse
+import com.montfel.pokedex.helper.Response
 import com.montfel.pokedex.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -49,14 +49,14 @@ class HomeViewModel @Inject constructor(
             val generationList = generationListDeferred.await()
             val typeList = typeListDeferred.await()
 
-            if (pokemonList is ApiResponse.SuccessResult) {
+            if (pokemonList is Response.Success) {
                 pokemons = pokemonList.data
                 _uiState.update { it.copy(pokemonList = pokemonList.data) }
             }
-            if (generationList is ApiResponse.SuccessResult) {
+            if (generationList is Response.Success) {
                 _uiState.update { it.copy(generationList = generationList.data) }
             }
-            if (typeList is ApiResponse.SuccessResult) {
+            if (typeList is Response.Success) {
                 _uiState.update { it.copy(typeList = typeList.data) }
             }
             _uiState.update { it.copy(isLoading = false) }
