@@ -27,10 +27,6 @@ fun PokemonCard(
     pokemon: PokemonHome,
     onClick: () -> Unit
 ) {
-    val assetHelper = LocalAssetHelper.current
-    val mainType = pokemon.types.firstOrNull { type -> type.slot == 1 }
-    val assetFromType = assetHelper.getAsset(mainType?.type?.name ?: "")
-
     Box(
         modifier = Modifier
             .padding(top = 4.dp)
@@ -39,7 +35,7 @@ fun PokemonCard(
     ) {
         Card(
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = assetFromType.backgroundColor,
+            backgroundColor = pokemon.types.first().type.assetFromType.backgroundColor,
             modifier = Modifier
                 .clickable(onClick = onClick)
                 .fillMaxWidth()
@@ -60,7 +56,10 @@ fun PokemonCard(
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     pokemon.types.forEach {
-                        TypeCard(typeName = it.type.name)
+                        TypeCard(
+                            typeName = it.type.name,
+                            assetFromType = it.type.assetFromType
+                        )
                     }
                 }
             }

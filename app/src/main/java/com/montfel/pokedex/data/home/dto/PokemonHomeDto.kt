@@ -4,6 +4,7 @@ import com.montfel.pokedex.PokemonListQuery
 import com.montfel.pokedex.domain.home.model.TypeHome
 import com.montfel.pokedex.domain.home.model.TypesHome
 import com.montfel.pokedex.domain.home.model.PokemonHome
+import com.montfel.pokedex.helper.AssetFromType
 
 fun PokemonListQuery.Pokemon_v2_pokemon.toDomain() = PokemonHome(
     id = id,
@@ -13,6 +14,7 @@ fun PokemonListQuery.Pokemon_v2_pokemon.toDomain() = PokemonHome(
             slot = type.slot,
             type = TypeHome(
                 name = type.pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() } ?: "",
+                assetFromType = AssetFromType.getAsset(type.pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() } ?: "")
             )
         )
     }

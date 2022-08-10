@@ -12,15 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokedex.presentation.theme.LocalAssetHelper
+import com.montfel.pokedex.helper.AssetFromType
 import com.montfel.pokedex.presentation.theme.pokemonType
 import com.montfel.pokedex.presentation.theme.primaryIcon
 import com.montfel.pokedex.presentation.theme.secondaryText
 
 @Composable
-fun TypeCard(typeName: String) {
-    val assetHelper = LocalAssetHelper.current
-    val assetFromType = assetHelper.getAsset(typeName)
+fun TypeCard(typeName: String, assetFromType: AssetFromType) {
 
     Card(
         shape = RoundedCornerShape(4.dp),
