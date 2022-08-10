@@ -2,8 +2,7 @@ package com.montfel.pokedex.domain.profile.model
 
 import com.montfel.pokedex.helper.AssetFromType
 
-data class TypeProfile(
+data class Type(
     val name: String,
-    val id: String,
     val assetFromType: AssetFromType
 )

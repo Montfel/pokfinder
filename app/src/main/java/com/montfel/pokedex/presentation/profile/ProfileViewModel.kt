@@ -57,8 +57,8 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getDamageRelations(types: List<TypesProfile>) {
-        val response = repository.getDamageRelations(types.first().type.id)
+    private suspend fun getDamageRelations(types: List<Types>) {
+        val response = repository.getDamageRelations(types.first().type.name.lowercase())
         if (response is ApiResponse.SuccessResult) {
             _uiState.update {
                 it.copy(

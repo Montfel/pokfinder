@@ -4,7 +4,7 @@ data class PokemonProfile(
     val id: Int,
     val name: String,
     val image: String,
-    val types: List<TypesProfile>,
+    val types: List<Types>,
     val height: Float,
     val weight: Float,
     val baseExp: Int,
