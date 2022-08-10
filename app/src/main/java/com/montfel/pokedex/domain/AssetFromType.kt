@@ -7,8 +7,8 @@ import com.montfel.pokedex.presentation.theme.*
 
 sealed class AssetFromType(
     val typeColor: Color,
-    val backgroundColor: Color,
-    @DrawableRes val icon: Int
+    @DrawableRes val icon: Int,
+    val backgroundColor: Color = Color.White
 ) {
     object Bug : AssetFromType(
         typeColor = TypeBug,
@@ -118,6 +118,36 @@ sealed class AssetFromType(
         icon = R.drawable.ic_water
     )
 
+    object Short : AssetFromType(
+        typeColor = HeightShort,
+        icon = R.drawable.ic_resource_short
+    )
+
+    object MediumHeight : AssetFromType(
+        typeColor = HeightMedium,
+        icon = R.drawable.ic_medium
+    )
+
+    object Tall : AssetFromType(
+        typeColor = HeightTall,
+        icon = R.drawable.ic_tall
+    )
+
+    object Light : AssetFromType(
+        typeColor = WeightLight,
+        icon = R.drawable.ic_light
+    )
+
+    object NormalWeight : AssetFromType(
+        typeColor = WeightNormal,
+        icon = R.drawable.ic_normal
+    )
+
+    object Heavy : AssetFromType(
+        typeColor = WeightHeavy,
+        icon = R.drawable.ic_heavy
+    )
+
     companion object {
         fun getAsset(type: String): AssetFromType {
             return when (type) {
@@ -139,6 +169,12 @@ sealed class AssetFromType(
                 "rock" -> Rock
                 "steel" -> Steel
                 "water" -> Water
+                "short" -> Short
+                "medium_height" -> MediumHeight
+                "tall" -> Tall
+                "light" -> Light
+                "normal_weight" -> NormalWeight
+                "heavy" -> Heavy
                 else -> Dark
             }
         }
