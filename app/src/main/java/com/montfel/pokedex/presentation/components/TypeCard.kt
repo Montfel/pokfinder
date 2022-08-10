@@ -12,17 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokedex.helper.AssetFromType
+import com.montfel.pokedex.domain.AssetFromType
+import com.montfel.pokedex.domain.profile.model.Type
 import com.montfel.pokedex.presentation.theme.pokemonType
 import com.montfel.pokedex.presentation.theme.primaryIcon
 import com.montfel.pokedex.presentation.theme.secondaryText
 
 @Composable
-fun TypeCard(typeName: String, assetFromType: AssetFromType) {
+fun TypeCard(type: Type) {
 
     Card(
         shape = RoundedCornerShape(4.dp),
-        backgroundColor = assetFromType.typeColor,
+        backgroundColor = type.assetFromType.typeColor,
         modifier = Modifier.height(24.dp)
     ) {
         Row(
@@ -31,13 +32,13 @@ fun TypeCard(typeName: String, assetFromType: AssetFromType) {
             modifier = Modifier.padding(horizontal = 4.dp)
         ) {
             Image(
-                painter = painterResource(id = assetFromType.icon),
+                painter = painterResource(id = type.assetFromType.icon),
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
                 modifier = Modifier.size(15.dp)
             )
             Text(
-                text = typeName,
+                text = type.name,
                 style = MaterialTheme.typography.pokemonType,
                 color = MaterialTheme.colors.secondaryText,
             )

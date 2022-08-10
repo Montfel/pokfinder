@@ -16,7 +16,7 @@ package com.montfel.pokedex.presentation.home.bottomsheet
 //import androidx.compose.ui.res.stringResource
 //import androidx.compose.ui.unit.dp
 //import com.montfel.pokedex.R
-//import com.montfel.pokedex.helper.AssetFromType
+//import com.montfel.pokedex.domain.AssetFromType
 //import com.montfel.pokedex.presentation.home.bottomsheet.components.BottomSheetHeader
 //import com.montfel.pokedex.presentation.home.bottomsheet.components.FilterSection
 //import com.montfel.pokedex.presentation.theme.*

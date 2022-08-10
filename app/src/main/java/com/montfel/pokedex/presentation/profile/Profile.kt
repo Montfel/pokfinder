@@ -163,10 +163,7 @@ fun Profile(
                         uiState.profile?.types?.let { types ->
                             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                 types.forEach { type ->
-                                    TypeCard(
-                                        typeName = type.type.name,
-                                        assetFromType = type.type.assetFromType
-                                    )
+                                    TypeCard(type = type.type)
                                 }
                             }
                         }

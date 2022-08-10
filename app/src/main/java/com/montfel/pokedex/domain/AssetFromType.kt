@@ -1,10 +1,9 @@
-package com.montfel.pokedex.helper
+package com.montfel.pokedex.domain
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.theme.*
-import javax.inject.Singleton
 
 sealed class AssetFromType(
     val typeColor: Color,
@@ -122,24 +121,24 @@ sealed class AssetFromType(
     companion object {
         fun getAsset(type: String): AssetFromType {
             return when (type) {
-                "Bug" -> Bug
-                "Dark" -> Dark
-                "Dragon" -> Dragon
-                "Electric" -> Electric
-                "Fairy" -> Fairy
-                "Fighting" -> Fighting
-                "Fire" -> Fire
-                "Flying" -> Flying
-                "Ghost" -> Ghost
-                "Grass" -> Grass
-                "Ground" -> Ground
-                "Ice" -> Ice
-                "Normal" -> Normal
-                "Poison" -> Poison
-                "Psychic" -> Psychic
-                "Rock" -> Rock
-                "Steel" -> Steel
-                "Water" -> Water
+                "bug" -> Bug
+                "dark" -> Dark
+                "dragon" -> Dragon
+                "electric" -> Electric
+                "fairy" -> Fairy
+                "fighting" -> Fighting
+                "fire" -> Fire
+                "flying" -> Flying
+                "ghost" -> Ghost
+                "grass" -> Grass
+                "ground" -> Ground
+                "ice" -> Ice
+                "normal" -> Normal
+                "poison" -> Poison
+                "psychic" -> Psychic
+                "rock" -> Rock
+                "steel" -> Steel
+                "water" -> Water
                 else -> Dark
             }
         }

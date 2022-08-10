@@ -56,10 +56,7 @@ fun PokemonCard(
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     pokemon.types.forEach {
-                        TypeCard(
-                            typeName = it.type.name,
-                            assetFromType = it.type.assetFromType
-                        )
+                        TypeCard(type = it.type)
                     }
                 }
             }

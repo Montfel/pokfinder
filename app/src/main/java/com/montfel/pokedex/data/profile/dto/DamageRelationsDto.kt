@@ -2,7 +2,7 @@ package com.montfel.pokedex.data.profile.dto
 
 import com.google.gson.annotations.SerializedName
 import com.montfel.pokedex.domain.profile.model.DamageRelations
-import com.montfel.pokedex.helper.DtoMapper
+import com.montfel.pokedex.data.DtoMapper
 
 data class DamageRelationsDto(
     @SerializedName("double_damage_from")
