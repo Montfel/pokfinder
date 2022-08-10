@@ -37,7 +37,7 @@ fun Profile(
 ) {
     val language = Locale.current.language
     val uiState by viewModel.uiState.collectAsState()
-    val assetFromType = uiState.profile?.types?.first()?.type?.assetFromType
+    val assetFromType = uiState.profile?.types?.first { it.slot == 1 }?.type?.assetFromType
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats)
     var abilities = ""
