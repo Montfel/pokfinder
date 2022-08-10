@@ -12,11 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.helper.AssetFromType
+import com.montfel.pokedex.domain.AssetFromType
 import com.montfel.pokedex.presentation.home.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokedex.presentation.home.bottomsheet.components.FilterSection
 import com.montfel.pokedex.presentation.theme.*
@@ -32,39 +31,15 @@ fun FilterBottomSheet(
     val weightsSelected = remember { mutableStateListOf<Int>() }
 
     val heightList = listOf(
-        AssetFromType(
-            typeColor = HeightShort,
-            icon = R.drawable.ic_resource_short,
-            backgroundColor = Color.White
-        ),
-        AssetFromType(
-            typeColor = HeightMedium,
-            icon = R.drawable.ic_medium,
-            backgroundColor = Color.White
-        ),
-        AssetFromType(
-            typeColor = HeightTall,
-            icon = R.drawable.ic_tall,
-            backgroundColor = Color.White
-        )
+        AssetFromType.getAsset("short"),
+        AssetFromType.getAsset("medium_height"),
+        AssetFromType.getAsset("tall"),
     )
 
     val weightList = listOf(
-        AssetFromType(
-            typeColor = WeightLight,
-            icon = R.drawable.ic_light,
-            backgroundColor = Color.White
-        ),
-        AssetFromType(
-            typeColor = WeightNormal,
-            icon = R.drawable.ic_normal,
-            backgroundColor = Color.White
-        ),
-        AssetFromType(
-            typeColor = WeightHeavy,
-            icon = R.drawable.ic_heavy,
-            backgroundColor = Color.White
-        )
+        AssetFromType.getAsset("light"),
+        AssetFromType.getAsset("normal_weight"),
+        AssetFromType.getAsset("heavy"),
     )
 
     Column(

@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
-import com.montfel.pokedex.presentation.home.bottomsheet.FilterBottomSheet
 import com.montfel.pokedex.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.home.bottomsheet.SortBottomSheet
 import com.montfel.pokedex.presentation.home.components.HomeHeader
@@ -28,13 +27,16 @@ import com.montfel.pokedex.presentation.home.components.PokemonCard
 import com.montfel.pokedex.presentation.home.components.SearchField
 import com.montfel.pokedex.presentation.home.components.TopBar
 import com.montfel.pokedex.presentation.navigation.Screen
-import com.montfel.pokedex.presentation.theme.*
+import com.montfel.pokedex.presentation.theme.fabBackground
+import com.montfel.pokedex.presentation.theme.fabContent
+import com.montfel.pokedex.presentation.theme.pokeballIcon
+import com.montfel.pokedex.presentation.theme.primaryText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 enum class BottomSheetFilter {
-    Generation, Sort, Filter
+    Generation, Sort
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -45,9 +47,8 @@ fun Home(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val assetHelper = LocalAssetHelper.current
     var text by rememberSaveable { mutableStateOf("") }
-    var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Filter) }
+    var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -75,16 +76,6 @@ fun Home(
                     sortOptionSelected = uiState.sortOptionSelected,
                     onSortOptionSelected = { sortOptionSelected ->
                         viewModel.sortPokemons(sortOptionSelected)
-                        scope.launch(Dispatchers.Main) {
-                            delay(500)
-                            sheetState.hide()
-                        }
-                    }
-                )
-                BottomSheetFilter.Filter -> FilterBottomSheet(
-                    assetFromTypeList = uiState.typeList.map { assetHelper.getAsset(it.name) },
-                    onFilterApplied = {
-//                        viewModel.filterByAsset(it)
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()

@@ -3,7 +3,7 @@ package com.montfel.pokedex.data.profile.dto
 import com.google.gson.annotations.SerializedName
 import com.montfel.pokedex.domain.profile.model.HatchCounter
 import com.montfel.pokedex.domain.profile.model.PokemonSpecies
-import com.montfel.pokedex.helper.DtoMapper
+import com.montfel.pokedex.data.DtoMapper
 
 data class PokemonSpeciesDto(
     @SerializedName("base_happiness")

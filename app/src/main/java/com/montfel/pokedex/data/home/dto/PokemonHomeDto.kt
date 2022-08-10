@@ -1,18 +1,20 @@
 package com.montfel.pokedex.data.home.dto
 
 import com.montfel.pokedex.PokemonListQuery
-import com.montfel.pokedex.domain.home.model.TypeHome
-import com.montfel.pokedex.domain.home.model.TypesHome
 import com.montfel.pokedex.domain.home.model.PokemonHome
+import com.montfel.pokedex.domain.profile.model.Type
+import com.montfel.pokedex.domain.profile.model.Types
+import com.montfel.pokedex.domain.AssetFromType
 
 fun PokemonListQuery.Pokemon_v2_pokemon.toDomain() = PokemonHome(
     id = id,
     name = name.replaceFirstChar { it.uppercase() },
     types = pokemon_v2_pokemontypes.map { type ->
-        TypesHome(
+        Types(
             slot = type.slot,
-            type = TypeHome(
+            type = Type(
                 name = type.pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() } ?: "",
+                assetFromType = AssetFromType.getAsset(type.pokemon_v2_type?.name ?: "")
             )
         )
     }

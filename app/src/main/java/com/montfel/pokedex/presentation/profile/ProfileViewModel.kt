@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.montfel.pokedex.domain.profile.model.*
 import com.montfel.pokedex.domain.profile.repository.ProfileRepository
-import com.montfel.pokedex.helper.ApiResponse
+import com.montfel.pokedex.helper.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -43,11 +43,11 @@ class ProfileViewModel @Inject constructor(
             val species = speciesDeferred.await()
 //            val evolutionChain = evolutionChainDeferred.await()
 
-            if (profile is ApiResponse.SuccessResult) {
+            if (profile is Response.Success) {
                 getDamageRelations(profile.data.types)
                 _uiState.update { it.copy(profile = profile.data) }
             }
-            if (species is ApiResponse.SuccessResult) {
+            if (species is Response.Success) {
                 _uiState.update { it.copy(species = species.data) }
             }
 //            if (evolutionChain is ApiResponse.SuccessResult) {
@@ -57,9 +57,9 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getDamageRelations(types: List<TypesProfile>) {
-        val response = repository.getDamageRelations(types.first().type.id)
-        if (response is ApiResponse.SuccessResult) {
+    private suspend fun getDamageRelations(types: List<Types>) {
+        val response = repository.getDamageRelations(types.first{it.slot == 1}.type.name.lowercase())
+        if (response is Response.Success) {
             _uiState.update {
                 it.copy(
                     strengths = response.data.damageRelations.doubleDamageTo,

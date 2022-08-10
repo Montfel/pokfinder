@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokedex.helper.AssetFromType
+import com.montfel.pokedex.domain.AssetFromType
 import com.montfel.pokedex.presentation.theme.filterTitle
 import com.montfel.pokedex.presentation.theme.primaryText
 

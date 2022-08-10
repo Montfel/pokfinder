@@ -37,9 +37,7 @@ fun Profile(
 ) {
     val language = Locale.current.language
     val uiState by viewModel.uiState.collectAsState()
-    val assetHelper = LocalAssetHelper.current
-    val mainType = uiState.profile?.types?.firstOrNull { type -> type.slot == 1 }
-    val assetFromType = assetHelper.getAsset(mainType?.type?.name ?: "")
+    val assetFromType = uiState.profile?.types?.first { it.slot == 1 }?.type?.assetFromType
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = listOf(R.string.about, R.string.stats)
     var abilities = ""
@@ -116,8 +114,8 @@ fun Profile(
                 }
             }
         },
-        backgroundColor =
-        if (uiState.isLoading) MaterialTheme.colors.fabBackground else assetFromType.backgroundColor
+        backgroundColor = if (uiState.isLoading) MaterialTheme.colors.fabBackground
+        else assetFromType?.backgroundColor ?: Color.Transparent
     ) { paddingValues ->
         if (uiState.isLoading) {
             Box(modifier = Modifier.fillMaxSize()) {
@@ -165,7 +163,7 @@ fun Profile(
                         uiState.profile?.types?.let { types ->
                             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                 types.forEach { type ->
-                                    TypeCard(typeName = type.type.name)
+                                    TypeCard(type = type.type)
                                 }
                             }
                         }
@@ -214,7 +212,7 @@ fun Profile(
                                 data = data,
                                 training = training,
                                 breeding = breeding,
-                                typeColor = assetFromType.typeColor,
+                                typeColor = assetFromType?.typeColor ?: Color.Transparent,
                                 strengths = uiState.strengths,
                                 weaknesses = uiState.weaknesses,
                                 immunity = uiState.immunity,
@@ -223,7 +221,7 @@ fun Profile(
                         1 -> {
                             Stats(
                                 stats = uiState.profile?.stats ?: emptyList(),
-                                typeColor = assetFromType.typeColor,
+                                typeColor = assetFromType?.typeColor ?: Color.Transparent,
                                 pokemonName = uiState.profile?.name ?: ""
                             )
                         }

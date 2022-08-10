@@ -1,6 +1,6 @@
 package com.montfel.pokedex.domain.profile.model
 
-data class TypesProfile(
+data class Types(
     val slot: Int,
-    val type: TypeProfile
+    val type: Type
 )

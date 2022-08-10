@@ -1,60 +1,70 @@
 package com.montfel.pokedex.helper
 
-import android.util.Log
 import kotlinx.coroutines.CancellationException
 import retrofit2.HttpException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-suspend fun <T : Any> requestWrapper(call: suspend () -> T): ApiResponse<T> {
+sealed class Response<out T : Any> {
 
-    fun onRequestError(exception: Exception) {
-        Log.e("error", "onRequestError", exception)
+    class Success<out T : Any>(val data: T) : Response<T>()
+
+    object OfflineError : Response<Nothing>()
+
+    sealed class ServerError : Response<Nothing>() {
+        abstract val errorMsg: String
+
+        class HttpError(
+            override val errorMsg: String,
+            val code: Int,
+            val body: String
+        ) : ServerError()
+
+        class NetworkError(override val errorMsg: String) : ServerError()
+
+        class UnknownError(override val errorMsg: String) : ServerError()
     }
 
+    object RequestCancelled : Response<Nothing>()
+}
+
+suspend fun <T : Any> requestWrapper(call: suspend () -> T): Response<T> {
+
     return try {
-        val dataResult = call()
-        ApiResponse.SuccessResult(dataResult)
+        Response.Success(call())
     } catch (exception: Exception) {
         when (exception) {
             is HttpException -> {
-                onRequestError(exception)
-                ApiResponse.ServerError.HttpError(
-                    exception.message(),
-                    exception.code(),
-                    exception.response()?.errorBody()?.toString() ?: exception.message()
+                Response.ServerError.HttpError(
+                    errorMsg = exception.message(),
+                    code = exception.code(),
+                    body = exception.response()?.errorBody()?.toString() ?: exception.message()
                 )
             }
-            is SocketException -> ApiResponse.ServerError.NetworkError(exception.message ?: "")
-            is UnknownHostException,
-            is SocketTimeoutException -> ApiResponse.OfflineError
-            is CancellationException -> ApiResponse.RequestCancelled
+            is SocketException -> Response.ServerError.NetworkError(exception.message ?: "")
+            is UnknownHostException, is SocketTimeoutException -> Response.OfflineError
+            is CancellationException -> Response.RequestCancelled
             else -> {
-                onRequestError(exception)
-                ApiResponse.ServerError.UnknownError(exception.message ?: "")
+                Response.ServerError.UnknownError(errorMsg = exception.message ?: "")
             }
         }
     }
 }
 
-inline fun <T : Any, U : Any> ApiResponse<T>.mapSuccess(
+inline fun <T : Any, U : Any> Response<T>.mapSuccess(
     transform: (T) -> U
-): ApiResponse<U> {
+): Response<U> {
     return when (this) {
-        is ApiResponse.SuccessResult -> ApiResponse.SuccessResult(transform(this.data))
-        ApiResponse.OfflineError -> ApiResponse.OfflineError
-        ApiResponse.RequestCancelled -> ApiResponse.RequestCancelled
-        is ApiResponse.ServerError.HttpError -> ApiResponse.ServerError.HttpError(
-            this.errorMsg,
-            this.code,
-            this.body
+        is Response.Success -> Response.Success(transform(this.data))
+        Response.OfflineError -> Response.OfflineError
+        Response.RequestCancelled -> Response.RequestCancelled
+        is Response.ServerError.HttpError -> Response.ServerError.HttpError(
+            errorMsg = this.errorMsg,
+            code = this.code,
+            body = this.body
         )
-        is ApiResponse.ServerError.NetworkError -> ApiResponse.ServerError.NetworkError(
-            this.errorMsg
-        )
-        is ApiResponse.ServerError.UnknownError -> ApiResponse.ServerError.UnknownError(
-            this.errorMsg
-        )
+        is Response.ServerError.NetworkError -> Response.ServerError.NetworkError(this.errorMsg)
+        is Response.ServerError.UnknownError -> Response.ServerError.UnknownError(this.errorMsg)
     }
 }

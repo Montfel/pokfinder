@@ -1,24 +1,24 @@
 package com.montfel.pokedex.domain.profile.usecase
 
-import com.montfel.pokedex.domain.profile.model.TypesProfile
+import com.montfel.pokedex.domain.profile.model.Types
 import com.montfel.pokedex.domain.profile.repository.ProfileRepository
-import com.montfel.pokedex.helper.ApiResponse
+import com.montfel.pokedex.helper.Response
 import javax.inject.Inject
 
 class GetTypesWeaknessesUseCase @Inject constructor(
     private val repository: ProfileRepository
 ) {
-    suspend operator fun invoke(types: List<TypesProfile>): List<String> {
+    suspend operator fun invoke(types: List<Types>): List<String> {
         if (types.size == 1) {
-            val response = repository.getDamageRelations(types.first().type.id)
-            if (response is ApiResponse.SuccessResult) {
+            val response = repository.getDamageRelations(types.first{it.slot == 1}.type.name)
+            if (response is Response.Success) {
                 return response.data.damageRelations.doubleDamageFrom
             }
         } else {
-            val firstType = repository.getDamageRelations(types.first().type.id)
-            val secondType = repository.getDamageRelations(types.last().type.id)
+            val firstType = repository.getDamageRelations(types.first{it.slot == 1}.type.name)
+            val secondType = repository.getDamageRelations(types.last().type.name)
 
-            if (firstType is ApiResponse.SuccessResult && secondType is ApiResponse.SuccessResult) {
+            if (firstType is Response.Success && secondType is Response.Success) {
                 val firstWeaknesses = firstType.data.damageRelations.doubleDamageFrom
                     .filter { it !in secondType.data.damageRelations.doubleDamageTo }
                 val secondWeaknesses = secondType.data.damageRelations.doubleDamageFrom
