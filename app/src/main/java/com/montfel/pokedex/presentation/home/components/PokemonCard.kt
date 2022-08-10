@@ -35,7 +35,7 @@ fun PokemonCard(
     ) {
         Card(
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = pokemon.types.first().type.assetFromType.backgroundColor,
+            backgroundColor = pokemon.types.first{it.slot == 1}.type.assetFromType.backgroundColor,
             modifier = Modifier
                 .clickable(onClick = onClick)
                 .fillMaxWidth()
