@@ -19,13 +19,13 @@ fun HomeHeader() {
         Text(
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.applicationTitle,
-            color = MaterialTheme.colors.primaryText,
+            color = MaterialTheme.colors.primaryText
         )
 
         Text(
             text = stringResource(id = R.string.subtitle),
             style = MaterialTheme.typography.description,
-            color = MaterialTheme.colors.primaryVariantText,
+            color = MaterialTheme.colors.primaryVariantText
         )
     }
 }

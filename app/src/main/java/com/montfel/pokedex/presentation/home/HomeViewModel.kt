@@ -40,6 +40,10 @@ class HomeViewModel @Inject constructor(
     private var pokemons = emptyList<PokemonHome>()
 
     init {
+        loadHomePage()
+    }
+
+    fun loadHomePage() {
         viewModelScope.launch(Dispatchers.IO) {
             val pokemonListDeferred = async { repository.getPokemonList() }
             val generationListDeferred = async { repository.getGenerationList() }
@@ -49,17 +53,28 @@ class HomeViewModel @Inject constructor(
             val generationList = generationListDeferred.await()
             val typeList = typeListDeferred.await()
 
-            if (pokemonList is Response.Success) {
+            if (pokemonList is Response.Success &&
+                generationList is Response.Success &&
+                typeList is Response.Success
+            ) {
                 pokemons = pokemonList.data
-                _uiState.update { it.copy(pokemonList = pokemonList.data) }
+                _uiState.update {
+                    it.copy(
+                        pokemonList = pokemonList.data,
+                        generationList = generationList.data,
+                        typeList = typeList.data,
+                        isLoading = false,
+                        hasError = false
+                    )
+                }
+            } else {
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        hasError = true
+                    )
+                }
             }
-            if (generationList is Response.Success) {
-                _uiState.update { it.copy(generationList = generationList.data) }
-            }
-            if (typeList is Response.Success) {
-                _uiState.update { it.copy(typeList = typeList.data) }
-            }
-            _uiState.update { it.copy(isLoading = false) }
         }
     }
 

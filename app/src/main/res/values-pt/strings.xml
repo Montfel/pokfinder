@@ -2,6 +2,7 @@
     <!-- Home -->
     <string name="subtitle">Encontre o Pokémon pelo nome ou usando o número da Pokédex Nacional.</string>
     <string name="placeholder_textfield">Qual Pokémon você está procurando?</string>
+    <string name="retry">Tente novamente</string>
 
     <!-- Filters -->
     <string name="filters">Filtros</string>

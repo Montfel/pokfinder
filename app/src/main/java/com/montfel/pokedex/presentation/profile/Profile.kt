@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.profile.model.AboutData
+import com.montfel.pokedex.presentation.components.RetryButton
 import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.profile.components.About
 import com.montfel.pokedex.presentation.profile.components.Stats
@@ -114,13 +115,21 @@ fun Profile(
                 }
             }
         },
-        backgroundColor = if (uiState.isLoading) MaterialTheme.colors.fabBackground
+        backgroundColor =
+        if (uiState.isLoading || uiState.hasError) MaterialTheme.colors.fabBackground
         else assetFromType?.backgroundColor ?: Color.Transparent
     ) { paddingValues ->
         if (uiState.isLoading) {
             Box(modifier = Modifier.fillMaxSize()) {
                 CircularProgressIndicator(
-                    color = MaterialTheme.colors.primaryText,
+                    color = MaterialTheme.colors.primaryInput,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+        } else if (uiState.hasError) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                RetryButton(
+                    onClick = { viewModel.getPokemonDetails(id) },
                     modifier = Modifier.align(Alignment.Center)
                 )
             }

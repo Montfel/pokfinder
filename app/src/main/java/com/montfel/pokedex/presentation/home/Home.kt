@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
+import com.montfel.pokedex.presentation.components.RetryButton
 import com.montfel.pokedex.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokedex.presentation.home.bottomsheet.SortBottomSheet
 import com.montfel.pokedex.presentation.home.components.HomeHeader
@@ -30,7 +31,7 @@ import com.montfel.pokedex.presentation.navigation.Screen
 import com.montfel.pokedex.presentation.theme.fabBackground
 import com.montfel.pokedex.presentation.theme.fabContent
 import com.montfel.pokedex.presentation.theme.pokeballIcon
-import com.montfel.pokedex.presentation.theme.primaryText
+import com.montfel.pokedex.presentation.theme.primaryInput
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,7 +59,6 @@ fun Home(
     val lazyListState = rememberLazyListState()
 
     ModalBottomSheetLayout(
-        sheetState = sheetState,
         sheetContent = {
             when (filter) {
                 BottomSheetFilter.Generation -> GenerationBottomSheet(
@@ -84,6 +84,7 @@ fun Home(
                 )
             }
         },
+        sheetState = sheetState,
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
     ) {
         Box(
@@ -126,27 +127,12 @@ fun Home(
                     )
                 }
 
-                if (uiState.isLoading) {
-                    item {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(top = 32.dp)
-                        ) {
-                            CircularProgressIndicator(
-                                color = MaterialTheme.colors.primaryText,
-                                modifier = Modifier.align(Alignment.Center)
-                            )
-                        }
-                    }
-                } else {
-                    items(
-                        items = uiState.pokemonList,
-                        key = { it.id },
-                    ) { pokemon ->
-                        PokemonCard(pokemon = pokemon) {
-                            navController.navigate(Screen.Profile.createRoute(pokemon.id))
-                        }
+                items(
+                    items = uiState.pokemonList,
+                    key = { it.id },
+                ) { pokemon ->
+                    PokemonCard(pokemon = pokemon) {
+                        navController.navigate(Screen.Profile.createRoute(pokemon.id))
                     }
                 }
             }
@@ -171,6 +157,18 @@ fun Home(
                         contentDescription = null
                     )
                 }
+            }
+
+            if (uiState.isLoading) {
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.primaryInput,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            } else if (uiState.hasError) {
+                RetryButton(
+                    onClick = viewModel::loadHomePage,
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
         }
     }
