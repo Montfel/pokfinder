@@ -14,13 +14,17 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.home.model.PokemonHome
 import com.montfel.pokedex.presentation.components.TypeCard
-import com.montfel.pokedex.presentation.theme.*
+import com.montfel.pokedex.presentation.theme.numberOverBackgroundColor
+import com.montfel.pokedex.presentation.theme.pokemonName
+import com.montfel.pokedex.presentation.theme.pokemonNumber
+import com.montfel.pokedex.presentation.theme.secondaryText
 
 @Composable
 fun PokemonCard(
@@ -35,30 +39,38 @@ fun PokemonCard(
     ) {
         Card(
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = pokemon.types.first{it.slot == 1}.type.assetFromType.backgroundColor,
+            backgroundColor = pokemon.types.first { it.slot == 1 }.type.assetFromType.backgroundColor,
             modifier = Modifier
                 .clickable(onClick = onClick)
                 .fillMaxWidth()
                 .height(115.dp)
                 .align(Alignment.BottomCenter)
         ) {
-            Column(modifier = Modifier.padding(20.dp)) {
-                Text(
-                    text = "#${pokemon.id}",
-                    style = MaterialTheme.typography.pokemonNumber,
-                    color = MaterialTheme.colors.numberOverBackgroundColor
-                )
-                Text(
-                    text = pokemon.name,
-                    style = MaterialTheme.typography.pokemonName,
-                    color = MaterialTheme.colors.secondaryText,
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    pokemon.types.forEach {
-                        TypeCard(type = it.type)
+            Row {
+                Column(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .weight(1f)
+                ) {
+                    Text(
+                        text = "#${pokemon.id}",
+                        style = MaterialTheme.typography.pokemonNumber,
+                        color = MaterialTheme.colors.numberOverBackgroundColor
+                    )
+                    Text(
+                        text = pokemon.name,
+                        style = MaterialTheme.typography.pokemonName,
+                        color = MaterialTheme.colors.secondaryText,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        pokemon.types.forEach {
+                            TypeCard(type = it.type)
+                        }
                     }
                 }
+                Spacer(modifier = Modifier.size(100.dp))
             }
         }
         Image(
