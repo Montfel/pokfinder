@@ -2,16 +2,16 @@ buildscript {
     ext {
         coil = '2.1.0'
         compose = '1.2.1'
-        compose_compiler = '1.2.0-rc02'
+        compose_compiler = '1.3.0'
         retrofit = '2.9.0'
         okhttp = '4.10.0'
-        accompanist = '0.25.0'
+        accompanist = '0.25.1'
     }
     repositories {
         google()
     }
     dependencies {
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.43.2'
         classpath 'com.google.gms:google-services:4.3.13'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.1'
     }
@@ -19,7 +19,7 @@ buildscript {
 plugins {
     id 'com.android.application' version '7.2.2' apply false
     id 'com.android.library' version '7.2.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.6.21' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 }
 
 task clean(type: Delete) {
