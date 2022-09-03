@@ -48,7 +48,6 @@ fun Home(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    var text by rememberSaveable { mutableStateOf("") }
     var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
@@ -119,11 +118,8 @@ fun Home(
                     HomeHeader()
 
                     SearchField(
-                        text = text,
-                        onType = {
-                            text = it
-                            viewModel.searchPokemon(it)
-                        }
+                        text = uiState.query,
+                        onType = viewModel::searchPokemon,
                     )
                 }
 

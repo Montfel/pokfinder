@@ -10,12 +10,12 @@ class GetTypesStrengthsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(types: List<Types>): List<String> {
         if (types.size == 1) {
-            val response = repository.getDamageRelations(types.first{it.slot == 1}.type.name)
+            val response = repository.getDamageRelations(types.first { it.slot == 1 }.type.name)
             if (response is Response.Success) {
                 return response.data.damageRelations.doubleDamageTo
             }
         } else {
-            val firstType = repository.getDamageRelations(types.first{it.slot == 1}.type.name)
+            val firstType = repository.getDamageRelations(types.first { it.slot == 1 }.type.name)
             val secondType = repository.getDamageRelations(types.last().type.name)
 
             if (firstType is Response.Success && secondType is Response.Success) {

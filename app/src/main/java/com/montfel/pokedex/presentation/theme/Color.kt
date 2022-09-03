@@ -48,6 +48,9 @@ val Colors.fabContent: Color
 val Colors.systemBar: Color
     get() = if (isLight) Color.White else Color.Black
 
+val Colors.textFieldIcon: Color
+    get() = Gray74
+
 private val Gray12 = Color(0xFF121212)
 val Gray17 = Color(0xFF17171B)
 private val Gray20 = Color(0xFF202020)

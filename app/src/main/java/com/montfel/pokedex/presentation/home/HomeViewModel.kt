@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeUiState(
+    val query: String = "",
     val pokemonList: List<PokemonHome> = emptyList(),
     val typeList: List<Type> = emptyList(),
     val generationList: List<Generation> = emptyList(),
@@ -79,6 +80,8 @@ class HomeViewModel @Inject constructor(
     }
 
     fun searchPokemon(query: String) {
+        _uiState.update { it.copy(query = query) }
+
         if (query.isNotBlank()) {
             viewModelScope.launch(Dispatchers.Default) {
                 val text = query.trim()
