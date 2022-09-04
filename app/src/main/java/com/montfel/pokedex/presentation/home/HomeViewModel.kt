@@ -23,7 +23,7 @@ data class HomeUiState(
     val pokemonList: List<PokemonHome> = emptyList(),
     val typeList: List<Type> = emptyList(),
     val generationList: List<Generation> = emptyList(),
-    val generationSelected: String = "",
+    val generationSelected: Int = 0,
     val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
     val isLoading: Boolean = true,
     val hasError: Boolean = false
@@ -96,19 +96,19 @@ class HomeViewModel @Inject constructor(
     }
 
     fun filterByGeneration(generation: Generation) {
-        if (generation.name != uiState.value.generationSelected) {
-            val result = pokemons.filter { it.id in generation.id }
+        if (generation.id != uiState.value.generationSelected) {
+            val result = pokemons.filter { it.id in generation.pokemonId }
 
             _uiState.update {
                 it.copy(
-                    generationSelected = generation.name,
+                    generationSelected = generation.id,
                     pokemonList = result,
                 )
             }
         } else {
             _uiState.update {
                 it.copy(
-                    generationSelected = "",
+                    generationSelected = 0,
                     pokemonList = pokemons,
                 )
             }

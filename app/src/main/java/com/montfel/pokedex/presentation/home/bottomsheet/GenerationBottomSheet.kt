@@ -15,7 +15,7 @@ import com.montfel.pokedex.presentation.home.bottomsheet.components.GenerationBu
 @Composable
 fun GenerationBottomSheet(
     generationList: List<Generation>,
-    generationSelected: String,
+    generationSelected: Int,
     onGenerationSelected: (Generation) -> Unit
 ) {
     Column(
@@ -38,8 +38,8 @@ fun GenerationBottomSheet(
             items(generationList) {
                 GenerationButton(
                     title = it.name,
-                    firstPokemons = it.id.take(3),
-                    isEnabled = generationSelected == it.name,
+                    firstPokemons = it.pokemonId.take(3),
+                    isEnabled = generationSelected == it.id,
                     onClick = { onGenerationSelected(it) }
                 )
             }

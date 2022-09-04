@@ -9,7 +9,8 @@ fun GenerationsQuery.Pokemon_v2_generation.toDomain(): Generation {
     val last = split.last().uppercase()
 
     return Generation(
+        id = id,
         name = "$first $last",
-        id = pokemon_v2_pokemonspecies.map { it.id }
+        pokemonId = pokemon_v2_pokemonspecies.map { it.id }
     )
 }
