@@ -104,3 +104,4 @@ lint/tmp/
 .idea/inspectionProfiles/Project_Default.xml
 .idea/compiler.xml
 .idea/workspace.xml~
+.idea/other.xml
