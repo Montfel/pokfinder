@@ -25,6 +25,9 @@
 
 ## 💻 About
 
+Pokédex - Find your Pokémon is an application for those who like the Pokémon world, as it will help you find the ideal Pokémon for you, in it you will be able to see all the characteristics such as its strengths and weaknesses, types and much more.
+
+This project was developed with the help of [umpontoseis](https://umpontoseis.com/), who prepared the entire design of the app and made it available on Figma, as well as with the help of [DevChallenge](https://www.devchallenge.com.br/), which on its website provides several application ideas and one of them is Pokédex.
 
 ---
 
@@ -36,7 +39,7 @@
    - [x] Generation
    - [ ] Type
    - [ ] Strength
-   - [ ] Weakeness
+   - [ ] Weakness
    - [ ] Height
    - [ ] Weight
 - [x] Order by
