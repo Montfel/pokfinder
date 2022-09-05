@@ -97,6 +97,11 @@ The following tools were used in the construction of the project:
 -   **[Kotlin](https://kotlinlang.org/)**
 -   **[Android](https://www.android.com/)**
 
+#### Architecture
+
+-   **Clean Architecture**
+-   **MVVM / MVI**
+
 #### Libraries
 
 -   **[Hilt](https://dagger.dev/hilt/)**
