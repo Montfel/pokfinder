@@ -30,10 +30,29 @@
 
 ## ⚙ Features
 
-- [ ] a
-- [ ] a
-- [ ] a
-- [ ] a
+- [x] Search for a Pokémon
+- [x] List all Pokémons
+- [ ] Filter by
+   - [x] Generation
+   - [ ] Type
+   - [ ] Strength
+   - [ ] Weakeness
+   - [ ] Height
+   - [ ] Weight
+- [x] Order by
+   - [x] Pokémon in ascending order
+   - [x] Pokémon in descending order
+   - [x] A - Z
+   - [x] Z - A
+- [ ] Pokémon details
+   - [x] General data
+   - [x] Training
+   - [x] Breeding
+   - [ ] Location
+   - [x] Base stats
+   - [ ] Type defenses
+   - [ ] Evolution
+- [x] Dark mode
 
 #### Supported languages
 
