@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("com.apollographql.apollo3").version('3.5.0')
+    id("com.apollographql.apollo3").version('3.6.0')
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
@@ -15,8 +15,8 @@ android {
         applicationId "com.montfel.pokedex"
         minSdk 21
         targetSdk 33
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 6
+        versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -94,7 +94,7 @@ dependencies {
     implementation 'androidx.window:window:1.0.0'
 
     // Apollo
-    implementation('com.apollographql.apollo3:apollo-runtime:3.5.0')
+    implementation('com.apollographql.apollo3:apollo-runtime:3.6.0')
 
     // Hilt
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
