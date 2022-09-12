@@ -44,7 +44,7 @@ fun Evolution(
                         painter = painterResource(id = R.drawable.ic_front),
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
-                        alpha = 0.1f,
+                        alpha = 0.3f,
                     )
                     evolutionChain[index + 1].evolutionDetail.forEach { nextSpecie ->
                         Text(
