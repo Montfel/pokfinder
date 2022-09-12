@@ -1,0 +1,14 @@
+query Evolution($id : Int!) {
+    pokemon_v2_evolutionchain_by_pk(id: $id) {
+        pokemon_v2_pokemonspecies {
+            id
+            name
+            pokemon_v2_pokemonevolutions {
+                min_level
+                pokemon_v2_evolutiontrigger {
+                    name
+                }
+            }
+        }
+    }
+}

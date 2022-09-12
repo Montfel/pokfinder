@@ -27,6 +27,7 @@ import com.montfel.pokedex.domain.profile.model.AboutData
 import com.montfel.pokedex.presentation.components.RetryButton
 import com.montfel.pokedex.presentation.components.TypeCard
 import com.montfel.pokedex.presentation.profile.components.About
+import com.montfel.pokedex.presentation.profile.components.Evolution
 import com.montfel.pokedex.presentation.profile.components.Stats
 import com.montfel.pokedex.presentation.theme.*
 
@@ -40,7 +41,10 @@ fun Profile(
     val uiState by viewModel.uiState.collectAsState()
     val assetFromType = uiState.profile?.types?.first { it.slot == 1 }?.type?.assetFromType
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
-    val titles = listOf(R.string.about, R.string.stats)
+    val titles = mutableListOf(R.string.about, R.string.stats)
+    if (uiState.evolutionChain.size > 1) {
+        titles.add(R.string.evolution)
+    }
     var abilities = ""
     uiState.profile?.abilities?.forEach {
         abilities += if (it.isHidden) {
@@ -234,12 +238,12 @@ fun Profile(
                                 pokemonName = uiState.profile?.name ?: ""
                             )
                         }
-//                    2 -> {
-//                        Evolution(
-//                            typeColor = assetBackground.typeColor,
-//                            evolutionChain = uiState.pokemonSpecies?.evolutionChain ?: emptyList()
-//                        )
-//                    }
+                        2 -> {
+                            Evolution(
+                                typeColor = assetFromType?.typeColor ?: Color.Transparent,
+                                evolutionChain = uiState.evolutionChain
+                            )
+                        }
                     }
                 }
             }

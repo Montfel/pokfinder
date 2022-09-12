@@ -1,7 +1,6 @@
 package com.montfel.pokedex.data.profile.datasource
 
 import com.montfel.pokedex.data.profile.dto.PokemonDamageRelationsDto
-import com.montfel.pokedex.data.profile.dto.PokemonEvolutionChainDto
 import com.montfel.pokedex.data.profile.dto.PokemonProfileDto
 import com.montfel.pokedex.data.profile.dto.PokemonSpeciesDto
 import retrofit2.http.GET
@@ -17,11 +16,6 @@ interface ProfileDataSource {
     suspend fun getSpecies(
         @Path(value = "pokemonId") pokemonId: String
     ): PokemonSpeciesDto
-
-    @GET("evolution-chain/{pokemonId}")
-    suspend fun getEvolutionChain(
-        @Path(value = "pokemonId") pokemonId: String
-    ): PokemonEvolutionChainDto
 
     @GET("type/{typeId}")
     suspend fun getDamageRelations(

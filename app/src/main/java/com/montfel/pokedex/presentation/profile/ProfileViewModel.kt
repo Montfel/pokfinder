@@ -2,6 +2,7 @@ package com.montfel.pokedex.presentation.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.montfel.pokedex.domain.profile.model.EvolutionChain
 import com.montfel.pokedex.domain.profile.model.PokemonProfile
 import com.montfel.pokedex.domain.profile.model.PokemonSpecies
 import com.montfel.pokedex.domain.profile.repository.ProfileRepository
@@ -21,6 +22,7 @@ data class ProfileUiState(
     val strengths: List<String> = emptyList(),
     val weaknesses: List<String> = emptyList(),
     val immunity: List<String> = emptyList(),
+    val evolutionChain: List<EvolutionChain> = emptyList(),
     val isLoading: Boolean = true,
     val hasError: Boolean = false
 )
@@ -42,9 +44,17 @@ class ProfileViewModel @Inject constructor(
             val species = speciesDeferred.await()
 
             if (profile is Response.Success && species is Response.Success) {
-                val damageRelations =
+                val evolutionChainDeferred = async {
+                    repository.getEvolutionChain(species.data.evolutionChainId)
+                }
+                val damageRelationsDeferred = async {
                     repository.getDamageRelations(profile.data.types.first { it.slot == 1 }.type.name.lowercase())
-                if (damageRelations is Response.Success) {
+                }
+
+                val evolutionChain = evolutionChainDeferred.await()
+                val damageRelations = damageRelationsDeferred.await()
+
+                if (evolutionChain is Response.Success && damageRelations is Response.Success) {
                     _uiState.update {
                         it.copy(
                             profile = profile.data,
@@ -52,6 +62,7 @@ class ProfileViewModel @Inject constructor(
                             strengths = damageRelations.data.damageRelations.doubleDamageTo,
                             weaknesses = damageRelations.data.damageRelations.doubleDamageFrom,
                             immunity = damageRelations.data.damageRelations.noDamageFrom,
+                            evolutionChain = evolutionChain.data,
                             isLoading = false,
                             hasError = false
                         )
