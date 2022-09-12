@@ -8,5 +8,6 @@ data class PokemonSpecies(
     val genderRate: Int,
     val genera: List<Genera>,
     val growthRate: String,
-    val hatchCounter: HatchCounter
+    val hatchCounter: HatchCounter,
+    val evolutionChainId: Int
 )

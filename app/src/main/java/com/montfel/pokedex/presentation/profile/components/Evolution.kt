@@ -16,12 +16,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokedex.R
+import com.montfel.pokedex.domain.profile.model.EvolutionChain
 import com.montfel.pokedex.presentation.theme.*
 
 @Composable
 fun Evolution(
     typeColor: Color,
-    evolutionChain: List<Any>
+    evolutionChain: List<EvolutionChain>
 ) {
     Spacer(modifier = Modifier.height(30.dp))
     Text(
@@ -31,7 +32,7 @@ fun Evolution(
     )
     Spacer(modifier = Modifier.height(30.dp))
     evolutionChain.forEachIndexed { index, specie ->
-        if (index != evolutionChain.size - 1) {
+        if (index < evolutionChain.size - 1) {
             Row(
                 verticalAlignment = CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -45,11 +46,13 @@ fun Evolution(
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
                         alpha = 0.1f,
                     )
-//                    Text(
-//                        text = "(Level ${evolutionChain[index + 1].minLevel})",
-//                        style = MaterialTheme.typography.pokemonNumber,
-//                        color = MaterialTheme.colors.primaryText
-//                    )
+                    evolutionChain[index + 1].evolutionDetail.forEach { nextSpecie ->
+                        Text(
+                            text = nextSpecie.minLevel?.let { "Level $it" } ?: nextSpecie.trigger,
+                            style = MaterialTheme.typography.pokemonNumber,
+                            color = MaterialTheme.colors.primaryText
+                        )
+                    }
                 }
                 PokemonEvolution(specie = evolutionChain[index + 1])
             }
@@ -59,7 +62,7 @@ fun Evolution(
 }
 
 @Composable
-fun PokemonEvolution(specie: Any) {
+fun PokemonEvolution(specie: EvolutionChain) {
     Column(horizontalAlignment = CenterHorizontally) {
         Box(modifier = Modifier.size(100.dp)) {
             Image(
@@ -69,22 +72,22 @@ fun PokemonEvolution(specie: Any) {
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.pokeballIcon)
             )
             AsyncImage(
-                model = null,
+                model = stringResource(id = R.string.pokemon_image_url, specie.id),
                 contentDescription = null,
                 modifier = Modifier
                     .size(75.dp)
                     .align(Alignment.Center)
             )
         }
-//        Text(
-//            text = "#${specie.id}",
-//            style = MaterialTheme.typography.pokemonType,
-//            color = MaterialTheme.colors.primaryVariantText
-//        )
-//        Text(
-//            text = specie.name,
-//            style = MaterialTheme.typography.filterTitle,
-//            color = MaterialTheme.colors.primaryText
-//        )
+        Text(
+            text = "#${specie.id}",
+            style = MaterialTheme.typography.pokemonType,
+            color = MaterialTheme.colors.primaryVariantText
+        )
+        Text(
+            text = specie.name,
+            style = MaterialTheme.typography.filterTitle,
+            color = MaterialTheme.colors.primaryText
+        )
     }
 }
