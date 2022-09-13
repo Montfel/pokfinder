@@ -1,6 +1,5 @@
 package com.montfel.pokedex.presentation.profile.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,26 +10,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.montfel.pokedex.R
+import com.montfel.pokedex.domain.AssetFromType
 import com.montfel.pokedex.presentation.theme.primaryIcon
 
 @Composable
-fun TypeEffectivenessItem(
-    typeColor: Color,
-    @DrawableRes image: Int
-) {
+fun TypeEffectivenessItem(typeName: String) {
+    val assetFromType = AssetFromType.getAsset(typeName)
     Box(
         modifier = Modifier
             .size(25.dp)
             .clip(RoundedCornerShape(4.dp))
-            .background(typeColor)
+            .background(assetFromType.typeColor)
     ) {
         Image(
-            painter = painterResource(id = image),
-            contentDescription = null,
+            painter = painterResource(id = assetFromType.icon),
+            contentDescription = stringResource(id = R.string.type, typeName),
             colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
             modifier = Modifier
                 .size(15.dp)

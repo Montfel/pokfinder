@@ -94,7 +94,7 @@ fun PokemonCard(
         )
         AsyncImage(
             model = stringResource(id = R.string.pokemon_image_url, pokemon.id),
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.pokemon_image_description, pokemon.name),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .align(Alignment.TopEnd)

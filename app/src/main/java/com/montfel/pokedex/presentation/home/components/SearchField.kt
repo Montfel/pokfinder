@@ -44,7 +44,7 @@ fun SearchField(
                 IconButton(onClick = { onType("") }) {
                     Image(
                         imageVector = Icons.Default.Close,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.clear_text_field),
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.textFieldIcon),
                         modifier = Modifier.size(20.dp)
                     )

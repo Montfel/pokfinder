@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
-import com.montfel.pokedex.domain.AssetFromType
 import com.montfel.pokedex.presentation.theme.description
 import com.montfel.pokedex.presentation.theme.pokemonType
 import com.montfel.pokedex.presentation.theme.primaryText
@@ -40,11 +39,7 @@ fun AboutTypeItem(@StringRes title: Int, typesList: List<String>) {
             )
         } else {
             typesList.forEach {
-                val assetFromType = AssetFromType.getAsset(it)
-                TypeEffectivenessItem(
-                    typeColor = assetFromType.typeColor,
-                    image = assetFromType.icon
-                )
+                TypeEffectivenessItem(typeName = it)
             }
         }
     }

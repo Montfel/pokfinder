@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -41,8 +43,8 @@ fun Evolution(
                 PokemonEvolution(specie = specie)
                 Column(horizontalAlignment = CenterHorizontally) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_front),
-                        contentDescription = null,
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = stringResource(id = R.string.evolution_arrow),
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
                         alpha = 0.3f,
                     )
@@ -73,7 +75,7 @@ fun PokemonEvolution(specie: EvolutionChain) {
             )
             AsyncImage(
                 model = stringResource(id = R.string.pokemon_image_url, specie.id),
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.pokemon_image_description, specie.name),
                 modifier = Modifier
                     .size(75.dp)
                     .align(Alignment.Center)

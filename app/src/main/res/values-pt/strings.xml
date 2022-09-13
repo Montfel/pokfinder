@@ -61,4 +61,15 @@
     <!-- Evolution -->
     <string name="evolution">Evolução</string>
     <string name="evolution_chart">Gráfico de Evolução</string>
+
+    <!-- Accessibity -->
+    <string name="button_scroll_top_page">Ir para o topo da página</string>
+    <string name="pokemon_image_description">Pokémon %s</string>
+    <string name="clear_text_field">Limpar campo de texto</string>
+    <string name="back">Voltar</string>
+    <string name="generation_filter">Filtro de geração</string>
+    <string name="sort_filter">Filtro de ordem</string>
+    <string name="other_filters">Outros filtros</string>
+    <string name="type">Tipo %s</string>
+    <string name="evolution_arrow">Evolui para</string>
 </resources>

@@ -7,6 +7,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -112,8 +114,8 @@ fun Profile(
             ) {
                 IconButton(onClick = navController::popBackStack) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = null,
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = stringResource(id = R.string.back),
                         tint = MaterialTheme.colors.primaryIcon
                     )
                 }
@@ -158,7 +160,10 @@ fun Profile(
                         )
                         AsyncImage(
                             model = uiState.profile?.image,
-                            contentDescription = null,
+                            contentDescription = stringResource(
+                                id = R.string.pokemon_image_description,
+                                uiState.profile?.name ?: ""
+                            ),
                             modifier = Modifier.size(125.dp)
                         )
                     }

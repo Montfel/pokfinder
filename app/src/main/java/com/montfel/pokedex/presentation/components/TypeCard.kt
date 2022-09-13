@@ -19,7 +19,6 @@ import com.montfel.pokedex.presentation.theme.secondaryText
 
 @Composable
 fun TypeCard(type: Type) {
-
     Card(
         shape = RoundedCornerShape(4.dp),
         backgroundColor = type.assetFromType.typeColor,

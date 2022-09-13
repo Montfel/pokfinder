@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.home.BottomSheetFilter
@@ -24,21 +25,21 @@ fun TopBar(onClick: (BottomSheetFilter) -> Unit) {
             IconButton(onClick = { onClick(BottomSheetFilter.Generation) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_generation),
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.generation_filter),
                     tint = MaterialTheme.colors.topBarIcon
                 )
             }
             IconButton(onClick = { onClick(BottomSheetFilter.Sort) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_sort),
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.sort_filter),
                     tint = MaterialTheme.colors.topBarIcon
                 )
             }
 //            IconButton(onClick = { onClick(BottomSheetFilter.Filter) }) {
 //                Icon(
 //                    painter = painterResource(id = R.drawable.ic_filter),
-//                    contentDescription = null,
+//                    contentDescription = stringResource(id = R.string.other_filters),
 //                    tint = MaterialTheme.colors.topBarIcon
 //                )
 //            }
