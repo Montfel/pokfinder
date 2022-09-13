@@ -1,6 +1,6 @@
 <resources>
     <!-- Home -->
-    <string name="app_name">Pokédex - Find your Pokémon</string>
+    <string name="app_name">Find your</string>
     <string name="subtitle">Search for Pokémon by name or using the National Pokédex number.</string>
     <string name="placeholder_textfield">What Pokémon are you looking for?</string>
     <string name="retry">Retry</string>
