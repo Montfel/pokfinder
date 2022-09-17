@@ -1,5 +1,8 @@
 package com.montfel.pokedex.presentation.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.montfel.pokedex.domain.home.model.Generation
@@ -19,7 +22,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeUiState(
-    val query: String = "",
     val pokemonList: List<PokemonHome> = emptyList(),
     val typeList: List<Type> = emptyList(),
     val generationList: List<Generation> = emptyList(),
@@ -37,6 +39,9 @@ class HomeViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
+
+    var pokemonQuery by mutableStateOf("")
+        private set
 
     private var pokemons = emptyList<PokemonHome>()
 
@@ -80,7 +85,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun searchPokemon(query: String) {
-        _uiState.update { it.copy(query = query) }
+        pokemonQuery = query
 
         if (query.isNotBlank()) {
             viewModelScope.launch(Dispatchers.Default) {
