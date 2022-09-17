@@ -28,6 +28,7 @@ import com.montfel.pokedex.R
 import com.montfel.pokedex.domain.profile.model.AboutData
 import com.montfel.pokedex.presentation.components.RetryButton
 import com.montfel.pokedex.presentation.components.TypeCard
+import com.montfel.pokedex.presentation.navigation.Screen
 import com.montfel.pokedex.presentation.profile.components.About
 import com.montfel.pokedex.presentation.profile.components.Evolution
 import com.montfel.pokedex.presentation.profile.components.Stats
@@ -246,7 +247,8 @@ fun Profile(
                         2 -> {
                             Evolution(
                                 typeColor = assetFromType?.typeColor ?: Color.Transparent,
-                                evolutionChain = uiState.evolutionChain
+                                evolutionChain = uiState.evolutionChain,
+                                onClick = { navController.navigate(Screen.Profile.createRoute(it)) }
                             )
                         }
                     }
