@@ -19,6 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.montfel.pokedex.R
 import com.montfel.pokedex.presentation.components.RetryButton
@@ -41,14 +43,14 @@ enum class BottomSheetFilter {
     Generation, Sort
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalLifecycleComposeApi::class)
 @Composable
 fun Home(
     navController: NavController,
     deviceWidth: Float,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
@@ -119,7 +121,7 @@ fun Home(
                     HomeHeader()
 
                     SearchField(
-                        text = uiState.query,
+                        text = viewModel.pokemonQuery,
                         onType = viewModel::searchPokemon,
                     )
                 }

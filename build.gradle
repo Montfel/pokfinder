@@ -6,6 +6,8 @@ buildscript {
         retrofit = '2.9.0'
         okhttp = '4.10.0'
         accompanist = '0.26.3-beta'
+        lifecycle = '2.6.0-alpha02'
+        firebase = '30.4.1'
     }
     repositories {
         google()

@@ -56,6 +56,8 @@ This project was developed with the help of [umpontoseis](https://umpontoseis.co
    - [ ] Type defenses
    - [x] Evolution
 - [x] Dark mode
+- [x] Accessible
+
 
 #### Supported languages
 
