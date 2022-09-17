@@ -1,7 +1,9 @@
 package com.montfel.pokedex.presentation.profile.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -11,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -24,7 +27,8 @@ import com.montfel.pokedex.presentation.theme.*
 @Composable
 fun Evolution(
     typeColor: Color,
-    evolutionChain: List<EvolutionChain>
+    evolutionChain: List<EvolutionChain>,
+    onClick: (Int) -> Unit
 ) {
     Spacer(modifier = Modifier.height(30.dp))
     Text(
@@ -40,7 +44,10 @@ fun Evolution(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                PokemonEvolution(specie = specie)
+                PokemonEvolution(
+                    specie = specie,
+                    onClick = onClick
+                )
                 Column(horizontalAlignment = CenterHorizontally) {
                     Image(
                         imageVector = Icons.Default.ArrowForward,
@@ -56,7 +63,10 @@ fun Evolution(
                         )
                     }
                 }
-                PokemonEvolution(specie = evolutionChain[index + 1])
+                PokemonEvolution(
+                    specie = evolutionChain[index + 1],
+                    onClick = onClick
+                )
             }
             Spacer(modifier = Modifier.height(30.dp))
         }
@@ -64,9 +74,17 @@ fun Evolution(
 }
 
 @Composable
-fun PokemonEvolution(specie: EvolutionChain) {
+fun PokemonEvolution(
+    specie: EvolutionChain,
+    onClick: (Int) -> Unit
+) {
     Column(horizontalAlignment = CenterHorizontally) {
-        Box(modifier = Modifier.size(100.dp)) {
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .clip(CircleShape)
+                .clickable { onClick(specie.id) }
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,

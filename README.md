@@ -1,11 +1,10 @@
 ![Cover Form](https://user-images.githubusercontent.com/63600670/188512424-41de6784-202c-4af7-b90b-85ba36beb032.png)
 
 <h1 align="center">
-<a href="https://user-images.githubusercontent.com/63600670/188513795-98f87adf-8926-43ae-b63e-9cc8596fa321.png"><img align="left" style="border-radius: 50%;" src="" width="180" alt=""/></a>
+<a href="https://play.google.com/store/apps/details?id=com.montfel.pokedex"><img align="left" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514149-56f6a4bc-48ae-45ff-97a1-597d81f86950.png" width="180" alt=""/></a>
     Pokédex - Find your Pokémon
-    <a href="https://play.google.com/store/apps/details?id=com.montfel.calculadoradegorjeta"><img align="right" style="border-radius: 50%;" src="" width="160" alt=""/></a>
+    <a href="https://play.google.com/store/apps/details?id=com.montfel.pokedex"><img align="right" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514104-486f0a1c-0bbf-4333-bb1b-5088687efdc9.png" width="160" alt=""/></a>
 </h1>
-
 
 <h4 align="center">
 	🚧   Work in progress...  🚧
@@ -75,11 +74,14 @@ The application layout is available on Figma:
 </a>
 
 
+Primeira tela | Segunda tela | Terceira tela
+---|---|---
+![home light](https://user-images.githubusercontent.com/63600670/190871373-a9102542-0750-4422-b20f-add8cbcdb929.png) | ![generations light](https://user-images.githubusercontent.com/63600670/190871380-82784f25-10a2-4642-a9ac-7698b02ea703.png) | ![sort light](https://user-images.githubusercontent.com/63600670/190871391-b236d84d-67a3-4a48-a6bf-38cdc4b4833b.png)
+![about light](https://user-images.githubusercontent.com/63600670/190871403-6e3b8c00-ae7a-4856-99b4-e0eec2d0c2be.png) | ![stats light](https://user-images.githubusercontent.com/63600670/190871409-63749e5d-ca5a-4115-88c8-56f10ba1f003.png) | ![sort light](https://user-images.githubusercontent.com/63600670/190871414-d209ef48-a11e-49f5-a386-df0a713598dd.png)
+![home dark](https://user-images.githubusercontent.com/63600670/190870659-0ce05c89-421b-4919-a8bd-edea31140c78.png) | ![generations dark](https://user-images.githubusercontent.com/63600670/190870665-1232d860-e345-4bcf-a141-95f58b4c4c60.png) | ![sort dark](https://user-images.githubusercontent.com/63600670/190870676-05d6d8d9-028b-4e76-95ad-2122d8351044.png)
+![about dark](https://user-images.githubusercontent.com/63600670/190870694-ab389ecb-e5ff-4ede-b8f0-a19bd911c872.png) | ![stats dark](https://user-images.githubusercontent.com/63600670/190870699-dd02805d-ee50-40af-9709-f7ca6e4307b3.png) | ![evolution dark](https://user-images.githubusercontent.com/63600670/190870712-ccf85a46-f62c-44a3-abc2-bab5537f8ba4.png)
 
-Light | Dark
----|---
-![smartphone home light](https://user-images.githubusercontent.com/63600670/188510434-9aee595d-9874-403b-a468-57b5437e5bbd.png) | ![smartphone home dark](https://user-images.githubusercontent.com/63600670/188510517-885264b6-a485-4269-9a29-214493f27137.png)
-![smartphone profile light](https://user-images.githubusercontent.com/63600670/188510619-5b3c290c-52a8-4b79-ad17-9b8580d23472.png) | ![smartphone profile dark](https://user-images.githubusercontent.com/63600670/188510740-b93157d7-830c-4cf5-83f5-b690e6a32f8f.png)
+
 
 ---
 
@@ -88,7 +90,7 @@ Light | Dark
 ### Pre-requisites
 
 -   You must have an Android device with Android 5.0 Lollipop or later.
--   Download `Pokédex - Find your Pokémon` app on Google Play Store through link: **[App](https://www.android.com/)**
+-   Download `Pokédex - Find your Pokémon` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokedex)**
 
 ---
 
