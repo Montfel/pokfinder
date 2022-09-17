@@ -1,9 +1,9 @@
 ![Cover Form](https://user-images.githubusercontent.com/63600670/188512424-41de6784-202c-4af7-b90b-85ba36beb032.png)
 
 <h1 align="center">
-<a href="https://user-images.githubusercontent.com/63600670/188513795-98f87adf-8926-43ae-b63e-9cc8596fa321.png"><img align="left" style="border-radius: 50%;" src="" width="180" alt=""/></a>
+<a href="https://user-images.githubusercontent.com/63600670/188513795-98f87adf-8926-43ae-b63e-9cc8596fa321.png"><img align="left" style="border-radius: 50%;" src="https://play.google.com/store/apps/details?id=com.montfel.pokedex" width="180" alt=""/></a>
     Pokédex - Find your Pokémon
-    <a href="https://play.google.com/store/apps/details?id=com.montfel.calculadoradegorjeta"><img align="right" style="border-radius: 50%;" src="" width="160" alt=""/></a>
+    <a href="https://play.google.com/store/apps/details?id=com.montfel.calculadoradegorjeta"><img align="right" style="border-radius: 50%;" src="https://play.google.com/store/apps/details?id=com.montfel.pokedex" width="160" alt=""/></a>
 </h1>
 
 
@@ -88,7 +88,7 @@ Light | Dark
 ### Pre-requisites
 
 -   You must have an Android device with Android 5.0 Lollipop or later.
--   Download `Pokédex - Find your Pokémon` app on Google Play Store through link: **[App](https://www.android.com/)**
+-   Download `Pokédex - Find your Pokémon` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokedex)**
 
 ---
 
