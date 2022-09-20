@@ -42,8 +42,8 @@ This project was developed with the help of [umpontoseis](https://umpontoseis.co
    - [ ] Height
    - [ ] Weight
 - [x] Order by
-   - [x] Pokémon in ascending order
-   - [x] Pokémon in descending order
+   - [x] Pokémon number in ascending order
+   - [x] Pokémon number in descending order
    - [x] A - Z
    - [x] Z - A
 - [ ] Pokémon details
@@ -74,7 +74,7 @@ The application layout is available on Figma:
 </a>
 
 
-Primeira tela | Segunda tela | Terceira tela
+First screen | Second screen | Third screen
 ---|---|---
 ![home light](https://user-images.githubusercontent.com/63600670/190871373-a9102542-0750-4422-b20f-add8cbcdb929.png) | ![generations light](https://user-images.githubusercontent.com/63600670/190871380-82784f25-10a2-4642-a9ac-7698b02ea703.png) | ![sort light](https://user-images.githubusercontent.com/63600670/190871391-b236d84d-67a3-4a48-a6bf-38cdc4b4833b.png)
 ![about light](https://user-images.githubusercontent.com/63600670/190871403-6e3b8c00-ae7a-4856-99b4-e0eec2d0c2be.png) | ![stats light](https://user-images.githubusercontent.com/63600670/190871409-63749e5d-ca5a-4115-88c8-56f10ba1f003.png) | ![sort light](https://user-images.githubusercontent.com/63600670/190871414-d209ef48-a11e-49f5-a386-df0a713598dd.png)
