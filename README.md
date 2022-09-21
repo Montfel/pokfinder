@@ -2,7 +2,7 @@
 
 <h1 align="center">
 <a href="https://play.google.com/store/apps/details?id=com.montfel.pokedex"><img align="left" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514149-56f6a4bc-48ae-45ff-97a1-597d81f86950.png" width="180" alt=""/></a>
-    Pokédex - Find your Pokémon
+    Pokéfinder
     <a href="https://play.google.com/store/apps/details?id=com.montfel.pokedex"><img align="right" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514104-486f0a1c-0bbf-4333-bb1b-5088687efdc9.png" width="160" alt=""/></a>
 </h1>
 
@@ -24,7 +24,7 @@
 
 ## 💻 About
 
-Pokédex - Find your Pokémon is an application for those who like the Pokémon world, as it will help you find the ideal Pokémon for you, in it you will be able to see all the characteristics such as its strengths and weaknesses, types and much more.
+Pokéfinder is an application for those who like the Pokémon world, as it will help you find the ideal Pokémon for you, in it you will be able to see all the characteristics such as its strengths and weaknesses, types and much more.
 
 This project was developed with the help of [umpontoseis](https://umpontoseis.com/), who prepared the entire design of the app and made it available on Figma, as well as with the help of [DevChallenge](https://www.devchallenge.com.br/), which on its website provides several application ideas and one of them is Pokédex.
 
@@ -92,7 +92,7 @@ First screen | Second screen | Third screen
 -   You must have an Android device with Android 5.0 Lollipop or later.
 
 ### Download
--   Download `Pokédex - Find your Pokémon` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokedex)**
+-   Download `Pokéfinder` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokedex)**
 
 ---
 
