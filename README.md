@@ -90,6 +90,8 @@ First screen | Second screen | Third screen
 ### Pre-requisites
 
 -   You must have an Android device with Android 5.0 Lollipop or later.
+
+### Download
 -   Download `Pokédex - Find your Pokémon` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokedex)**
 
 ---
