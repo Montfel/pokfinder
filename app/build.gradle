@@ -16,8 +16,8 @@ android {
         applicationId "com.montfel.pokedex"
         minSdk 21
         targetSdk 33
-        versionCode 8
-        versionName "1.0.7"
+        versionCode 13
+        versionName "1.0.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -27,7 +27,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
