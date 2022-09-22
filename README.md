@@ -90,7 +90,7 @@ First screen | Second screen | Third screen
 -   You must have an Android device with Android 5.0 Lollipop or later.
 
 ### Download
--   Download `Pokéfinder` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokedex)**
+-   Download and install `Pokéfinder` APK from releases: https://github.com/Montfel/pokedex/releases
 
 ---
 
