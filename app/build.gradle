@@ -9,15 +9,15 @@ plugins {
 }
 
 android {
-    namespace 'com.montfel.pokedex'
+    namespace 'com.montfel.pokfinder'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.montfel.pokedex"
+        applicationId "com.montfel.pokfinder"
         minSdk 21
         targetSdk 33
-        versionCode 13
-        versionName "1.0.12"
+        versionCode 1
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,7 +50,7 @@ android {
         }
     }
     apollo {
-        packageName.set("com.montfel.pokedex")
+        packageName.set("com.montfel.pokfinder")
     }
 }
 
