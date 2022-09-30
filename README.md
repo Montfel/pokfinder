@@ -75,7 +75,7 @@ The application layout is available on Figma:
 First screen | Second screen | Third screen
 ---|---|---
 ![home light](https://user-images.githubusercontent.com/63600670/190871373-a9102542-0750-4422-b20f-add8cbcdb929.png) | ![generations light](https://user-images.githubusercontent.com/63600670/190871380-82784f25-10a2-4642-a9ac-7698b02ea703.png) | ![sort light](https://user-images.githubusercontent.com/63600670/190871391-b236d84d-67a3-4a48-a6bf-38cdc4b4833b.png)
-![about light](https://user-images.githubusercontent.com/63600670/190871403-6e3b8c00-ae7a-4856-99b4-e0eec2d0c2be.png) | ![stats light](https://user-images.githubusercontent.com/63600670/190871409-63749e5d-ca5a-4115-88c8-56f10ba1f003.png) | ![sort light](https://user-images.githubusercontent.com/63600670/190871414-d209ef48-a11e-49f5-a386-df0a713598dd.png)
+![about light](https://user-images.githubusercontent.com/63600670/190871403-6e3b8c00-ae7a-4856-99b4-e0eec2d0c2be.png) | ![stats light](https://user-images.githubusercontent.com/63600670/190871409-63749e5d-ca5a-4115-88c8-56f10ba1f003.png) | ![evolution light](https://user-images.githubusercontent.com/63600670/193352544-16155129-0326-4ed9-9abf-fb4d30c16d85.png)
 ![home dark](https://user-images.githubusercontent.com/63600670/190870659-0ce05c89-421b-4919-a8bd-edea31140c78.png) | ![generations dark](https://user-images.githubusercontent.com/63600670/190870665-1232d860-e345-4bcf-a141-95f58b4c4c60.png) | ![sort dark](https://user-images.githubusercontent.com/63600670/190870676-05d6d8d9-028b-4e76-95ad-2122d8351044.png)
 ![about dark](https://user-images.githubusercontent.com/63600670/190870694-ab389ecb-e5ff-4ede-b8f0-a19bd911c872.png) | ![stats dark](https://user-images.githubusercontent.com/63600670/190870699-dd02805d-ee50-40af-9709-f7ca6e4307b3.png) | ![evolution dark](https://user-images.githubusercontent.com/63600670/190870712-ccf85a46-f62c-44a3-abc2-bab5537f8ba4.png)
 
@@ -86,6 +86,7 @@ First screen | Second screen | Third screen
 ## 🚀 How to run
 
 ### Pre-requisites
+
 
 -   You must have an Android device with Android 5.0 Lollipop or later.
 
