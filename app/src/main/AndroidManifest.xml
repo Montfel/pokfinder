@@ -5,18 +5,18 @@
 
 
     <application
-        android:name=".PokedexApp"
+        android:name=".PokfinderApp"
         android:allowBackup="true"
-        android:icon="@mipmap/pokeball_launcher"
+        android:icon="@mipmap/pokfinder_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/pokeball_launcher_round"
+        android:roundIcon="@mipmap/pokfinder_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Pokedex">
+        android:theme="@style/Theme.Pokfinder">
         <activity
-            android:name=".presentation.PokedexActivity"
+            android:name=".presentation.PokfinderActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Pokedex"
+            android:theme="@style/Theme.Pokfinder"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

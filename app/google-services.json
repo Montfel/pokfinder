@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "779841327164",
-    "project_id": "pokedex-3ccb0",
-    "storage_bucket": "pokedex-3ccb0.appspot.com"
+    "project_number": "755819608275",
+    "project_id": "pokfinder-a6339",
+    "storage_bucket": "pokfinder-a6339.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:779841327164:android:506e14eddc7bbedf00f339",
+        "mobilesdk_app_id": "1:755819608275:android:d9fb21a7edfcdcb07c3c26",
         "android_client_info": {
-          "package_name": "com.montfel.pokedex"
+          "package_name": "com.montfel.pokfinder"
         }
       },
       "oauth_client": [
         {
-          "client_id": "779841327164-forj2bp9hn267qrqhhejpi675fvngi92.apps.googleusercontent.com",
+          "client_id": "755819608275-bq6ul5gos9sjl60gl14s8shb663nauai.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.montfel.pokedex",
+            "package_name": "com.montfel.pokfinder",
             "certificate_hash": "e2ca7be2758a19c3535e82c394ef143a20237174"
           }
         },
         {
-          "client_id": "779841327164-if94c5g3oiahbam2rdtmhq0ps13kf7cj.apps.googleusercontent.com",
+          "client_id": "755819608275-0l7gmeuaqqac1e5qtecojc39mboi7oro.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA47HOz-wi186Is1sj2hDZ_4sduiPRhGIU"
+          "current_key": "AIzaSyBtkCwlCBnR-33TQcThAHeFKXw7G-0kNYw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "779841327164-if94c5g3oiahbam2rdtmhq0ps13kf7cj.apps.googleusercontent.com",
+              "client_id": "755819608275-0l7gmeuaqqac1e5qtecojc39mboi7oro.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("com.apollographql.apollo3").version('3.6.0')
+    id("com.apollographql.apollo3").version('3.6.2')
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
@@ -9,15 +9,15 @@ plugins {
 }
 
 android {
-    namespace 'com.montfel.pokedex'
+    namespace 'com.montfel.pokfinder'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.montfel.pokedex"
+        applicationId "com.montfel.pokfinder"
         minSdk 21
         targetSdk 33
-        versionCode 13
-        versionName "1.0.12"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,7 +50,7 @@ android {
         }
     }
     apollo {
-        packageName.set("com.montfel.pokedex")
+        packageName.set("com.montfel.pokfinder")
     }
 }
 
@@ -91,14 +91,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Dagger
-    implementation "com.google.dagger:hilt-android:2.43.2"
-    kapt "com.google.dagger:hilt-android-compiler:2.43.2"
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-android-compiler:2.44"
 
     // Window
     implementation 'androidx.window:window:1.0.0'
 
     // Apollo
-    implementation('com.apollographql.apollo3:apollo-runtime:3.6.0')
+    implementation('com.apollographql.apollo3:apollo-runtime:3.6.2')
 
     // Hilt
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
@@ -107,7 +107,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
 
     // Activity
-    implementation 'androidx.activity:activity-compose:1.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.0'
 
     // Navigation
     implementation 'androidx.navigation:navigation-compose:2.5.2'
