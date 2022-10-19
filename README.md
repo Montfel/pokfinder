@@ -1,7 +1,9 @@
 ![Cover Form](https://user-images.githubusercontent.com/63600670/188512424-41de6784-202c-4af7-b90b-85ba36beb032.png)
 
 <h1 align="center">
+<a href="https://play.google.com/store/apps/details?id=com.montfel.pokfinder"><img align="left" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514149-56f6a4bc-48ae-45ff-97a1-597d81f86950.png" width="180" alt=""/></a>
     Pokéfinder
+    <a href="https://play.google.com/store/apps/details?id=com.montfel.pokfinder"><img align="right" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514104-486f0a1c-0bbf-4333-bb1b-5088687efdc9.png" width="160" alt=""/></a>
 </h1>
 
 <h4 align="center">
@@ -91,7 +93,7 @@ First screen | Second screen | Third screen
 -   You must have an Android device with Android 5.0 Lollipop or later.
 
 ### Download
--   Download and install `Pokéfinder` APK from releases: https://github.com/Montfel/pokedex/releases
+-   Download `Pokfinder` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokfinder)**
 
 ---
 
