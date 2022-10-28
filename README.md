@@ -101,7 +101,12 @@ First screen | Second screen | Third screen
 
 The following tools were used in the construction of the project:
 
+#### Language
+
 -   **[Kotlin](https://kotlinlang.org/)**
+
+#### Framework
+
 -   **[Android](https://www.android.com/)**
 
 #### Architecture
