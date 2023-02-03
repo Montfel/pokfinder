@@ -19,12 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.presentation.components.RetryButton
-import com.montfel.pokfinder.presentation.home.HomeViewModel
 import com.montfel.pokfinder.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.SortBottomSheet
 import com.montfel.pokfinder.presentation.home.components.HomeHeader
@@ -44,7 +42,7 @@ enum class BottomSheetFilter {
     Generation, Sort
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalLifecycleComposeApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun Home(
     navController: NavController,
@@ -75,6 +73,7 @@ fun Home(
                         }
                     }
                 )
+
                 BottomSheetFilter.Sort -> SortBottomSheet(
                     sortOptionSelected = uiState.sortOptionSelected,
                     onSortOptionSelected = { sortOptionSelected ->

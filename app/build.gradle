@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("com.apollographql.apollo3").version('3.6.2')
+    id("com.apollographql.apollo3").version('3.7.3')
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
@@ -16,8 +16,8 @@ android {
         applicationId "com.montfel.pokfinder"
         minSdk 21
         targetSdk 33
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 6
+        versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -57,14 +57,12 @@ android {
 dependencies {
 
     // Compose
-    implementation "androidx.compose.animation:animation:$compose"
-    implementation "androidx.compose.foundation:foundation:$compose"
-    implementation "androidx.compose.material:material:$compose"
-    implementation "androidx.compose.runtime:runtime:$compose"
-    implementation "androidx.compose.ui:ui:$compose"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose"
+    def composeBom = platform("androidx.compose:compose-bom:$compose")
+    implementation composeBom
+    androidTestImplementation composeBom
+    implementation "androidx.compose.material:material"
+    implementation "androidx.compose.ui:ui-tooling-preview"
+    debugImplementation "androidx.compose.ui:ui-tooling"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
@@ -91,14 +89,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Dagger
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-android-compiler:2.44"
+    implementation "com.google.dagger:hilt-android:2.44.2"
+    kapt "com.google.dagger:hilt-android-compiler:2.44.2"
 
     // Window
     implementation 'androidx.window:window:1.0.0'
 
     // Apollo
-    implementation('com.apollographql.apollo3:apollo-runtime:3.6.2')
+    implementation('com.apollographql.apollo3:apollo-runtime:3.7.3')
 
     // Hilt
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
@@ -107,13 +105,13 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
 
     // Activity
-    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation 'androidx.activity:activity-compose:1.6.1'
 
     // Navigation
-    implementation 'androidx.navigation:navigation-compose:2.5.2'
+    implementation 'androidx.navigation:navigation-compose:2.5.3'
 
     // Test
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

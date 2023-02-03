@@ -105,3 +105,4 @@ lint/tmp/
 .idea/compiler.xml
 .idea/workspace.xml~
 .idea/other.xml
+/.idea/kotlinc.xml
