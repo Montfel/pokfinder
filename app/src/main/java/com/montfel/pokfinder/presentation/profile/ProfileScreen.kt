@@ -2,15 +2,37 @@ package com.montfel.pokfinder.presentation.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -32,7 +54,14 @@ import com.montfel.pokfinder.presentation.navigation.Screen
 import com.montfel.pokfinder.presentation.profile.components.About
 import com.montfel.pokfinder.presentation.profile.components.Evolution
 import com.montfel.pokfinder.presentation.profile.components.Stats
-import com.montfel.pokfinder.presentation.theme.*
+import com.montfel.pokfinder.presentation.theme.applicationTitle
+import com.montfel.pokfinder.presentation.theme.description
+import com.montfel.pokfinder.presentation.theme.fabBackground
+import com.montfel.pokfinder.presentation.theme.filterTitle
+import com.montfel.pokfinder.presentation.theme.numberOverBackgroundColor
+import com.montfel.pokfinder.presentation.theme.primaryIcon
+import com.montfel.pokfinder.presentation.theme.primaryInput
+import com.montfel.pokfinder.presentation.theme.secondaryText
 
 @Composable
 fun Profile(
@@ -62,13 +91,13 @@ fun Profile(
         ?: uiState.species?.genera?.first { lang -> lang.language == "en" }?.name
 
     val data = listOf(
-        AboutData(title = R.string.species, description = species ?: ""),
+        AboutData(title = R.string.species, description = species.orEmpty()),
         AboutData(title = R.string.height, description = "${uiState.profile?.height}m"),
         AboutData(title = R.string.weight, description = "${uiState.profile?.weight}kg"),
         AboutData(title = R.string.abilities, description = abilities),
     )
 
-    val ev = uiState.profile?.ev?.joinToString("\n") { "${it.effort} ${it.name}" } ?: ""
+    val ev = uiState.profile?.ev?.joinToString("\n") { "${it.effort} ${it.name}" }.orEmpty()
 
     val training = listOf(
         AboutData(title = R.string.ev_yield, description = ev),
@@ -80,8 +109,14 @@ fun Profile(
             title = R.string.base_friendship,
             description = uiState.species?.baseHappiness.toString()
         ),
-        AboutData(title = R.string.base_exp, description = uiState.profile?.baseExp.toString()),
-        AboutData(title = R.string.growth_rate, description = uiState.species?.growthRate ?: ""),
+        AboutData(
+            title = R.string.base_exp,
+            description = uiState.profile?.baseExp.toString()
+        ),
+        AboutData(
+            title = R.string.growth_rate,
+            description = uiState.species?.growthRate.orEmpty()
+        ),
     )
 
     val gender = uiState.species?.genderRate?.let {
@@ -92,7 +127,7 @@ fun Profile(
 
         }
     } ?: "Genderless"
-    val eggGroup = uiState.species?.eggGroups?.joinToString { it.name } ?: ""
+    val eggGroup = uiState.species?.eggGroups?.joinToString { it.name }.orEmpty()
     val eggCycles =
         "${uiState.species?.hatchCounter?.cycles} (${uiState.species?.hatchCounter?.steps} steps)"
 
@@ -163,7 +198,7 @@ fun Profile(
                             model = uiState.profile?.image,
                             contentDescription = stringResource(
                                 id = R.string.pokemon_image_description,
-                                uiState.profile?.name ?: ""
+                                uiState.profile?.name.orEmpty()
                             ),
                             modifier = Modifier.size(125.dp)
                         )
@@ -175,7 +210,7 @@ fun Profile(
                             color = MaterialTheme.colors.numberOverBackgroundColor
                         )
                         Text(
-                            text = uiState.profile?.name ?: "",
+                            text = uiState.profile?.name.orEmpty(),
                             style = MaterialTheme.typography.applicationTitle,
                             color = MaterialTheme.colors.secondaryText,
                         )
@@ -227,7 +262,7 @@ fun Profile(
                                     ?.random()?.flavorText
                                     ?: uiState.species?.flavorTexts
                                         ?.filter { lang -> lang.language == "en" }
-                                        ?.random()?.flavorText ?: "",
+                                        ?.random()?.flavorText.orEmpty(),
                                 data = data,
                                 training = training,
                                 breeding = breeding,
@@ -241,9 +276,10 @@ fun Profile(
                             Stats(
                                 stats = uiState.profile?.stats ?: emptyList(),
                                 typeColor = assetFromType?.typeColor ?: Color.Transparent,
-                                pokemonName = uiState.profile?.name ?: ""
+                                pokemonName = uiState.profile?.name.orEmpty()
                             )
                         }
+
                         2 -> {
                             Evolution(
                                 typeColor = assetFromType?.typeColor ?: Color.Transparent,

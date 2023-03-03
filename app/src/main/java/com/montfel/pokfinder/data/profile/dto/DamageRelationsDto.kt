@@ -1,8 +1,6 @@
 package com.montfel.pokfinder.data.profile.dto
 
 import com.google.gson.annotations.SerializedName
-import com.montfel.pokfinder.domain.profile.model.DamageRelations
-import com.montfel.pokfinder.data.DtoMapper
 
 data class DamageRelationsDto(
     @SerializedName("double_damage_from")
@@ -22,14 +20,4 @@ data class DamageRelationsDto(
 
     @SerializedName("no_damage_to")
     val noDamageTo: List<DamageTypeDto>
-
-) : DtoMapper<DamageRelations> {
-    override fun toDomain() = DamageRelations(
-        doubleDamageFrom = doubleDamageFrom.map { it.toDomain().name }.sorted(),
-        doubleDamageTo = doubleDamageTo.map { it.toDomain().name }.sorted(),
-        halfDamageFrom = halfDamageFrom.map { it.toDomain().name }.sorted(),
-        halfDamageTo = halfDamageTo.map { it.toDomain().name }.sorted(),
-        noDamageFrom = noDamageFrom.map { it.toDomain().name }.sorted(),
-        noDamageTo = noDamageTo.map { it.toDomain().name }.sorted()
-    )
-}
+)

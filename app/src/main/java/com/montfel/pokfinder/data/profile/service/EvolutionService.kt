@@ -1,11 +1,11 @@
-package com.montfel.pokfinder.data.profile.datasource
+package com.montfel.pokfinder.data.profile.service
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.montfel.pokfinder.EvolutionQuery
 import javax.inject.Inject
 
-class EvolutionDataSource @Inject constructor(
+class EvolutionService @Inject constructor(
     private val apolloClient: ApolloClient
 ) {
     suspend fun getEvolutionChain(evolutionChainId: Int): ApolloResponse<EvolutionQuery.Data> {

@@ -1,9 +1,6 @@
 package com.montfel.pokfinder.data.profile.dto
 
 import com.google.gson.annotations.SerializedName
-import com.montfel.pokfinder.data.DtoMapper
-import com.montfel.pokfinder.domain.profile.model.HatchCounter
-import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
 
 data class PokemonSpeciesDto(
     @SerializedName("base_happiness")
@@ -32,27 +29,4 @@ data class PokemonSpeciesDto(
 
     @SerializedName("evolution_chain")
     val evolutionChain: EvolutionChainDto
-
-) : DtoMapper<PokemonSpecies> {
-    override fun toDomain() = PokemonSpecies(
-        baseHappiness = baseHappiness,
-        captureRate = captureRate,
-        eggGroups = eggGroups.sortedBy { it.name }.map { it.toDomain() },
-        flavorTexts = flavorTexts
-            .map { it.toDomain() }
-            .filter { it.language == "en" || it.language == "pt-BR" },
-        genderRate = genderRate,
-        genera = genera
-            .map { it.toDomain() }
-            .filter { it.language == "en" || it.language == "pt-BR" },
-        growthRate = growthRate.toDomain().name,
-        hatchCounter = HatchCounter(
-            cycles = hatchCounter,
-            steps = hatchCounter.plus(1).times(255)
-        ),
-        evolutionChainId = evolutionChain.url
-            .dropLastWhile { it == '/' }
-            .takeLastWhile { it.isDigit() }
-            .toInt()
-    )
-}
+)

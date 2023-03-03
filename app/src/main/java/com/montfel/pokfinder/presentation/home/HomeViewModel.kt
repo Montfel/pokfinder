@@ -9,27 +9,16 @@ import com.montfel.pokfinder.domain.home.model.Generation
 import com.montfel.pokfinder.domain.home.model.PokemonHome
 import com.montfel.pokfinder.domain.home.repository.HomeRepository
 import com.montfel.pokfinder.domain.home.usecase.HomeUseCases
-import com.montfel.pokfinder.domain.profile.model.Type
 import com.montfel.pokfinder.helper.Response
 import com.montfel.pokfinder.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-data class HomeUiState(
-    val pokemonList: List<PokemonHome> = emptyList(),
-    val typeList: List<Type> = emptyList(),
-    val generationList: List<Generation> = emptyList(),
-    val generationSelected: Int = 0,
-    val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
-    val isLoading: Boolean = true,
-    val hasError: Boolean = false
-)
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -38,9 +27,9 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState
+    val uiState = _uiState.asStateFlow()
 
-    var pokemonQuery by mutableStateOf("")
+    var pokemonQuery: String by mutableStateOf("")
         private set
 
     private var pokemons = emptyList<PokemonHome>()

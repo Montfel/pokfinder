@@ -42,11 +42,12 @@ suspend fun <T : Any> requestWrapper(call: suspend () -> T): Response<T> {
                     body = exception.response()?.errorBody()?.toString() ?: exception.message()
                 )
             }
-            is SocketException -> Response.ServerError.NetworkError(exception.message ?: "")
+
+            is SocketException -> Response.ServerError.NetworkError(exception.message.orEmpty())
             is UnknownHostException, is SocketTimeoutException -> Response.OfflineError
             is CancellationException -> Response.RequestCancelled
             else -> {
-                Response.ServerError.UnknownError(errorMsg = exception.message ?: "")
+                Response.ServerError.UnknownError(errorMsg = exception.message.orEmpty())
             }
         }
     }

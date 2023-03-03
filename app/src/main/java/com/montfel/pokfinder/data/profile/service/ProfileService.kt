@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.data.profile.datasource
+package com.montfel.pokfinder.data.profile.service
 
 import com.montfel.pokfinder.data.profile.dto.PokemonDamageRelationsDto
 import com.montfel.pokfinder.data.profile.dto.PokemonProfileDto
@@ -6,7 +6,7 @@ import com.montfel.pokfinder.data.profile.dto.PokemonSpeciesDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ProfileDataSource {
+interface ProfileService {
     @GET("pokemon/{pokemonId}")
     suspend fun getProfile(
         @Path(value = "pokemonId") pokemonId: String

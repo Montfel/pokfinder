@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.R
-import com.montfel.pokfinder.presentation.home.BottomSheetFilter
+import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
 import com.montfel.pokfinder.presentation.theme.topBarIcon
 
 @Composable

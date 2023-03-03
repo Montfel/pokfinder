@@ -11,7 +11,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -23,6 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.presentation.components.RetryButton
+import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
 import com.montfel.pokfinder.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.SortBottomSheet
 import com.montfel.pokfinder.presentation.home.components.HomeHeader
@@ -38,19 +38,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-enum class BottomSheetFilter {
-    Generation, Sort
-}
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun Home(
+fun HomeScreen(
     navController: NavController,
     deviceWidth: Float,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var filter by rememberSaveable { mutableStateOf(BottomSheetFilter.Generation) }
+    var filter: BottomSheetFilter by remember { mutableStateOf(BottomSheetFilter.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -136,7 +132,9 @@ fun Home(
                 }
             }
 
-            val showButton by remember { derivedStateOf { lazyListState.firstVisibleItemIndex > 0 } }
+            val showButton by remember {
+                derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
+            }
 
             if (showButton) {
                 FloatingActionButton(
