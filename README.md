@@ -1,9 +1,9 @@
 ![Cover Form](https://user-images.githubusercontent.com/63600670/188512424-41de6784-202c-4af7-b90b-85ba36beb032.png)
 
 <h1 align="center">
-<a href="https://play.google.com/store/apps/details?id=com.montfel.pokfinder"><img align="left" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514149-56f6a4bc-48ae-45ff-97a1-597d81f86950.png" width="180" alt=""/></a>
+<a href="https://play.google.com/store/apps/details?id=com.montfel.pokfinder"><img align="left" src="https://user-images.githubusercontent.com/63600670/188514149-56f6a4bc-48ae-45ff-97a1-597d81f86950.png" width="180" alt=""/></a>
     Pokfinder
-    <a href="https://play.google.com/store/apps/details?id=com.montfel.pokfinder"><img align="right" style="border-radius: 50%;" src="https://user-images.githubusercontent.com/63600670/188514104-486f0a1c-0bbf-4333-bb1b-5088687efdc9.png" width="160" alt=""/></a>
+    <a href="https://play.google.com/store/apps/details?id=com.montfel.pokfinder"><img align="right" src="https://user-images.githubusercontent.com/63600670/188514104-486f0a1c-0bbf-4333-bb1b-5088687efdc9.png" width="160" alt=""/></a>
 </h1>
 
 <h4 align="center">
