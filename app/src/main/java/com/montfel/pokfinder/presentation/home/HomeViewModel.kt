@@ -1,8 +1,5 @@
 package com.montfel.pokfinder.presentation.home
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.montfel.pokfinder.domain.home.model.Generation
@@ -14,8 +11,10 @@ import com.montfel.pokfinder.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,16 +28,28 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
-    var pokemonQuery: String by mutableStateOf("")
-        private set
+    private val _uiEvent = Channel<HomeUiEvent>()
+    val uiEvent = _uiEvent.receiveAsFlow()
 
     private var pokemons = emptyList<PokemonHome>()
 
-    init {
-        loadHomePage()
+    fun onEvent(event: HomeEvent) {
+        when (event) {
+            HomeEvent.LoadHomePage -> loadHomePage()
+            is HomeEvent.SearchPokemon -> searchPokemon(event.query)
+            is HomeEvent.FilterByGenaration -> filterByGeneration(event.generation)
+            is HomeEvent.SortPokemonList -> sortPokemonList(event.sortOption)
+            is HomeEvent.NavigateToProfile -> navigateToProfile(event.pokemonId)
+        }
     }
 
-    fun loadHomePage() {
+    private fun navigateToProfile(pokemonId: Int) {
+        viewModelScope.launch {
+            _uiEvent.send(HomeUiEvent.NavigateToProfile(pokemonId))
+        }
+    }
+
+    private fun loadHomePage() {
         viewModelScope.launch(Dispatchers.IO) {
             val pokemonListDeferred = async { repository.getPokemonList() }
             val generationListDeferred = async { repository.getGenerationList() }
@@ -58,23 +69,17 @@ class HomeViewModel @Inject constructor(
                         pokemonList = pokemonList.data,
                         generationList = generationList.data,
                         typeList = typeList.data,
-                        isLoading = false,
-                        hasError = false
+                        stateOfUi = HomeStateOfUi.Success,
                     )
                 }
             } else {
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        hasError = true
-                    )
-                }
+                _uiState.update { it.copy(stateOfUi = HomeStateOfUi.Error) }
             }
         }
     }
 
-    fun searchPokemon(query: String) {
-        pokemonQuery = query
+    private fun searchPokemon(query: String) {
+        _uiState.update { it.copy(pokemonQuery = query) }
 
         if (query.isNotBlank()) {
             viewModelScope.launch(Dispatchers.Default) {
@@ -89,7 +94,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun filterByGeneration(generation: Generation) {
+    private fun filterByGeneration(generation: Generation) {
         if (generation.id != uiState.value.generationSelected) {
             val result = pokemons.filter { it.id in generation.pokemonId }
 
@@ -109,7 +114,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun sortPokemons(sortOption: SortOptions) {
+    private fun sortPokemonList(sortOption: SortOptions) {
         if (sortOption != uiState.value.sortOptionSelected) {
             val sortedPokemons = useCases.sortPokemonsUseCase(sortOption, uiState.value.pokemonList)
 

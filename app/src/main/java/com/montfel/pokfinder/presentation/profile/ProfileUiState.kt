@@ -5,12 +5,18 @@ import com.montfel.pokfinder.domain.profile.model.PokemonProfile
 import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
 
 data class ProfileUiState(
+    val pokemonId: String? = null,
     val profile: PokemonProfile? = null,
     val species: PokemonSpecies? = null,
     val strengths: List<String> = emptyList(),
     val weaknesses: List<String> = emptyList(),
     val immunity: List<String> = emptyList(),
     val evolutionChain: List<EvolutionChain> = emptyList(),
-    val isLoading: Boolean = true,
-    val hasError: Boolean = false
+    val statesOfUi: ProfileStateOfUi = ProfileStateOfUi.Loading,
 )
+
+sealed interface ProfileStateOfUi {
+    object Loading : ProfileStateOfUi
+    object Error : ProfileStateOfUi
+    object Success : ProfileStateOfUi
+}

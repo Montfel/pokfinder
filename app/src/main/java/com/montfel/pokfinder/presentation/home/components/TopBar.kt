@@ -36,13 +36,13 @@ fun TopBar(onClick: (BottomSheetFilter) -> Unit) {
                     tint = MaterialTheme.colors.topBarIcon
                 )
             }
-//            IconButton(onClick = { onClick(BottomSheetFilter.Filter) }) {
-//                Icon(
-//                    painter = painterResource(id = R.drawable.ic_filter),
-//                    contentDescription = stringResource(id = R.string.other_filters),
-//                    tint = MaterialTheme.colors.topBarIcon
-//                )
-//            }
+            IconButton(onClick = { onClick(BottomSheetFilter.Filter) }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_filter),
+                    contentDescription = stringResource(id = R.string.other_filters),
+                    tint = MaterialTheme.colors.topBarIcon
+                )
+            }
         }
     }
 }

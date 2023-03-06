@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -42,12 +41,14 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.domain.profile.model.AboutData
+import com.montfel.pokfinder.presentation.components.ProgressIndicator
 import com.montfel.pokfinder.presentation.components.RetryButton
 import com.montfel.pokfinder.presentation.components.TypeCard
 import com.montfel.pokfinder.presentation.navigation.Screen
@@ -60,7 +61,6 @@ import com.montfel.pokfinder.presentation.theme.fabBackground
 import com.montfel.pokfinder.presentation.theme.filterTitle
 import com.montfel.pokfinder.presentation.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.presentation.theme.primaryIcon
-import com.montfel.pokfinder.presentation.theme.primaryInput
 import com.montfel.pokfinder.presentation.theme.secondaryText
 
 @Composable
@@ -69,11 +69,60 @@ fun Profile(
     navController: NavController,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
-    val language = Locale.current.language
     val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                ProfileUiEvent.NavigateBack -> navController.popBackStack()
+                is ProfileUiEvent.NavigateToProfile -> navController.navigate(
+                    Screen.Profile.createRoute(
+                        event.pokemonId
+                    )
+                )
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onEvent(ProfileEvent.SavePokemonId(id))
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onEvent(ProfileEvent.FetchPokemonDetails)
+    }
+
+    ProfileScreen(
+        uiState = uiState,
+        onEvent = viewModel::onEvent
+    )
+}
+
+@Composable
+fun ProfileScreen(
+    uiState: ProfileUiState,
+    onEvent: (ProfileEvent) -> Unit,
+) {
+    when (uiState.statesOfUi) {
+        ProfileStateOfUi.Error -> RetryButton(onClick = { onEvent(ProfileEvent.FetchPokemonDetails) })
+        ProfileStateOfUi.Loading -> ProgressIndicator()
+        ProfileStateOfUi.Success -> View(
+            uiState = uiState,
+            onEvent = onEvent
+        )
+    }
+}
+
+@Composable
+fun View(
+    uiState: ProfileUiState,
+    onEvent: (ProfileEvent) -> Unit,
+) {
+    val language = Locale.current.language
     val assetFromType = uiState.profile?.types?.first { it.slot == 1 }?.type?.assetFromType
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = mutableListOf(R.string.about, R.string.stats)
+
     if (uiState.evolutionChain.size > 1) {
         titles.add(R.string.evolution)
     }
@@ -127,6 +176,7 @@ fun Profile(
 
         }
     } ?: "Genderless"
+
     val eggGroup = uiState.species?.eggGroups?.joinToString { it.name }.orEmpty()
     val eggCycles =
         "${uiState.species?.hatchCounter?.cycles} (${uiState.species?.hatchCounter?.steps} steps)"
@@ -137,10 +187,6 @@ fun Profile(
         AboutData(title = R.string.egg_cycles, description = eggCycles),
     )
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.getPokemonDetails(id)
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -148,7 +194,7 @@ fun Profile(
                 elevation = 0.dp,
                 modifier = Modifier.statusBarsPadding()
             ) {
-                IconButton(onClick = navController::popBackStack) {
+                IconButton(onClick = { onEvent(ProfileEvent.NavigateBack) }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = stringResource(id = R.string.back),
@@ -158,138 +204,133 @@ fun Profile(
             }
         },
         backgroundColor =
-        if (uiState.isLoading || uiState.hasError) MaterialTheme.colors.fabBackground
+        if (uiState.statesOfUi !is ProfileStateOfUi.Success) MaterialTheme.colors.fabBackground
         else assetFromType?.backgroundColor ?: Color.Transparent
     ) { paddingValues ->
-        if (uiState.isLoading) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colors.primaryInput,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-        } else if (uiState.hasError) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                RetryButton(
-                    onClick = { viewModel.getPokemonDetails(id) },
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-        } else {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(24.dp),
+                verticalAlignment = CenterVertically
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(24.dp),
-                    verticalAlignment = CenterVertically
-                ) {
-                    Box {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_circle),
-                            contentDescription = null,
-                            colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
-                            alpha = 0.35f,
-                            modifier = Modifier.size(125.dp)
-                        )
-                        AsyncImage(
-                            model = uiState.profile?.image,
-                            contentDescription = stringResource(
-                                id = R.string.pokemon_image_description,
-                                uiState.profile?.name.orEmpty()
-                            ),
-                            modifier = Modifier.size(125.dp)
-                        )
-                    }
-                    Column {
-                        Text(
-                            text = "#${uiState.profile?.id}",
-                            style = MaterialTheme.typography.filterTitle,
-                            color = MaterialTheme.colors.numberOverBackgroundColor
-                        )
-                        Text(
-                            text = uiState.profile?.name.orEmpty(),
-                            style = MaterialTheme.typography.applicationTitle,
-                            color = MaterialTheme.colors.secondaryText,
-                        )
-                        uiState.profile?.types?.let { types ->
-                            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                                types.forEach { type ->
-                                    TypeCard(type = type.type)
-                                }
+                Box {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_circle),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
+                        alpha = 0.35f,
+                        modifier = Modifier.size(125.dp)
+                    )
+                    AsyncImage(
+                        model = uiState.profile?.image,
+                        contentDescription = stringResource(
+                            id = R.string.pokemon_image_description,
+                            uiState.profile?.name.orEmpty()
+                        ),
+                        modifier = Modifier.size(125.dp)
+                    )
+                }
+                Column {
+                    Text(
+                        text = "#${uiState.profile?.id}",
+                        style = MaterialTheme.typography.filterTitle,
+                        color = MaterialTheme.colors.numberOverBackgroundColor
+                    )
+                    Text(
+                        text = uiState.profile?.name.orEmpty(),
+                        style = MaterialTheme.typography.applicationTitle,
+                        color = MaterialTheme.colors.secondaryText,
+                    )
+                    uiState.profile?.types?.let { types ->
+                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            types.forEach { type ->
+                                TypeCard(type = type.type)
                             }
                         }
                     }
                 }
+            }
 
-                Spacer(modifier = Modifier.height(44.dp))
+            Spacer(modifier = Modifier.height(44.dp))
 
-                TabRow(
-                    selectedTabIndex = selectedTabIndex,
-                    backgroundColor = Color.Transparent,
-                ) {
-                    titles.forEachIndexed { index, title ->
-                        Tab(
-                            selected = selectedTabIndex == index,
-                            onClick = { selectedTabIndex = index },
-                        ) {
-                            Text(
-                                text = stringResource(id = title),
-                                style =
-                                if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
-                                else MaterialTheme.typography.description,
-                                color = MaterialTheme.colors.secondaryText
-                            )
-                        }
+            TabRow(
+                selectedTabIndex = selectedTabIndex,
+                backgroundColor = Color.Transparent,
+            ) {
+                titles.forEachIndexed { index, title ->
+                    Tab(
+                        selected = selectedTabIndex == index,
+                        onClick = { selectedTabIndex = index },
+                    ) {
+                        Text(
+                            text = stringResource(id = title),
+                            style =
+                            if (selectedTabIndex == index) MaterialTheme.typography.filterTitle
+                            else MaterialTheme.typography.description,
+                            color = MaterialTheme.colors.secondaryText
+                        )
                     }
                 }
+            }
 
-                Column(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                        .background(color = MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp)
-                ) {
-                    when (selectedTabIndex) {
-                        0 -> {
-                            About(
-                                flavorText = uiState.species?.flavorTexts
-                                    ?.filter { lang -> lang.language == language }
-                                    ?.takeIf { list -> list.isNotEmpty() }
-                                    ?.random()?.flavorText
-                                    ?: uiState.species?.flavorTexts
-                                        ?.filter { lang -> lang.language == "en" }
-                                        ?.random()?.flavorText.orEmpty(),
-                                data = data,
-                                training = training,
-                                breeding = breeding,
-                                typeColor = assetFromType?.typeColor ?: Color.Transparent,
-                                strengths = uiState.strengths,
-                                weaknesses = uiState.weaknesses,
-                                immunity = uiState.immunity,
-                            )
-                        }
-                        1 -> {
-                            Stats(
-                                stats = uiState.profile?.stats ?: emptyList(),
-                                typeColor = assetFromType?.typeColor ?: Color.Transparent,
-                                pokemonName = uiState.profile?.name.orEmpty()
-                            )
-                        }
+            Column(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                    .background(color = MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+            ) {
+                when (selectedTabIndex) {
+                    0 -> {
+                        About(
+                            flavorText = uiState.species?.flavorTexts
+                                ?.filter { lang -> lang.language == language }
+                                ?.takeIf { list -> list.isNotEmpty() }
+                                ?.random()?.flavorText
+                                ?: uiState.species?.flavorTexts
+                                    ?.filter { lang -> lang.language == "en" }
+                                    ?.random()?.flavorText.orEmpty(),
+                            data = data,
+                            training = training,
+                            breeding = breeding,
+                            typeColor = assetFromType?.typeColor ?: Color.Transparent,
+                            strengths = uiState.strengths,
+                            weaknesses = uiState.weaknesses,
+                            immunity = uiState.immunity,
+                        )
+                    }
 
-                        2 -> {
-                            Evolution(
-                                typeColor = assetFromType?.typeColor ?: Color.Transparent,
-                                evolutionChain = uiState.evolutionChain,
-                                onClick = { navController.navigate(Screen.Profile.createRoute(it)) }
-                            )
-                        }
+                    1 -> {
+                        Stats(
+                            stats = uiState.profile?.stats ?: emptyList(),
+                            typeColor = assetFromType?.typeColor ?: Color.Transparent,
+                            pokemonName = uiState.profile?.name.orEmpty()
+                        )
+                    }
+
+                    2 -> {
+                        Evolution(
+                            typeColor = assetFromType?.typeColor ?: Color.Transparent,
+                            evolutionChain = uiState.evolutionChain,
+                            onClick = { onEvent(ProfileEvent.NavigateToProfile(it)) }
+                        )
                     }
                 }
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun ProfileScreenPreview() {
+    ProfileScreen(
+        uiState = ProfileUiState(),
+        onEvent = {}
+    )
 }

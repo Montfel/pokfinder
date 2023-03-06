@@ -16,13 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.montfel.pokfinder.R
+import com.montfel.pokfinder.presentation.components.ProgressIndicator
 import com.montfel.pokfinder.presentation.components.RetryButton
 import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
+import com.montfel.pokfinder.presentation.home.bottomsheet.FilterBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.SortBottomSheet
 import com.montfel.pokfinder.presentation.home.components.HomeHeader
@@ -33,12 +36,10 @@ import com.montfel.pokfinder.presentation.navigation.Screen
 import com.montfel.pokfinder.presentation.theme.fabBackground
 import com.montfel.pokfinder.presentation.theme.fabContent
 import com.montfel.pokfinder.presentation.theme.pokeballIcon
-import com.montfel.pokfinder.presentation.theme.primaryInput
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -46,6 +47,60 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is HomeUiEvent.NavigateToProfile -> {
+                    navController.navigate(Screen.Profile.createRoute(event.pokemonId))
+                }
+            }
+        }
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onEvent(HomeEvent.LoadHomePage)
+    }
+
+    HomeScreen(
+        uiState = uiState,
+        deviceWidth = deviceWidth,
+        onEvent = viewModel::onEvent
+    )
+}
+
+@Composable
+private fun HomeScreen(
+    uiState: HomeUiState,
+    deviceWidth: Float,
+    onEvent: (HomeEvent) -> Unit,
+) {
+    when (uiState.stateOfUi) {
+        HomeStateOfUi.Error -> {
+            RetryButton(onClick = { onEvent(HomeEvent.LoadHomePage) })
+        }
+
+        HomeStateOfUi.Loading -> {
+            ProgressIndicator()
+        }
+
+        HomeStateOfUi.Success -> {
+            View(
+                deviceWidth = deviceWidth,
+                uiState = uiState,
+                onEvent = onEvent
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun View(
+    uiState: HomeUiState,
+    deviceWidth: Float,
+    onEvent: (HomeEvent) -> Unit,
+) {
     var filter: BottomSheetFilter by remember { mutableStateOf(BottomSheetFilter.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
@@ -62,7 +117,7 @@ fun HomeScreen(
                     generationList = uiState.generationList,
                     generationSelected = uiState.generationSelected,
                     onGenerationSelected = { generation ->
-                        viewModel.filterByGeneration(generation)
+                        onEvent(HomeEvent.FilterByGenaration(generation))
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()
@@ -73,7 +128,18 @@ fun HomeScreen(
                 BottomSheetFilter.Sort -> SortBottomSheet(
                     sortOptionSelected = uiState.sortOptionSelected,
                     onSortOptionSelected = { sortOptionSelected ->
-                        viewModel.sortPokemons(sortOptionSelected)
+                        onEvent(HomeEvent.SortPokemonList(sortOptionSelected))
+                        scope.launch(Dispatchers.Main) {
+                            delay(500)
+                            sheetState.hide()
+                        }
+                    }
+                )
+
+                BottomSheetFilter.Filter -> FilterBottomSheet(
+                    assetFromTypeList = uiState.typeList.map { it.assetFromType },
+                    onFilterApplied = {
+//                        viewModel.filterByAsset(it)
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()
@@ -117,8 +183,8 @@ fun HomeScreen(
                     HomeHeader()
 
                     SearchField(
-                        text = viewModel.pokemonQuery,
-                        onType = viewModel::searchPokemon,
+                        text = uiState.pokemonQuery,
+                        onType = { onEvent(HomeEvent.SearchPokemon(it)) },
                     )
                 }
 
@@ -126,9 +192,10 @@ fun HomeScreen(
                     items = uiState.pokemonList,
                     key = { it.id },
                 ) { pokemon ->
-                    PokemonCard(pokemon = pokemon) {
-                        navController.navigate(Screen.Profile.createRoute(pokemon.id))
-                    }
+                    PokemonCard(
+                        pokemon = pokemon,
+                        onClick = { onEvent(HomeEvent.NavigateToProfile(pokemon.id)) }
+                    )
                 }
             }
 
@@ -155,18 +222,16 @@ fun HomeScreen(
                     )
                 }
             }
-
-            if (uiState.isLoading) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colors.primaryInput,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            } else if (uiState.hasError) {
-                RetryButton(
-                    onClick = viewModel::loadHomePage,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
         }
     }
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    HomeScreen(
+        uiState = HomeUiState(),
+        deviceWidth = 360f,
+        onEvent = {}
+    )
 }

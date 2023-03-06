@@ -1,5 +1,8 @@
 package com.montfel.pokfinder.presentation.home.bottomsheet
 
-enum class SortOptions {
-    SmallestNumber, HighestNumber, Alphabetical, ReverseAlphabetical
+sealed interface SortOptions {
+    object SmallestNumber : SortOptions
+    object HighestNumber : SortOptions
+    object Alphabetical : SortOptions
+    object ReverseAlphabetical : SortOptions
 }
