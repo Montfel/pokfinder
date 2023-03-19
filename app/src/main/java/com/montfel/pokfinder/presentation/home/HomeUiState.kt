@@ -1,5 +1,6 @@
 package com.montfel.pokfinder.presentation.home
 
+import com.montfel.pokfinder.domain.AssetFromType
 import com.montfel.pokfinder.domain.home.model.Generation
 import com.montfel.pokfinder.domain.home.model.PokemonHome
 import com.montfel.pokfinder.domain.profile.model.Type
@@ -12,6 +13,7 @@ data class HomeUiState(
     val generationList: List<Generation> = emptyList(),
     val generationSelected: Int = 0,
     val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
+    val typesSelected: MutableList<AssetFromType> = mutableListOf(),
     val stateOfUi: HomeStateOfUi = HomeStateOfUi.Loading,
 )
 

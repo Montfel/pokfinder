@@ -66,7 +66,7 @@ class ProfileViewModel @Inject constructor(
                     }
                     val damageRelationsDeferred = async {
                         repository.getDamageRelations(
-                            profile.data.types.first { it.slot == 1 }.type.name.lowercase()
+                            profile.data.types.first().type.name.lowercase()
                         )
                     }
 

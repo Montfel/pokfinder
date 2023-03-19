@@ -2,6 +2,7 @@ package com.montfel.pokfinder.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.montfel.pokfinder.domain.AssetFromType
 import com.montfel.pokfinder.domain.home.model.Generation
 import com.montfel.pokfinder.domain.home.model.PokemonHome
 import com.montfel.pokfinder.domain.home.repository.HomeRepository
@@ -33,6 +34,10 @@ class HomeViewModel @Inject constructor(
 
     private var pokemons = emptyList<PokemonHome>()
 
+    init {
+        loadHomePage()
+    }
+
     fun onEvent(event: HomeEvent) {
         when (event) {
             HomeEvent.LoadHomePage -> loadHomePage()
@@ -40,6 +45,7 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.FilterByGenaration -> filterByGeneration(event.generation)
             is HomeEvent.SortPokemonList -> sortPokemonList(event.sortOption)
             is HomeEvent.NavigateToProfile -> navigateToProfile(event.pokemonId)
+            is HomeEvent.FilterBy -> filterBy(event.typeList)
         }
     }
 
@@ -111,6 +117,18 @@ class HomeViewModel @Inject constructor(
                     pokemonList = pokemons,
                 )
             }
+        }
+    }
+
+    private fun filterBy(list: MutableList<AssetFromType>) {
+        if (list.isNotEmpty()) {
+            val result = pokemons.filter {
+                list.contains(it.types.first().type.assetFromType) || list.contains(it.types.last().type.assetFromType)
+            }
+
+            _uiState.update { it.copy(pokemonList = result) }
+        } else {
+            _uiState.update { it.copy(pokemonList = pokemons) }
         }
     }
 

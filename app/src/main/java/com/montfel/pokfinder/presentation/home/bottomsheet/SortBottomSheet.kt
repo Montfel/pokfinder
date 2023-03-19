@@ -2,9 +2,7 @@ package com.montfel.pokfinder.presentation.home.bottomsheet
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,18 +19,17 @@ fun SortBottomSheet(
     onSortOptionSelected: (SortOptions) -> Unit
 ) {
     Column(
+        verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(top = 30.dp)
+            .padding(top = 30.dp, bottom = 50.dp)
             .verticalScroll(rememberScrollState())
     ) {
         BottomSheetHeader(
             title = R.string.sort,
             description = R.string.sort_description
         )
-
-        Spacer(modifier = Modifier.height(32.dp))
 
         Column(
             verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -63,7 +60,5 @@ fun SortBottomSheet(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-
-        Spacer(modifier = Modifier.height(32.dp))
     }
 }

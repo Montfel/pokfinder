@@ -40,6 +40,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -58,26 +59,9 @@ fun HomeScreen(
         }
     }
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(HomeEvent.LoadHomePage)
-    }
-
-    HomeScreen(
-        uiState = uiState,
-        deviceWidth = deviceWidth,
-        onEvent = viewModel::onEvent
-    )
-}
-
-@Composable
-private fun HomeScreen(
-    uiState: HomeUiState,
-    deviceWidth: Float,
-    onEvent: (HomeEvent) -> Unit,
-) {
     when (uiState.stateOfUi) {
         HomeStateOfUi.Error -> {
-            RetryButton(onClick = { onEvent(HomeEvent.LoadHomePage) })
+            RetryButton(onClick = { viewModel.onEvent(HomeEvent.LoadHomePage) })
         }
 
         HomeStateOfUi.Loading -> {
@@ -85,18 +69,18 @@ private fun HomeScreen(
         }
 
         HomeStateOfUi.Success -> {
-            View(
-                deviceWidth = deviceWidth,
+            HomeScreen(
                 uiState = uiState,
-                onEvent = onEvent
+                deviceWidth = deviceWidth,
+                onEvent = viewModel::onEvent
             )
         }
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
 @Composable
-private fun View(
+private fun HomeScreen(
     uiState: HomeUiState,
     deviceWidth: Float,
     onEvent: (HomeEvent) -> Unit,
@@ -138,8 +122,9 @@ private fun View(
 
                 BottomSheetFilter.Filter -> FilterBottomSheet(
                     assetFromTypeList = uiState.typeList.map { it.assetFromType },
+                    typesSelected = uiState.typesSelected,
                     onFilterApplied = {
-//                        viewModel.filterByAsset(it)
+                        onEvent(HomeEvent.FilterBy(it))
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()
@@ -166,6 +151,7 @@ private fun View(
                     .align(Alignment.TopCenter)
                     .offset(y = (-halfWidth).dp)
             )
+
             LazyColumn(
                 state = lazyListState,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -226,6 +212,7 @@ private fun View(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Preview
 @Composable
 fun HomeScreenPreview() {

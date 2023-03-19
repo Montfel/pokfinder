@@ -92,10 +92,22 @@ fun Profile(
         viewModel.onEvent(ProfileEvent.FetchPokemonDetails)
     }
 
-    ProfileScreen(
-        uiState = uiState,
-        onEvent = viewModel::onEvent
-    )
+    when (uiState.statesOfUi) {
+        ProfileStateOfUi.Error -> {
+            RetryButton(onClick = { viewModel.onEvent(ProfileEvent.FetchPokemonDetails) })
+        }
+
+        ProfileStateOfUi.Loading -> {
+            ProgressIndicator()
+        }
+
+        ProfileStateOfUi.Success -> {
+            ProfileScreen(
+                uiState = uiState,
+                onEvent = viewModel::onEvent
+            )
+        }
+    }
 }
 
 @Composable
@@ -103,23 +115,8 @@ fun ProfileScreen(
     uiState: ProfileUiState,
     onEvent: (ProfileEvent) -> Unit,
 ) {
-    when (uiState.statesOfUi) {
-        ProfileStateOfUi.Error -> RetryButton(onClick = { onEvent(ProfileEvent.FetchPokemonDetails) })
-        ProfileStateOfUi.Loading -> ProgressIndicator()
-        ProfileStateOfUi.Success -> View(
-            uiState = uiState,
-            onEvent = onEvent
-        )
-    }
-}
-
-@Composable
-fun View(
-    uiState: ProfileUiState,
-    onEvent: (ProfileEvent) -> Unit,
-) {
     val language = Locale.current.language
-    val assetFromType = uiState.profile?.types?.first { it.slot == 1 }?.type?.assetFromType
+    val assetFromType = uiState.profile?.types?.first()?.type?.assetFromType
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val titles = mutableListOf(R.string.about, R.string.stats)
 

@@ -2,7 +2,17 @@ package com.montfel.pokfinder.presentation.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -18,13 +28,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.montfel.pokfinder.R
 import com.montfel.pokfinder.domain.home.model.PokemonHome
 import com.montfel.pokfinder.presentation.components.TypeCard
 import com.montfel.pokfinder.presentation.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.presentation.theme.pokemonName
 import com.montfel.pokfinder.presentation.theme.pokemonNumber
 import com.montfel.pokfinder.presentation.theme.secondaryText
-import com.montfel.pokfinder.R
 
 @Composable
 fun PokemonCard(
@@ -39,7 +49,7 @@ fun PokemonCard(
     ) {
         Card(
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = pokemon.types.first { it.slot == 1 }.type.assetFromType.backgroundColor,
+            backgroundColor = pokemon.types.first().type.assetFromType.backgroundColor,
             modifier = Modifier
                 .clickable(onClick = onClick)
                 .fillMaxWidth()
@@ -94,7 +104,10 @@ fun PokemonCard(
         )
         AsyncImage(
             model = stringResource(id = R.string.pokemon_image_url, pokemon.id),
-            contentDescription = stringResource(id = R.string.pokemon_image_description, pokemon.name),
+            contentDescription = stringResource(
+                id = R.string.pokemon_image_description,
+                pokemon.name
+            ),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .align(Alignment.TopEnd)

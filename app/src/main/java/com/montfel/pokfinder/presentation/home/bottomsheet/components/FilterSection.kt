@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,8 +21,8 @@ import com.montfel.pokfinder.presentation.theme.primaryText
 fun FilterSection(
     @StringRes title: Int,
     items: List<AssetFromType>,
-    itemsSelected: MutableList<Int>,
-    onFilterSelected: (Int) -> Unit
+    itemsSelected: MutableList<AssetFromType>,
+    onFilterSelected: (AssetFromType) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
@@ -31,16 +31,17 @@ fun FilterSection(
             color = MaterialTheme.colors.primaryText,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
+
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            itemsIndexed(items) { index, item ->
+            items(items) { item ->
                 FilterItem(
                     icon = item.icon,
                     typeColor = item.typeColor,
-                    isEnabled = itemsSelected.contains(index),
-                    onClick = { onFilterSelected(index) },
+                    isEnabled = itemsSelected.contains(item),
+                    onClick = { onFilterSelected(item) },
                 )
             }
         }
