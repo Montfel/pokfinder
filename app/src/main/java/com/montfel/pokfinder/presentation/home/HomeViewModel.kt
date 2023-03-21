@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.montfel.pokfinder.domain.AssetFromType
 import com.montfel.pokfinder.domain.home.model.Generation
 import com.montfel.pokfinder.domain.home.model.PokemonHome
+import com.montfel.pokfinder.domain.home.model.SortOptions
 import com.montfel.pokfinder.domain.home.repository.HomeRepository
 import com.montfel.pokfinder.domain.home.usecase.HomeUseCases
 import com.montfel.pokfinder.helper.Response
-import com.montfel.pokfinder.presentation.home.bottomsheet.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -40,12 +40,13 @@ class HomeViewModel @Inject constructor(
 
     fun onEvent(event: HomeEvent) {
         when (event) {
-            HomeEvent.LoadHomePage -> loadHomePage()
+            is HomeEvent.LoadHomePage -> loadHomePage()
             is HomeEvent.SearchPokemon -> searchPokemon(event.query)
             is HomeEvent.FilterByGenaration -> filterByGeneration(event.generation)
             is HomeEvent.SortPokemonList -> sortPokemonList(event.sortOption)
             is HomeEvent.NavigateToProfile -> navigateToProfile(event.pokemonId)
-            is HomeEvent.FilterBy -> filterBy(event.typeList)
+            is HomeEvent.FilterByType -> filterByType(event.typeList)
+            is HomeEvent.FilterByWeaknesses -> filterByWeaknesses(event.weaknessesList)
         }
     }
 
@@ -120,18 +121,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun filterBy(list: MutableList<AssetFromType>) {
-        if (list.isNotEmpty()) {
-            val result = pokemons.filter {
-                list.contains(it.types.first().type.assetFromType) || list.contains(it.types.last().type.assetFromType)
-            }
-
-            _uiState.update { it.copy(pokemonList = result) }
-        } else {
-            _uiState.update { it.copy(pokemonList = pokemons) }
-        }
-    }
-
     private fun sortPokemonList(sortOption: SortOptions) {
         if (sortOption != uiState.value.sortOptionSelected) {
             val sortedPokemons = useCases.sortPokemonsUseCase(sortOption, uiState.value.pokemonList)
@@ -142,6 +131,33 @@ class HomeViewModel @Inject constructor(
                     sortOptionSelected = sortOption
                 )
             }
+        }
+    }
+
+    private fun filterByType(typeList: List<AssetFromType>) {
+        if (typeList.isNotEmpty()) {
+            val result = pokemons.filter {
+                typeList.contains(it.types.first().type.assetFromType) ||
+                        typeList.contains(it.types.last().type.assetFromType)
+            }
+
+            _uiState.update { it.copy(pokemonList = result) }
+        } else {
+            _uiState.update { it.copy(pokemonList = pokemons) }
+        }
+    }
+
+    private fun filterByWeaknesses(weaknessesList: List<AssetFromType>) {
+        if (weaknessesList.isNotEmpty()) {
+            val result = pokemons.filter {
+                weaknessesList.contains(it.types.first().type.assetFromType) || weaknessesList.contains(
+                    it.types.last().type.assetFromType
+                )
+            }
+
+            _uiState.update { it.copy(pokemonList = result) }
+        } else {
+            _uiState.update { it.copy(pokemonList = pokemons) }
         }
     }
 }

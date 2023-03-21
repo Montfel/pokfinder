@@ -25,9 +25,9 @@ import com.montfel.pokfinder.R
 import com.montfel.pokfinder.presentation.components.ProgressIndicator
 import com.montfel.pokfinder.presentation.components.RetryButton
 import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
-import com.montfel.pokfinder.presentation.home.bottomsheet.FilterBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.SortBottomSheet
+import com.montfel.pokfinder.presentation.home.bottomsheet.filter.FilterBottomSheet
 import com.montfel.pokfinder.presentation.home.components.HomeHeader
 import com.montfel.pokfinder.presentation.home.components.PokemonCard
 import com.montfel.pokfinder.presentation.home.components.SearchField
@@ -122,9 +122,8 @@ private fun HomeScreen(
 
                 BottomSheetFilter.Filter -> FilterBottomSheet(
                     assetFromTypeList = uiState.typeList.map { it.assetFromType },
-                    typesSelected = uiState.typesSelected,
-                    onFilterApplied = {
-                        onEvent(HomeEvent.FilterBy(it))
+                    onFilterApplied = { selectedTypes ->
+                        onEvent(HomeEvent.FilterByType(selectedTypes))
                         scope.launch(Dispatchers.Main) {
                             delay(500)
                             sheetState.hide()

@@ -21,7 +21,7 @@ import com.montfel.pokfinder.presentation.theme.primaryText
 fun FilterSection(
     @StringRes title: Int,
     items: List<AssetFromType>,
-    itemsSelected: MutableList<AssetFromType>,
+    itemsSelected: List<AssetFromType>,
     onFilterSelected: (AssetFromType) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {

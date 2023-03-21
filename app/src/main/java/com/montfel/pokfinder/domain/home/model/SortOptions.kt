@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.presentation.home.bottomsheet
+package com.montfel.pokfinder.domain.home.model
 
 sealed interface SortOptions {
     object SmallestNumber : SortOptions

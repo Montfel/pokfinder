@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.presentation.home.bottomsheet
+package com.montfel.pokfinder.presentation.home.bottomsheet.filter
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,12 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.domain.AssetFromType
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.BottomSheetHeader
@@ -31,20 +34,22 @@ import com.montfel.pokfinder.presentation.theme.secondaryVariantInput
 @Composable
 fun FilterBottomSheet(
     assetFromTypeList: List<AssetFromType>,
-    typesSelected: MutableList<AssetFromType>,
-    onFilterApplied: (MutableList<AssetFromType>) -> Unit
+    onFilterApplied: (List<AssetFromType>) -> Unit,
+    viewModel: FilterViewModel = hiltViewModel(),
 ) {
-//    val heightList = listOf(
-//        AssetFromType.getAsset("short"),
-//        AssetFromType.getAsset("medium_height"),
-//        AssetFromType.getAsset("tall"),
-//    )
-//
-//    val weightList = listOf(
-//        AssetFromType.getAsset("light"),
-//        AssetFromType.getAsset("normal_weight"),
-//        AssetFromType.getAsset("heavy"),
-//    )
+    val uiState by viewModel.uiState.collectAsState()
+
+    val heightList = listOf(
+        AssetFromType.getAsset("short"),
+        AssetFromType.getAsset("medium_height"),
+        AssetFromType.getAsset("tall"),
+    )
+
+    val weightList = listOf(
+        AssetFromType.getAsset("light"),
+        AssetFromType.getAsset("normal_weight"),
+        AssetFromType.getAsset("heavy"),
+    )
 
     Column(
         verticalArrangement = Arrangement.spacedBy(32.dp),
@@ -62,54 +67,30 @@ fun FilterBottomSheet(
         FilterSection(
             title = R.string.types,
             items = assetFromTypeList,
-            itemsSelected = typesSelected,
-            onFilterSelected = {
-                if (typesSelected.contains(it)) {
-                    typesSelected.remove(it)
-                } else {
-                    typesSelected.add(it)
-                }
-            }
+            itemsSelected = uiState.selectedTypes,
+            onFilterSelected = { viewModel.previewSelectedTypes(it) }
         )
 
-//        FilterSection(
-//            title = R.string.weakeness,
-//            items = assetFromTypeList,
-//            itemsSelected = weaknessesSelected,
-//            onFilterSelected = {
-//                if (weaknessesSelected.contains(it)) {
-//                    weaknessesSelected.remove(it)
-//                } else {
-//                    weaknessesSelected.add(it)
-//                }
-//            }
-//        )
-//
-//        FilterSection(
-//            title = R.string.heights,
-//            items = heightList,
-//            itemsSelected = heightsSelected,
-//            onFilterSelected = {
-//                if (heightsSelected.contains(it)) {
-//                    heightsSelected.remove(it)
-//                } else {
-//                    heightsSelected.add(it)
-//                }
-//            }
-//        )
-//
-//        FilterSection(
-//            title = R.string.weights,
-//            items = weightList,
-//            itemsSelected = weightsSelected,
-//            onFilterSelected = {
-//                if (weightsSelected.contains(it)) {
-//                    weightsSelected.remove(it)
-//                } else {
-//                    weightsSelected.add(it)
-//                }
-//            }
-//        )
+        FilterSection(
+            title = R.string.weakeness,
+            items = assetFromTypeList,
+            itemsSelected = uiState.selectedWeaknesses,
+            onFilterSelected = { viewModel.previewSelectedWeaknesses(it) }
+        )
+
+        FilterSection(
+            title = R.string.heights,
+            items = heightList,
+            itemsSelected = uiState.selectedHeights,
+            onFilterSelected = { viewModel.previewSelectedHeights(it) }
+        )
+
+        FilterSection(
+            title = R.string.weights,
+            items = weightList,
+            itemsSelected = uiState.selectedWeights,
+            onFilterSelected = { viewModel.previewSelectedWeights(it) }
+        )
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -118,7 +99,10 @@ fun FilterBottomSheet(
                 .padding(horizontal = 16.dp)
         ) {
             Button(
-                onClick = { typesSelected.clear().also { onFilterApplied(typesSelected) } },
+                onClick = {
+                    viewModel.resetFilters()
+                    onFilterApplied(emptyList())
+                },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = MaterialTheme.colors.secondaryInput,
                     contentColor = MaterialTheme.colors.secondaryVariantInput
@@ -136,7 +120,7 @@ fun FilterBottomSheet(
             }
 
             Button(
-                onClick = { onFilterApplied(typesSelected) },
+                onClick = { onFilterApplied(uiState.selectedTypes) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = MaterialTheme.colors.primaryInput,
                     contentColor = MaterialTheme.colors.secondaryText
