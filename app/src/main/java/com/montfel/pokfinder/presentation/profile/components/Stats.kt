@@ -1,6 +1,12 @@
 package com.montfel.pokfinder.presentation.profile.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -15,7 +21,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.domain.profile.model.Stats
-import com.montfel.pokfinder.presentation.theme.*
+import com.montfel.pokfinder.presentation.theme.description
+import com.montfel.pokfinder.presentation.theme.filterTitle
+import com.montfel.pokfinder.presentation.theme.pokemonType
+import com.montfel.pokfinder.presentation.theme.primaryText
+import com.montfel.pokfinder.presentation.theme.primaryVariantText
 
 @Composable
 fun Stats(

@@ -32,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures {
         compose true
@@ -50,7 +50,9 @@ android {
         }
     }
     apollo {
-        packageName.set("com.montfel.pokfinder")
+        service("service") {
+            packageName.set("com.montfel.pokfinder")
+        }
     }
 }
 
@@ -89,8 +91,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // Dagger
-    implementation "com.google.dagger:hilt-android:2.44.2"
-    kapt "com.google.dagger:hilt-android-compiler:2.44.2"
+    implementation "com.google.dagger:hilt-android:2.45"
+    kapt "com.google.dagger:hilt-android-compiler:2.45"
 
     // Window
     implementation 'androidx.window:window:1.0.0'
