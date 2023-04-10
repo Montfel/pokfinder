@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.window.layout.WindowMetricsCalculator
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
@@ -25,20 +24,10 @@ class PokfinderActivity : ComponentActivity() {
         firebaseAnalytics = Firebase.analytics
         setContent {
             PokfinderTheme {
-                NavigationComponent(
-                    getWidth()
-                )
+                NavigationComponent()
             }
         }
     }
-
-    private fun getWidth(): Float {
-        val metrics = WindowMetricsCalculator.getOrCreate()
-            .computeCurrentWindowMetrics(this)
-
-        return (metrics.bounds.width() / resources.displayMetrics.density)
-    }
-
 }
 
 @Preview(showBackground = true)

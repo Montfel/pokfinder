@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,7 +45,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     navController: NavController,
-    deviceWidth: Float,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -71,7 +71,6 @@ fun HomeScreen(
         HomeStateOfUi.Success -> {
             HomeScreen(
                 uiState = uiState,
-                deviceWidth = deviceWidth,
                 onEvent = viewModel::onEvent
             )
         }
@@ -82,7 +81,6 @@ fun HomeScreen(
 @Composable
 private fun HomeScreen(
     uiState: HomeUiState,
-    deviceWidth: Float,
     onEvent: (HomeEvent) -> Unit,
 ) {
     var filter: BottomSheetFilter by remember { mutableStateOf(BottomSheetFilter.Generation) }
@@ -91,6 +89,9 @@ private fun HomeScreen(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = true
     )
+    val context = LocalContext.current
+    val displayMetrics = context.resources.displayMetrics
+    val deviceWidth = displayMetrics.widthPixels / displayMetrics.density
     val halfWidth = deviceWidth / 2
     val lazyListState = rememberLazyListState()
 
@@ -217,7 +218,6 @@ private fun HomeScreen(
 fun HomeScreenPreview() {
     HomeScreen(
         uiState = HomeUiState(),
-        deviceWidth = 360f,
         onEvent = {}
     )
 }

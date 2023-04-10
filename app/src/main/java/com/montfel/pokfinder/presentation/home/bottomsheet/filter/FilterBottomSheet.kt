@@ -14,12 +14,12 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.domain.AssetFromType
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.BottomSheetHeader
@@ -37,7 +37,7 @@ fun FilterBottomSheet(
     onFilterApplied: (List<AssetFromType>) -> Unit,
     viewModel: FilterViewModel = hiltViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val heightList = listOf(
         AssetFromType.getAsset("short"),

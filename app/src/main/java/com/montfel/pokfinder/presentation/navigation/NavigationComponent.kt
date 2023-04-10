@@ -12,7 +12,7 @@ import com.montfel.pokfinder.presentation.profile.Profile
 
 @ExperimentalMaterialApi
 @Composable
-fun NavigationComponent(deviceWidth: Float) {
+fun NavigationComponent() {
     val navController = rememberNavController()
 
     NavHost(
@@ -23,11 +23,9 @@ fun NavigationComponent(deviceWidth: Float) {
 //            Splash(navController = navController)
 //        }
         composable(Screen.Home.route) {
-            HomeScreen(
-                navController = navController,
-                deviceWidth = deviceWidth
-            )
+            HomeScreen(navController = navController)
         }
+
         composable(
             route = Screen.Profile.route,
             arguments = listOf(

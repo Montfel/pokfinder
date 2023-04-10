@@ -1,7 +1,6 @@
 package com.montfel.pokfinder.presentation.home.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +36,7 @@ import com.montfel.pokfinder.presentation.theme.pokemonName
 import com.montfel.pokfinder.presentation.theme.pokemonNumber
 import com.montfel.pokfinder.presentation.theme.secondaryText
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PokemonCard(
     pokemon: PokemonHome,
@@ -48,10 +49,10 @@ fun PokemonCard(
             .clipToBounds()
     ) {
         Card(
+            onClick = onClick,
             shape = RoundedCornerShape(10.dp),
             backgroundColor = pokemon.types.first().type.assetFromType.backgroundColor,
             modifier = Modifier
-                .clickable(onClick = onClick)
                 .fillMaxWidth()
                 .height(115.dp)
                 .align(Alignment.BottomCenter)
