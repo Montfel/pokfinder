@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("com.apollographql.apollo3").version('3.7.3')
+    id("com.apollographql.apollo3").version('3.7.5')
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
@@ -90,6 +90,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
+    // Review
+    implementation 'com.google.android.play:review-ktx:2.0.1'
+    implementation 'com.google.android.play:review:2.0.1'
+
     // Dagger
     implementation "com.google.dagger:hilt-android:2.45"
     kapt "com.google.dagger:hilt-android-compiler:2.45"
@@ -98,7 +102,7 @@ dependencies {
     implementation 'androidx.window:window:1.0.0'
 
     // Apollo
-    implementation('com.apollographql.apollo3:apollo-runtime:3.7.3')
+    implementation('com.apollographql.apollo3:apollo-runtime:3.7.5')
 
     // Hilt
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'

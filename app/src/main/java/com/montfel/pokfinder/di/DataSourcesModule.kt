@@ -18,14 +18,14 @@ internal object DataSourcesModule {
 
     @Singleton
     @Provides
-    fun providesProfileService(retrofit: Retrofit): ProfileService =
+    fun provideProfileService(retrofit: Retrofit): ProfileService =
         retrofit.create(ProfileService::class.java)
 
     @Singleton
     @Provides
-    fun providesHomeService(apolloClient: ApolloClient) = HomeService(apolloClient)
+    fun provideHomeService(apolloClient: ApolloClient) = HomeService(apolloClient)
 
     @Provides
     @Singleton
-    fun providesHomeUseCases() = HomeUseCases(sortPokemonsUseCase = SortPokemonsUseCase())
+    fun provideHomeUseCases() = HomeUseCases(sortPokemonsUseCase = SortPokemonsUseCase())
 }

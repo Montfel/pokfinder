@@ -17,7 +17,7 @@ object ClientModule {
 
     @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit =
+    fun provideRetrofit(): Retrofit =
         Retrofit
             .Builder()
             .baseUrl(RETROFIT_BASE_URL)
@@ -26,7 +26,7 @@ object ClientModule {
 
     @Singleton
     @Provides
-    fun providesApolloClient(): ApolloClient =
+    fun provideApolloClient(): ApolloClient =
         ApolloClient
             .Builder()
             .serverUrl(APOLLO_BASE_URL)
