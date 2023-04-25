@@ -25,9 +25,9 @@ class GetTypesStrengthsUseCase @Inject constructor(
                     .filter { it !in firstType.data.damageRelations.doubleDamageFrom }
                 val strengths = firstStrengths.union(secondStrengths).toMutableList()
 
-                strengths.removeAll(firstType.data.damageRelations.noDamageTo)
-                strengths.removeAll(secondType.data.damageRelations.noDamageTo)
-                strengths.removeAll(types.map { it.type.name })
+                strengths.removeAll(firstType.data.damageRelations.noDamageTo.toSet())
+                strengths.removeAll(secondType.data.damageRelations.noDamageTo.toSet())
+                strengths.removeAll(types.map { it.type.name }.toSet())
 
                 return strengths
             }

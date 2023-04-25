@@ -2,7 +2,14 @@ package com.montfel.pokfinder.presentation.profile.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -22,7 +29,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokfinder.R
 import com.montfel.pokfinder.domain.profile.model.EvolutionChain
-import com.montfel.pokfinder.presentation.theme.*
+import com.montfel.pokfinder.presentation.theme.filterTitle
+import com.montfel.pokfinder.presentation.theme.pokeballIcon
+import com.montfel.pokfinder.presentation.theme.pokemonNumber
+import com.montfel.pokfinder.presentation.theme.pokemonType
+import com.montfel.pokfinder.presentation.theme.primaryText
+import com.montfel.pokfinder.presentation.theme.primaryVariantText
 
 @Composable
 fun Evolution(
@@ -55,9 +67,9 @@ fun Evolution(
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
                         alpha = 0.3f,
                     )
-                    evolutionChain[index + 1].evolutionDetail.forEach { nextSpecie ->
+                    evolutionChain[index + 1].evolutionDetail.forEach { (minLevel, trigger) ->
                         Text(
-                            text = nextSpecie.minLevel?.let { "Level $it" } ?: nextSpecie.trigger,
+                            text = minLevel?.let { "Level $it" } ?: trigger,
                             style = MaterialTheme.typography.pokemonNumber,
                             color = MaterialTheme.colors.primaryText
                         )

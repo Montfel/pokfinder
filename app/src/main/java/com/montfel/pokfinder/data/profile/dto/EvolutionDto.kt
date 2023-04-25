@@ -5,17 +5,17 @@ import com.montfel.pokfinder.domain.profile.model.EvolutionChain
 import com.montfel.pokfinder.domain.profile.model.EvolutionDetail
 
 fun EvolutionQuery.Data.toDomain(): List<EvolutionChain> {
-    return pokemon_v2_evolutionchain_by_pk?.pokemon_v2_pokemonspecies?.map {
+    return pokemon_v2_evolutionchain_by_pk?.pokemon_v2_pokemonspecies?.map { it ->
         EvolutionChain(
             id = it.id,
             name = it.name.replaceFirstChar { first -> first.uppercase() },
-            evolutionDetail = it.pokemon_v2_pokemonevolutions.map { detail ->
-                val split = detail.pokemon_v2_evolutiontrigger?.name?.split("-")
+            evolutionDetail = it.pokemon_v2_pokemonevolutions.map { (minLevel, evolutionTrigger) ->
+                val split = evolutionTrigger?.name?.split("-")
                 val first = split?.first()?.replaceFirstChar { it.uppercase() }
                 val last = split?.last()
 
                 EvolutionDetail(
-                    minLevel = detail.min_level,
+                    minLevel = minLevel,
                     trigger = "$first $last",
                 )
             }
