@@ -291,6 +291,7 @@ fun ProfileScreen(
                                 ?.random()?.flavorText
                                 ?: uiState.species?.flavorTexts
                                     ?.filter { lang -> lang.language == "en" }
+                                    ?.takeIf { list -> list.isNotEmpty() }
                                     ?.random()?.flavorText.orEmpty(),
                             data = data,
                             training = training,
