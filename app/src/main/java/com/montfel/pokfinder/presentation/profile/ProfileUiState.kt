@@ -12,7 +12,7 @@ data class ProfileUiState(
     val weaknesses: List<String> = emptyList(),
     val immunity: List<String> = emptyList(),
     val evolutionChain: List<EvolutionChain> = emptyList(),
-    val statesOfUi: ProfileStateOfUi = ProfileStateOfUi.Loading,
+    val stateOfUi: ProfileStateOfUi = ProfileStateOfUi.Loading,
 )
 
 sealed interface ProfileStateOfUi {

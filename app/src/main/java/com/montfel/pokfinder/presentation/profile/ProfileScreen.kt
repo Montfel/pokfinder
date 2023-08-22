@@ -92,7 +92,7 @@ fun Profile(
         viewModel.onEvent(ProfileEvent.FetchPokemonDetails)
     }
 
-    when (uiState.statesOfUi) {
+    when (uiState.stateOfUi) {
         ProfileStateOfUi.Error -> {
             RetryButton(onClick = { viewModel.onEvent(ProfileEvent.FetchPokemonDetails) })
         }
@@ -201,7 +201,7 @@ fun ProfileScreen(
             }
         },
         backgroundColor =
-        if (uiState.statesOfUi !is ProfileStateOfUi.Success) MaterialTheme.colors.fabBackground
+        if (uiState.stateOfUi !is ProfileStateOfUi.Success) MaterialTheme.colors.fabBackground
         else assetFromType?.backgroundColor ?: Color.Transparent
     ) { paddingValues ->
 

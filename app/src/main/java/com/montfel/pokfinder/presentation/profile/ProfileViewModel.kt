@@ -82,18 +82,18 @@ class ProfileViewModel @Inject constructor(
                                 weaknesses = damageRelations.data.damageRelations.doubleDamageFrom,
                                 immunity = damageRelations.data.damageRelations.noDamageFrom,
                                 evolutionChain = evolutionChain.data,
-                                statesOfUi = ProfileStateOfUi.Success
+                                stateOfUi = ProfileStateOfUi.Success
                             )
                         }
                     } else {
-                        _uiState.update { it.copy(statesOfUi = ProfileStateOfUi.Error) }
+                        _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }
                     }
                 } else {
-                    _uiState.update { it.copy(statesOfUi = ProfileStateOfUi.Error) }
+                    _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }
                 }
             }
         } ?: run {
-            _uiState.update { it.copy(statesOfUi = ProfileStateOfUi.Error) }
+            _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }
         }
     }
 }
