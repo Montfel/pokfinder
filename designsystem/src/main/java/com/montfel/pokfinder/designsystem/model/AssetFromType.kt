@@ -148,8 +148,8 @@ sealed class AssetFromType(
     )
 
     companion object {
-        fun getAsset(type: String): AssetFromType {
-            return when (type.lowercase()) {
+        fun getAsset(type: String?): AssetFromType {
+            return when (type?.lowercase()) {
                 "bug" -> Bug
                 "dark" -> Dark
                 "dragon" -> Dragon

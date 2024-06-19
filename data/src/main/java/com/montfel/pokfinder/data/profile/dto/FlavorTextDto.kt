@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class FlavorTextDto(
     @SerializedName("flavor_text")
-    val flavorText: String,
+    val flavorText: String? = null,
 
     @SerializedName("language")
-    val language: LanguageDto
+    val language: LanguageDto? = null,
 )

@@ -44,6 +44,7 @@ import com.montfel.pokfinder.designsystem.model.AssetFromType
 import com.montfel.pokfinder.designsystem.theme.fabBackground
 import com.montfel.pokfinder.designsystem.theme.fabContent
 import com.montfel.pokfinder.designsystem.theme.pokeballIcon
+import com.montfel.pokfinder.domain.home.model.PokemonHome
 import com.montfel.pokfinder.presentation.components.ProgressIndicator
 import com.montfel.pokfinder.presentation.components.RetryButton
 import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
@@ -193,7 +194,7 @@ private fun HomeScreen(
 
                 items(
                     items = uiState.pokemons,
-                    key = { it.id },
+                    key = PokemonHome::id,
                 ) { pokemon ->
                     PokemonCard(
                         pokemon = pokemon,

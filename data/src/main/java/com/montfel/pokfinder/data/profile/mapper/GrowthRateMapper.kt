@@ -6,8 +6,8 @@ import com.montfel.pokfinder.domain.profile.model.GrowthRate
 fun GrowthRateDto.toDomain(): GrowthRate {
     return GrowthRate(
         name = name
-            .split("-")
-            .joinToString(separator = " ") { word ->
+            ?.split("-")
+            ?.joinToString(separator = " ") { word ->
                 word.replaceFirstChar { letter ->
                     letter.uppercase()
                 }

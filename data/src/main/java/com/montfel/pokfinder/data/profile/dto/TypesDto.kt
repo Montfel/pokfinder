@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class TypesDto(
     @SerializedName("slot")
-    val slot: Int,
+    val slot: Int? = null,
 
     @SerializedName("type")
-    val type: TypeProfileDto
+    val type: TypeProfileDto? = null,
 )

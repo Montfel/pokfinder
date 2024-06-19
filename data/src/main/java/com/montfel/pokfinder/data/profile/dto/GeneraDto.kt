@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class GeneraDto(
     @SerializedName("genus")
-    val name: String,
+    val name: String? = null,
 
     @SerializedName("language")
-    val language: LanguageDto
+    val language: LanguageDto? = null,
 )

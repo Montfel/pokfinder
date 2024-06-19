@@ -103,75 +103,88 @@ fun ProfileScreen(
     uiState: ProfileUiState,
     onEvent: (ProfileEvent) -> Unit,
 ) {
-    val language = Locale.current.language
+    val deviceLanguage = Locale.current.language
     val assetFromType =
         AssetFromType.getAsset(uiState.profile?.types?.first()?.type?.name.orEmpty())
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
     val titles = mutableListOf(R.string.about, R.string.stats)
 
-    if (uiState.evolutionChain.size > 1) {
+    if ((uiState.evolutionChain?.size ?: 0) > 1) {
         titles.add(R.string.evolution)
-    }
-    var abilities = ""
-    uiState.profile?.abilities?.forEach {
-        abilities += if (it.isHidden) {
-            "\n${it.ability.name} (hidden ability)"
-        } else {
-            "${it.slot}. ${it.ability.name}"
-        }
     }
 
     val species = uiState.species?.genera
-        ?.firstOrNull { lang -> lang.language == language }?.name
+        ?.firstOrNull { lang -> lang.language == deviceLanguage }?.name
         ?: uiState.species?.genera?.first { lang -> lang.language == "en" }?.name
 
-    val data = listOf(
-        AboutData(title = R.string.species, description = species.orEmpty()),
-        AboutData(title = R.string.height, description = "${uiState.profile?.height}m"),
-        AboutData(title = R.string.weight, description = "${uiState.profile?.weight}kg"),
-        AboutData(title = R.string.abilities, description = abilities),
-    )
+    val pokedexData = mutableListOf<AboutData>()
 
-    val ev = uiState.profile?.ev?.joinToString("\n") { "${it.effort} ${it.name}" }.orEmpty()
+    species?.let {
+        pokedexData.add(AboutData(title = R.string.species, description = it))
+    }
 
-    val training = listOf(
-        AboutData(title = R.string.ev_yield, description = ev),
-        AboutData(
-            title = R.string.catch_rate,
-            description = uiState.species?.captureRate.toString()
-        ),
-        AboutData(
-            title = R.string.base_friendship,
-            description = uiState.species?.baseHappiness.toString()
-        ),
-        AboutData(
-            title = R.string.base_exp,
-            description = uiState.profile?.baseExp.toString()
-        ),
-        AboutData(
-            title = R.string.growth_rate,
-            description = uiState.species?.growthRate.orEmpty()
-        ),
-    )
+    uiState.profile?.height?.let {
+        pokedexData.add(AboutData(title = R.string.height, description = "${it}m"))
+    }
 
-    val gender = uiState.species?.genderRate?.let {
-        if (it == -1) "Genderless"
-        else {
-            "♂ ${(8 - it.toFloat()).div(8).times(100)}% | " +
-                    "♀ ${it.toFloat().div(8).times(100)}% "
+    uiState.profile?.weight?.let {
+        pokedexData.add(AboutData(title = R.string.weight, description = "${it}kg"))
+    }
 
-        }
-    } ?: "Genderless"
+    uiState.profile?.abilitiesText?.let {
+        pokedexData.add(AboutData(title = R.string.abilities, description = it))
+    }
 
-    val eggGroup = uiState.species?.eggGroups?.joinToString { it.name }.orEmpty()
-    val eggCycles =
-        "${uiState.species?.hatchCounter?.cycles} (${uiState.species?.hatchCounter?.steps} steps)"
+    val training = mutableListOf<AboutData>()
 
-    val breeding = listOf(
-        AboutData(title = R.string.gender, description = gender),
-        AboutData(title = R.string.egg_groups, description = eggGroup),
-        AboutData(title = R.string.egg_cycles, description = eggCycles),
-    )
+    uiState.profile?.ev?.let { evPoint ->
+        training.add(
+            AboutData(
+                title = R.string.ev_yield,
+                description = evPoint.joinToString("\n") { "${it.effort} ${it.name}" }
+            )
+        )
+    }
+
+    uiState.species?.captureRate?.let {
+        training.add(AboutData(title = R.string.catch_rate, description = it.toString()))
+    }
+
+    uiState.species?.baseHappiness?.let {
+        training.add(AboutData(title = R.string.base_friendship, description = it.toString()))
+    }
+
+    uiState.profile?.baseExp?.let {
+        training.add(AboutData(title = R.string.base_exp, description = it.toString()))
+    }
+
+    uiState.species?.growthRate?.let {
+        training.add(AboutData(title = R.string.growth_rate, description = it))
+    }
+
+    val breeding = mutableListOf<AboutData>()
+
+    uiState.species?.gender?.let {
+        breeding.add(AboutData(title = R.string.gender, description = it))
+    }
+
+    uiState.species?.eggGroups?.let { groups ->
+        breeding.add(
+            AboutData(
+                title = R.string.egg_groups,
+                description = groups.joinToString { it.name.orEmpty() }
+            )
+        )
+    }
+
+    uiState.species?.hatchCounter?.let {
+        breeding.add(
+            AboutData(
+                title = R.string.egg_cycles,
+                description = "${it.cycles} (${it.steps} steps)"
+            )
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -240,8 +253,10 @@ fun ProfileScreen(
 
                     uiState.profile?.types?.let { types ->
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            types.forEach { type ->
-                                TypeCard(type = type.type)
+                            types.forEach { types ->
+                                types.type?.let {
+                                    TypeCard(type = it)
+                                }
                             }
                         }
                     }
@@ -261,9 +276,11 @@ fun ProfileScreen(
                     ) {
                         Text(
                             text = stringResource(id = title),
-                            style =
-                            if (selectedTabIndex == index) PokfinderTheme.typography.filterTitle
-                            else PokfinderTheme.typography.description,
+                            style = if (selectedTabIndex == index) {
+                                PokfinderTheme.typography.filterTitle
+                            } else {
+                                PokfinderTheme.typography.description
+                            },
                             color = MaterialTheme.colors.secondaryText
                         )
                     }
@@ -281,14 +298,14 @@ fun ProfileScreen(
                     0 -> {
                         About(
                             flavorText = uiState.species?.flavorTexts
-                                ?.filter { lang -> lang.language == language }
+                                ?.filter { lang -> lang.language == deviceLanguage }
                                 ?.takeIf { list -> list.isNotEmpty() }
                                 ?.random()?.flavorText
                                 ?: uiState.species?.flavorTexts
                                     ?.filter { lang -> lang.language == "en" }
                                     ?.takeIf { list -> list.isNotEmpty() }
-                                    ?.random()?.flavorText.orEmpty(),
-                            data = data,
+                                    ?.random()?.flavorText,
+                            pokedexData = pokedexData,
                             training = training,
                             breeding = breeding,
                             typeColor = assetFromType.typeColor,
@@ -306,11 +323,13 @@ fun ProfileScreen(
                     }
 
                     2 -> {
-                        Evolution(
-                            typeColor = assetFromType.typeColor,
-                            evolutionChain = uiState.evolutionChain,
-                            onClick = { onEvent(ProfileEvent.NavigateToProfile(it)) }
-                        )
+                        uiState.evolutionChain?.let {
+                            Evolution(
+                                typeColor = assetFromType.typeColor,
+                                evolutionChain = it,
+                                onClick = { onEvent(ProfileEvent.NavigateToProfile(it)) }
+                            )
+                        }
                     }
                 }
             }

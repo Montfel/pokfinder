@@ -41,11 +41,13 @@ fun TypeCard(type: Type) {
                 modifier = Modifier.size(15.dp)
             )
 
-            Text(
-                text = type.name,
-                style = PokfinderTheme.typography.pokemonType,
-                color = MaterialTheme.colors.secondaryText,
-            )
+            type.name?.let {
+                Text(
+                    text = it,
+                    style = PokfinderTheme.typography.pokemonType,
+                    color = MaterialTheme.colors.secondaryText,
+                )
+            }
         }
     }
 }

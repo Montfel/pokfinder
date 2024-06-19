@@ -5,6 +5,6 @@ import com.montfel.pokfinder.domain.profile.model.EggGroup
 
 fun EggGroupDto.toDomain(): EggGroup {
     return EggGroup(
-        name = name.replaceFirstChar { it.uppercase() }
+        name = name?.replaceFirstChar { it.uppercase() }
     )
 }

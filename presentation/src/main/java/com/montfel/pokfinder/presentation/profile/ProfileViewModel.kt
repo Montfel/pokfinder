@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.montfel.pokfinder.domain.profile.repository.ProfileRepository
 import com.montfel.pokfinder.domain.util.ResultType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -53,40 +52,55 @@ class ProfileViewModel @Inject constructor(
 
     private fun fetchPokemonDetails() {
         _uiState.value.pokemonId?.let { pokemonId ->
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 val profileDeferred = async { repository.getProfile(pokemonId) }
                 val speciesDeferred = async { repository.getSpecies(pokemonId) }
 
                 val profile = profileDeferred.await()
                 val species = speciesDeferred.await()
 
-                if (profile is ResultType.Success && species is ResultType.Success) {
-                    val evolutionChainDeferred = async {
-                        repository.getEvolutionChain(species.data.evolutionChainId)
-                    }
-                    val damageRelationsDeferred = async {
-                        repository.getDamageRelations(
-                            profile.data.types.first().type.name.lowercase()
+                if (profile is ResultType.Success) {
+                    _uiState.update {
+                        it.copy(
+                            profile = profile.data,
+                            stateOfUi = ProfileStateOfUi.Success
                         )
                     }
 
-                    val evolutionChain = evolutionChainDeferred.await()
-                    val damageRelations = damageRelationsDeferred.await()
-
-                    if (evolutionChain is ResultType.Success && damageRelations is ResultType.Success) {
+                    if (species is ResultType.Success) {
                         _uiState.update {
                             it.copy(
-                                profile = profile.data,
                                 species = species.data,
-                                strengths = damageRelations.data.damageRelations.doubleDamageTo,
-                                weaknesses = damageRelations.data.damageRelations.doubleDamageFrom,
-                                immunity = damageRelations.data.damageRelations.noDamageFrom,
-                                evolutionChain = evolutionChain.data,
                                 stateOfUi = ProfileStateOfUi.Success
                             )
                         }
-                    } else {
-                        _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }
+
+                        val evolutionChainDeferred = species.data.evolutionChainId?.let {
+                            async { repository.getEvolutionChain(it) }
+                        }
+
+                        val evolutionChain = evolutionChainDeferred?.await()
+
+                        if (evolutionChain is ResultType.Success) {
+                            _uiState.update { it.copy(evolutionChain = evolutionChain.data) }
+                        }
+                    }
+
+                    val damageRelationsDeferred =
+                        profile.data.types?.first()?.type?.name?.lowercase()?.let {
+                            async { repository.getDamageRelations(it) }
+                        }
+
+                    val damageRelations = damageRelationsDeferred?.await()
+
+                    if (damageRelations is ResultType.Success) {
+                        _uiState.update {
+                            it.copy(
+                                strengths = damageRelations.data.damageRelations?.doubleDamageTo,
+                                weaknesses = damageRelations.data.damageRelations?.doubleDamageFrom,
+                                immunity = damageRelations.data.damageRelations?.noDamageFrom,
+                            )
+                        }
                     }
                 } else {
                     _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }

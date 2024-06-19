@@ -5,7 +5,7 @@ import com.montfel.pokfinder.domain.profile.model.FlavorText
 
 fun FlavorTextDto.toDomain(): FlavorText {
     return FlavorText(
-        flavorText = flavorText.replace("\n", " "),
-        language = language.name
+        flavorText = flavorText?.replace("\n", " "),
+        language = language?.name
     )
 }

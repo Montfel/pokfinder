@@ -51,7 +51,7 @@ fun PokemonCard(
         Card(
             onClick = onClick,
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = AssetFromType.getAsset(pokemon.types.first().type.name).backgroundColor,
+            backgroundColor = AssetFromType.getAsset(pokemon.types.first().type?.name).backgroundColor,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(115.dp)
@@ -79,8 +79,10 @@ fun PokemonCard(
                     Spacer(modifier = Modifier.height(4.dp))
 
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                        pokemon.types.forEach {
-                            TypeCard(type = it.type)
+                        pokemon.types.forEach { types ->
+                            types.type?.let {
+                                TypeCard(type = it)
+                            }
                         }
                     }
                 }

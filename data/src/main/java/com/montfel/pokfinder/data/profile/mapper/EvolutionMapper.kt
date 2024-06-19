@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.data.profile.dto
+package com.montfel.pokfinder.data.profile.mapper
 
 import com.montfel.pokfinder.data.EvolutionQuery
 import com.montfel.pokfinder.domain.profile.model.EvolutionChain

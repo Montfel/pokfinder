@@ -21,16 +21,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.designsystem.R
 import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.domain.profile.model.Stats
 import com.montfel.pokfinder.designsystem.theme.primaryText
 import com.montfel.pokfinder.designsystem.theme.primaryVariantText
+import com.montfel.pokfinder.domain.profile.model.Stats
 
 @Composable
 fun Stats(
     stats: List<Stats>,
     typeColor: Color,
 ) {
-    val total = stats.sumOf { it.baseStat }
+    val total = stats.sumOf { it.baseStat ?: 0 }
 
     Spacer(modifier = Modifier.height(30.dp))
 
@@ -49,7 +49,7 @@ fun Stats(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = it.stat.name,
+                text = it.stat?.name.orEmpty(),
                 style = PokfinderTheme.typography.pokemonType,
                 color = MaterialTheme.colors.primaryText,
                 modifier = Modifier.width(50.dp)
@@ -64,7 +64,8 @@ fun Stats(
             )
 
             LinearProgressIndicator(
-                progress = it.baseStat.toFloat() / ((it.min + it.max) / 2).toFloat(),
+                progress = it.baseStat?.toFloat()
+                    ?.div((it.min?.plus(it.max ?: 0))?.div(2) ?: 0)?: 0f,
                 color = typeColor,
                 backgroundColor = Color.Transparent,
                 modifier = Modifier

@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadHomePage() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val pokemonListDeferred = async { repository.getPokemonList() }
             val generationListDeferred = async { repository.getGenerationList() }
             val typeListDeferred = async { repository.getTypeList() }
@@ -138,10 +138,10 @@ class HomeViewModel @Inject constructor(
         if (typeList.isNotEmpty()) {
             val result = pokemons.filter {
                 typeList.contains(
-                    AssetFromType.getAsset(it.types.first().type.name)
+                    AssetFromType.getAsset(it.types.first().type?.name)
                 ) ||
                         typeList.contains(
-                            AssetFromType.getAsset(it.types.last().type.name)
+                            AssetFromType.getAsset(it.types.last().type?.name)
                         )
             }
 
@@ -155,9 +155,9 @@ class HomeViewModel @Inject constructor(
         if (weaknessesList.isNotEmpty()) {
             val result = pokemons.filter {
                 weaknessesList.contains(
-                    AssetFromType.getAsset(it.types.first().type.name)
+                    AssetFromType.getAsset(it.types.first().type?.name)
                 ) || weaknessesList.contains(
-                    AssetFromType.getAsset(it.types.last().type.name)
+                    AssetFromType.getAsset(it.types.last().type?.name)
                 )
             }
 

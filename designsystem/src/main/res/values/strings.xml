@@ -48,7 +48,6 @@
     <string name="gender">Gender</string>
     <string name="egg_groups">Egg Groups</string>
     <string name="egg_cycles">Egg Cycles</string>
-    <string name="location">Location</string>
 
     <!-- Stats -->
     <string name="stats">Stats</string>
@@ -64,7 +63,7 @@
     <string name="evolution">Evolution</string>
     <string name="evolution_chart">Evolution Chart</string>
 
-    <!-- Accessibity -->
+    <!-- Accessibility -->
     <string name="button_scroll_top_page">Scroll to top of page</string>
     <string name="pokemon_image_description">Pokémon %s</string>
     <string name="clear_text_field">Clear text field</string>

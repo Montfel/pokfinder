@@ -45,7 +45,6 @@
     <string name="gender">Gênero</string>
     <string name="egg_groups">Grupos de Ovos</string>
     <string name="egg_cycles">Ciclos de Ovos</string>
-    <string name="location">Localização</string>
 
     <!-- Stats -->
     <string name="stats">Estatísticas</string>

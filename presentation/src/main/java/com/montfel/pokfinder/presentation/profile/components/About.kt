@@ -17,69 +17,83 @@ import com.montfel.pokfinder.designsystem.theme.primaryVariantText
 
 @Composable
 fun About(
-    flavorText: String,
-    data: List<AboutData>,
+    flavorText: String?,
+    pokedexData: List<AboutData>,
     training: List<AboutData>,
     breeding: List<AboutData>,
     typeColor: Color,
-    strengths: List<String>,
-    weaknesses: List<String>,
-    immunity: List<String>
+    strengths: List<String>?,
+    weaknesses: List<String>?,
+    immunity: List<String>?
 ) {
-    Spacer(modifier = Modifier.height(40.dp))
+    flavorText?.let {
+        Spacer(modifier = Modifier.height(40.dp))
 
-    Text(
-        text = flavorText,
-        style = PokfinderTheme.typography.description,
-        color = MaterialTheme.colors.primaryVariantText,
-        modifier = Modifier.fillMaxWidth()
-    )
-
-    Spacer(modifier = Modifier.height(30.dp))
-
-    Text(
-        text = stringResource(id = R.string.pokedex_data),
-        style = PokfinderTheme.typography.filterTitle,
-        color = typeColor
-    )
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    data.forEach {
-        AboutItem(data = it)
+        Text(
+            text = flavorText,
+            style = PokfinderTheme.typography.description,
+            color = MaterialTheme.colors.primaryVariantText,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 
-    AboutTypeItem(title = R.string.strength, typesList = strengths)
+    if (pokedexData.isNotEmpty()) {
+        Spacer(modifier = Modifier.height(30.dp))
 
-    AboutTypeItem(title = R.string.weakeness, typesList = weaknesses)
+        Text(
+            text = stringResource(id = R.string.pokedex_data),
+            style = PokfinderTheme.typography.filterTitle,
+            color = typeColor
+        )
 
-    AboutTypeItem(title = R.string.immunity, typesList = immunity)
+        Spacer(modifier = Modifier.height(20.dp))
 
-    Spacer(modifier = Modifier.height(20.dp))
-
-    Text(
-        text = stringResource(id = R.string.training),
-        style = PokfinderTheme.typography.filterTitle,
-        color = typeColor
-    )
-
-    Spacer(modifier = Modifier.height(20.dp))
-
-    training.forEach {
-        AboutItem(data = it)
+        pokedexData.forEach {
+            AboutItem(data = it)
+        }
     }
 
-    Spacer(modifier = Modifier.height(20.dp))
+    strengths?.let {
+        AboutTypeItem(title = R.string.strength, typesList = strengths)
+    }
 
-    Text(
-        text = stringResource(id = R.string.breeding),
-        style = PokfinderTheme.typography.filterTitle,
-        color = typeColor
-    )
+    weaknesses?.let {
+        AboutTypeItem(title = R.string.weakeness, typesList = weaknesses)
+    }
 
-    Spacer(modifier = Modifier.height(20.dp))
+    immunity?.let {
+        AboutTypeItem(title = R.string.immunity, typesList = immunity)
+    }
 
-    breeding.forEach {
-        AboutItem(data = it)
+    if (training.isNotEmpty()) {
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = stringResource(id = R.string.training),
+            style = PokfinderTheme.typography.filterTitle,
+            color = typeColor
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        training.forEach {
+            AboutItem(data = it)
+        }
+    }
+
+    if (breeding.isNotEmpty()) {
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = stringResource(id = R.string.breeding),
+            style = PokfinderTheme.typography.filterTitle,
+            color = typeColor
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        breeding.forEach {
+            AboutItem(data = it)
+        }
     }
 }

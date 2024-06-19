@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class AbilitiesDto(
     @SerializedName("ability")
-    val ability: AbilityDto,
+    val ability: AbilityDto? = null,
 
     @SerializedName("is_hidden")
-    val isHidden: Boolean,
+    val isHidden: Boolean? = null,
 
     @SerializedName("slot")
-    val slot: Int
+    val slot: Int? = null,
 )

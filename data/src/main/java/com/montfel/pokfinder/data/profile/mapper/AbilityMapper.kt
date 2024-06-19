@@ -5,6 +5,6 @@ import com.montfel.pokfinder.domain.profile.model.Ability
 
 fun AbilityDto.toDomain(): Ability {
     return Ability(
-        name = name.replaceFirstChar { it.uppercase() }
+        name = name?.replaceFirstChar { it.uppercase() }
     )
 }

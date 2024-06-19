@@ -1,6 +1,5 @@
 package com.montfel.pokfinder.data.profile.repository
 
-import com.montfel.pokfinder.data.profile.dto.toDomain
 import com.montfel.pokfinder.data.profile.mapper.toDomain
 import com.montfel.pokfinder.data.profile.service.EvolutionService
 import com.montfel.pokfinder.data.profile.service.ProfileService

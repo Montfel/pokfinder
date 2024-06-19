@@ -8,10 +8,10 @@ data class ProfileUiState(
     val pokemonId: Int? = null,
     val profile: PokemonProfile? = null,
     val species: PokemonSpecies? = null,
-    val strengths: List<String> = emptyList(),
-    val weaknesses: List<String> = emptyList(),
-    val immunity: List<String> = emptyList(),
-    val evolutionChain: List<EvolutionChain> = emptyList(),
+    val strengths: List<String>? = null,
+    val weaknesses: List<String>? = null,
+    val immunity: List<String>? = null,
+    val evolutionChain: List<EvolutionChain>? = null,
     val stateOfUi: ProfileStateOfUi = ProfileStateOfUi.Loading,
 )
 

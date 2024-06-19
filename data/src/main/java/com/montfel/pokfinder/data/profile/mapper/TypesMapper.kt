@@ -6,6 +6,6 @@ import com.montfel.pokfinder.domain.profile.model.Types
 fun TypesDto.toDomain(): Types {
     return Types(
         slot = slot,
-        type = type.toDomain()
+        type = type?.toDomain()
     )
 }

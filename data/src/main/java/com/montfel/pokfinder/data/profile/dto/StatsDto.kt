@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class StatsDto(
     @SerializedName("base_stat")
-    val baseStat: Int,
+    val baseStat: Int? = null,
 
     @SerializedName("effort")
-    val effort: Int,
+    val effort: Int? = null,
 
     @SerializedName("stat")
-    val stat: StatDto
+    val stat: StatDto? = null,
 )

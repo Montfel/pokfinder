@@ -5,6 +5,6 @@ import com.montfel.pokfinder.domain.profile.model.Type
 
 fun TypeProfileDto.toDomain(): Type {
     return Type(
-        name = name.replaceFirstChar { it.uppercase() },
+        name = name?.replaceFirstChar { it.uppercase() },
     )
 }

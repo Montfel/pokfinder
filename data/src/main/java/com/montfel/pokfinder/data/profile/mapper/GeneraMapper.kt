@@ -6,6 +6,6 @@ import com.montfel.pokfinder.domain.profile.model.Genera
 fun GeneraDto.toDomain(): Genera {
     return Genera(
         name = name,
-        language = language.name
+        language = language?.name
     )
 }

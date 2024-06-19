@@ -5,6 +5,6 @@ import com.montfel.pokfinder.domain.profile.model.PokemonDamageRelations
 
 fun PokemonDamageRelationsDto.toDomain(): PokemonDamageRelations {
     return PokemonDamageRelations(
-        damageRelations = damageRelations.toDomain()
+        damageRelations = damageRelations?.toDomain()
     )
 }
