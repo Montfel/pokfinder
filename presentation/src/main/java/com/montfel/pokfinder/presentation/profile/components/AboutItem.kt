@@ -25,11 +25,13 @@ fun AboutItem(data: AboutData) {
             color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
+
         Text(
             text = data.description,
             style = PokfinderTheme.typography.description,
             color = MaterialTheme.colors.primaryVariantText
         )
     }
+
     Spacer(modifier = Modifier.height(16.dp))
 }

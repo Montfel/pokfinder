@@ -30,12 +30,12 @@ class ProfileViewModel @Inject constructor(
         when (event) {
             is ProfileEvent.FetchPokemonDetails -> fetchPokemonDetails()
             is ProfileEvent.NavigateToProfile -> navigateToProfile(event.pokemonId)
-            ProfileEvent.NavigateBack -> navigateBack()
+            is ProfileEvent.NavigateBack -> navigateBack()
             is ProfileEvent.SavePokemonId -> savePokemonId(event.pokemonId)
         }
     }
 
-    private fun savePokemonId(pokemonId: String) {
+    private fun savePokemonId(pokemonId: Int) {
         _uiState.update { it.copy(pokemonId = pokemonId) }
     }
 

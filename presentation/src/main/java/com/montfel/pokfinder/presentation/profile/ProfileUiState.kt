@@ -5,7 +5,7 @@ import com.montfel.pokfinder.domain.profile.model.PokemonProfile
 import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
 
 data class ProfileUiState(
-    val pokemonId: String? = null,
+    val pokemonId: Int? = null,
     val profile: PokemonProfile? = null,
     val species: PokemonSpecies? = null,
     val strengths: List<String> = emptyList(),

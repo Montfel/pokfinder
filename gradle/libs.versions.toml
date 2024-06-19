@@ -44,7 +44,7 @@ activity = { module = "androidx.activity:activity-compose", version.ref = "activ
 apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version = "1.7.0-beta03" } # fixme
+compose-foundation = { module = "androidx.compose.foundation:foundation", version = "1.7.0-beta03" }
 compose-material = { module = "androidx.compose.material:material" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }

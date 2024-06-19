@@ -23,6 +23,7 @@ fun BottomSheetHeader(
             style = PokfinderTheme.typography.pokemonName,
             color = MaterialTheme.colors.primaryText,
         )
+
         Text(
             text = stringResource(id = description),
             style = PokfinderTheme.typography.description,

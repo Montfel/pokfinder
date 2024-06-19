@@ -60,6 +60,7 @@ fun GenerationButton(
                 .size(110.dp)
                 .offset(x = 10.dp, y = 50.dp)
         )
+
         Image(
             painter = painterResource(id = R.drawable.ic_6x3),
             contentDescription = null,
@@ -70,6 +71,7 @@ fun GenerationButton(
                 .height(35.dp)
                 .offset(x = 15.dp, y = 10.dp)
         )
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
@@ -84,6 +86,7 @@ fun GenerationButton(
                     )
                 }
             }
+
             Text(
                 text = title,
                 style = PokfinderTheme.typography.description,

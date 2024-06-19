@@ -7,8 +7,8 @@ import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
 import com.montfel.pokfinder.domain.util.ResultType
 
 interface ProfileRepository {
-    suspend fun getProfile(pokemonId: String): ResultType<PokemonProfile>
-    suspend fun getSpecies(pokemonId: String): ResultType<PokemonSpecies>
+    suspend fun getProfile(pokemonId: Int): ResultType<PokemonProfile>
+    suspend fun getSpecies(pokemonId: Int): ResultType<PokemonSpecies>
     suspend fun getEvolutionChain(evolutionChainId: Int): ResultType<List<EvolutionChain>>
     suspend fun getDamageRelations(typeId: String): ResultType<PokemonDamageRelations>
 }

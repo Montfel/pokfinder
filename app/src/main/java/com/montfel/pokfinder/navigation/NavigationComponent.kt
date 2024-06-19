@@ -30,9 +30,9 @@ fun NavigationComponent() {
             val (id) = it.toRoute<Screen.Profile>()
 
             ProfileScreen(
-                id = id.toString(),
-                onNavigateToProfile = { profileId ->
-                    navController.navigate(Screen.Profile(profileId))
+                id = id,
+                onNavigateToProfile = { pokemonId ->
+                    navController.navigate(Screen.Profile(pokemonId))
                 },
                 onNavigateBack = navController::popBackStack
             )

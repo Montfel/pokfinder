@@ -25,13 +25,17 @@ fun FilterItem(
     onClick: () -> Unit
 ) {
     val color = if (isEnabled) MaterialTheme.colors.primaryIcon else typeColor
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier =
-        if (isEnabled) Modifier
+    val modifier = if (isEnabled) {
+        Modifier
             .size(50.dp)
             .background(typeColor, CircleShape)
-        else Modifier.size(50.dp)
+    } else {
+        Modifier.size(50.dp)
+    }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
     ) {
         IconButton(onClick = onClick) {
             Image(

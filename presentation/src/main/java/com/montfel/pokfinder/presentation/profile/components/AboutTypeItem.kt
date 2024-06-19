@@ -30,6 +30,7 @@ fun AboutTypeItem(@StringRes title: Int, typesList: List<String>) {
             color = MaterialTheme.colors.primaryText,
             modifier = Modifier.width(100.dp)
         )
+
         if (typesList.isEmpty()) {
             Text(
                 text = stringResource(id = R.string.none),

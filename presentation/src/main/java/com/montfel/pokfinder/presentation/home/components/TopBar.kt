@@ -29,6 +29,7 @@ fun TopBar(onClick: (BottomSheetFilter) -> Unit) {
                     tint = MaterialTheme.colors.topBarIcon
                 )
             }
+
             IconButton(onClick = { onClick(BottomSheetFilter.Sort) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_sort),
@@ -36,6 +37,7 @@ fun TopBar(onClick: (BottomSheetFilter) -> Unit) {
                     tint = MaterialTheme.colors.topBarIcon
                 )
             }
+
             IconButton(onClick = { onClick(BottomSheetFilter.Filter) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_filter),

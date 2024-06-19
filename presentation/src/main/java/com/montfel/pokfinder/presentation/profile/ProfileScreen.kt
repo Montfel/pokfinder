@@ -62,7 +62,7 @@ import com.montfel.pokfinder.presentation.profile.components.Stats
 
 @Composable
 fun ProfileScreen(
-    id: String,
+    id: Int,
     onNavigateToProfile: (id: Int) -> Unit,
     onNavigateBack: () -> Unit,
     viewModel: ProfileViewModel = hiltViewModel()
@@ -70,20 +70,14 @@ fun ProfileScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) {
+        viewModel.onEvent(ProfileEvent.SavePokemonId(id))
+        viewModel.onEvent(ProfileEvent.FetchPokemonDetails)
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is ProfileUiEvent.NavigateBack -> onNavigateBack()
                 is ProfileUiEvent.NavigateToProfile -> onNavigateToProfile(event.pokemonId)
             }
         }
-    }
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(ProfileEvent.SavePokemonId(id))
-    }
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(ProfileEvent.FetchPokemonDetails)
     }
 
     when (uiState.stateOfUi) {

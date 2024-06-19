@@ -14,12 +14,28 @@ suspend fun <T : Any> resultWrapper(call: suspend () -> T): ResultType<T> {
     }.getOrElse { exception ->
         exception.printStackTrace()
 
-        when (exception) {
-            is HttpException -> ResultType.Failure(ErrorType.Http)
-            is SocketException -> ResultType.Failure(ErrorType.Network)
-            is UnknownHostException, is SocketTimeoutException -> ResultType.Failure(ErrorType.Offline)
-            is CancellationException -> throw exception
-            else -> ResultType.Failure(ErrorType.Unknown)
-        }
+        ResultType.Failure(getErrorTypeFromThrowable(exception))
+    }
+}
+
+fun getErrorTypeFromThrowable(it: Throwable) = when (it) {
+    is HttpException -> {
+        ErrorType.Http
+    }
+
+    is SocketException -> {
+        ErrorType.Network
+    }
+
+    is UnknownHostException, is SocketTimeoutException -> {
+        ErrorType.Offline
+    }
+
+    is CancellationException -> {
+        throw it
+    }
+
+    else -> {
+        ErrorType.Unknown
     }
 }

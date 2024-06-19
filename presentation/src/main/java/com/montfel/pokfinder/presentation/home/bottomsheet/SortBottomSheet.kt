@@ -42,18 +42,21 @@ fun SortBottomSheet(
                 onClick = { onSortOptionSelected(SortOptions.SmallestNumber) },
                 modifier = Modifier.fillMaxWidth()
             )
+
             SortButton(
                 title = R.string.highest,
                 isEnabled = sortOptionSelected is SortOptions.HighestNumber,
                 onClick = { onSortOptionSelected(SortOptions.HighestNumber) },
                 modifier = Modifier.fillMaxWidth()
             )
+
             SortButton(
                 title = R.string.a_z,
                 isEnabled = sortOptionSelected is SortOptions.Alphabetical,
                 onClick = { onSortOptionSelected(SortOptions.Alphabetical) },
                 modifier = Modifier.fillMaxWidth()
             )
+
             SortButton(
                 title = R.string.z_a,
                 isEnabled = sortOptionSelected is SortOptions.ReverseAlphabetical,

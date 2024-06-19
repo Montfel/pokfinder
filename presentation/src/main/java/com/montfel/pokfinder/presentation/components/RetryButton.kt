@@ -45,6 +45,7 @@ fun RetryButton(
                     imageVector = Icons.Default.Refresh,
                     contentDescription = null
                 )
+
                 Text(
                     text = stringResource(id = R.string.retry),
                     style = PokfinderTheme.typography.description,

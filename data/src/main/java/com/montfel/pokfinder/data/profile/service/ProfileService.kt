@@ -9,12 +9,12 @@ import retrofit2.http.Path
 interface ProfileService {
     @GET("pokemon/{pokemonId}")
     suspend fun getProfile(
-        @Path(value = "pokemonId") pokemonId: String
+        @Path(value = "pokemonId") pokemonId: Int
     ): PokemonProfileDto
 
     @GET("pokemon-species/{pokemonId}")
     suspend fun getSpecies(
-        @Path(value = "pokemonId") pokemonId: String
+        @Path(value = "pokemonId") pokemonId: Int
     ): PokemonSpeciesDto
 
     @GET("type/{typeId}")

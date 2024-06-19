@@ -19,11 +19,11 @@ class ProfileRepositoryImpl @Inject constructor(
     private val profileService: ProfileService,
     private val evolutionService: EvolutionService,
 ) : ProfileRepository {
-    override suspend fun getProfile(pokemonId: String): ResultType<PokemonProfile> {
+    override suspend fun getProfile(pokemonId: Int): ResultType<PokemonProfile> {
         return resultWrapper { profileService.getProfile(pokemonId).toDomain() }
     }
 
-    override suspend fun getSpecies(pokemonId: String): ResultType<PokemonSpecies> {
+    override suspend fun getSpecies(pokemonId: Int): ResultType<PokemonSpecies> {
         return resultWrapper { profileService.getSpecies(pokemonId).toDomain() }
     }
 

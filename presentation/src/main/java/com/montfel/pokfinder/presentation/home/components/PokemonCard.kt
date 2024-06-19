@@ -68,22 +68,27 @@ fun PokemonCard(
                         style = PokfinderTheme.typography.pokemonNumber,
                         color = MaterialTheme.colors.numberOverBackgroundColor
                     )
+
                     Text(
                         text = pokemon.name,
                         style = PokfinderTheme.typography.pokemonName,
                         color = MaterialTheme.colors.secondaryText,
                         overflow = TextOverflow.Ellipsis
                     )
+
                     Spacer(modifier = Modifier.height(4.dp))
+
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         pokemon.types.forEach {
                             TypeCard(type = it.type)
                         }
                     }
                 }
+
                 Spacer(modifier = Modifier.size(100.dp))
             }
         }
+
         Image(
             painter = painterResource(id = R.drawable.ic_pokeball),
             contentDescription = null,
@@ -93,6 +98,7 @@ fun PokemonCard(
                 .size(140.dp)
                 .offset(x = 15.dp, y = 15.dp)
         )
+
         Image(
             painter = painterResource(id = R.drawable.ic_6x3),
             contentDescription = null,
@@ -103,6 +109,7 @@ fun PokemonCard(
                 .width(74.dp)
                 .height(32.dp)
         )
+
         AsyncImage(
             model = stringResource(id = R.string.pokemon_image_url, pokemon.id),
             contentDescription = stringResource(
@@ -127,6 +134,7 @@ fun PokemonCardPreview() {
             name = "Bulbasaur",
             image = "",
             types = emptyList()
-        )
-    ) {}
+        ),
+        onClick = {}
+    )
 }
