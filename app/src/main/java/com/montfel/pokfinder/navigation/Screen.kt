@@ -1,15 +1,9 @@
 package com.montfel.pokfinder.navigation
 
-import kotlinx.serialization.Serializable
+sealed class Screen(val route: String) {
+    data object Home : Screen("home")
 
-@Serializable
-sealed interface Screen {
-
-    @Serializable
-    data object Home : Screen
-
-    @Serializable
-    data class Profile(
-        val id: Int
-    ) : Screen
+    data object Profile : Screen("profile/{id}") {
+        fun createRoute(id: Int) = "profile/$id"
+    }
 }

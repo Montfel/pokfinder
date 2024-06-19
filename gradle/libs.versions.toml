@@ -14,11 +14,11 @@ hilt = "2.51.1"
 hiltNavigation = "1.2.0"
 junit = "4.13.2"
 junitAndroid = "1.1.5"
-kotlin = "2.0.0"
+kotlin = "1.9.24"
 kotlinSerialization = "1.7.0"
-ksp = "2.0.0-1.0.22"
+ksp = "1.9.24-1.0.20"
 lifecycle = "2.8.2"
-navigation = "2.8.0-beta03"
+navigation = "2.7.7"
 okhttp = "4.12.0"
 paging = "3.3.0"
 review = "2.0.1"
@@ -30,7 +30,6 @@ truth = "1.4.2"
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
@@ -44,8 +43,8 @@ activity = { module = "androidx.activity:activity-compose", version.ref = "activ
 apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version = "1.7.0-beta03" }
-compose-material = { module = "androidx.compose.material:material", version = "1.7.0-beta03" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-material = { module = "androidx.compose.material:material" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 core = { module = "androidx.core:core-ktx", version.ref = "core" }
