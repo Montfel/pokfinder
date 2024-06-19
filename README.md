@@ -122,7 +122,6 @@ The following tools were used in the construction of the project:
 - **[Retrofit](https://square.github.io/retrofit/)**
 - **[Jetpack Compose](https://developer.android.com/jetpack/compose)**
 - **[Coil](https://coil-kt.github.io/coil/)**
-- **[Accompanist](https://google.github.io/accompanist/)**
 - **[Firebase](https://firebase.google.com/)**
 
 #### Util

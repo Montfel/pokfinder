@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokfinder">
         <activity
-            android:name=".presentation.PokfinderActivity"
+            android:name=".PokfinderActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Pokfinder"
