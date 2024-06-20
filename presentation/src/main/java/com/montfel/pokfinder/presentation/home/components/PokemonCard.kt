@@ -34,7 +34,7 @@ import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.designsystem.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.designsystem.theme.secondaryText
 import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.presentation.components.TypeCard
+import com.montfel.pokfinder.designsystem.components.TypeCard
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -80,8 +80,8 @@ fun PokemonCard(
 
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         pokemon.types.forEach { types ->
-                            types.type?.let {
-                                TypeCard(type = it)
+                            types.type?.name?.let {
+                                TypeCard(typeName = it)
                             }
                         }
                     }

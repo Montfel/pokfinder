@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.data.di
 
 import com.apollographql.apollo3.ApolloClient
-import com.montfel.pokfinder.data.home.service.HomeService
-import com.montfel.pokfinder.data.profile.service.ProfileService
+import com.montfel.pokfinder.data.service.HomeService
+import com.montfel.pokfinder.data.service.ProfileService
 import com.montfel.pokfinder.domain.home.usecase.HomeUseCases
 import com.montfel.pokfinder.domain.home.usecase.SortPokemonsUseCase
 import dagger.Module

@@ -53,9 +53,9 @@ import com.montfel.pokfinder.designsystem.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.designsystem.theme.primaryIcon
 import com.montfel.pokfinder.designsystem.theme.secondaryText
 import com.montfel.pokfinder.domain.profile.model.AboutData
-import com.montfel.pokfinder.presentation.components.ProgressIndicator
-import com.montfel.pokfinder.presentation.components.RetryButton
-import com.montfel.pokfinder.presentation.components.TypeCard
+import com.montfel.pokfinder.designsystem.components.LoadingScreen
+import com.montfel.pokfinder.designsystem.components.ErrorScreen
+import com.montfel.pokfinder.designsystem.components.TypeCard
 import com.montfel.pokfinder.presentation.profile.components.About
 import com.montfel.pokfinder.presentation.profile.components.Evolution
 import com.montfel.pokfinder.presentation.profile.components.Stats
@@ -82,11 +82,11 @@ fun ProfileScreen(
 
     when (uiState.stateOfUi) {
         ProfileStateOfUi.Error -> {
-            RetryButton(onClick = { viewModel.onEvent(ProfileEvent.FetchPokemonDetails) })
+            ErrorScreen(onClick = { viewModel.onEvent(ProfileEvent.FetchPokemonDetails) })
         }
 
         ProfileStateOfUi.Loading -> {
-            ProgressIndicator()
+            LoadingScreen()
         }
 
         ProfileStateOfUi.Success -> {
@@ -254,8 +254,8 @@ fun ProfileScreen(
                     uiState.profile?.types?.let { types ->
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                             types.forEach { types ->
-                                types.type?.let {
-                                    TypeCard(type = it)
+                                types.type?.name?.let {
+                                    TypeCard(typeName = it)
                                 }
                             }
                         }
