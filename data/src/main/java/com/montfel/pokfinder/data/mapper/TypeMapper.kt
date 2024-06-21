@@ -1,6 +1,8 @@
 package com.montfel.pokfinder.data.mapper
 
+import com.montfel.pokfinder.data.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.data.PokemonsQuery
+import com.montfel.pokfinder.data.SearchPokemonsQuery
 import com.montfel.pokfinder.data.TypesQuery
 import com.montfel.pokfinder.data.model.dto.TypeDto
 import com.montfel.pokfinder.data.model.dto.TypeNameDto
@@ -28,6 +30,20 @@ fun PokemonsQuery.Pokemon_v2_pokemontype.toTypeDto(): TypeDto {
 }
 
 fun PokemonsQuery.Pokemon_v2_pokemontype.toType(): Type {
+    return Type(
+        slot = slot,
+        name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }
+    )
+}
+
+fun SearchPokemonsQuery.Pokemon_v2_pokemontype.toType(): Type {
+    return Type(
+        slot = slot,
+        name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }
+    )
+}
+
+fun FilterPokemonsByTypesQuery.Pokemon_v2_pokemontype.toType(): Type {
     return Type(
         slot = slot,
         name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }

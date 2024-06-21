@@ -16,13 +16,14 @@ import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.designsystem.model.AssetFromType
 import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.designsystem.theme.primaryText
+import com.montfel.pokfinder.domain.profile.model.Type
 
 @Composable
 fun FilterSection(
     @StringRes title: Int,
-    items: List<AssetFromType>,
-    itemsSelected: List<AssetFromType>,
-    onFilterSelected: (AssetFromType) -> Unit
+    items: List<Type>,
+    itemsSelected: List<Type>,
+    onFilterSelected: (Type) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
@@ -37,9 +38,11 @@ fun FilterSection(
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
             items(items) { item ->
+                val asset = AssetFromType.getAsset(item.name)
+
                 FilterItem(
-                    icon = item.icon,
-                    typeColor = item.typeColor,
+                    icon = asset.icon,
+                    typeColor = asset.typeColor,
                     isEnabled = itemsSelected.contains(item),
                     onClick = { onFilterSelected(item) },
                 )

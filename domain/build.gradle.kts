@@ -9,4 +9,5 @@ java {
 
 dependencies {
     implementation(libs.hilt.compiler)
+    implementation(libs.paging.common)
 }

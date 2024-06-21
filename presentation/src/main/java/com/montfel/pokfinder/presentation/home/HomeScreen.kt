@@ -2,16 +2,18 @@ package com.montfel.pokfinder.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -35,18 +37,21 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 import com.montfel.pokfinder.designsystem.R
-import com.montfel.pokfinder.designsystem.model.AssetFromType
+import com.montfel.pokfinder.designsystem.components.ErrorScreen
+import com.montfel.pokfinder.designsystem.components.LoadingScreen
 import com.montfel.pokfinder.designsystem.theme.fabBackground
 import com.montfel.pokfinder.designsystem.theme.fabContent
 import com.montfel.pokfinder.designsystem.theme.pokeballIcon
+import com.montfel.pokfinder.designsystem.theme.primaryInput
 import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.presentation.components.ProgressIndicator
-import com.montfel.pokfinder.presentation.components.RetryButton
 import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
 import com.montfel.pokfinder.presentation.home.bottomsheet.GenerationBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.SortBottomSheet
@@ -66,39 +71,28 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val pokemonsLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is HomeUiEvent.NavigateToProfile -> {
-                    onNavigateToProfile(event.pokemonId)
-                }
+                is HomeUiEvent.NavigateToProfile -> onNavigateToProfile(event.pokemonId)
             }
         }
     }
 
-    when (uiState.stateOfUi) {
-        HomeStateOfUi.Error -> {
-            RetryButton(onClick = { viewModel.onEvent(HomeEvent.LoadHomePage) })
-        }
-
-        HomeStateOfUi.Loading -> {
-            ProgressIndicator()
-        }
-
-        HomeStateOfUi.Success -> {
-            HomeScreen(
-                uiState = uiState,
-                onEvent = viewModel::onEvent
-            )
-        }
-    }
+    HomeScreen(
+        uiState = uiState,
+        pokemonsLazyPagingItems = pokemonsLazyPagingItems,
+        onEvent = viewModel::onEvent
+    )
 }
 
 @ExperimentalMaterialApi
 @Composable
 private fun HomeScreen(
     uiState: HomeUiState,
+    pokemonsLazyPagingItems: LazyPagingItems<PokemonHome>,
     onEvent: (HomeEvent) -> Unit,
 ) {
     var filter: BottomSheetFilter by remember { mutableStateOf(BottomSheetFilter.Generation) }
@@ -116,39 +110,45 @@ private fun HomeScreen(
     ModalBottomSheetLayout(
         sheetContent = {
             when (filter) {
-                BottomSheetFilter.Generation -> GenerationBottomSheet(
-                    generationList = uiState.generations,
-                    generationSelected = uiState.generationSelected,
-                    onGenerationSelected = { generation ->
-                        onEvent(HomeEvent.FilterByGeneration(generation))
-                        scope.launch(Dispatchers.Main) {
-                            delay(500)
-                            sheetState.hide()
+                BottomSheetFilter.Generation -> {
+                    GenerationBottomSheet(
+                        generationList = uiState.generations,
+                        generationSelected = uiState.generationSelected,
+                        onGenerationSelected = { generation ->
+                            onEvent(HomeEvent.FilterByGeneration(generation))
+                            scope.launch(Dispatchers.Main) {
+                                delay(500)
+                                sheetState.hide()
+                            }
                         }
-                    }
-                )
+                    )
+                }
 
-                BottomSheetFilter.Sort -> SortBottomSheet(
-                    sortOptionSelected = uiState.sortOptionSelected,
-                    onSortOptionSelected = { sortOptionSelected ->
-                        onEvent(HomeEvent.SortPokemonList(sortOptionSelected))
-                        scope.launch(Dispatchers.Main) {
-                            delay(500)
-                            sheetState.hide()
+                BottomSheetFilter.Sort -> {
+                    SortBottomSheet(
+                        sortOptionSelected = uiState.sortOptionSelected,
+                        onSortOptionSelected = { sortOptionSelected ->
+                            onEvent(HomeEvent.SortPokemonList(sortOptionSelected))
+                            scope.launch(Dispatchers.Main) {
+                                delay(500)
+                                sheetState.hide()
+                            }
                         }
-                    }
-                )
+                    )
+                }
 
-                BottomSheetFilter.Filter -> FilterBottomSheet(
-                    assetFromTypeList = uiState.types.map { AssetFromType.getAsset(it.name) },
-                    onFilterApplied = { selectedTypes ->
-                        onEvent(HomeEvent.FilterByType(selectedTypes))
-                        scope.launch(Dispatchers.Main) {
-                            delay(500)
-                            sheetState.hide()
+                BottomSheetFilter.Filter -> {
+                    FilterBottomSheet(
+                        types = uiState.types,
+                        onFilterApplied = { selectedTypes ->
+                            onEvent(HomeEvent.FilterByTypes(selectedTypes))
+                            scope.launch(Dispatchers.Main) {
+                                delay(500)
+                                sheetState.hide()
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         },
         sheetState = sheetState,
@@ -156,8 +156,8 @@ private fun HomeScreen(
     ) {
         Box(
             modifier = Modifier
-                .background(MaterialTheme.colors.background)
                 .fillMaxSize()
+                .background(MaterialTheme.colors.background)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_pokeball),
@@ -193,14 +193,53 @@ private fun HomeScreen(
                 }
 
                 items(
-                    items = uiState.pokemons,
-                    key = PokemonHome::id,
-                ) { pokemon ->
-                    PokemonCard(
-                        pokemon = pokemon,
-                        onClick = { onEvent(HomeEvent.NavigateToProfile(pokemon.id)) }
-                    )
+                    count = pokemonsLazyPagingItems.itemCount,
+                    key = pokemonsLazyPagingItems.itemKey(PokemonHome::id),
+                ) { index ->
+                    val pokemon = pokemonsLazyPagingItems[index]
+
+                    pokemon?.let {
+                        PokemonCard(
+                            pokemon = it,
+                            onClick = { onEvent(HomeEvent.NavigateToProfile(it.id)) }
+                        )
+                    }
                 }
+
+                item {
+                    when (pokemonsLazyPagingItems.loadState.refresh) {
+                        is LoadState.Error -> {
+                            ErrorScreen(onClick = pokemonsLazyPagingItems::refresh)
+                        }
+
+                        is LoadState.Loading -> {
+                            LoadingScreen()
+                        }
+
+                        is LoadState.NotLoading -> {}
+                    }
+                }
+
+                item {
+                    when (pokemonsLazyPagingItems.loadState.append) {
+                        is LoadState.Error -> {
+                            ErrorScreen(onClick = pokemonsLazyPagingItems::retry)
+                        }
+
+                        is LoadState.Loading -> {
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                            ) {
+                                CircularProgressIndicator(color = MaterialTheme.colors.primaryInput)
+                            }
+                        }
+
+                        is LoadState.NotLoading -> {}
+                    }
+                }
+
             }
 
             val showButton by remember {
@@ -228,14 +267,4 @@ private fun HomeScreen(
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen(
-        uiState = HomeUiState(),
-        onEvent = {}
-    )
 }

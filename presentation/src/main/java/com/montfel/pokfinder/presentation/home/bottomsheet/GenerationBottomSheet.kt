@@ -42,7 +42,7 @@ fun GenerationBottomSheet(
             items(generationList) {
                 GenerationButton(
                     title = it.name,
-                    firstPokemons = it.pokemonId.take(3),
+                    firstPokemons = it.pokemonIds.take(3),
                     isEnabled = generationSelected == it.id,
                     onClick = { onGenerationSelected(it) }
                 )

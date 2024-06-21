@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.montfel.pokfinder.designsystem.R
-import com.montfel.pokfinder.designsystem.model.AssetFromType
 import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.FilterSection
@@ -30,11 +29,12 @@ import com.montfel.pokfinder.designsystem.theme.primaryVariantText
 import com.montfel.pokfinder.designsystem.theme.secondaryInput
 import com.montfel.pokfinder.designsystem.theme.secondaryText
 import com.montfel.pokfinder.designsystem.theme.secondaryVariantInput
+import com.montfel.pokfinder.domain.profile.model.Type
 
 @Composable
 fun FilterBottomSheet(
-    assetFromTypeList: List<AssetFromType>,
-    onFilterApplied: (List<AssetFromType>) -> Unit,
+    types: List<Type>,
+    onFilterApplied: (types: List<Type>) -> Unit,
     viewModel: FilterViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -54,7 +54,7 @@ fun FilterBottomSheet(
 
         FilterSection(
             title = R.string.types,
-            items = assetFromTypeList,
+            items = types,
             itemsSelected = uiState.selectedTypes,
             onFilterSelected = { viewModel.previewSelectedTypes(it) }
         )

@@ -1,5 +1,5 @@
-query PokemonList {
-    pokemon_v2_pokemon {
+query Pokemons($limit : Int!, $offset : Int!) {
+    pokemon_v2_pokemon(limit: $limit, offset: $offset) {
         id
         name
         pokemon_v2_pokemontypes {

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.apollo)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
@@ -62,7 +63,14 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.bundles.okhttp)
+    implementation(libs.kotlin.coroutines)
+    implementation(libs.kotlin.serialization.json)
+    implementation(libs.bundles.paging)
     implementation(libs.bundles.retrofit)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.room.paging)
+    implementation(libs.room.runtime)
 
     testImplementation(libs.junit.test)
     androidTestImplementation(libs.junit.test.android)

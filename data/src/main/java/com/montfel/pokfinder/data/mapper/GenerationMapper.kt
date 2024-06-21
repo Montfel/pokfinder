@@ -11,6 +11,6 @@ fun GenerationsQuery.Pokemon_v2_generation.toGeneration(): Generation {
     return Generation(
         id = id,
         name = "$first $last",
-        pokemonId = pokemon_v2_pokemonspecies.map { it.id }
+        pokemonIds = pokemon_v2_pokemonspecies.map { it.id }
     )
 }

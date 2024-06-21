@@ -326,10 +326,10 @@ fun ProfileScreen(
                     }
 
                     2 -> {
-                        uiState.evolutionChain?.let {
+                        uiState.evolutionChain?.let { chain ->
                             Evolution(
                                 typeColor = assetFromType.typeColor,
-                                evolutionChain = it,
+                                evolutionChain = chain,
                                 onClick = { onEvent(ProfileEvent.NavigateToProfile(it)) }
                             )
                         }
