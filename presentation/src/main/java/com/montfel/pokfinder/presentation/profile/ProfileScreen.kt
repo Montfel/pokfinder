@@ -46,6 +46,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.montfel.pokfinder.designsystem.R
+import com.montfel.pokfinder.designsystem.components.ErrorScreen
+import com.montfel.pokfinder.designsystem.components.LoadingScreen
+import com.montfel.pokfinder.designsystem.components.TypeCard
 import com.montfel.pokfinder.designsystem.model.AssetFromType
 import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.designsystem.theme.fabBackground
@@ -53,9 +56,6 @@ import com.montfel.pokfinder.designsystem.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.designsystem.theme.primaryIcon
 import com.montfel.pokfinder.designsystem.theme.secondaryText
 import com.montfel.pokfinder.domain.profile.model.AboutData
-import com.montfel.pokfinder.designsystem.components.LoadingScreen
-import com.montfel.pokfinder.designsystem.components.ErrorScreen
-import com.montfel.pokfinder.designsystem.components.TypeCard
 import com.montfel.pokfinder.presentation.profile.components.About
 import com.montfel.pokfinder.presentation.profile.components.Evolution
 import com.montfel.pokfinder.presentation.profile.components.Stats
@@ -104,8 +104,7 @@ fun ProfileScreen(
     onEvent: (ProfileEvent) -> Unit,
 ) {
     val deviceLanguage = Locale.current.language
-    val assetFromType =
-        AssetFromType.getAsset(uiState.profile?.types?.first()?.type?.name.orEmpty())
+    val assetFromType = AssetFromType.getAsset(uiState.profile?.types?.firstOrNull()?.name)
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
     val titles = mutableListOf(R.string.about, R.string.stats)
 
@@ -239,22 +238,26 @@ fun ProfileScreen(
                 }
 
                 Column {
-                    Text(
-                        text = "#${uiState.profile?.id}",
-                        style = PokfinderTheme.typography.filterTitle,
-                        color = MaterialTheme.colors.numberOverBackgroundColor
-                    )
+                    uiState.profile?.id?.let {
+                        Text(
+                            text = "#$it",
+                            style = PokfinderTheme.typography.filterTitle,
+                            color = MaterialTheme.colors.numberOverBackgroundColor
+                        )
+                    }
 
-                    Text(
-                        text = uiState.profile?.name.orEmpty(),
-                        style = PokfinderTheme.typography.applicationTitle,
-                        color = MaterialTheme.colors.secondaryText,
-                    )
+                    uiState.profile?.name?.let {
+                        Text(
+                            text = it,
+                            style = PokfinderTheme.typography.applicationTitle,
+                            color = MaterialTheme.colors.secondaryText,
+                        )
+                    }
 
                     uiState.profile?.types?.let { types ->
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            types.forEach { types ->
-                                types.type?.name?.let {
+                            types.forEach { type ->
+                                type.name?.let {
                                     TypeCard(typeName = it)
                                 }
                             }

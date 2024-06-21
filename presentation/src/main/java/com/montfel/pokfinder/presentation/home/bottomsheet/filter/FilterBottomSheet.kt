@@ -39,18 +39,6 @@ fun FilterBottomSheet(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val heightList = listOf(
-        AssetFromType.getAsset("short"),
-        AssetFromType.getAsset("medium_height"),
-        AssetFromType.getAsset("tall"),
-    )
-
-    val weightList = listOf(
-        AssetFromType.getAsset("light"),
-        AssetFromType.getAsset("normal_weight"),
-        AssetFromType.getAsset("heavy"),
-    )
-
     Column(
         verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
@@ -69,27 +57,6 @@ fun FilterBottomSheet(
             items = assetFromTypeList,
             itemsSelected = uiState.selectedTypes,
             onFilterSelected = { viewModel.previewSelectedTypes(it) }
-        )
-
-        FilterSection(
-            title = R.string.weakeness,
-            items = assetFromTypeList,
-            itemsSelected = uiState.selectedWeaknesses,
-            onFilterSelected = { viewModel.previewSelectedWeaknesses(it) }
-        )
-
-        FilterSection(
-            title = R.string.heights,
-            items = heightList,
-            itemsSelected = uiState.selectedHeights,
-            onFilterSelected = { viewModel.previewSelectedHeights(it) }
-        )
-
-        FilterSection(
-            title = R.string.weights,
-            items = weightList,
-            itemsSelected = uiState.selectedWeights,
-            onFilterSelected = { viewModel.previewSelectedWeights(it) }
         )
 
         Row(

@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.data.di
 
 import com.apollographql.apollo3.ApolloClient
-import com.montfel.pokfinder.data.service.HomeService
-import com.montfel.pokfinder.data.service.ProfileService
+import com.montfel.pokfinder.data.datasource.remote.service.HomeService
+import com.montfel.pokfinder.data.datasource.remote.service.ProfileService
 import com.montfel.pokfinder.domain.home.usecase.HomeUseCases
 import com.montfel.pokfinder.domain.home.usecase.SortPokemonsUseCase
 import dagger.Module
@@ -16,16 +16,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal object DataSourcesModule {
 
-    @Singleton
     @Provides
-    fun provideProfileService(retrofit: Retrofit): ProfileService =
-        retrofit.create(ProfileService::class.java)
+    @Singleton
+    fun provideProfileService(retrofit: Retrofit): ProfileService {
+        return retrofit.create(ProfileService::class.java)
+    }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideHomeService(apolloClient: ApolloClient) = HomeService(apolloClient)
 
-    @Provides
     @Singleton
+    @Provides
     fun provideHomeUseCases() = HomeUseCases(sortPokemonsUseCase = SortPokemonsUseCase())
 }

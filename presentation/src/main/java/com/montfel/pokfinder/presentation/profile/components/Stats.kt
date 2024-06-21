@@ -23,11 +23,11 @@ import com.montfel.pokfinder.designsystem.R
 import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.designsystem.theme.primaryText
 import com.montfel.pokfinder.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.domain.profile.model.Stats
+import com.montfel.pokfinder.domain.profile.model.Stat
 
 @Composable
 fun Stats(
-    stats: List<Stats>,
+    stats: List<Stat>,
     typeColor: Color,
 ) {
     val total = stats.sumOf { it.baseStat ?: 0 }
@@ -49,7 +49,7 @@ fun Stats(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = it.stat?.name.orEmpty(),
+                text = it.name.orEmpty(),
                 style = PokfinderTheme.typography.pokemonType,
                 color = MaterialTheme.colors.primaryText,
                 modifier = Modifier.width(50.dp)

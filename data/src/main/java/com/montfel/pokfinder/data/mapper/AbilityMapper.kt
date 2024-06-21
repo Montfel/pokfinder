@@ -1,10 +1,12 @@
 package com.montfel.pokfinder.data.mapper
 
-import com.montfel.pokfinder.data.dto.profile.AbilityDto
+import com.montfel.pokfinder.data.model.dto.AbilityDto
 import com.montfel.pokfinder.domain.profile.model.Ability
 
-fun AbilityDto.toDomain(): Ability {
+fun AbilityDto.toAbility(): Ability {
     return Ability(
-        name = name?.replaceFirstChar { it.uppercase() }
+        name = abilityName?.name?.replaceFirstChar { it.uppercase() },
+        isHidden = isHidden,
+        slot = slot
     )
 }

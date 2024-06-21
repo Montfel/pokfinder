@@ -75,23 +75,19 @@ class ProfileViewModel @Inject constructor(
                             )
                         }
 
-                        val evolutionChainDeferred = species.data.evolutionChainId?.let {
-                            async { repository.getEvolutionChain(it) }
+                        val evolutionChain = species.data.evolutionChainId?.let {
+                            repository.getEvolutionChain(it)
                         }
-
-                        val evolutionChain = evolutionChainDeferred?.await()
 
                         if (evolutionChain is ResultType.Success) {
                             _uiState.update { it.copy(evolutionChain = evolutionChain.data) }
                         }
                     }
 
-                    val damageRelationsDeferred =
-                        profile.data.types?.first()?.type?.name?.lowercase()?.let {
-                            async { repository.getDamageRelations(it) }
+                    val damageRelations =
+                        profile.data.types?.firstOrNull()?.name?.lowercase()?.let {
+                            repository.getDamageRelations(it)
                         }
-
-                    val damageRelations = damageRelationsDeferred?.await()
 
                     if (damageRelations is ResultType.Success) {
                         _uiState.update {
@@ -106,8 +102,6 @@ class ProfileViewModel @Inject constructor(
                     _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }
                 }
             }
-        } ?: run {
-            _uiState.update { it.copy(stateOfUi = ProfileStateOfUi.Error) }
         }
     }
 }

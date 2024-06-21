@@ -1,5 +1,6 @@
 package com.montfel.pokfinder.domain.profile.model
 
 data class Type(
-    val name: String?,
+    val slot: Int?,
+    val name: String?
 )

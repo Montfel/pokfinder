@@ -17,23 +17,25 @@ internal object ClientModule {
     private const val RETROFIT_BASE_URL = "https://pokeapi.co/api/v2/"
     private const val APOLLO_BASE_URL = "https://beta.pokeapi.co/graphql/v1beta"
 
-    @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit =
-        Retrofit
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit
             .Builder()
             .baseUrl(RETROFIT_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(createOkHttpClient())
             .build()
+    }
 
-    @Singleton
     @Provides
-    fun provideApolloClient(): ApolloClient =
-        ApolloClient
+    @Singleton
+    fun provideApolloClient(): ApolloClient {
+        return ApolloClient
             .Builder()
             .serverUrl(APOLLO_BASE_URL)
             .build()
+    }
 
     private fun createOkHttpClient(): OkHttpClient {
         return OkHttpClient

@@ -7,7 +7,7 @@
 
     <!-- Filters -->
     <string name="filters">Filters</string>
-    <string name="filters_description">Use advanced search to explore Pokémon by type, weakness, height and more!</string>
+    <string name="filters_description">Use advanced search to explore Pokémon by type</string>
     <string name="types">Types</string>
     <string name="heights">Heights</string>
     <string name="weights">Weights</string>

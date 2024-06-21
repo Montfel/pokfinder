@@ -1,15 +1,15 @@
 package com.montfel.pokfinder.data.mapper
 
-import com.montfel.pokfinder.data.dto.profile.DamageRelationsDto
+import com.montfel.pokfinder.data.model.dto.DamageRelationsDto
 import com.montfel.pokfinder.domain.profile.model.DamageRelations
 
-fun DamageRelationsDto.toDomain(): DamageRelations {
+fun DamageRelationsDto.toDamageRelations(): DamageRelations {
     return DamageRelations(
-        doubleDamageFrom = doubleDamageFrom?.mapNotNull { it.toDomain().name }?.sorted(),
-        doubleDamageTo = doubleDamageTo?.mapNotNull { it.toDomain().name }?.sorted(),
-        halfDamageFrom = halfDamageFrom?.mapNotNull { it.toDomain().name }?.sorted(),
-        halfDamageTo = halfDamageTo?.mapNotNull { it.toDomain().name }?.sorted(),
-        noDamageFrom = noDamageFrom?.mapNotNull { it.toDomain().name }?.sorted(),
-        noDamageTo = noDamageTo?.mapNotNull { it.toDomain().name }?.sorted()
+        doubleDamageFrom = doubleDamageFrom?.mapNotNull { it.toDamageType().name }?.sorted(),
+        doubleDamageTo = doubleDamageTo?.mapNotNull { it.toDamageType().name }?.sorted(),
+        halfDamageFrom = halfDamageFrom?.mapNotNull { it.toDamageType().name }?.sorted(),
+        halfDamageTo = halfDamageTo?.mapNotNull { it.toDamageType().name }?.sorted(),
+        noDamageFrom = noDamageFrom?.mapNotNull { it.toDamageType().name }?.sorted(),
+        noDamageTo = noDamageTo?.mapNotNull { it.toDamageType().name }?.sorted()
     )
 }
