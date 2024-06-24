@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.domain.profile.model
+package com.montfel.pokfinder.presentation.profile.model
 
 data class AboutData(
     val title: Int,

@@ -55,7 +55,7 @@ import com.montfel.pokfinder.designsystem.theme.fabBackground
 import com.montfel.pokfinder.designsystem.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.designsystem.theme.primaryIcon
 import com.montfel.pokfinder.designsystem.theme.secondaryText
-import com.montfel.pokfinder.domain.profile.model.AboutData
+import com.montfel.pokfinder.presentation.profile.model.AboutData
 import com.montfel.pokfinder.presentation.profile.components.About
 import com.montfel.pokfinder.presentation.profile.components.Evolution
 import com.montfel.pokfinder.presentation.profile.components.Stats

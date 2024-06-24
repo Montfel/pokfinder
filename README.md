@@ -93,8 +93,7 @@ The application layout is available on Figma:
 
 ### Download
 
-- Download `Pokfinder` app on Google Play Store through link: *
-  *[App](https://play.google.com/store/apps/details?id=com.montfel.pokfinder)**
+- Download `Pokfinder` app on Google Play Store through link: **[App](https://play.google.com/store/apps/details?id=com.montfel.pokfinder)**
 
 ---
 

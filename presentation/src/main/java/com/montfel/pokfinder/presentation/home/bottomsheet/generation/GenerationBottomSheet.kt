@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.presentation.home.bottomsheet
+package com.montfel.pokfinder.presentation.home.bottomsheet.generation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

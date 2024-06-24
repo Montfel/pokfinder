@@ -52,9 +52,9 @@ import com.montfel.pokfinder.designsystem.theme.fabContent
 import com.montfel.pokfinder.designsystem.theme.pokeballIcon
 import com.montfel.pokfinder.designsystem.theme.primaryInput
 import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetFilter
-import com.montfel.pokfinder.presentation.home.bottomsheet.GenerationBottomSheet
-import com.montfel.pokfinder.presentation.home.bottomsheet.SortBottomSheet
+import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetType
+import com.montfel.pokfinder.presentation.home.bottomsheet.generation.GenerationBottomSheet
+import com.montfel.pokfinder.presentation.home.bottomsheet.sort.SortBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.filter.FilterBottomSheet
 import com.montfel.pokfinder.presentation.home.components.HomeHeader
 import com.montfel.pokfinder.presentation.home.components.PokemonCard
@@ -95,7 +95,7 @@ private fun HomeScreen(
     pokemonsLazyPagingItems: LazyPagingItems<PokemonHome>,
     onEvent: (HomeEvent) -> Unit,
 ) {
-    var filter: BottomSheetFilter by remember { mutableStateOf(BottomSheetFilter.Generation) }
+    var bottomSheetType: BottomSheetType by remember { mutableStateOf(BottomSheetType.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
@@ -109,8 +109,8 @@ private fun HomeScreen(
 
     ModalBottomSheetLayout(
         sheetContent = {
-            when (filter) {
-                BottomSheetFilter.Generation -> {
+            when (bottomSheetType) {
+                BottomSheetType.Generation -> {
                     GenerationBottomSheet(
                         generationList = uiState.generations,
                         generationSelected = uiState.generationSelected,
@@ -124,7 +124,7 @@ private fun HomeScreen(
                     )
                 }
 
-                BottomSheetFilter.Sort -> {
+                BottomSheetType.Sort -> {
                     SortBottomSheet(
                         sortOptionSelected = uiState.sortOptionSelected,
                         onSortOptionSelected = { sortOptionSelected ->
@@ -137,7 +137,7 @@ private fun HomeScreen(
                     )
                 }
 
-                BottomSheetFilter.Filter -> {
+                BottomSheetType.Filter -> {
                     FilterBottomSheet(
                         types = uiState.types,
                         onFilterApplied = { selectedTypes ->
@@ -177,7 +177,7 @@ private fun HomeScreen(
                 item {
                     TopBar(
                         onClick = {
-                            filter = it
+                            bottomSheetType = it
                             scope.launch(Dispatchers.Main) {
                                 sheetState.show()
                             }

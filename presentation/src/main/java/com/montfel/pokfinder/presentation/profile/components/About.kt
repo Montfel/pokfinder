@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.designsystem.R
 import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.domain.profile.model.AboutData
+import com.montfel.pokfinder.presentation.profile.model.AboutData
 import com.montfel.pokfinder.designsystem.theme.primaryVariantText
 
 @Composable
