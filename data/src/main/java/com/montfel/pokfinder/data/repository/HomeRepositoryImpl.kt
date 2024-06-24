@@ -20,7 +20,6 @@ import com.montfel.pokfinder.domain.home.model.PokemonHome
 import com.montfel.pokfinder.domain.home.repository.HomeRepository
 import com.montfel.pokfinder.domain.profile.model.Type
 import com.montfel.pokfinder.domain.util.ResultType
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -80,7 +79,6 @@ internal class HomeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getGenerations(): ResultType<List<Generation>> {
-        delay(5000)
         return resultWrapper {
             service.getGenerations().data?.pokemon_v2_generation?.map { it.toGeneration() }
                 ?: emptyList()

@@ -40,7 +40,7 @@ application ideas and one of them is Pokédex.
 - [x] List all Pokémons
 - [ ] Filter by
   - [x] Generation
-  - [ ] Type
+  - [x] Type
   - [ ] Strength
   - [ ] Weakness
   - [ ] Height
@@ -89,7 +89,7 @@ The application layout is available on Figma:
 
 ### Pre-requisites
 
-- You must have an Android device with Android 5.0 Lollipop or later.
+- You must have an Android device with Android 7.0 Nougat or later.
 
 ### Download
 
@@ -113,7 +113,7 @@ The following tools were used in the construction of the project:
 #### Architecture
 
 - **Clean Architecture**
-- **MVVM / MVI**
+- **MVI**
 
 #### Libraries
 
@@ -123,6 +123,9 @@ The following tools were used in the construction of the project:
 - **[Jetpack Compose](https://developer.android.com/jetpack/compose)**
 - **[Coil](https://coil-kt.github.io/coil/)**
 - **[Firebase](https://firebase.google.com/)**
+- **[Room](https://developer.android.com/training/data-storage/room)**
+- **[Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)**
+- **[Compose Navigation](https://developer.android.com/develop/ui/compose/navigation)**
 
 #### Util
 
