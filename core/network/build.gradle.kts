@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.domain)
+    implementation(projects.core.common.domain)
 
     implementation(libs.apollo)
     implementation(libs.core)

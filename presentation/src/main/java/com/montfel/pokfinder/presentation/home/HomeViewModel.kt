@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.montfel.pokfinder.domain.home.model.Generation
-import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.domain.home.model.SortOptions
-import com.montfel.pokfinder.domain.home.repository.HomeRepository
-import com.montfel.pokfinder.domain.home.usecase.HomeUseCases
-import com.montfel.pokfinder.domain.profile.model.Type
-import com.montfel.pokfinder.domain.util.ResultType
+import com.montfel.pokfinder.core.common.domain.model.Type
+import com.montfel.pokfinder.core.common.domain.util.ResultType
+import com.montfel.pokfinder.feature.home.domain.model.Generation
+import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
+import com.montfel.pokfinder.feature.home.domain.model.SortOptions
+import com.montfel.pokfinder.feature.home.repository.HomeRepository
+import com.montfel.pokfinder.feature.home.usecase.HomeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
@@ -123,7 +123,7 @@ class HomeViewModel @Inject constructor(
                         pokemonsPagingDataFlow = repository.searchPokemons(queryId = generation.pokemonIds.first())
                             .cachedIn(viewModelScope)
                     )
-                    
+
                 }
             } else {
                 _uiState.update {

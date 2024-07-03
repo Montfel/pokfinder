@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.presentation.home.bottomsheet.filter
 
 import androidx.lifecycle.ViewModel
-import com.montfel.pokfinder.domain.profile.model.Type
+import com.montfel.pokfinder.core.common.domain.model.Type
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

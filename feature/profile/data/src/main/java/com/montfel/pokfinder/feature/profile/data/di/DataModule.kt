@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.feature.profile.data.di
 
-import com.montfel.pokfinder.domain.profile.repository.ProfileRepository
 import com.montfel.pokfinder.feature.profile.data.repository.ProfileRepositoryImpl
+import com.montfel.pokfinder.feature.profile.domain.repository.ProfileRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

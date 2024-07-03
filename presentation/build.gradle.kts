@@ -57,7 +57,8 @@ android {
 dependencies {
     implementation(projects.core.designsystem)
 
-    implementation(projects.domain)
+    implementation(projects.feature.home.domain)
+    implementation(projects.feature.profile.domain)
 
     implementation(libs.core)
     implementation(libs.coil)

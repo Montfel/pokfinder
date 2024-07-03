@@ -7,11 +7,8 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.montfel.core.database.PokfinderDatabase
 import com.montfel.network.util.resultWrapper
-import com.montfel.pokfinder.domain.home.model.Generation
-import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.domain.home.repository.HomeRepository
-import com.montfel.pokfinder.domain.profile.model.Type
-import com.montfel.pokfinder.domain.util.ResultType
+import com.montfel.pokfinder.core.common.domain.model.Type
+import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
 import com.montfel.pokfinder.feature.home.data.mapper.toGeneration
@@ -20,6 +17,9 @@ import com.montfel.pokfinder.feature.home.data.mapper.toType
 import com.montfel.pokfinder.feature.home.data.paging.FilterPokemonsByTypesPagingSource
 import com.montfel.pokfinder.feature.home.data.paging.PokemonHomeRemoteMediator
 import com.montfel.pokfinder.feature.home.data.paging.SearchPokemonsPagingSource
+import com.montfel.pokfinder.feature.home.domain.model.Generation
+import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
+import com.montfel.pokfinder.feature.home.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.core.designsystem.model.AssetFromType
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.core.designsystem.theme.primaryText
-import com.montfel.pokfinder.domain.profile.model.Type
+import com.montfel.pokfinder.core.common.domain.model.Type
 
 @Composable
 fun FilterSection(

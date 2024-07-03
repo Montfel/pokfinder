@@ -51,11 +51,11 @@ import com.montfel.pokfinder.core.designsystem.theme.fabBackground
 import com.montfel.pokfinder.core.designsystem.theme.fabContent
 import com.montfel.pokfinder.core.designsystem.theme.pokeballIcon
 import com.montfel.pokfinder.core.designsystem.theme.primaryInput
-import com.montfel.pokfinder.domain.home.model.PokemonHome
+import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetType
+import com.montfel.pokfinder.presentation.home.bottomsheet.filter.FilterBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.generation.GenerationBottomSheet
 import com.montfel.pokfinder.presentation.home.bottomsheet.sort.SortBottomSheet
-import com.montfel.pokfinder.presentation.home.bottomsheet.filter.FilterBottomSheet
 import com.montfel.pokfinder.presentation.home.components.HomeHeader
 import com.montfel.pokfinder.presentation.home.components.PokemonCard
 import com.montfel.pokfinder.presentation.home.components.SearchField

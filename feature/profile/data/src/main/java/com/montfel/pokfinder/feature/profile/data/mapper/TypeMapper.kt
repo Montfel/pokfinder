@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
 import com.montfel.core.database.model.dto.TypeDto
-import com.montfel.pokfinder.domain.profile.model.Type
+import com.montfel.pokfinder.core.common.domain.model.Type
 
 fun TypeDto.toType(): Type {
     return Type(

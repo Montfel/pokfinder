@@ -32,7 +32,7 @@ import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.core.designsystem.theme.pokeballIcon
 import com.montfel.pokfinder.core.designsystem.theme.primaryText
 import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.domain.profile.model.EvolutionChain
+import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
 
 @Composable
 fun Evolution(

@@ -23,7 +23,7 @@ import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.core.designsystem.theme.primaryText
 import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.domain.profile.model.Stat
+import com.montfel.pokfinder.feature.profile.domain.model.Stat
 
 @Composable
 fun Stats(
@@ -65,7 +65,7 @@ fun Stats(
 
             LinearProgressIndicator(
                 progress = it.baseStat?.toFloat()
-                    ?.div((it.min?.plus(it.max ?: 0))?.div(2) ?: 0)?: 0f,
+                    ?.div((it.min?.plus(it.max ?: 0))?.div(2) ?: 0) ?: 0f,
                 color = typeColor,
                 backgroundColor = Color.Transparent,
                 modifier = Modifier

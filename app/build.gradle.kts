@@ -69,6 +69,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.common.domain)
     implementation(projects.core.database)
     implementation(projects.core.designsystem)
     implementation(projects.core.network)
@@ -76,7 +77,6 @@ dependencies {
     implementation(projects.feature.home.data)
     implementation(projects.feature.profile.data)
 
-    implementation(projects.domain)
     implementation(projects.presentation)
 
     implementation(libs.activity)

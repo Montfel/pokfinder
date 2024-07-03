@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.presentation.profile
 
-import com.montfel.pokfinder.domain.profile.model.EvolutionChain
-import com.montfel.pokfinder.domain.profile.model.PokemonProfile
-import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
+import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonProfile
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonSpecies
 
 data class ProfileUiState(
     val pokemonId: Int? = null,

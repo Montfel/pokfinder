@@ -58,7 +58,7 @@ dependencies {
     implementation(projects.core.database) //fixme foi colocado devido ao TypeDto estar no database
     implementation(projects.core.network)
 
-    implementation(projects.domain)
+    implementation(projects.feature.profile.domain)
 
     implementation(libs.apollo)
     implementation(libs.core)

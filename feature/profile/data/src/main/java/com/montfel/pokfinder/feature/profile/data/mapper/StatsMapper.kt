@@ -1,9 +1,9 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
 import com.montfel.pokfinder.feature.profile.data.model.dto.StatDto
-import com.montfel.pokfinder.domain.profile.model.Stat
+import com.montfel.pokfinder.feature.profile.domain.model.Stat
 
-fun com.montfel.pokfinder.feature.profile.data.model.dto.StatDto.toStat(): Stat {
+fun StatDto.toStat(): Stat {
     val statName = when (stat?.name) {
         "hp" -> "HP"
         "attack" -> "Attack"

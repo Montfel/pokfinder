@@ -34,7 +34,7 @@ import com.montfel.pokfinder.core.designsystem.model.AssetFromType
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.core.designsystem.theme.numberOverBackgroundColor
 import com.montfel.pokfinder.core.designsystem.theme.secondaryText
-import com.montfel.pokfinder.domain.home.model.PokemonHome
+import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

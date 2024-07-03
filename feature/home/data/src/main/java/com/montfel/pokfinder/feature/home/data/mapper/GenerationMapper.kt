@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.feature.home.data.mapper
 
-import com.montfel.pokfinder.domain.home.model.Generation
 import com.montfel.pokfinder.feature.home.data.GenerationsQuery
+import com.montfel.pokfinder.feature.home.domain.model.Generation
 
 fun GenerationsQuery.Pokemon_v2_generation.toGeneration(): Generation {
     val split = name.split("-")

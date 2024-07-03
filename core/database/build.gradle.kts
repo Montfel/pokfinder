@@ -48,8 +48,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.domain)
-
     implementation(libs.core)
     implementation(libs.gson)
     implementation(libs.hilt.android)
