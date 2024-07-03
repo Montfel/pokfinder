@@ -1,9 +1,9 @@
 package com.montfel.pokfinder.feature.home.data.mapper
 
 import com.montfel.core.database.model.entity.PokemonHomeEntity
-import com.montfel.pokfinder.feature.home.data.FilterPokemonsByTypesQuery
-import com.montfel.pokfinder.feature.home.data.PokemonsQuery
-import com.montfel.pokfinder.feature.home.data.SearchPokemonsQuery
+import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
+import com.montfel.pokfinder.core.network.PokemonsQuery
+import com.montfel.pokfinder.core.network.SearchPokemonsQuery
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 
 fun PokemonsQuery.Pokemon_v2_pokemon.toPokemonHome(): PokemonHome {

@@ -2,7 +2,7 @@ package com.montfel.pokfinder.feature.profile.data.datasource.remote.service
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
-import com.montfel.pokfinder.feature.profile.data.EvolutionQuery
+import com.montfel.pokfinder.core.network.EvolutionQuery
 import javax.inject.Inject
 
 internal class EvolutionService @Inject constructor(

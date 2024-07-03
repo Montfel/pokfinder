@@ -20,6 +20,5 @@ internal object DataSourcesModule {
 
     @Singleton
     @Provides
-    fun provideHomeUseCases() =
-        com.montfel.pokfinder.feature.home.usecase.HomeUseCases(sortPokemonsUseCase = com.montfel.pokfinder.feature.home.usecase.SortPokemonsUseCase())
+    fun provideHomeUseCases() = HomeUseCases(sortPokemonsUseCase = SortPokemonsUseCase())
 }

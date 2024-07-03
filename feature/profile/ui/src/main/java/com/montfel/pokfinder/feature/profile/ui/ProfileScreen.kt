@@ -45,8 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.montfel.gamerguide.core.designsystem.resources.drawableDesignSystem
-import com.montfel.gamerguide.core.designsystem.resources.stringDesignSystem
+import com.montfel.pokfinder.core.designsystem.resources.drawableDesignSystem
+import com.montfel.pokfinder.core.designsystem.resources.stringDesignSystem
 import com.montfel.pokfinder.core.designsystem.components.ErrorScreen
 import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
 import com.montfel.pokfinder.core.designsystem.components.TypeCard

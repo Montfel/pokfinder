@@ -3,11 +3,11 @@ package com.montfel.pokfinder.feature.home.data.datasource.remote
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.apollographql.apollo3.api.Optional
-import com.montfel.pokfinder.feature.home.data.FilterPokemonsByTypesQuery
-import com.montfel.pokfinder.feature.home.data.GenerationsQuery
-import com.montfel.pokfinder.feature.home.data.PokemonsQuery
-import com.montfel.pokfinder.feature.home.data.SearchPokemonsQuery
-import com.montfel.pokfinder.feature.home.data.TypesQuery
+import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
+import com.montfel.pokfinder.core.network.GenerationsQuery
+import com.montfel.pokfinder.core.network.PokemonsQuery
+import com.montfel.pokfinder.core.network.SearchPokemonsQuery
+import com.montfel.pokfinder.core.network.TypesQuery
 import javax.inject.Inject
 
 internal class HomeService @Inject constructor(

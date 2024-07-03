@@ -1,6 +1,6 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
-import com.montfel.pokfinder.feature.profile.data.EvolutionQuery
+import com.montfel.pokfinder.core.network.EvolutionQuery
 import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
 import com.montfel.pokfinder.feature.profile.domain.model.EvolutionDetail
 

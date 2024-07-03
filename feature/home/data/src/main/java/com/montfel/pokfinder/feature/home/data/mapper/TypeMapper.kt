@@ -3,10 +3,10 @@ package com.montfel.pokfinder.feature.home.data.mapper
 import com.montfel.core.database.model.dto.TypeDto
 import com.montfel.core.database.model.dto.TypeNameDto
 import com.montfel.pokfinder.core.common.domain.model.Type
-import com.montfel.pokfinder.feature.home.data.FilterPokemonsByTypesQuery
-import com.montfel.pokfinder.feature.home.data.PokemonsQuery
-import com.montfel.pokfinder.feature.home.data.SearchPokemonsQuery
-import com.montfel.pokfinder.feature.home.data.TypesQuery
+import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
+import com.montfel.pokfinder.core.network.PokemonsQuery
+import com.montfel.pokfinder.core.network.SearchPokemonsQuery
+import com.montfel.pokfinder.core.network.TypesQuery
 
 fun TypeDto.toType(): Type {
     return Type(

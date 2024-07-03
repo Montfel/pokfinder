@@ -1,4 +1,4 @@
-package com.montfel.gamerguide.core.designsystem.resources
+package com.montfel.pokfinder.core.designsystem.resources
 
 import com.montfel.pokfinder.core.designsystem.R
 

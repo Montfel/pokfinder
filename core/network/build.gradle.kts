@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.apollo)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
@@ -37,6 +38,12 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    apollo {
+        service("service") {
+            packageName.set("com.montfel.pokfinder.core.network")
+        }
     }
 
     packaging {
