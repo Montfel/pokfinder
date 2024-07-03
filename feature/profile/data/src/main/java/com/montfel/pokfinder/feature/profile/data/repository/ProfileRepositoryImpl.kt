@@ -1,18 +1,18 @@
 package com.montfel.pokfinder.feature.profile.data.repository
 
 import com.montfel.network.util.resultWrapper
-import com.montfel.pokfinder.domain.profile.model.EvolutionChain
-import com.montfel.pokfinder.domain.profile.model.PokemonDamageRelations
-import com.montfel.pokfinder.domain.profile.model.PokemonProfile
-import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
-import com.montfel.pokfinder.domain.profile.repository.ProfileRepository
-import com.montfel.pokfinder.domain.util.ResultType
+import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.profile.data.datasource.remote.service.EvolutionService
 import com.montfel.pokfinder.feature.profile.data.datasource.remote.service.ProfileService
 import com.montfel.pokfinder.feature.profile.data.mapper.toEvolutionChains
 import com.montfel.pokfinder.feature.profile.data.mapper.toPokemonDamageRelations
 import com.montfel.pokfinder.feature.profile.data.mapper.toPokemonProfile
 import com.montfel.pokfinder.feature.profile.data.mapper.toPokemonSpecies
+import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonDamageRelations
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonProfile
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonSpecies
+import com.montfel.pokfinder.feature.profile.domain.repository.ProfileRepository
 import javax.inject.Inject
 
 internal class ProfileRepositoryImpl @Inject constructor(

@@ -2,11 +2,10 @@ package com.montfel.pokfinder.feature.home.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.feature.home.data.Constants
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHome
+import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 
 internal class FilterPokemonsByTypesPagingSource(
     private val service: HomeService,

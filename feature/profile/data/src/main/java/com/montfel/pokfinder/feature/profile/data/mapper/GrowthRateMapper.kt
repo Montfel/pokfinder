@@ -1,9 +1,9 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
 import com.montfel.pokfinder.feature.profile.data.model.dto.GrowthRateDto
-import com.montfel.pokfinder.domain.profile.model.GrowthRate
+import com.montfel.pokfinder.feature.profile.domain.model.GrowthRate
 
-fun com.montfel.pokfinder.feature.profile.data.model.dto.GrowthRateDto.toGrowthRate(): GrowthRate {
+fun GrowthRateDto.toGrowthRate(): GrowthRate {
     return GrowthRate(
         name = name
             ?.split("-")

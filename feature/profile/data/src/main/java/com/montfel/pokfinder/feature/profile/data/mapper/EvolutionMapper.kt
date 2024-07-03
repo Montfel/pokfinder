@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
-import com.montfel.pokfinder.domain.profile.model.EvolutionChain
-import com.montfel.pokfinder.domain.profile.model.EvolutionDetail
 import com.montfel.pokfinder.feature.profile.data.EvolutionQuery
+import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
+import com.montfel.pokfinder.feature.profile.domain.model.EvolutionDetail
 
 fun EvolutionQuery.Data.toEvolutionChains(): List<EvolutionChain> {
     return pokemon_v2_evolutionchain_by_pk?.pokemon_v2_pokemonspecies?.map { it ->

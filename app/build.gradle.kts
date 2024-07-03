@@ -69,15 +69,15 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.common.domain)
     implementation(projects.core.database)
     implementation(projects.core.designsystem)
     implementation(projects.core.network)
 
     implementation(projects.feature.home.data)
+    implementation(projects.feature.home.ui)
     implementation(projects.feature.profile.data)
-
-    implementation(projects.domain)
-    implementation(projects.presentation)
+    implementation(projects.feature.profile.ui)
 
     implementation(libs.activity)
     implementation(libs.core)

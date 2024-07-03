@@ -1,10 +1,10 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
 import com.montfel.pokfinder.feature.profile.data.model.dto.PokemonSpeciesDto
-import com.montfel.pokfinder.domain.profile.model.HatchCounter
-import com.montfel.pokfinder.domain.profile.model.PokemonSpecies
+import com.montfel.pokfinder.feature.profile.domain.model.HatchCounter
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonSpecies
 
-fun com.montfel.pokfinder.feature.profile.data.model.dto.PokemonSpeciesDto.toPokemonSpecies(): PokemonSpecies {
+fun PokemonSpeciesDto.toPokemonSpecies(): PokemonSpecies {
     return PokemonSpecies(
         baseHappiness = baseHappiness,
         captureRate = captureRate,

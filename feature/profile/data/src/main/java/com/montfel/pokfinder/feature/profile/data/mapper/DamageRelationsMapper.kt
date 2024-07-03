@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
 import com.montfel.pokfinder.feature.profile.data.model.dto.DamageRelationsDto
-import com.montfel.pokfinder.domain.profile.model.DamageRelations
+import com.montfel.pokfinder.feature.profile.domain.model.DamageRelations
 
 fun DamageRelationsDto.toDamageRelations(): DamageRelations {
     return DamageRelations(

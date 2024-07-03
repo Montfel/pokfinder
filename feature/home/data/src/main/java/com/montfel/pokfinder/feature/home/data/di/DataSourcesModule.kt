@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.feature.home.data.di
 
 import com.apollographql.apollo3.ApolloClient
-import com.montfel.pokfinder.domain.home.usecase.HomeUseCases
-import com.montfel.pokfinder.domain.home.usecase.SortPokemonsUseCase
+import com.montfel.pokfinder.feature.home.usecase.HomeUseCases
+import com.montfel.pokfinder.feature.home.usecase.SortPokemonsUseCase
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
 import dagger.Module
 import dagger.Provides
@@ -20,5 +20,6 @@ internal object DataSourcesModule {
 
     @Singleton
     @Provides
-    fun provideHomeUseCases() = HomeUseCases(sortPokemonsUseCase = SortPokemonsUseCase())
+    fun provideHomeUseCases() =
+        com.montfel.pokfinder.feature.home.usecase.HomeUseCases(sortPokemonsUseCase = com.montfel.pokfinder.feature.home.usecase.SortPokemonsUseCase())
 }

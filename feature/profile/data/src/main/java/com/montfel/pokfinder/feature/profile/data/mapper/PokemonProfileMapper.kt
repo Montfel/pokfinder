@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
 import com.montfel.pokfinder.feature.profile.data.model.dto.PokemonProfileDto
-import com.montfel.pokfinder.domain.profile.model.EV
-import com.montfel.pokfinder.domain.profile.model.PokemonProfile
+import com.montfel.pokfinder.feature.profile.domain.model.EV
+import com.montfel.pokfinder.feature.profile.domain.model.PokemonProfile
 
 fun PokemonProfileDto.toPokemonProfile(): PokemonProfile {
     val abilities = abilities?.map { it.toAbility() }

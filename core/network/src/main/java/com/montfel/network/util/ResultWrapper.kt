@@ -1,7 +1,7 @@
 package com.montfel.network.util
 
-import com.montfel.pokfinder.domain.util.ErrorType
-import com.montfel.pokfinder.domain.util.ResultType
+import com.montfel.pokfinder.core.common.domain.util.ErrorType
+import com.montfel.pokfinder.core.common.domain.util.ResultType
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

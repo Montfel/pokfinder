@@ -14,7 +14,7 @@ internal object DataSourcesModule {
 
     @Provides
     @Singleton
-    fun provideProfileService(retrofit: Retrofit): com.montfel.pokfinder.feature.profile.data.datasource.remote.service.ProfileService {
-        return retrofit.create(com.montfel.pokfinder.feature.profile.data.datasource.remote.service.ProfileService::class.java)
+    fun provideProfileService(retrofit: Retrofit): ProfileService {
+        return retrofit.create(ProfileService::class.java)
     }
 }
