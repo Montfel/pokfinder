@@ -28,13 +28,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.montfel.pokfinder.designsystem.R
-import com.montfel.pokfinder.designsystem.model.AssetFromType
-import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.designsystem.theme.numberOverBackgroundColor
-import com.montfel.pokfinder.designsystem.theme.secondaryText
+import com.montfel.pokfinder.core.designsystem.R
+import com.montfel.pokfinder.core.designsystem.components.TypeCard
+import com.montfel.pokfinder.core.designsystem.model.AssetFromType
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
+import com.montfel.pokfinder.core.designsystem.theme.numberOverBackgroundColor
+import com.montfel.pokfinder.core.designsystem.theme.secondaryText
 import com.montfel.pokfinder.domain.home.model.PokemonHome
-import com.montfel.pokfinder.designsystem.components.TypeCard
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

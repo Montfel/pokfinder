@@ -8,7 +8,7 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.navigation.NavigationComponent
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -18,8 +18,12 @@ rootProject.name = "Pokfinder"
 
 include(":app")
 
-include(":data")
+include(":core:database")
+include(":core:designsystem")
+include(":core:network")
+
+include(":feature:home:data")
+include(":feature:profile:data")
+
 include(":domain")
 include(":presentation")
-
-include(":designsystem")

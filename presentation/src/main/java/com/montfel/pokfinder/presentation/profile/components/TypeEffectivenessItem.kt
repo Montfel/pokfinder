@@ -14,9 +14,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokfinder.designsystem.R
-import com.montfel.pokfinder.designsystem.model.AssetFromType
-import com.montfel.pokfinder.designsystem.theme.primaryIcon
+import com.montfel.pokfinder.core.designsystem.R
+import com.montfel.pokfinder.core.designsystem.model.AssetFromType
+import com.montfel.pokfinder.core.designsystem.theme.primaryIcon
 
 @Composable
 fun TypeEffectivenessItem(typeName: String) {

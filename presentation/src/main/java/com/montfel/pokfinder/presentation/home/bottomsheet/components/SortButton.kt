@@ -11,12 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.designsystem.theme.primaryInput
-import com.montfel.pokfinder.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.designsystem.theme.secondaryInput
-import com.montfel.pokfinder.designsystem.theme.secondaryText
-import com.montfel.pokfinder.designsystem.theme.secondaryVariantInput
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
+import com.montfel.pokfinder.core.designsystem.theme.primaryInput
+import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
+import com.montfel.pokfinder.core.designsystem.theme.secondaryInput
+import com.montfel.pokfinder.core.designsystem.theme.secondaryText
+import com.montfel.pokfinder.core.designsystem.theme.secondaryVariantInput
 
 @Composable
 fun SortButton(

@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.montfel.pokfinder.designsystem.R
+import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.domain.home.model.Generation
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.GenerationButton

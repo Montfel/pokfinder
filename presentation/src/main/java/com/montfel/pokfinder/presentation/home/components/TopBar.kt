@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.montfel.pokfinder.designsystem.R
+import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.presentation.home.bottomsheet.BottomSheetType
-import com.montfel.pokfinder.designsystem.theme.topBarIcon
+import com.montfel.pokfinder.core.designsystem.theme.topBarIcon
 
 @Composable
 fun TopBar(onClick: (BottomSheetType) -> Unit) {

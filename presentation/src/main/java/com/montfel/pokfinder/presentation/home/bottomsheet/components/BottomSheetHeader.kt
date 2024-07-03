@@ -7,9 +7,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.designsystem.theme.primaryText
-import com.montfel.pokfinder.designsystem.theme.primaryVariantText
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
+import com.montfel.pokfinder.core.designsystem.theme.primaryText
+import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
 
 @Composable
 fun BottomSheetHeader(

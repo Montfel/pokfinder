@@ -45,20 +45,19 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.montfel.pokfinder.designsystem.R
-import com.montfel.pokfinder.designsystem.components.ErrorScreen
-import com.montfel.pokfinder.designsystem.components.LoadingScreen
-import com.montfel.pokfinder.designsystem.components.TypeCard
-import com.montfel.pokfinder.designsystem.model.AssetFromType
-import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.designsystem.theme.fabBackground
-import com.montfel.pokfinder.designsystem.theme.numberOverBackgroundColor
-import com.montfel.pokfinder.designsystem.theme.primaryIcon
-import com.montfel.pokfinder.designsystem.theme.secondaryText
-import com.montfel.pokfinder.presentation.profile.model.AboutData
+import com.montfel.pokfinder.core.designsystem.R
+import com.montfel.pokfinder.core.designsystem.components.ErrorScreen
+import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
+import com.montfel.pokfinder.core.designsystem.components.TypeCard
+import com.montfel.pokfinder.core.designsystem.model.AssetFromType
+import com.montfel.pokfinder.core.designsystem.theme.fabBackground
+import com.montfel.pokfinder.core.designsystem.theme.numberOverBackgroundColor
+import com.montfel.pokfinder.core.designsystem.theme.primaryIcon
+import com.montfel.pokfinder.core.designsystem.theme.secondaryText
 import com.montfel.pokfinder.presentation.profile.components.About
 import com.montfel.pokfinder.presentation.profile.components.Evolution
 import com.montfel.pokfinder.presentation.profile.components.Stats
+import com.montfel.pokfinder.presentation.profile.model.AboutData
 
 @Composable
 fun ProfileScreen(
@@ -241,7 +240,7 @@ fun ProfileScreen(
                     uiState.profile?.id?.let {
                         Text(
                             text = "#$it",
-                            style = PokfinderTheme.typography.filterTitle,
+                            style = com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.filterTitle,
                             color = MaterialTheme.colors.numberOverBackgroundColor
                         )
                     }
@@ -249,7 +248,7 @@ fun ProfileScreen(
                     uiState.profile?.name?.let {
                         Text(
                             text = it,
-                            style = PokfinderTheme.typography.applicationTitle,
+                            style = com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.applicationTitle,
                             color = MaterialTheme.colors.secondaryText,
                         )
                     }
@@ -280,9 +279,9 @@ fun ProfileScreen(
                         Text(
                             text = stringResource(id = title),
                             style = if (selectedTabIndex == index) {
-                                PokfinderTheme.typography.filterTitle
+                                com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.filterTitle
                             } else {
-                                PokfinderTheme.typography.description
+                                com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.description
                             },
                             color = MaterialTheme.colors.secondaryText
                         )

@@ -20,16 +20,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.montfel.pokfinder.designsystem.R
-import com.montfel.pokfinder.designsystem.theme.PokfinderTheme
+import com.montfel.pokfinder.core.designsystem.R
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
+import com.montfel.pokfinder.core.designsystem.theme.primaryInput
+import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
+import com.montfel.pokfinder.core.designsystem.theme.secondaryInput
+import com.montfel.pokfinder.core.designsystem.theme.secondaryText
+import com.montfel.pokfinder.core.designsystem.theme.secondaryVariantInput
+import com.montfel.pokfinder.domain.profile.model.Type
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokfinder.presentation.home.bottomsheet.components.FilterSection
-import com.montfel.pokfinder.designsystem.theme.primaryInput
-import com.montfel.pokfinder.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.designsystem.theme.secondaryInput
-import com.montfel.pokfinder.designsystem.theme.secondaryText
-import com.montfel.pokfinder.designsystem.theme.secondaryVariantInput
-import com.montfel.pokfinder.domain.profile.model.Type
 
 @Composable
 fun FilterBottomSheet(
