@@ -9,12 +9,12 @@ import com.montfel.core.database.PokfinderDatabase
 import com.montfel.core.database.model.entity.PokemonHomeEntity
 import com.montfel.core.database.model.entity.PokemonHomeRemoteKeysEntity
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
-import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHomeEntity
 
 @OptIn(ExperimentalPagingApi::class)
 internal class PokemonHomeRemoteMediator(
-    private val service: HomeService,
+    private val service: HomeServiceImpl,
     private val pokfinderDatabase: PokfinderDatabase
 ) : RemoteMediator<Int, PokemonHomeEntity>() {
 

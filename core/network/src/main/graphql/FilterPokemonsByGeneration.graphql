@@ -1,14 +1,10 @@
-query FilterPokemonsByTypes($limit : Int!, $offset : Int!, $types: [String!]) {
+query FilterPokemonsByGeneration($limit : Int!, $offset : Int!, $ids: [Int!]) {
     pokemon_v2_pokemon(
         limit: $limit,
         offset: $offset,
         where: {
-            pokemon_v2_pokemontypes: {
-                pokemon_v2_type: {
-                    name: {
-                        _in: $types
-                    }
-                }
+            id: {
+                _in: $ids
             }
         }
     ) {

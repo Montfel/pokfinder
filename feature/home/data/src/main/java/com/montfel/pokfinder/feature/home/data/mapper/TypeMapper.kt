@@ -3,6 +3,7 @@ package com.montfel.pokfinder.feature.home.data.mapper
 import com.montfel.core.database.model.dto.TypeDto
 import com.montfel.core.database.model.dto.TypeNameDto
 import com.montfel.pokfinder.core.common.domain.model.Type
+import com.montfel.pokfinder.core.network.FilterPokemonsByGenerationQuery
 import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.core.network.PokemonsQuery
 import com.montfel.pokfinder.core.network.SearchPokemonsQuery
@@ -44,6 +45,13 @@ fun SearchPokemonsQuery.Pokemon_v2_pokemontype.toType(): Type {
 }
 
 fun FilterPokemonsByTypesQuery.Pokemon_v2_pokemontype.toType(): Type {
+    return Type(
+        slot = slot,
+        name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }
+    )
+}
+
+fun FilterPokemonsByGenerationQuery.Pokemon_v2_pokemontype.toType(): Type {
     return Type(
         slot = slot,
         name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }

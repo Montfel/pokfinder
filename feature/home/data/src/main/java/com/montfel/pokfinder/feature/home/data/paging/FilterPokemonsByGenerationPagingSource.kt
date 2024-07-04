@@ -7,9 +7,9 @@ import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHome
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 
-internal class FilterPokemonsByTypesPagingSource(
+internal class FilterPokemonsByGenerationPagingSource(
     private val service: HomeServiceImpl,
-    private val types: List<String>,
+    private val ids: List<Int>,
 ) : PagingSource<Int, PokemonHome>() {
     override fun getRefreshKey(state: PagingState<Int, PokemonHome>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -21,10 +21,10 @@ internal class FilterPokemonsByTypesPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonHome> {
         return runCatching {
             val offset = params.key ?: 0
-            val response = service.filterPokemonsByTypes(
+            val response = service.filterPokemonsByGeneration(
                 limit = ITEMS_PER_PAGE,
                 offset = offset,
-                types = types,
+                ids = ids,
             )
             val pokemons =
                 response.data?.pokemon_v2_pokemon?.map { it.toPokemonHome() } ?: emptyList()

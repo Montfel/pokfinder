@@ -10,10 +10,11 @@ import com.montfel.network.util.resultWrapper
 import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
-import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.mapper.toGeneration
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHome
 import com.montfel.pokfinder.feature.home.data.mapper.toType
+import com.montfel.pokfinder.feature.home.data.paging.FilterPokemonsByGenerationPagingSource
 import com.montfel.pokfinder.feature.home.data.paging.FilterPokemonsByTypesPagingSource
 import com.montfel.pokfinder.feature.home.data.paging.PokemonHomeRemoteMediator
 import com.montfel.pokfinder.feature.home.data.paging.SearchPokemonsPagingSource
@@ -26,7 +27,7 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 internal class HomeRepositoryImpl @Inject constructor(
-    private val service: HomeService,
+    private val service: HomeServiceImpl,
     private val pokfinderDatabase: PokfinderDatabase,
 ) : HomeRepository {
 
@@ -63,6 +64,18 @@ internal class HomeRepositoryImpl @Inject constructor(
                 FilterPokemonsByTypesPagingSource(
                     service = service,
                     types = types
+                )
+            }
+        ).flow
+    }
+
+    override fun filterPokemonsByGeneration(ids: List<Int>): Flow<PagingData<PokemonHome>> {
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+            pagingSourceFactory = {
+                FilterPokemonsByGenerationPagingSource(
+                    service = service,
+                    ids = ids
                 )
             }
         ).flow

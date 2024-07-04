@@ -1,6 +1,7 @@
 package com.montfel.pokfinder.feature.home.data.mapper
 
 import com.montfel.core.database.model.entity.PokemonHomeEntity
+import com.montfel.pokfinder.core.network.FilterPokemonsByGenerationQuery
 import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.core.network.PokemonsQuery
 import com.montfel.pokfinder.core.network.SearchPokemonsQuery
@@ -23,6 +24,14 @@ fun SearchPokemonsQuery.Pokemon_v2_pokemon.toPokemonHome(): PokemonHome {
 }
 
 fun FilterPokemonsByTypesQuery.Pokemon_v2_pokemon.toPokemonHome(): PokemonHome {
+    return PokemonHome(
+        id = id,
+        name = name.replaceFirstChar { it.uppercase() },
+        types = pokemon_v2_pokemontypes.map { it.toType() },
+    )
+}
+
+fun FilterPokemonsByGenerationQuery.Pokemon_v2_pokemon.toPokemonHome(): PokemonHome {
     return PokemonHome(
         id = id,
         name = name.replaceFirstChar { it.uppercase() },

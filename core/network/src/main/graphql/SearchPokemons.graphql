@@ -1,5 +1,22 @@
 query SearchPokemons($limit : Int!, $offset : Int!, $queryName: String!, $queryId: Int!) {
-    pokemon_v2_pokemon(limit: $limit, offset: $offset, where: { _or: [{name: {_iregex: $queryName}}, {id: {_eq: $queryId}}] }) {
+    pokemon_v2_pokemon(
+        limit: $limit,
+        offset: $offset,
+        where: {
+            _or: [
+                {
+                    name: {
+                        _iregex: $queryName
+                    }
+                },
+                {
+                    id: {
+                        _eq: $queryId
+                    }
+                }
+            ]
+        }
+    ) {
         id
         name
         pokemon_v2_pokemontypes {

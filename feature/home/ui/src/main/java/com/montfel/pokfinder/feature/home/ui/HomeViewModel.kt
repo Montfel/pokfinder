@@ -120,8 +120,7 @@ class HomeViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         generationSelected = generation.id,
-                        pokemonsPagingDataFlow = repository.searchPokemons(queryId = generation.pokemonIds.first())
-                            .cachedIn(viewModelScope)
+                        pokemonsPagingDataFlow = repository.filterPokemonsByGeneration(ids = generation.pokemonIds).cachedIn(viewModelScope)
                     )
 
                 }

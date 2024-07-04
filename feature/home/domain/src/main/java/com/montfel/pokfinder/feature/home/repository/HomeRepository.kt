@@ -11,6 +11,7 @@ interface HomeRepository {
     fun getPokemons(): Flow<PagingData<PokemonHome>>
     fun searchPokemons(queryName: String = "", queryId: Int = 0): Flow<PagingData<PokemonHome>>
     fun filterPokemonsByTypes(types: List<String>): Flow<PagingData<PokemonHome>>
+    fun filterPokemonsByGeneration(ids: List<Int>): Flow<PagingData<PokemonHome>>
     suspend fun getTypes(): ResultType<List<Type>>
     suspend fun getGenerations(): ResultType<List<Generation>>
 }

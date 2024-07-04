@@ -1,5 +1,7 @@
 package com.montfel.pokfinder.feature.home.data.di
 
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
 import com.montfel.pokfinder.feature.home.data.repository.HomeRepositoryImpl
 import com.montfel.pokfinder.feature.home.repository.HomeRepository
 import dagger.Binds
@@ -15,4 +17,9 @@ internal abstract class DataModule {
     internal abstract fun bindHomeRepository(
         homeRepositoryImpl: HomeRepositoryImpl
     ): HomeRepository
+
+    @Binds
+    internal abstract fun bindHomeService(
+        homeService: HomeServiceImpl
+    ): HomeService
 }
