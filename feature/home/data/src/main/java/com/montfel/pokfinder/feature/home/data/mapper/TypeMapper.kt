@@ -7,6 +7,8 @@ import com.montfel.pokfinder.core.network.FilterPokemonsByGenerationQuery
 import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.core.network.PokemonsQuery
 import com.montfel.pokfinder.core.network.SearchPokemonsQuery
+import com.montfel.pokfinder.core.network.SortPokemonsByIdQuery
+import com.montfel.pokfinder.core.network.SortPokemonsByNameQuery
 import com.montfel.pokfinder.core.network.TypesQuery
 
 fun TypeDto.toType(): Type {
@@ -52,6 +54,20 @@ fun FilterPokemonsByTypesQuery.Pokemon_v2_pokemontype.toType(): Type {
 }
 
 fun FilterPokemonsByGenerationQuery.Pokemon_v2_pokemontype.toType(): Type {
+    return Type(
+        slot = slot,
+        name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }
+    )
+}
+
+fun SortPokemonsByNameQuery.Pokemon_v2_pokemontype.toType(): Type {
+    return Type(
+        slot = slot,
+        name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }
+    )
+}
+
+fun SortPokemonsByIdQuery.Pokemon_v2_pokemontype.toType(): Type {
     return Type(
         slot = slot,
         name = pokemon_v2_type?.name?.replaceFirstChar { it.uppercase() }

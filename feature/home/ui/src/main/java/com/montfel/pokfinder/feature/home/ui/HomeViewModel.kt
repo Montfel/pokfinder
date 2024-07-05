@@ -11,7 +11,6 @@ import com.montfel.pokfinder.feature.home.domain.model.Generation
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 import com.montfel.pokfinder.feature.home.domain.model.SortOptions
 import com.montfel.pokfinder.feature.home.repository.HomeRepository
-import com.montfel.pokfinder.feature.home.usecase.HomeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
@@ -26,7 +25,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val useCases: HomeUseCases,
     private val repository: HomeRepository
 ) : ViewModel() {
 
@@ -120,7 +118,8 @@ class HomeViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         generationSelected = generation.id,
-                        pokemonsPagingDataFlow = repository.filterPokemonsByGeneration(ids = generation.pokemonIds).cachedIn(viewModelScope)
+                        pokemonsPagingDataFlow = repository.filterPokemonsByGeneration(ids = generation.pokemonIds)
+                            .cachedIn(viewModelScope)
                     )
 
                 }
@@ -136,15 +135,25 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun sortPokemonList(sortOption: SortOptions) {
-        if (sortOption != uiState.value.sortOptionSelected) {
-            val sortedPokemons =
-                useCases.sortPokemonsUseCase(sortOption, uiState.value.pokemons)
+        viewModelScope.launch {
+            val pokemonsPagingDataFlow = when (sortOption) {
+                SortOptions.SmallestNumber -> pokemons
+                SortOptions.HighestNumber -> {
+                    repository.sortPokemonsById(orderType = sortOption.orderType)
+                }
 
-            _uiState.update {
-                it.copy(
-                    pokemons = sortedPokemons,
-                    sortOptionSelected = sortOption
-                )
+                SortOptions.Alphabetical, SortOptions.ReverseAlphabetical -> {
+                    repository.sortPokemonsByName(orderType = sortOption.orderType)
+                }
+            }
+
+            if (sortOption != uiState.value.sortOptionSelected) {
+                _uiState.update {
+                    it.copy(
+                        pokemonsPagingDataFlow = pokemonsPagingDataFlow.cachedIn(viewModelScope),
+                        sortOptionSelected = sortOption
+                    )
+                }
             }
         }
     }

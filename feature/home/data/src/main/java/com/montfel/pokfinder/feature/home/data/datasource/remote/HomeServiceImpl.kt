@@ -8,12 +8,16 @@ import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.core.network.GenerationsQuery
 import com.montfel.pokfinder.core.network.PokemonsQuery
 import com.montfel.pokfinder.core.network.SearchPokemonsQuery
+import com.montfel.pokfinder.core.network.SortPokemonsByIdQuery
+import com.montfel.pokfinder.core.network.SortPokemonsByNameQuery
 import com.montfel.pokfinder.core.network.TypesQuery
+import com.montfel.pokfinder.core.network.type.order_by
+import com.montfel.pokfinder.feature.home.domain.model.OrderType
 import javax.inject.Inject
 
 internal class HomeServiceImpl @Inject constructor(
     private val apolloClient: ApolloClient
-): HomeService {
+) : HomeService {
     override suspend fun getPokemons(
         limit: Int,
         offset: Int,
@@ -66,6 +70,44 @@ internal class HomeServiceImpl @Inject constructor(
                 limit = limit,
                 offset = offset,
                 ids = Optional.present(ids),
+            )
+        ).execute()
+    }
+
+    override suspend fun sortPokemonsByName(
+        limit: Int,
+        offset: Int,
+        orderType: OrderType
+    ): ApolloResponse<SortPokemonsByNameQuery.Data> {
+        return apolloClient.query(
+            SortPokemonsByNameQuery(
+                limit = limit,
+                offset = offset,
+                order = Optional.present(
+                    when (orderType) {
+                        OrderType.Ascendant -> order_by.asc
+                        OrderType.Descendant -> order_by.desc
+                    }
+                )
+            )
+        ).execute()
+    }
+
+    override suspend fun sortPokemonsById(
+        limit: Int,
+        offset: Int,
+        orderType: OrderType
+    ): ApolloResponse<SortPokemonsByIdQuery.Data> {
+        return apolloClient.query(
+            SortPokemonsByIdQuery(
+                limit = limit,
+                offset = offset,
+                order = Optional.present(
+                    when (orderType) {
+                        OrderType.Ascendant -> order_by.asc
+                        OrderType.Descendant -> order_by.desc
+                    }
+                )
             )
         ).execute()
     }

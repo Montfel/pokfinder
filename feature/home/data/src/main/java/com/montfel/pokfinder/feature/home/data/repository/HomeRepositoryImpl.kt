@@ -18,7 +18,10 @@ import com.montfel.pokfinder.feature.home.data.paging.FilterPokemonsByGeneration
 import com.montfel.pokfinder.feature.home.data.paging.FilterPokemonsByTypesPagingSource
 import com.montfel.pokfinder.feature.home.data.paging.PokemonHomeRemoteMediator
 import com.montfel.pokfinder.feature.home.data.paging.SearchPokemonsPagingSource
+import com.montfel.pokfinder.feature.home.data.paging.SortPokemonsByIdPagingSource
+import com.montfel.pokfinder.feature.home.data.paging.SortPokemonsByNamePagingSource
 import com.montfel.pokfinder.feature.home.domain.model.Generation
+import com.montfel.pokfinder.feature.home.domain.model.OrderType
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 import com.montfel.pokfinder.feature.home.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
@@ -76,6 +79,30 @@ internal class HomeRepositoryImpl @Inject constructor(
                 FilterPokemonsByGenerationPagingSource(
                     service = service,
                     ids = ids
+                )
+            }
+        ).flow
+    }
+
+    override fun sortPokemonsByName(orderType: OrderType): Flow<PagingData<PokemonHome>> {
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+            pagingSourceFactory = {
+                SortPokemonsByNamePagingSource(
+                    service = service,
+                    orderType = orderType
+                )
+            }
+        ).flow
+    }
+
+    override fun sortPokemonsById(orderType: OrderType): Flow<PagingData<PokemonHome>> {
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+            pagingSourceFactory = {
+                SortPokemonsByIdPagingSource(
+                    service = service,
+                    orderType = orderType
                 )
             }
         ).flow

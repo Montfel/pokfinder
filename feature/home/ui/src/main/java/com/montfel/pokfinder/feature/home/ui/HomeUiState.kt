@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.emptyFlow
 
 data class HomeUiState(
     val pokemonQuery: String = "",
-    val pokemons: List<PokemonHome> = emptyList(),
     val pokemonsPagingDataFlow: Flow<PagingData<PokemonHome>> = emptyFlow(),
     val types: List<Type> = emptyList(),
     val generations: List<Generation> = emptyList(),
