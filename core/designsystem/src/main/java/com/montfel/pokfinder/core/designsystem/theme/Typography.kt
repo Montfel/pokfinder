@@ -16,13 +16,13 @@ val font = FontFamily(
 
 @Immutable
 data class Typography(
-    val title: TextStyle,
-    val applicationTitle: TextStyle,
-    val pokemonName: TextStyle,
-    val filterTitle: TextStyle,
-    val description: TextStyle,
-    val pokemonNumber: TextStyle,
-    val pokemonType: TextStyle,
+    val title: TextStyle = TextStyle.Default,
+    val applicationTitle: TextStyle = TextStyle.Default,
+    val pokemonName: TextStyle = TextStyle.Default,
+    val filterTitle: TextStyle = TextStyle.Default,
+    val description: TextStyle = TextStyle.Default,
+    val pokemonNumber: TextStyle = TextStyle.Default,
+    val pokemonType: TextStyle = TextStyle.Default,
 )
 
 internal val typography = Typography(

@@ -8,21 +8,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -30,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,10 +48,7 @@ import androidx.paging.compose.itemKey
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.components.ErrorScreen
 import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
-import com.montfel.pokfinder.core.designsystem.theme.fabBackground
-import com.montfel.pokfinder.core.designsystem.theme.fabContent
-import com.montfel.pokfinder.core.designsystem.theme.pokeballIcon
-import com.montfel.pokfinder.core.designsystem.theme.primaryInput
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.BottomSheetType
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.filter.FilterBottomSheet
@@ -64,7 +62,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
     onNavigateToProfile: (id: Int) -> Unit,
@@ -88,7 +85,7 @@ fun HomeScreen(
     )
 }
 
-@ExperimentalMaterialApi
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreen(
     uiState: HomeUiState,
@@ -98,17 +95,140 @@ private fun HomeScreen(
     var bottomSheetType: BottomSheetType by remember { mutableStateOf(BottomSheetType.Generation) }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(
-        initialValue = ModalBottomSheetValue.Hidden,
-        skipHalfExpanded = true
+        skipPartiallyExpanded = true
     )
+    var isSheetOpen by rememberSaveable { mutableStateOf(false) }
     val context = LocalContext.current
     val displayMetrics = context.resources.displayMetrics
     val deviceWidth = displayMetrics.widthPixels / displayMetrics.density
     val halfWidth = deviceWidth / 2
     val lazyListState = rememberLazyListState()
 
-    ModalBottomSheetLayout(
-        sheetContent = {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(PokfinderTheme.palette.background)
+            .navigationBarsPadding()
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_pokeball),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(PokfinderTheme.palette.pokeballIcon),
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .align(Alignment.TopCenter)
+                .offset(y = (-halfWidth).dp)
+        )
+
+        LazyColumn(
+            state = lazyListState,
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .statusBarsPadding()
+        ) {
+            item {
+                TopBar(
+                    onClick = {
+                        bottomSheetType = it
+                        scope.launch(Dispatchers.Main) {
+                            isSheetOpen = true
+                        }
+                    }
+                )
+
+                HomeHeader()
+
+                SearchField(
+                    text = uiState.pokemonQuery,
+                    onType = { onEvent(HomeEvent.SearchPokemon(it)) },
+                )
+            }
+
+            items(
+                count = pokemonsLazyPagingItems.itemCount,
+                key = pokemonsLazyPagingItems.itemKey(PokemonHome::id),
+            ) { index ->
+                val pokemon = pokemonsLazyPagingItems[index]
+
+                pokemon?.let {
+                    PokemonCard(
+                        pokemon = it,
+                        onClick = { onEvent(HomeEvent.NavigateToProfile(it.id)) }
+                    )
+                }
+            }
+
+            item {
+                when (pokemonsLazyPagingItems.loadState.refresh) {
+                    is LoadState.Error -> {
+                        ErrorScreen(onClick = pokemonsLazyPagingItems::refresh)
+                    }
+
+                    is LoadState.Loading -> {
+                        LoadingScreen()
+                    }
+
+                    is LoadState.NotLoading -> {}
+                }
+            }
+
+            item {
+                when (pokemonsLazyPagingItems.loadState.append) {
+                    is LoadState.Error -> {
+                        ErrorScreen(onClick = pokemonsLazyPagingItems::retry)
+                    }
+
+                    is LoadState.Loading -> {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                        ) {
+                            CircularProgressIndicator(color = PokfinderTheme.palette.primaryInput)
+                        }
+                    }
+
+                    is LoadState.NotLoading -> {}
+                }
+            }
+
+        }
+
+        val showButton by remember {
+            derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
+        }
+
+        if (showButton) {
+            FloatingActionButton(
+                onClick = {
+                    scope.launch {
+                        lazyListState.scrollToItem(0)
+                    }
+                },
+                containerColor = PokfinderTheme.palette.fabBackground,
+                contentColor = PokfinderTheme.palette.fabContent,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowUp,
+                    contentDescription = stringResource(id = R.string.button_scroll_top_page)
+                )
+            }
+        }
+    }
+
+    if (isSheetOpen) {
+        ModalBottomSheet(
+            containerColor = PokfinderTheme.palette.surface,
+            sheetState = sheetState,
+            onDismissRequest = {
+                isSheetOpen = false
+            },
+            shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
+        ) {
             when (bottomSheetType) {
                 BottomSheetType.Generation -> {
                     GenerationBottomSheet(
@@ -118,7 +238,7 @@ private fun HomeScreen(
                             onEvent(HomeEvent.FilterByGeneration(generation))
                             scope.launch(Dispatchers.Main) {
                                 delay(500)
-                                sheetState.hide()
+                                isSheetOpen = false
                             }
                         }
                     )
@@ -131,7 +251,7 @@ private fun HomeScreen(
                             onEvent(HomeEvent.SortPokemonList(sortOptionSelected))
                             scope.launch(Dispatchers.Main) {
                                 delay(500)
-                                sheetState.hide()
+                                isSheetOpen = false
                             }
                         }
                     )
@@ -144,124 +264,9 @@ private fun HomeScreen(
                             onEvent(HomeEvent.FilterByTypes(selectedTypes))
                             scope.launch(Dispatchers.Main) {
                                 delay(500)
-                                sheetState.hide()
+                                isSheetOpen = false
                             }
                         }
-                    )
-                }
-            }
-        },
-        sheetState = sheetState,
-        sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_pokeball),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.pokeballIcon),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .align(Alignment.TopCenter)
-                    .offset(y = (-halfWidth).dp)
-            )
-
-            LazyColumn(
-                state = lazyListState,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            ) {
-                item {
-                    TopBar(
-                        onClick = {
-                            bottomSheetType = it
-                            scope.launch(Dispatchers.Main) {
-                                sheetState.show()
-                            }
-                        }
-                    )
-
-                    HomeHeader()
-
-                    SearchField(
-                        text = uiState.pokemonQuery,
-                        onType = { onEvent(HomeEvent.SearchPokemon(it)) },
-                    )
-                }
-
-                items(
-                    count = pokemonsLazyPagingItems.itemCount,
-                    key = pokemonsLazyPagingItems.itemKey(PokemonHome::id),
-                ) { index ->
-                    val pokemon = pokemonsLazyPagingItems[index]
-
-                    pokemon?.let {
-                        PokemonCard(
-                            pokemon = it,
-                            onClick = { onEvent(HomeEvent.NavigateToProfile(it.id)) }
-                        )
-                    }
-                }
-
-                item {
-                    when (pokemonsLazyPagingItems.loadState.refresh) {
-                        is LoadState.Error -> {
-                            ErrorScreen(onClick = pokemonsLazyPagingItems::refresh)
-                        }
-
-                        is LoadState.Loading -> {
-                            LoadingScreen()
-                        }
-
-                        is LoadState.NotLoading -> {}
-                    }
-                }
-
-                item {
-                    when (pokemonsLazyPagingItems.loadState.append) {
-                        is LoadState.Error -> {
-                            ErrorScreen(onClick = pokemonsLazyPagingItems::retry)
-                        }
-
-                        is LoadState.Loading -> {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center,
-                            ) {
-                                CircularProgressIndicator(color = MaterialTheme.colors.primaryInput)
-                            }
-                        }
-
-                        is LoadState.NotLoading -> {}
-                    }
-                }
-
-            }
-
-            val showButton by remember {
-                derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
-            }
-
-            if (showButton) {
-                FloatingActionButton(
-                    onClick = {
-                        scope.launch {
-                            lazyListState.scrollToItem(0)
-                        }
-                    },
-                    backgroundColor = MaterialTheme.colors.fabBackground,
-                    contentColor = MaterialTheme.colors.fabContent,
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(16.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowUp,
-                        contentDescription = stringResource(id = R.string.button_scroll_top_page)
                     )
                 }
             }

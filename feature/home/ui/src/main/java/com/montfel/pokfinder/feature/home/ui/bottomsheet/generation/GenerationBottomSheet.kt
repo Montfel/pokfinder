@@ -26,7 +26,6 @@ fun GenerationBottomSheet(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(top = 30.dp)
     ) {
         BottomSheetHeader(
             title = R.string.generations,

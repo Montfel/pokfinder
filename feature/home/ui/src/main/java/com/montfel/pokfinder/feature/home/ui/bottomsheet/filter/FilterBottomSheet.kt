@@ -9,10 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -23,11 +22,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryInput
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.core.designsystem.theme.secondaryInput
-import com.montfel.pokfinder.core.designsystem.theme.secondaryText
-import com.montfel.pokfinder.core.designsystem.theme.secondaryVariantInput
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.components.FilterSection
 
@@ -43,7 +37,7 @@ fun FilterBottomSheet(
         verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 30.dp, bottom = 50.dp)
+            .padding(bottom = 50.dp)
             .verticalScroll(rememberScrollState())
     ) {
         BottomSheetHeader(
@@ -71,8 +65,8 @@ fun FilterBottomSheet(
                     onFilterApplied(emptyList())
                 },
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MaterialTheme.colors.secondaryInput,
-                    contentColor = MaterialTheme.colors.secondaryVariantInput
+                    containerColor = PokfinderTheme.palette.secondaryInput,
+                    contentColor = PokfinderTheme.palette.secondaryVariantInput
                 ),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier
@@ -82,15 +76,15 @@ fun FilterBottomSheet(
                 Text(
                     text = stringResource(id = R.string.reset),
                     style = PokfinderTheme.typography.description,
-                    color = MaterialTheme.colors.primaryVariantText
+                    color = PokfinderTheme.palette.primaryVariantText
                 )
             }
 
             Button(
                 onClick = { onFilterApplied(uiState.selectedTypes) },
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MaterialTheme.colors.primaryInput,
-                    contentColor = MaterialTheme.colors.secondaryText
+                    containerColor = PokfinderTheme.palette.primaryInput,
+                    contentColor = PokfinderTheme.palette.secondaryText
                 ),
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier

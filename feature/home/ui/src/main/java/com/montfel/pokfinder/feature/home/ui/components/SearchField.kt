@@ -6,9 +6,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,12 +24,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryInput
-import com.montfel.pokfinder.core.designsystem.theme.primaryText
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.core.designsystem.theme.secondaryInput
-import com.montfel.pokfinder.core.designsystem.theme.textFieldIcon
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchField(
     text: String,
@@ -40,7 +41,7 @@ fun SearchField(
             Image(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = null,
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.textFieldIcon),
+                colorFilter = ColorFilter.tint(PokfinderTheme.palette.textFieldIcon),
                 modifier = Modifier.size(20.dp)
             )
         },
@@ -50,24 +51,26 @@ fun SearchField(
                     Image(
                         imageVector = Icons.Default.Close,
                         contentDescription = stringResource(id = R.string.clear_text_field),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.textFieldIcon),
+                        colorFilter = ColorFilter.tint(PokfinderTheme.palette.textFieldIcon),
                         modifier = Modifier.size(20.dp)
                     )
                 }
             }
         },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.secondaryInput,
-            textColor = MaterialTheme.colors.primaryText,
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = PokfinderTheme.palette.secondaryInput,
+            unfocusedContainerColor = PokfinderTheme.palette.secondaryInput,
+            focusedTextColor = PokfinderTheme.palette.primaryText,
+            unfocusedTextColor = PokfinderTheme.palette.primaryText,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colors.primaryInput,
+            cursorColor = PokfinderTheme.palette.primaryInput
         ),
         placeholder = {
             Text(
                 text = stringResource(id = R.string.placeholder_textfield),
                 style = PokfinderTheme.typography.description,
-                color = MaterialTheme.colors.primaryVariantText
+                color = PokfinderTheme.palette.primaryVariantText
             )
         },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),

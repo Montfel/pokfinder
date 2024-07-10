@@ -11,10 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -29,9 +28,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.pokeballIcon
-import com.montfel.pokfinder.core.designsystem.theme.primaryText
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
 import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
 
 @Composable
@@ -66,7 +62,7 @@ fun Evolution(
                     Image(
                         imageVector = Icons.AutoMirrored.Default.ArrowForward,
                         contentDescription = stringResource(id = R.string.evolution_arrow),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariantText),
+                        colorFilter = ColorFilter.tint(PokfinderTheme.palette.primaryVariantText),
                         alpha = 0.3f,
                     )
 
@@ -74,7 +70,7 @@ fun Evolution(
                         Text(
                             text = minLevel?.let { "Level $it" } ?: trigger,
                             style = PokfinderTheme.typography.pokemonNumber,
-                            color = MaterialTheme.colors.primaryText
+                            color = PokfinderTheme.palette.primaryText
                         )
                     }
                 }
@@ -106,7 +102,7 @@ fun PokemonEvolution(
                 painter = painterResource(id = R.drawable.ic_pokeball),
                 contentDescription = null,
                 modifier = Modifier.size(100.dp),
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.pokeballIcon)
+                colorFilter = ColorFilter.tint(PokfinderTheme.palette.pokeballIcon)
             )
 
             AsyncImage(
@@ -124,13 +120,13 @@ fun PokemonEvolution(
         Text(
             text = "#${specie.id}",
             style = PokfinderTheme.typography.pokemonType,
-            color = MaterialTheme.colors.primaryVariantText
+            color = PokfinderTheme.palette.primaryVariantText
         )
 
         Text(
             text = specie.name,
             style = PokfinderTheme.typography.filterTitle,
-            color = MaterialTheme.colors.primaryText
+            color = PokfinderTheme.palette.primaryText
         )
     }
 }

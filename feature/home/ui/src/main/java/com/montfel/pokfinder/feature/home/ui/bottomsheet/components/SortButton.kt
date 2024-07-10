@@ -3,20 +3,14 @@ package com.montfel.pokfinder.feature.home.ui.bottomsheet.components
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryInput
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.core.designsystem.theme.secondaryInput
-import com.montfel.pokfinder.core.designsystem.theme.secondaryText
-import com.montfel.pokfinder.core.designsystem.theme.secondaryVariantInput
 
 @Composable
 fun SortButton(
@@ -26,17 +20,17 @@ fun SortButton(
     onClick: () -> Unit
 ) {
     val backgroundColor =
-        if (isEnabled) MaterialTheme.colors.primaryInput
-        else MaterialTheme.colors.secondaryInput
+        if (isEnabled) PokfinderTheme.palette.primaryInput
+        else PokfinderTheme.palette.secondaryInput
     val textColor =
-        if (isEnabled) MaterialTheme.colors.secondaryText
-        else MaterialTheme.colors.primaryVariantText
+        if (isEnabled) PokfinderTheme.palette.secondaryText
+        else PokfinderTheme.palette.primaryVariantText
 
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = backgroundColor,
-            contentColor = MaterialTheme.colors.secondaryVariantInput
+            containerColor = backgroundColor,
+            contentColor = PokfinderTheme.palette.secondaryVariantInput
         ),
         shape = RoundedCornerShape(10.dp),
         modifier = modifier.height(60.dp)

@@ -3,8 +3,7 @@ package com.montfel.pokfinder.feature.profile.ui.components
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,7 +11,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
 import com.montfel.pokfinder.feature.profile.ui.model.AboutData
 
 @Composable
@@ -32,7 +30,7 @@ fun About(
         Text(
             text = flavorText,
             style = PokfinderTheme.typography.description,
-            color = MaterialTheme.colors.primaryVariantText,
+            color = PokfinderTheme.palette.primaryVariantText,
             modifier = Modifier.fillMaxWidth()
         )
     }

@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Pokfinder" parent="android:Theme.Material.Light.NoActionBar"/>
+    <style name="Theme.Pokfinder" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">
+            @android:color/transparent
+        </item>
+        <item name="android:navigationBarColor">
+            @android:color/transparent
+        </item>
+    </style>
+
+    <style name="Theme.Pokfinder.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@android:color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_pokfinder_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.Pokfinder</item>
+    </style>
 </resources>

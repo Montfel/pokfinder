@@ -7,16 +7,17 @@
     <application
         android:name=".PokfinderApp"
         android:allowBackup="true"
-        android:icon="@mipmap/pokfinder_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/pokfinder_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Pokfinder">
+        android:enableOnBackInvokedCallback="true"
+        android:theme="@style/Theme.Pokfinder.SplashScreen"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".PokfinderActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Pokfinder"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

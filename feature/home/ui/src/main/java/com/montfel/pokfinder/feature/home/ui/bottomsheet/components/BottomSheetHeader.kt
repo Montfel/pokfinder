@@ -2,14 +2,11 @@ package com.montfel.pokfinder.feature.home.ui.bottomsheet.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryText
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
 
 @Composable
 fun BottomSheetHeader(
@@ -21,13 +18,13 @@ fun BottomSheetHeader(
         Text(
             text = stringResource(id = title),
             style = PokfinderTheme.typography.pokemonName,
-            color = MaterialTheme.colors.primaryText,
+            color = PokfinderTheme.palette.primaryText,
         )
 
         Text(
             text = stringResource(id = description),
             style = PokfinderTheme.typography.description,
-            color = MaterialTheme.colors.primaryVariantText,
+            color = PokfinderTheme.palette.primaryVariantText,
         )
     }
 }

@@ -13,10 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,11 +31,8 @@ import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.components.TypeCard
 import com.montfel.pokfinder.core.designsystem.model.AssetFromType
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.numberOverBackgroundColor
-import com.montfel.pokfinder.core.designsystem.theme.secondaryText
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PokemonCard(
     pokemon: PokemonHome,
@@ -51,7 +47,9 @@ fun PokemonCard(
         Card(
             onClick = onClick,
             shape = RoundedCornerShape(10.dp),
-            backgroundColor = AssetFromType.getAsset(pokemon.types?.firstOrNull()?.name).backgroundColor,
+            colors = CardDefaults.cardColors(
+                containerColor = AssetFromType.getAsset(pokemon.types?.firstOrNull()?.name).backgroundColor
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(115.dp)
@@ -66,13 +64,13 @@ fun PokemonCard(
                     Text(
                         text = "#${pokemon.id}",
                         style = PokfinderTheme.typography.pokemonNumber,
-                        color = MaterialTheme.colors.numberOverBackgroundColor
+                        color = PokfinderTheme.palette.numberOverBackgroundColor
                     )
 
                     Text(
                         text = pokemon.name,
                         style = PokfinderTheme.typography.pokemonName,
-                        color = MaterialTheme.colors.secondaryText,
+                        color = PokfinderTheme.palette.secondaryText,
                         overflow = TextOverflow.Ellipsis
                     )
 

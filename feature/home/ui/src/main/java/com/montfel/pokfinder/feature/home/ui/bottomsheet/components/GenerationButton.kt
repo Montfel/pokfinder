@@ -3,10 +3,18 @@ package com.montfel.pokfinder.feature.home.ui.bottomsheet.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,12 +27,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryInput
-import com.montfel.pokfinder.core.designsystem.theme.primaryPattern
-import com.montfel.pokfinder.core.designsystem.theme.primaryVariantText
-import com.montfel.pokfinder.core.designsystem.theme.secondaryInput
-import com.montfel.pokfinder.core.designsystem.theme.secondaryPattern
-import com.montfel.pokfinder.core.designsystem.theme.secondaryText
 
 @Composable
 fun GenerationButton(
@@ -34,14 +36,14 @@ fun GenerationButton(
     onClick: () -> Unit
 ) {
     val backgroundColor =
-        if (isEnabled) MaterialTheme.colors.primaryInput
-        else MaterialTheme.colors.secondaryInput
+        if (isEnabled) PokfinderTheme.palette.primaryInput
+        else PokfinderTheme.palette.secondaryInput
     val textColor =
-        if (isEnabled) MaterialTheme.colors.secondaryText
-        else MaterialTheme.colors.primaryVariantText
+        if (isEnabled) PokfinderTheme.palette.secondaryText
+        else PokfinderTheme.palette.primaryVariantText
     val patternColor =
-        if (isEnabled) MaterialTheme.colors.primaryPattern
-        else MaterialTheme.colors.secondaryPattern
+        if (isEnabled) PokfinderTheme.palette.primaryPattern
+        else PokfinderTheme.palette.secondaryPattern
 
     Box(
         modifier = Modifier

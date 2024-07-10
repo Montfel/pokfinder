@@ -46,7 +46,7 @@ apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "a
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
-compose-material = { module = "androidx.compose.material:material" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 core = { module = "androidx.core:core-ktx", version.ref = "core" }
@@ -83,7 +83,7 @@ splash = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 [bundles]
-compose = ["compose-material", "compose-foundation", "compose-ui-tooling", "compose-ui-tooling-preview"]
+compose = ["compose-material3", "compose-foundation", "compose-ui-tooling", "compose-ui-tooling-preview"]
 lifecycle = ["lifecycle-ktx", "lifecycle-compose"]
 okhttp = ["okhttp", "okhttp-logging-interceptor"]
 paging = ["paging-compose", "paging-runtime"]

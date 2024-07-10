@@ -24,7 +24,7 @@ fun SortBottomSheet(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(top = 30.dp, bottom = 50.dp)
+            .padding(bottom = 50.dp)
             .verticalScroll(rememberScrollState())
     ) {
         BottomSheetHeader(

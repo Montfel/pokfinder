@@ -1,6 +1,5 @@
 package com.montfel.pokfinder.navigation
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,7 +9,6 @@ import androidx.navigation.navArgument
 import com.montfel.pokfinder.feature.home.ui.HomeScreen
 import com.montfel.pokfinder.feature.profile.ui.ProfileScreen
 
-@ExperimentalMaterialApi
 @Composable
 fun NavigationComponent() {
     val navController = rememberNavController()

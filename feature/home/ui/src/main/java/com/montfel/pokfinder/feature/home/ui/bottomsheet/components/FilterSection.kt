@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -16,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.designsystem.model.AssetFromType
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
-import com.montfel.pokfinder.core.designsystem.theme.primaryText
 
 @Composable
 fun FilterSection(
@@ -29,7 +27,7 @@ fun FilterSection(
         Text(
             text = stringResource(id = title),
             style = PokfinderTheme.typography.filterTitle,
-            color = MaterialTheme.colors.primaryText,
+            color = PokfinderTheme.palette.primaryText,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
 

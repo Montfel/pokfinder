@@ -8,23 +8,25 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -45,16 +47,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.montfel.pokfinder.core.designsystem.resources.drawableDesignSystem
-import com.montfel.pokfinder.core.designsystem.resources.stringDesignSystem
 import com.montfel.pokfinder.core.designsystem.components.ErrorScreen
 import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
 import com.montfel.pokfinder.core.designsystem.components.TypeCard
 import com.montfel.pokfinder.core.designsystem.model.AssetFromType
-import com.montfel.pokfinder.core.designsystem.theme.fabBackground
-import com.montfel.pokfinder.core.designsystem.theme.numberOverBackgroundColor
-import com.montfel.pokfinder.core.designsystem.theme.primaryIcon
-import com.montfel.pokfinder.core.designsystem.theme.secondaryText
+import com.montfel.pokfinder.core.designsystem.resources.drawableDesignSystem
+import com.montfel.pokfinder.core.designsystem.resources.stringDesignSystem
+import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.feature.profile.ui.components.About
 import com.montfel.pokfinder.feature.profile.ui.components.Evolution
 import com.montfel.pokfinder.feature.profile.ui.components.Stats
@@ -150,7 +149,12 @@ fun ProfileScreen(
     }
 
     uiState.species?.baseHappiness?.let {
-        training.add(AboutData(title = stringDesignSystem.base_friendship, description = it.toString()))
+        training.add(
+            AboutData(
+                title = stringDesignSystem.base_friendship,
+                description = it.toString()
+            )
+        )
     }
 
     uiState.profile?.baseExp?.let {
@@ -187,22 +191,20 @@ fun ProfileScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                backgroundColor = Color.Transparent,
-                elevation = 0.dp,
+            Row(
                 modifier = Modifier.statusBarsPadding()
             ) {
                 IconButton(onClick = { onEvent(ProfileEvent.NavigateBack) }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         contentDescription = stringResource(id = stringDesignSystem.back),
-                        tint = MaterialTheme.colors.primaryIcon
+                        tint = PokfinderTheme.palette.primaryIcon
                     )
                 }
             }
         },
-        backgroundColor = if (uiState.stateOfUi !is ProfileStateOfUi.Success) {
-            MaterialTheme.colors.fabBackground
+        containerColor = if (uiState.stateOfUi !is ProfileStateOfUi.Success) {
+            PokfinderTheme.palette.fabBackground
         } else {
             assetFromType.backgroundColor
         }
@@ -222,7 +224,7 @@ fun ProfileScreen(
                     Image(
                         painter = painterResource(id = drawableDesignSystem.ic_circle),
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryIcon),
+                        colorFilter = ColorFilter.tint(PokfinderTheme.palette.primaryIcon),
                         alpha = 0.35f,
                         modifier = Modifier.size(125.dp)
                     )
@@ -241,16 +243,16 @@ fun ProfileScreen(
                     uiState.profile?.id?.let {
                         Text(
                             text = "#$it",
-                            style = com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.filterTitle,
-                            color = MaterialTheme.colors.numberOverBackgroundColor
+                            style = PokfinderTheme.typography.filterTitle,
+                            color = PokfinderTheme.palette.numberOverBackgroundColor
                         )
                     }
 
                     uiState.profile?.name?.let {
                         Text(
                             text = it,
-                            style = com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.applicationTitle,
-                            color = MaterialTheme.colors.secondaryText,
+                            style = PokfinderTheme.typography.applicationTitle,
+                            color = PokfinderTheme.palette.secondaryText,
                         )
                     }
 
@@ -270,21 +272,42 @@ fun ProfileScreen(
 
             TabRow(
                 selectedTabIndex = selectedTabIndex,
-                backgroundColor = Color.Transparent,
+                containerColor = Color.Transparent,
+                divider = {},
+                indicator = { tabPositions ->
+                    val rightOffset = (tabPositions[selectedTabIndex].width - 100.dp).div(2.dp).dp
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                    ) {
+                        Image(
+                            painter = painterResource(id = drawableDesignSystem.ic_pokeball),
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(Color.White),
+                            alpha = 0.2f,
+                            modifier = Modifier
+                                .requiredSize(100.dp)
+                                .offset(y = 25.dp, x = rightOffset)
+                        )
+                    }
+                },
             ) {
                 titles.forEachIndexed { index, title ->
                     Tab(
                         selected = selectedTabIndex == index,
                         onClick = { selectedTabIndex = index },
+                        modifier = Modifier.height(50.dp)
                     ) {
                         Text(
                             text = stringResource(id = title),
                             style = if (selectedTabIndex == index) {
-                                com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.filterTitle
+                                PokfinderTheme.typography.filterTitle
                             } else {
-                                com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme.typography.description
+                                PokfinderTheme.typography.description
                             },
-                            color = MaterialTheme.colors.secondaryText
+                            color = PokfinderTheme.palette.secondaryText
                         )
                     }
                 }
@@ -293,7 +316,7 @@ fun ProfileScreen(
             Column(
                 modifier = Modifier
                     .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                    .background(color = MaterialTheme.colors.surface)
+                    .background(color = PokfinderTheme.palette.surface)
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {
