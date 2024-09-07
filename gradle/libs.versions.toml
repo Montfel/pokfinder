@@ -1,12 +1,12 @@
 [versions]
-activity = "1.9.0"
-androidGradlePlugin = "8.5.0"
+activity = "1.9.2"
+androidGradlePlugin = "8.5.2"
 apollo = "3.8.3"
 coil = "2.6.0"
-compose = "2024.06.00"
+compose = "2024.09.00"
 core = "1.13.1"
 espresso = "3.6.1"
-firebase = "33.1.1"
+firebase = "33.2.0"
 firebaseCrashlyticsGradle = "3.0.2"
 googleServices = "4.4.2"
 gson = "2.11.0"
@@ -14,14 +14,14 @@ hilt = "2.51.1"
 hiltNavigation = "1.2.0"
 junit = "4.13.2"
 junitAndroid = "1.2.1"
-kotlin = "1.9.24"
+kotlin = "2.0.20"
 kotlinCoroutines = "1.8.1"
 kotlinSerialization = "1.6.3"
-ksp = "1.9.24-1.0.20"
-lifecycle = "2.8.2"
-navigation = "2.7.7"
+ksp = "2.0.20-1.0.24"
+lifecycle = "2.8.5"
+navigation = "2.8.0"
 okhttp = "4.12.0"
-paging = "3.3.0"
+paging = "3.3.2"
 review = "2.0.1"
 retrofit = "2.11.0"
 room = "2.6.1"
@@ -32,6 +32,7 @@ truth = "1.4.2"
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

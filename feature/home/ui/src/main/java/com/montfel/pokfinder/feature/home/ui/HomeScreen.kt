@@ -58,8 +58,6 @@ import com.montfel.pokfinder.feature.home.ui.components.HomeHeader
 import com.montfel.pokfinder.feature.home.ui.components.PokemonCard
 import com.montfel.pokfinder.feature.home.ui.components.SearchField
 import com.montfel.pokfinder.feature.home.ui.components.TopBar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -129,11 +127,11 @@ private fun HomeScreen(
         ) {
             item {
                 TopBar(
+                    hasGenerations = uiState.generations.isNotEmpty(),
+                    hasTypes = uiState.types.isNotEmpty(),
                     onClick = {
                         bottomSheetType = it
-                        scope.launch(Dispatchers.Main) {
-                            isSheetOpen = true
-                        }
+                        isSheetOpen = true
                     }
                 )
 
@@ -236,10 +234,7 @@ private fun HomeScreen(
                         generationSelected = uiState.generationSelected,
                         onGenerationSelected = { generation ->
                             onEvent(HomeEvent.FilterByGeneration(generation))
-                            scope.launch(Dispatchers.Main) {
-                                delay(500)
-                                isSheetOpen = false
-                            }
+                            isSheetOpen = false
                         }
                     )
                 }
@@ -249,10 +244,7 @@ private fun HomeScreen(
                         sortOptionSelected = uiState.sortOptionSelected,
                         onSortOptionSelected = { sortOptionSelected ->
                             onEvent(HomeEvent.SortPokemonList(sortOptionSelected))
-                            scope.launch(Dispatchers.Main) {
-                                delay(500)
-                                isSheetOpen = false
-                            }
+                            isSheetOpen = false
                         }
                     )
                 }
@@ -262,10 +254,7 @@ private fun HomeScreen(
                         types = uiState.types,
                         onFilterApplied = { selectedTypes ->
                             onEvent(HomeEvent.FilterByTypes(selectedTypes))
-                            scope.launch(Dispatchers.Main) {
-                                delay(500)
-                                isSheetOpen = false
-                            }
+                            isSheetOpen = false
                         }
                     )
                 }

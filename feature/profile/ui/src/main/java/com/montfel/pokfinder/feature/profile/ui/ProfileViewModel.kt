@@ -2,6 +2,7 @@ package com.montfel.pokfinder.feature.profile.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.profile.domain.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -58,7 +59,7 @@ class ProfileViewModel @Inject constructor(
                 val profile = profileDeferred.await()
                 val species = speciesDeferred.await()
 
-                if (profile is com.montfel.pokfinder.core.common.domain.util.ResultType.Success) {
+                if (profile is ResultType.Success) {
                     _uiState.update {
                         it.copy(
                             profile = profile.data,
@@ -66,7 +67,7 @@ class ProfileViewModel @Inject constructor(
                         )
                     }
 
-                    if (species is com.montfel.pokfinder.core.common.domain.util.ResultType.Success) {
+                    if (species is ResultType.Success) {
                         _uiState.update {
                             it.copy(
                                 species = species.data,
@@ -78,7 +79,7 @@ class ProfileViewModel @Inject constructor(
                             repository.getEvolutionChain(it)
                         }
 
-                        if (evolutionChain is com.montfel.pokfinder.core.common.domain.util.ResultType.Success) {
+                        if (evolutionChain is ResultType.Success) {
                             _uiState.update { it.copy(evolutionChain = evolutionChain.data) }
                         }
                     }
@@ -88,7 +89,7 @@ class ProfileViewModel @Inject constructor(
                             repository.getDamageRelations(it)
                         }
 
-                    if (damageRelations is com.montfel.pokfinder.core.common.domain.util.ResultType.Success) {
+                    if (damageRelations is ResultType.Success) {
                         _uiState.update {
                             it.copy(
                                 strengths = damageRelations.data.damageRelations?.doubleDamageTo,

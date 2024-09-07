@@ -15,34 +15,44 @@ import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.BottomSheetType
 
 @Composable
-fun TopBar(onClick: (BottomSheetType) -> Unit) {
+fun TopBar(
+    hasGenerations: Boolean,
+    hasTypes: Boolean,
+    onClick: (BottomSheetType) -> Unit
+) {
     Row(
         horizontalArrangement = Arrangement.End,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            IconButton(onClick = { onClick(BottomSheetType.Generation) }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_generation),
-                    contentDescription = stringResource(id = R.string.generation_filter),
-                    tint = PokfinderTheme.palette.topBarIcon
-                )
+            if (hasGenerations) {
+                IconButton(onClick = { onClick(BottomSheetType.Generation) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_generation),
+                        contentDescription = stringResource(id = R.string.generation_filter),
+                        tint = PokfinderTheme.palette.topBarIcon
+                    )
+                }
             }
 
-            IconButton(onClick = { onClick(BottomSheetType.Sort) }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_sort),
-                    contentDescription = stringResource(id = R.string.sort_filter),
-                    tint = PokfinderTheme.palette.topBarIcon
-                )
+            if (true) { //fixme
+                IconButton(onClick = { onClick(BottomSheetType.Sort) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_sort),
+                        contentDescription = stringResource(id = R.string.sort_filter),
+                        tint = PokfinderTheme.palette.topBarIcon
+                    )
+                }
             }
 
-            IconButton(onClick = { onClick(BottomSheetType.Filter) }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_filter),
-                    contentDescription = stringResource(id = R.string.other_filters),
-                    tint = PokfinderTheme.palette.topBarIcon
-                )
+            if (hasTypes) {
+                IconButton(onClick = { onClick(BottomSheetType.Filter) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_filter),
+                        contentDescription = stringResource(id = R.string.other_filters),
+                        tint = PokfinderTheme.palette.topBarIcon
+                    )
+                }
             }
         }
     }
