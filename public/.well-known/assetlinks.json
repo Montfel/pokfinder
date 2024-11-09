@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.montfel.pokfinder",
+      "sha256_cert_fingerprints":
+      ["68:CD:93:E6:45:77:D3:F2:CF:94:AF:E1:BF:73:7B:61:C9:D4:28:FC:0E:E9:EA:9B:CE:C5:F8:5F:4E:68:71:CC"]
+    }
+  }
+]
