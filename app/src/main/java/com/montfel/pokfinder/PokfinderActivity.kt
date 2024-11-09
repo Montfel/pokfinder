@@ -13,6 +13,8 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.navigation.NavigationComponent
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Intent
+import android.net.Uri
 
 @AndroidEntryPoint
 class PokfinderActivity : ComponentActivity() {
@@ -23,9 +25,13 @@ class PokfinderActivity : ComponentActivity() {
         showFeedbackDialog()
         enableEdgeToEdge()
 
+        val appLinkIntent: Intent = intent
+        val appLinkData: Uri? = appLinkIntent.data
+        val appLinkPath = appLinkData?.path?.drop(1)
+
         setContent {
             PokfinderTheme {
-                NavigationComponent()
+                NavigationComponent(appLinkPath)
             }
         }
     }

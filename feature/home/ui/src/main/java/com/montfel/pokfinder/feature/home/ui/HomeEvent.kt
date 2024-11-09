@@ -10,4 +10,5 @@ sealed interface HomeEvent {
     data class SortPokemonList(val sortOption: SortOptions) : HomeEvent
     data class NavigateToProfile(val pokemonId: Int) : HomeEvent
     data class FilterByTypes(val types: List<Type>) : HomeEvent
+    data class CheckDeepLink(val deepLink: String?) : HomeEvent
 }

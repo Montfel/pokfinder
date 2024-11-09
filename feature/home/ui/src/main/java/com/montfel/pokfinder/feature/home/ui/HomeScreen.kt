@@ -62,7 +62,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
+    deepLink: String?,
     onNavigateToProfile: (id: Int) -> Unit,
+    onNavigateToDeepLink: (deepLink: String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -70,9 +72,12 @@ fun HomeScreen(
     val pokemonsLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
 
     LaunchedEffect(key1 = Unit) {
+        viewModel.onEvent(HomeEvent.CheckDeepLink(deepLink))
+
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is HomeUiEvent.NavigateToProfile -> onNavigateToProfile(event.pokemonId)
+                is HomeUiEvent.NavigateToDeepLink -> onNavigateToDeepLink(event.deepLink)
             }
         }
     }

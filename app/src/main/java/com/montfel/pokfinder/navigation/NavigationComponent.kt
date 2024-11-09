@@ -8,9 +8,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.montfel.pokfinder.feature.home.ui.HomeScreen
 import com.montfel.pokfinder.feature.profile.ui.ProfileScreen
+import com.montfel.pokfinder.navigation.Screen.Companion.ID
 
 @Composable
-fun NavigationComponent() {
+fun NavigationComponent(
+    deepLink: String?
+) {
     val navController = rememberNavController()
 
     NavHost(
@@ -19,8 +22,14 @@ fun NavigationComponent() {
     ) {
         composable(Screen.Home.route) {
             HomeScreen(
+                deepLink = deepLink,
                 onNavigateToProfile = { id ->
                     navController.navigate(Screen.Profile.createRoute(id))
+                },
+                onNavigateToDeepLink = { deepLink ->
+                    runCatching {
+                        navController.navigate(deepLink)
+                    }
                 }
             )
         }
@@ -28,12 +37,12 @@ fun NavigationComponent() {
         composable(
             route = Screen.Profile.route,
             arguments = listOf(
-                navArgument("id") {
+                navArgument(ID) {
                     type = NavType.IntType
                 }
             )
         ) {
-            val id = it.arguments?.getInt("id") ?: 0
+            val id = it.arguments?.getInt(ID) ?: 0
 
             ProfileScreen(
                 id = id,

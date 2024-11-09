@@ -37,6 +37,8 @@ class HomeViewModel @Inject constructor(
     private val _uiEvent = Channel<HomeUiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    private var hasCheckedDeepLink = false
+
     var pokemonName by mutableStateOf("")
         private set
 
@@ -58,6 +60,7 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.SortPokemonList -> sortPokemonList(event.sortOption)
             is HomeEvent.NavigateToProfile -> navigateToProfile(event.pokemonId)
             is HomeEvent.FilterByTypes -> filterByTypes(event.types)
+            is HomeEvent.CheckDeepLink -> checkDeepLink(event.deepLink)
         }
     }
 
@@ -183,6 +186,17 @@ class HomeViewModel @Inject constructor(
             } else {
                 _uiState.update {
                     it.copy(pokemonsPagingDataFlow = pokemons)
+                }
+            }
+        }
+    }
+
+    private fun checkDeepLink(deepLink: String?) {
+        if (!hasCheckedDeepLink) {
+            hasCheckedDeepLink = true
+            if (!deepLink.isNullOrBlank()) {
+                viewModelScope.launch {
+                    _uiEvent.send(HomeUiEvent.NavigateToDeepLink(deepLink))
                 }
             }
         }
