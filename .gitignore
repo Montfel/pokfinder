@@ -108,3 +108,6 @@ lint/tmp/
 .idea/other.xml
 /.idea/kotlinc.xml
 .kotlin
+.idea/
+/.idea/
+

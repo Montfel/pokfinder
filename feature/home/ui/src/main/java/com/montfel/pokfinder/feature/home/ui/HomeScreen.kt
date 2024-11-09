@@ -66,6 +66,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val pokemonName = viewModel.pokemonName
     val pokemonsLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
 
     LaunchedEffect(key1 = Unit) {
@@ -78,6 +79,7 @@ fun HomeScreen(
 
     HomeScreen(
         uiState = uiState,
+        pokemonName = pokemonName,
         pokemonsLazyPagingItems = pokemonsLazyPagingItems,
         onEvent = viewModel::onEvent
     )
@@ -87,6 +89,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreen(
     uiState: HomeUiState,
+    pokemonName: String,
     pokemonsLazyPagingItems: LazyPagingItems<PokemonHome>,
     onEvent: (HomeEvent) -> Unit,
 ) {
@@ -138,7 +141,7 @@ private fun HomeScreen(
                 HomeHeader()
 
                 SearchField(
-                    text = uiState.pokemonQuery,
+                    text = pokemonName,
                     onType = { onEvent(HomeEvent.SearchPokemon(it)) },
                 )
             }
