@@ -12,8 +12,9 @@ import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.home.domain.model.Generation
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
-import com.montfel.pokfinder.feature.home.domain.model.SortOptions
-import com.montfel.pokfinder.feature.home.repository.HomeRepository
+import com.montfel.pokfinder.feature.home.ui.model.SortOptions
+import com.montfel.pokfinder.feature.home.domain.repository.HomeRepository
+import com.montfel.pokfinder.feature.home.domain.usecase.GetPokemonsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
@@ -28,7 +29,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: HomeRepository
+    private val repository: HomeRepository,
+    private val getPokemonsUseCase: GetPokemonsUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -66,7 +68,7 @@ class HomeViewModel @Inject constructor(
 
     private fun fetchPokemons() {
         viewModelScope.launch {
-            pokemons = repository.getPokemons().cachedIn(viewModelScope)
+            pokemons = getPokemonsUseCase().cachedIn(viewModelScope)
 
             _uiState.update {
                 it.copy(pokemonsPagingDataFlow = pokemons)

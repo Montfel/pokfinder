@@ -8,6 +8,7 @@ import androidx.room.withTransaction
 import com.montfel.core.database.PokfinderDatabase
 import com.montfel.core.database.model.entity.PokemonHomeEntity
 import com.montfel.core.database.model.entity.PokemonHomeRemoteKeysEntity
+import com.montfel.pokfinder.core.network.PokemonsQuery
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHomeEntity
@@ -49,7 +50,9 @@ internal class PokemonHomeRemoteMediator(
 
             val response = service.getPokemons(offset = currentPage, limit = ITEMS_PER_PAGE)
             val pokemons =
-                response.data?.pokemon_v2_pokemon?.map { it.toPokemonHomeEntity() } ?: emptyList()
+                response.data?.pokemon_v2_pokemon
+                    ?.map(PokemonsQuery.Pokemon_v2_pokemon::toPokemonHomeEntity)
+                    ?: emptyList()
             val endOfPaginationReached = pokemons.isEmpty()
 
             val prevPage = if (currentPage == 0) null else currentPage - ITEMS_PER_PAGE

@@ -1,4 +1,6 @@
-package com.montfel.pokfinder.feature.home.domain.model
+package com.montfel.pokfinder.feature.home.ui.model
+
+import com.montfel.pokfinder.feature.home.domain.model.OrderType
 
 sealed class SortOptions(val orderType: OrderType) {
     data object SmallestNumber : SortOptions(orderType = OrderType.Ascendant)
@@ -7,7 +9,3 @@ sealed class SortOptions(val orderType: OrderType) {
     data object ReverseAlphabetical : SortOptions(orderType = OrderType.Descendant)
 }
 
-sealed interface OrderType {
-    data object Ascendant : OrderType
-    data object Descendant : OrderType
-}

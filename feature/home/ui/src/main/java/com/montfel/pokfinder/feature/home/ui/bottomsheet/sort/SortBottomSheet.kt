@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.montfel.pokfinder.core.designsystem.R
-import com.montfel.pokfinder.feature.home.domain.model.SortOptions
+import com.montfel.pokfinder.feature.home.ui.model.SortOptions
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.components.BottomSheetHeader
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.components.SortButton
 

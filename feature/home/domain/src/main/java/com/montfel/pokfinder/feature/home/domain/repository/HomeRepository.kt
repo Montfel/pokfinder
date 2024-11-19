@@ -1,4 +1,4 @@
-package com.montfel.pokfinder.feature.home.repository
+package com.montfel.pokfinder.feature.home.domain.repository
 
 import androidx.paging.PagingData
 import com.montfel.pokfinder.core.common.domain.model.Type

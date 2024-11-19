@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.profile.domain.repository.ProfileRepository
+import com.montfel.pokfinder.feature.profile.domain.usecase.GetProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: ProfileRepository
+    private val repository: ProfileRepository,
+    private val getProfileUseCase: GetProfileUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProfileUiState())
@@ -53,7 +55,7 @@ class ProfileViewModel @Inject constructor(
     private fun fetchPokemonDetails() {
         _uiState.value.pokemonId?.let { pokemonId ->
             viewModelScope.launch {
-                val profileDeferred = async { repository.getProfile(pokemonId) }
+                val profileDeferred = async { getProfileUseCase(pokemonId) }
                 val speciesDeferred = async { repository.getSpecies(pokemonId) }
 
                 val profile = profileDeferred.await()

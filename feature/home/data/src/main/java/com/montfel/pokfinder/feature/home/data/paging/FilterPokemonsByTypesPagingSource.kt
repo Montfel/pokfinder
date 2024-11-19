@@ -2,6 +2,7 @@ package com.montfel.pokfinder.feature.home.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHome
@@ -27,7 +28,9 @@ internal class FilterPokemonsByTypesPagingSource(
                 types = types,
             )
             val pokemons =
-                response.data?.pokemon_v2_pokemon?.map { it.toPokemonHome() } ?: emptyList()
+                response.data?.pokemon_v2_pokemon
+                    ?.map(FilterPokemonsByTypesQuery.Pokemon_v2_pokemon::toPokemonHome)
+                    ?: emptyList()
 
             LoadResult.Page(
                 data = pokemons,

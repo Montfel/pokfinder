@@ -6,9 +6,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.montfel.core.database.PokfinderDatabase
+import com.montfel.core.database.model.entity.PokemonHomeEntity
 import com.montfel.network.util.resultWrapper
 import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.common.domain.util.ResultType
+import com.montfel.pokfinder.core.network.GenerationsQuery
+import com.montfel.pokfinder.core.network.TypesQuery
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.mapper.toGeneration
@@ -23,7 +26,7 @@ import com.montfel.pokfinder.feature.home.data.paging.SortPokemonsByNamePagingSo
 import com.montfel.pokfinder.feature.home.domain.model.Generation
 import com.montfel.pokfinder.feature.home.domain.model.OrderType
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
-import com.montfel.pokfinder.feature.home.repository.HomeRepository
+import com.montfel.pokfinder.feature.home.domain.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -43,7 +46,7 @@ internal class HomeRepositoryImpl @Inject constructor(
             ),
             pagingSourceFactory = { pokfinderDatabase.pokemonHomeDao().getAllPokemons() }
         ).flow.map { pagingData ->
-            pagingData.map { it.toPokemonHome() }
+            pagingData.map(PokemonHomeEntity::toPokemonHome)
         }
     }
 
@@ -111,7 +114,7 @@ internal class HomeRepositoryImpl @Inject constructor(
     override suspend fun getTypes(): ResultType<List<Type>> {
         return resultWrapper {
             service.getTypes().data?.pokemon_v2_type
-                ?.map { it.toType() }
+                ?.map(TypesQuery.Pokemon_v2_type::toType)
                 ?.filter { it.name != "Unknown" && it.name != "Shadow" }
                 ?.sortedBy { it.name }
                 ?: emptyList()
@@ -120,7 +123,8 @@ internal class HomeRepositoryImpl @Inject constructor(
 
     override suspend fun getGenerations(): ResultType<List<Generation>> {
         return resultWrapper {
-            service.getGenerations().data?.pokemon_v2_generation?.map { it.toGeneration() }
+            service.getGenerations().data?.pokemon_v2_generation
+                ?.map(GenerationsQuery.Pokemon_v2_generation::toGeneration)
                 ?: emptyList()
         }
     }
