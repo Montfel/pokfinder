@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ksp)
 }
 
 java {
@@ -10,5 +11,6 @@ java {
 dependencies {
     api(projects.core.common.domain)
 
-    implementation(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.core)
 }

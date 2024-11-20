@@ -5,7 +5,7 @@ import com.montfel.pokfinder.feature.profile.domain.model.PokemonProfile
 import com.montfel.pokfinder.feature.profile.domain.repository.ProfileRepository
 import javax.inject.Inject
 
-class GetProfileUseCaseImpl @Inject constructor(
+internal class GetProfileUseCaseImpl @Inject constructor(
     private val repository: ProfileRepository
 ) : GetProfileUseCase {
     override suspend fun invoke(pokemonId: Int): ResultType<PokemonProfile> {

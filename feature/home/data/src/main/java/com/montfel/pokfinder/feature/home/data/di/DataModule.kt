@@ -1,11 +1,9 @@
 package com.montfel.pokfinder.feature.home.data.di
 
-import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import com.montfel.pokfinder.feature.home.data.repository.HomeRepositoryImpl
 import com.montfel.pokfinder.feature.home.domain.repository.HomeRepository
-import com.montfel.pokfinder.feature.home.domain.usecase.GetPokemonsUseCase
-import com.montfel.pokfinder.feature.home.domain.usecase.GetPokemonsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -24,9 +22,4 @@ internal abstract class DataModule {
     internal abstract fun bindHomeService(
         homeService: HomeServiceImpl
     ): HomeService
-
-    @Binds
-    internal abstract fun bindGetPokemonsUseCase(
-        getPokemonsUseCaseImpl: GetPokemonsUseCaseImpl
-    ): GetPokemonsUseCase
 }
