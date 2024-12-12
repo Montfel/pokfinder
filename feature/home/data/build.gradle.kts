@@ -61,7 +61,7 @@ dependencies {
     implementation(libs.bundles.okhttp)
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.serialization.json)
-    implementation(libs.bundles.paging)
+    implementation(libs.paging.runtime)
     implementation(libs.bundles.retrofit)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
