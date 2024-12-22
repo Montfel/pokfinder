@@ -18,19 +18,19 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "pokfinder.android.application"
+            id = libs.plugins.pokfinder.android.application.get().pluginId
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidLibrary") {
-            id = "pokfinder.android.library"
+            id = libs.plugins.pokfinder.android.library.get().pluginId
             implementationClass = "AndroidLibraryConventionPlugin"
         }
-        register("androidLibraryCompose") {
-            id = "pokfinder.android.library.compose"
-            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        register("composeLibrary") {
+            id = libs.plugins.pokfinder.compose.library.get().pluginId
+            implementationClass = "ComposeLibraryConventionPlugin"
         }
         register("kotlinLibrary") {
-            id = "pokfinder.kotlin.library"
+            id = libs.plugins.pokfinder.kotlin.library.get().pluginId
             implementationClass = "KotlinLibraryConventionPlugin"
         }
     }

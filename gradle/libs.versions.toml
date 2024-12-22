@@ -52,7 +52,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Convention Plugins
 pokfinder-android-application = { id = "pokfinder.android.application", version = "unspecified" }
 pokfinder-android-library = { id = "pokfinder.android.library", version = "unspecified" }
-pokfinder-android-library-compose = { id = "pokfinder.android.library.compose", version = "unspecified" }
+pokfinder-compose-library = { id = "pokfinder.compose.library", version = "unspecified" }
 pokfinder-kotlin-library = { id = "pokfinder.kotlin.library", version = "unspecified" }
 
 [libraries]
