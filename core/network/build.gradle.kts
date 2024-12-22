@@ -1,55 +1,17 @@
 plugins {
-    alias(libs.plugins.android.library)
     alias(libs.plugins.apollo)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
+
+    alias(libs.plugins.pokfinder.android.library)
 }
 
 android {
-    namespace = "com.montfel.pokfinder.core.network"
-    compileSdk = ProjectConfig.compileSdkVersion
-
-    defaultConfig {
-        minSdk = ProjectConfig.minSdkVersion
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        debug {
-            isMinifyEnabled = false
-        }
-
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
-    }
+    namespace = "${libs.versions.app.namespace.get()}.core.network"
 
     apollo {
         service("service") {
-            packageName.set("com.montfel.pokfinder.core.network")
-        }
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            excludes += "/META-INF/gradle/incremental.annotation.processors"
+            packageName.set("${libs.versions.app.namespace.get()}.core.network")
         }
     }
 }

@@ -7,62 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
-}
 
-android {
-    namespace = "com.montfel.pokfinder"
-    compileSdk = ProjectConfig.compileSdkVersion
-
-    defaultConfig {
-        applicationId = "com.montfel.pokfinder"
-        minSdk = ProjectConfig.minSdkVersion
-        targetSdk = ProjectConfig.targetSdkVersion
-        versionCode = ProjectConfig.versionCode
-        versionName = ProjectConfig.versionName
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
-    buildTypes {
-        debug {
-            isMinifyEnabled = false
-            isDebuggable = true
-        }
-
-        release {
-            isMinifyEnabled = false
-            isShrinkResources = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            signingConfig = signingConfigs.getByName("debug")
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            excludes += "/META-INF/gradle/incremental.annotation.processors"
-        }
-    }
+    alias(libs.plugins.pokfinder.android.application)
 }
 
 dependencies {
