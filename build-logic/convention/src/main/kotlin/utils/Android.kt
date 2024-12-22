@@ -81,7 +81,7 @@ internal fun Project.configureAndroidLibrary(libraryExtension: LibraryExtension)
     configureKotlin()
 }
 
-internal fun Project.applyAndroidPlugins() {
+internal fun Project.applyAndroidLibraryPlugins() {
     apply(plugin = libs.plugins.android.library.get().pluginId)
     apply(plugin = libs.plugins.kotlin.android.get().pluginId)
 }
