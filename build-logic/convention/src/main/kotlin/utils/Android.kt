@@ -5,13 +5,12 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
-internal fun Project.configureAndroidApplication(
-    applicationExtension: ApplicationExtension,
-) {
+internal fun Project.configureAndroidApplication(applicationExtension: ApplicationExtension) {
     applicationExtension.apply {
         namespace = libs.versions.app.namespace.get()
 
@@ -57,9 +56,7 @@ internal fun Project.configureAndroidApplication(
     configureKotlin()
 }
 
-internal fun Project.configureAndroidLibrary(
-    libraryExtension: LibraryExtension,
-) {
+internal fun Project.configureAndroidLibrary(libraryExtension: LibraryExtension) {
     libraryExtension.apply {
         defaultConfig {
             consumerProguardFiles("consumer-rules.pro")
@@ -84,9 +81,12 @@ internal fun Project.configureAndroidLibrary(
     configureKotlin()
 }
 
-private fun Project.configureAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-) {
+internal fun Project.applyAndroidPlugins() {
+    apply(plugin = libs.plugins.android.library.get().pluginId)
+    apply(plugin = libs.plugins.kotlin.android.get().pluginId)
+}
+
+private fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
     commonExtension.apply {
         compileSdk = libs.versions.sdk.compile.get().toInt()
 
@@ -104,7 +104,7 @@ private fun Project.configureAndroid(
 }
 
 private fun Project.configureKotlin() {
-    with(extensions.getByType<KotlinAndroidProjectExtension>()) {
+    extensions.configure<KotlinAndroidProjectExtension> {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
         }
