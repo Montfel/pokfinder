@@ -1,6 +1,14 @@
 [versions]
+sdk-compile = "35"
+sdk-min = "24"
+sdk-target = "35"
+
+app-namespace = "com.montfel.pokfinder"
+app-version-code = "11"
+app-version-name = "1.2.1"
+
 activity = "1.9.3"
-androidGradlePlugin = "8.7.3"
+agp = "8.7.3"
 apollo = "3.8.5"
 coil = "2.7.0"
 compose = "2024.12.01"
@@ -29,8 +37,8 @@ splash = "1.0.1"
 truth = "1.4.4"
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
@@ -40,6 +48,12 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Convention Plugins
+pokfinder-android-application = { id = "pokfinder.android.application", version = "unspecified" }
+pokfinder-android-library = { id = "pokfinder.android.library", version = "unspecified" }
+pokfinder-android-library-compose = { id = "pokfinder.android.library.compose", version = "unspecified" }
+pokfinder-kotlin-library = { id = "pokfinder.kotlin.library", version = "unspecified" }
 
 [libraries]
 activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
@@ -55,6 +69,8 @@ espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "esp
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+gradle-plugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+gradle-plugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
