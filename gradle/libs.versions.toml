@@ -1,6 +1,6 @@
 [versions]
-sdk-compile = "35"
 sdk-min = "24"
+sdk-compile = "35"
 sdk-target = "35"
 
 app-namespace = "com.montfel.pokfinder"
