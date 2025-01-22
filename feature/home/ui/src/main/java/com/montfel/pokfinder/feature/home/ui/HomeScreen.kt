@@ -24,7 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,10 +37,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
@@ -58,44 +57,15 @@ import com.montfel.pokfinder.feature.home.ui.components.HomeHeader
 import com.montfel.pokfinder.feature.home.ui.components.PokemonCard
 import com.montfel.pokfinder.feature.home.ui.components.SearchField
 import com.montfel.pokfinder.feature.home.ui.components.TopBar
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
-
-@Composable
-fun HomeScreen(
-    deepLink: String?,
-    onNavigateToProfile: (id: Int) -> Unit,
-    onNavigateToDeepLink: (deepLink: String) -> Unit,
-    viewModel: HomeViewModel = hiltViewModel(),
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val pokemonName = viewModel.pokemonName
-    val pokemonsLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(HomeEvent.CheckDeepLink(deepLink))
-
-        viewModel.uiEvent.collect { event ->
-            when (event) {
-                is HomeUiEvent.NavigateToProfile -> onNavigateToProfile(event.pokemonId)
-                is HomeUiEvent.NavigateToDeepLink -> onNavigateToDeepLink(event.deepLink)
-            }
-        }
-    }
-
-    HomeScreen(
-        uiState = uiState,
-        pokemonName = pokemonName,
-        pokemonsLazyPagingItems = pokemonsLazyPagingItems,
-        onEvent = viewModel::onEvent
-    )
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreen(
+internal fun HomeScreen(
     uiState: HomeUiState,
     pokemonName: String,
-    pokemonsLazyPagingItems: LazyPagingItems<PokemonHome>,
+    pokemonLazyPagingItems: LazyPagingItems<PokemonHome>,
     onEvent: (HomeEvent) -> Unit,
 ) {
     var bottomSheetType: BottomSheetType by remember { mutableStateOf(BottomSheetType.Generation) }
@@ -152,10 +122,10 @@ private fun HomeScreen(
             }
 
             items(
-                count = pokemonsLazyPagingItems.itemCount,
-                key = pokemonsLazyPagingItems.itemKey(PokemonHome::id),
+                count = pokemonLazyPagingItems.itemCount,
+                key = pokemonLazyPagingItems.itemKey(PokemonHome::id),
             ) { index ->
-                val pokemon = pokemonsLazyPagingItems[index]
+                val pokemon = pokemonLazyPagingItems[index]
 
                 pokemon?.let {
                     PokemonCard(
@@ -166,9 +136,9 @@ private fun HomeScreen(
             }
 
             item {
-                when (pokemonsLazyPagingItems.loadState.refresh) {
+                when (pokemonLazyPagingItems.loadState.refresh) {
                     is LoadState.Error -> {
-                        ErrorScreen(onClick = pokemonsLazyPagingItems::refresh)
+                        ErrorScreen(onClick = pokemonLazyPagingItems::refresh)
                     }
 
                     is LoadState.Loading -> {
@@ -180,9 +150,9 @@ private fun HomeScreen(
             }
 
             item {
-                when (pokemonsLazyPagingItems.loadState.append) {
+                when (pokemonLazyPagingItems.loadState.append) {
                     is LoadState.Error -> {
-                        ErrorScreen(onClick = pokemonsLazyPagingItems::retry)
+                        ErrorScreen(onClick = pokemonLazyPagingItems::retry)
                     }
 
                     is LoadState.Loading -> {
@@ -269,4 +239,25 @@ private fun HomeScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun HomeScreenPreview() {
+    HomeScreen(
+        uiState = HomeUiState(),
+        pokemonName = "Lacey Dejesus",
+        pokemonLazyPagingItems = flowOf(
+            PagingData.from(
+                listOf(
+                    PokemonHome(
+                        id = 8484,
+                        name = "Jame Slater",
+                        types = listOf()
+                    )
+                )
+            )
+        ).collectAsLazyPagingItems(),
+        onEvent = {}
+    )
 }

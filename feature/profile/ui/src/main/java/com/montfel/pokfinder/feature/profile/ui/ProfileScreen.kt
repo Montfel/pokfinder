@@ -28,7 +28,6 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -44,11 +43,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.montfel.pokfinder.core.designsystem.components.ErrorScreen
-import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
 import com.montfel.pokfinder.core.designsystem.components.TypeCard
 import com.montfel.pokfinder.core.designsystem.model.AssetFromType
 import com.montfel.pokfinder.core.designsystem.resources.drawableDesignSystem
@@ -60,45 +55,7 @@ import com.montfel.pokfinder.feature.profile.ui.components.Stats
 import com.montfel.pokfinder.feature.profile.ui.model.AboutData
 
 @Composable
-fun ProfileScreen(
-    id: Int,
-    onNavigateToProfile: (id: Int) -> Unit,
-    onNavigateBack: () -> Unit,
-    viewModel: ProfileViewModel = hiltViewModel()
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onEvent(ProfileEvent.SavePokemonId(id))
-        viewModel.onEvent(ProfileEvent.FetchPokemonDetails)
-        viewModel.uiEvent.collect { event ->
-            when (event) {
-                is ProfileUiEvent.NavigateBack -> onNavigateBack()
-                is ProfileUiEvent.NavigateToProfile -> onNavigateToProfile(event.pokemonId)
-            }
-        }
-    }
-
-    when (uiState.stateOfUi) {
-        ProfileStateOfUi.Error -> {
-            ErrorScreen(onClick = { viewModel.onEvent(ProfileEvent.FetchPokemonDetails) })
-        }
-
-        ProfileStateOfUi.Loading -> {
-            LoadingScreen()
-        }
-
-        ProfileStateOfUi.Success -> {
-            ProfileScreen(
-                uiState = uiState,
-                onEvent = viewModel::onEvent
-            )
-        }
-    }
-}
-
-@Composable
-fun ProfileScreen(
+internal fun ProfileScreen(
     uiState: ProfileUiState,
     onEvent: (ProfileEvent) -> Unit,
 ) {
@@ -365,7 +322,7 @@ fun ProfileScreen(
 
 @Preview
 @Composable
-fun ProfileScreenPreview() {
+internal fun ProfileScreenPreview() {
     ProfileScreen(
         uiState = ProfileUiState(),
         onEvent = {}
