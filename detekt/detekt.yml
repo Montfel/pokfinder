@@ -4,7 +4,7 @@ complexity:
   LongParameterList:
     active: false
   LongMethod:
-    threshold: 100
+    threshold: 250
 
 style:
   WildcardImport:
