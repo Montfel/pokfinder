@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import utils.applyAndroidLibraryPlugins
 import utils.configureAndroidLibrary
+import utils.configureDetekt
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -12,6 +13,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureAndroidLibrary(this)
+                configureDetekt()
             }
         }
     }

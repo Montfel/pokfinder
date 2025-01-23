@@ -1,0 +1,29 @@
+complexity:
+  TooManyFunctions:
+    active: true
+  LongParameterList:
+    active: false
+  LongMethod:
+    threshold: 100
+
+style:
+  WildcardImport:
+    active: false
+  DestructuringDeclarationWithTooManyEntries:
+    maxDestructuringEntries: 10
+  UnusedPrivateMember:
+    ignoreAnnotated:
+      - 'Preview'
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+  MaxLineLength:
+    ignoreAnnotated:
+      - 'Test'
+  UnusedImports:
+    active: true
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - 'Composable'

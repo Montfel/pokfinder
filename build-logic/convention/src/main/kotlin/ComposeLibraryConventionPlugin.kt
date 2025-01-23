@@ -6,6 +6,7 @@ import utils.applyAndroidLibraryPlugins
 import utils.applyComposePlugins
 import utils.configureAndroidLibrary
 import utils.configureCompose
+import utils.configureDetekt
 
 class ComposeLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -16,6 +17,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 configureAndroidLibrary(this)
                 configureCompose(this)
+                configureDetekt()
             }
         }
     }

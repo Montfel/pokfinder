@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import utils.configureAndroidApplication
 import utils.configureCompose
+import utils.configureDetekt
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -11,6 +12,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureAndroidApplication(this)
                 configureCompose(this)
+                configureDetekt()
             }
         }
     }

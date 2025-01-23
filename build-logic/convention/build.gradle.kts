@@ -8,6 +8,7 @@ group = "com.montfel.pokfinder.buildlogic"
 
 dependencies {
     compileOnly(libs.gradle.plugin.android)
+    compileOnly(libs.gradle.plugin.detekt)
     compileOnly(libs.gradle.plugin.kotlin)
 
     @Suppress("USELESS_CAST")
