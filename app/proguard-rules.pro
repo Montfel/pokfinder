@@ -1,21 +1,27 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn com.montfel.core.database.di.DatabaseModule_ProvideDatabaseFactory
+-dontwarn com.montfel.network.di.ClientModule_ProvideApolloClientFactory
+-dontwarn com.montfel.network.di.ClientModule_ProvideRetrofitFactory
+-dontwarn com.montfel.pokfinder.core.designsystem.theme.ThemeKt
+-dontwarn com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
+-dontwarn com.montfel.pokfinder.feature.home.data.di.DataSourcesModule_ProvideHomeServiceFactory
+-dontwarn com.montfel.pokfinder.feature.home.data.repository.HomeRepositoryImpl
+-dontwarn com.montfel.pokfinder.feature.home.ui.HomeRouteKt
+-dontwarn com.montfel.pokfinder.feature.home.ui.HomeViewModel
+-dontwarn com.montfel.pokfinder.feature.home.ui.HomeViewModel_HiltModules$KeyModule
+-dontwarn com.montfel.pokfinder.feature.home.ui.HomeViewModel_HiltModules_BindsModule_Binds_LazyMapKey
+-dontwarn com.montfel.pokfinder.feature.home.ui.HomeViewModel_HiltModules_KeyModule_Provide_LazyMapKey
+-dontwarn com.montfel.pokfinder.feature.home.ui.bottomsheet.filter.FilterViewModel
+-dontwarn com.montfel.pokfinder.feature.home.ui.bottomsheet.filter.FilterViewModel_HiltModules$KeyModule
+-dontwarn com.montfel.pokfinder.feature.home.ui.bottomsheet.filter.FilterViewModel_HiltModules_BindsModule_Binds_LazyMapKey
+-dontwarn com.montfel.pokfinder.feature.home.ui.bottomsheet.filter.FilterViewModel_HiltModules_KeyModule_Provide_LazyMapKey
+-dontwarn com.montfel.pokfinder.feature.profile.data.datasource.remote.service.EvolutionService
+-dontwarn com.montfel.pokfinder.feature.profile.data.datasource.remote.service.ProfileService
+-dontwarn com.montfel.pokfinder.feature.profile.data.di.DataSourcesModule_ProvideProfileServiceFactory
+-dontwarn com.montfel.pokfinder.feature.profile.data.repository.ProfileRepositoryImpl
+-dontwarn com.montfel.pokfinder.feature.profile.ui.ProfileRouteKt
+-dontwarn com.montfel.pokfinder.feature.profile.ui.ProfileViewModel
+-dontwarn com.montfel.pokfinder.feature.profile.ui.ProfileViewModel_HiltModules$KeyModule
+-dontwarn com.montfel.pokfinder.feature.profile.ui.ProfileViewModel_HiltModules_BindsModule_Binds_LazyMapKey
+-dontwarn com.montfel.pokfinder.feature.profile.ui.ProfileViewModel_HiltModules_KeyModule_Provide_LazyMapKey
