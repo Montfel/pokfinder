@@ -1,9 +1,9 @@
-package com.montfel.core.database.di
+package com.montfel.pokfinder.core.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.montfel.core.database.PokfinderDatabase
-import com.montfel.core.database.util.Constants
+import com.montfel.pokfinder.core.database.PokfinderDatabase
+import com.montfel.pokfinder.core.database.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
 package com.montfel.pokfinder.feature.profile.data.mapper
 
-import com.montfel.core.database.model.dto.TypeDto
+import com.montfel.pokfinder.core.database.model.dto.TypeDto
 import com.montfel.pokfinder.feature.profile.data.model.dto.AbilityDto
 import com.montfel.pokfinder.feature.profile.data.model.dto.PokemonProfileDto
 import com.montfel.pokfinder.feature.profile.data.model.dto.StatDto

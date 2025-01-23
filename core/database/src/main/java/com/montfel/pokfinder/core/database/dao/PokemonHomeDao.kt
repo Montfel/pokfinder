@@ -1,11 +1,11 @@
-package com.montfel.core.database.dao
+package com.montfel.pokfinder.core.database.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.montfel.core.database.model.entity.PokemonHomeEntity
+import com.montfel.pokfinder.core.database.model.entity.PokemonHomeEntity
 
 @Dao
 interface PokemonHomeDao {

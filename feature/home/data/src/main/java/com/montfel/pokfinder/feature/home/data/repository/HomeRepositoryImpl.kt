@@ -5,9 +5,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.montfel.core.database.PokfinderDatabase
-import com.montfel.core.database.model.entity.PokemonHomeEntity
-import com.montfel.network.util.resultWrapper
+import com.montfel.pokfinder.core.database.PokfinderDatabase
+import com.montfel.pokfinder.core.database.model.entity.PokemonHomeEntity
+import com.montfel.pokfinder.core.network.util.resultWrapper
 import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.core.network.GenerationsQuery

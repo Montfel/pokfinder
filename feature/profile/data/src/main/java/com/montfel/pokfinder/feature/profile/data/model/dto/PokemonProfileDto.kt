@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.feature.profile.data.model.dto
 
 import com.google.gson.annotations.SerializedName
-import com.montfel.core.database.model.dto.TypeDto
+import com.montfel.pokfinder.core.database.model.dto.TypeDto
 
 data class PokemonProfileDto(
     @SerializedName("id")

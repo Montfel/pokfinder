@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "${libs.versions.app.namespace.get()}.feature.home.data"
+    namespace = "${libs.versions.app.namespace.get()}.feature.profile.data"
 }
 
 dependencies {

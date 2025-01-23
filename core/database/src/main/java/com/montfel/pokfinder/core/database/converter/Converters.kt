@@ -1,9 +1,9 @@
-package com.montfel.core.database.converter
+package com.montfel.pokfinder.core.database.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.montfel.core.database.model.dto.TypeDto
+import com.montfel.pokfinder.core.database.model.dto.TypeDto
 
 internal class Converters {
     @TypeConverter

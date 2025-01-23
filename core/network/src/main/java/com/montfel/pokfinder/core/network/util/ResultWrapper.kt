@@ -1,4 +1,4 @@
-package com.montfel.network.util
+package com.montfel.pokfinder.core.network.util
 
 import com.montfel.pokfinder.core.common.domain.util.ErrorType
 import com.montfel.pokfinder.core.common.domain.util.ResultType

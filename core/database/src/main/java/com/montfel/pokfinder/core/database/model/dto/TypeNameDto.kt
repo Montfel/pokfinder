@@ -1,4 +1,4 @@
-package com.montfel.core.database.model.dto
+package com.montfel.pokfinder.core.database.model.dto
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable

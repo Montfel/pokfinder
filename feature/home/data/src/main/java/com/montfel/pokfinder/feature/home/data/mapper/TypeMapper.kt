@@ -1,7 +1,7 @@
 package com.montfel.pokfinder.feature.home.data.mapper
 
-import com.montfel.core.database.model.dto.TypeDto
-import com.montfel.core.database.model.dto.TypeNameDto
+import com.montfel.pokfinder.core.database.model.dto.TypeDto
+import com.montfel.pokfinder.core.database.model.dto.TypeNameDto
 import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.network.FilterPokemonsByGenerationQuery
 import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery

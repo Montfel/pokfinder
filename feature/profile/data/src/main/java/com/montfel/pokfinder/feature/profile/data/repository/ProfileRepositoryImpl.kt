@@ -1,6 +1,6 @@
 package com.montfel.pokfinder.feature.profile.data.repository
 
-import com.montfel.network.util.resultWrapper
+import com.montfel.pokfinder.core.network.util.resultWrapper
 import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.profile.data.datasource.remote.service.EvolutionService
 import com.montfel.pokfinder.feature.profile.data.datasource.remote.service.ProfileService

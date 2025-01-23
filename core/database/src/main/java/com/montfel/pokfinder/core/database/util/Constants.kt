@@ -1,4 +1,4 @@
-package com.montfel.core.database.util
+package com.montfel.pokfinder.core.database.util
 
 object Constants {
     const val POKFINDER_DATABASE = "pokfinder_database"

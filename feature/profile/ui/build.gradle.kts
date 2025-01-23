@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "${libs.versions.app.namespace.get()}.feature.home.ui"
+    namespace = "${libs.versions.app.namespace.get()}.feature.profile.ui"
 }
 
 dependencies {

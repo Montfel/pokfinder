@@ -1,4 +1,4 @@
-package com.montfel.network.di
+package com.montfel.pokfinder.core.network.di
 
 import com.apollographql.apollo3.ApolloClient
 import dagger.Module

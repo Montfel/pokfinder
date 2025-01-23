@@ -1,8 +1,8 @@
-package com.montfel.core.database.model.entity
+package com.montfel.pokfinder.core.database.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.montfel.core.database.util.Constants
+import com.montfel.pokfinder.core.database.util.Constants
 import kotlinx.serialization.Serializable
 
 @Serializable

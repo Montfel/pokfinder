@@ -5,9 +5,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.montfel.core.database.PokfinderDatabase
-import com.montfel.core.database.model.entity.PokemonHomeEntity
-import com.montfel.core.database.model.entity.PokemonHomeRemoteKeysEntity
+import com.montfel.pokfinder.core.database.PokfinderDatabase
+import com.montfel.pokfinder.core.database.model.entity.PokemonHomeEntity
+import com.montfel.pokfinder.core.database.model.entity.PokemonHomeRemoteKeysEntity
 import com.montfel.pokfinder.core.network.PokemonsQuery
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
