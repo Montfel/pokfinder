@@ -58,20 +58,12 @@ internal fun Project.configureAndroidApplication(applicationExtension: Applicati
 
 internal fun Project.configureAndroidLibrary(libraryExtension: LibraryExtension) {
     libraryExtension.apply {
-        defaultConfig {
-            consumerProguardFiles("consumer-rules.pro")
-        }
-
         buildTypes {
             debug {
                 isMinifyEnabled = false
             }
             release {
                 isMinifyEnabled = true
-                proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-                )
             }
         }
 
