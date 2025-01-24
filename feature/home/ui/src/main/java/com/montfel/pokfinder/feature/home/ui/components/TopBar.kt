@@ -18,7 +18,7 @@ import com.montfel.pokfinder.feature.home.ui.bottomsheet.BottomSheetType
 fun TopBar(
     hasGenerations: Boolean,
     hasTypes: Boolean,
-    onClick: (BottomSheetType) -> Unit
+    onClick: (BottomSheetType) -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.End,
@@ -35,14 +35,12 @@ fun TopBar(
                 }
             }
 
-            if (true) { //fixme
-                IconButton(onClick = { onClick(BottomSheetType.Sort) }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_sort),
-                        contentDescription = stringResource(id = R.string.sort_filter),
-                        tint = PokfinderTheme.palette.topBarIcon
-                    )
-                }
+            IconButton(onClick = { onClick(BottomSheetType.Sort) }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_sort),
+                    contentDescription = stringResource(id = R.string.sort_filter),
+                    tint = PokfinderTheme.palette.topBarIcon
+                )
             }
 
             if (hasTypes) {
