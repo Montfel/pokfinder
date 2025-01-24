@@ -31,8 +31,8 @@ internal fun Project.configureAndroidApplication(applicationExtension: Applicati
                 isDebuggable = true
             }
             release {
-                isMinifyEnabled = false
-                isShrinkResources = false
+                isMinifyEnabled = true
+                isShrinkResources = true
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
@@ -63,7 +63,7 @@ internal fun Project.configureAndroidLibrary(libraryExtension: LibraryExtension)
                 isMinifyEnabled = false
             }
             release {
-                isMinifyEnabled = false
+                isMinifyEnabled = false //fixme
             }
         }
 
