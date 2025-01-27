@@ -65,6 +65,7 @@ fun Stats(
                     it.baseStat?.toFloat()
                         ?.div((it.min?.plus(it.max ?: 0))?.div(2) ?: 0) ?: 0f
                 },
+                drawStopIndicator = {},
                 modifier = Modifier
                     .width(150.dp)
                     .clip(RoundedCornerShape(2.dp)),
