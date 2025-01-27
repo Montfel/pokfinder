@@ -29,7 +29,7 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -53,6 +53,7 @@ import com.montfel.pokfinder.feature.profile.ui.components.About
 import com.montfel.pokfinder.feature.profile.ui.components.Evolution
 import com.montfel.pokfinder.feature.profile.ui.components.Stats
 import com.montfel.pokfinder.feature.profile.ui.model.AboutData
+import com.montfel.pokfinder.feature.profile.ui.model.ProfileTab
 
 @Composable
 internal fun ProfileScreen(
@@ -61,11 +62,11 @@ internal fun ProfileScreen(
 ) {
     val deviceLanguage = Locale.current.language
     val assetFromType = AssetFromType.getAsset(uiState.profile?.types?.firstOrNull()?.name)
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
-    val titles = mutableListOf(stringDesignSystem.about, stringDesignSystem.stats)
-
-    if ((uiState.evolutionChain?.size ?: 0) > 1) {
-        titles.add(stringDesignSystem.evolution)
+    var selectedTab by rememberSaveable { mutableStateOf(ProfileTab.About) }
+    val tabs = if ((uiState.evolutionChain?.size ?: 0) > 1) {
+        ProfileTab.entries
+    } else {
+        ProfileTab.entries.dropLast(1)
     }
 
     val species = uiState.species?.genera
@@ -228,16 +229,16 @@ internal fun ProfileScreen(
             Spacer(modifier = Modifier.height(44.dp))
 
             TabRow(
-                selectedTabIndex = selectedTabIndex,
+                selectedTabIndex = selectedTab.ordinal,
                 containerColor = Color.Transparent,
                 divider = {},
                 indicator = { tabPositions ->
-                    val rightOffset = (tabPositions[selectedTabIndex].width - 100.dp).div(2.dp).dp
+                    val rightOffset = (tabPositions[selectedTab.ordinal].width - 100.dp).div(2.dp).dp
 
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                            .tabIndicatorOffset(tabPositions[selectedTab.ordinal]),
                     ) {
                         Image(
                             painter = painterResource(id = drawableDesignSystem.ic_pokeball),
@@ -251,15 +252,15 @@ internal fun ProfileScreen(
                     }
                 },
             ) {
-                titles.forEachIndexed { index, title ->
+                tabs.forEach { tab ->
                     Tab(
-                        selected = selectedTabIndex == index,
-                        onClick = { selectedTabIndex = index },
+                        selected = selectedTab == tab,
+                        onClick = { selectedTab = ProfileTab.entries[tab.ordinal] },
                         modifier = Modifier.height(50.dp)
                     ) {
                         Text(
-                            text = stringResource(id = title),
-                            style = if (selectedTabIndex == index) {
+                            text = stringResource(id = tab.title),
+                            style = if (selectedTab == tab) {
                                 PokfinderTheme.typography.filterTitle
                             } else {
                                 PokfinderTheme.typography.description
@@ -277,8 +278,8 @@ internal fun ProfileScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {
-                when (selectedTabIndex) {
-                    0 -> {
+                when (selectedTab) {
+                    ProfileTab.About -> {
                         About(
                             flavorText = uiState.species?.flavorTexts
                                 ?.filter { lang -> lang.language == deviceLanguage }
@@ -297,15 +298,13 @@ internal fun ProfileScreen(
                             immunity = uiState.immunity,
                         )
                     }
-
-                    1 -> {
+                    ProfileTab.Stats -> {
                         Stats(
                             stats = uiState.profile?.stats ?: emptyList(),
                             typeColor = assetFromType.typeColor,
                         )
                     }
-
-                    2 -> {
+                    ProfileTab.Evolution -> {
                         uiState.evolutionChain?.let { chain ->
                             Evolution(
                                 typeColor = assetFromType.typeColor,
