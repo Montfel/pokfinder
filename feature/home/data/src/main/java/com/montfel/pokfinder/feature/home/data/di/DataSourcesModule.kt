@@ -1,6 +1,6 @@
 package com.montfel.pokfinder.feature.home.data.di
 
-import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo.ApolloClient
 import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
 import dagger.Module
 import dagger.Provides

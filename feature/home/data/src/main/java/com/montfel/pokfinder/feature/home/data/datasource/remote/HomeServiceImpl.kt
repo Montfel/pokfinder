@@ -1,8 +1,8 @@
 package com.montfel.pokfinder.feature.home.data.datasource.remote
 
-import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.api.ApolloResponse
-import com.apollographql.apollo3.api.Optional
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.ApolloResponse
+import com.apollographql.apollo.api.Optional
 import com.montfel.pokfinder.core.network.FilterPokemonsByGenerationQuery
 import com.montfel.pokfinder.core.network.FilterPokemonsByTypesQuery
 import com.montfel.pokfinder.core.network.GenerationsQuery
@@ -11,7 +11,7 @@ import com.montfel.pokfinder.core.network.SearchPokemonsQuery
 import com.montfel.pokfinder.core.network.SortPokemonsByIdQuery
 import com.montfel.pokfinder.core.network.SortPokemonsByNameQuery
 import com.montfel.pokfinder.core.network.TypesQuery
-import com.montfel.pokfinder.core.network.type.order_by
+import com.montfel.pokfinder.core.network.type.Order_by
 import com.montfel.pokfinder.feature.home.domain.model.OrderType
 import javax.inject.Inject
 
@@ -85,8 +85,8 @@ internal class HomeServiceImpl @Inject constructor(
                 offset = offset,
                 order = Optional.present(
                     when (orderType) {
-                        OrderType.Ascendant -> order_by.asc
-                        OrderType.Descendant -> order_by.desc
+                        OrderType.Ascendant -> Order_by.asc
+                        OrderType.Descendant -> Order_by.desc
                     }
                 )
             )
@@ -104,8 +104,8 @@ internal class HomeServiceImpl @Inject constructor(
                 offset = offset,
                 order = Optional.present(
                     when (orderType) {
-                        OrderType.Ascendant -> order_by.asc
-                        OrderType.Descendant -> order_by.desc
+                        OrderType.Ascendant -> Order_by.asc
+                        OrderType.Descendant -> Order_by.desc
                     }
                 )
             )

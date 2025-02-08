@@ -9,7 +9,7 @@ app-version-name = "1.2.5"
 
 activity = "1.10.0"
 agp = "8.7.3"
-apollo = "3.8.5"
+apollo = "4.1.1"
 coil = "2.7.0"
 compose = "2025.01.01"
 core = "1.15.0"
@@ -37,7 +37,7 @@ splash = "1.0.1"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
+apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
@@ -57,7 +57,7 @@ pokfinder-kotlin-library = { id = "pokfinder.kotlin.library", version = "unspeci
 
 [libraries]
 activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
-apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo" }
+apollo = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
