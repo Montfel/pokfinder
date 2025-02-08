@@ -15,4 +15,5 @@ internal fun Project.configureKotlinLibrary() {
 
 internal fun Project.applyKotlinPlugins() {
     apply(plugin = libs.plugins.kotlin.jvm.get().pluginId)
+    apply(plugin = libs.plugins.dependency.analysis.get().pluginId)
 }

@@ -13,6 +13,7 @@ apollo = "3.8.5"
 coil = "2.7.0"
 compose = "2025.01.01"
 core = "1.15.0"
+dependencyAnalysis = "2.8.0"
 detekt = "1.23.6"
 espresso = "3.6.1"
 firebase = "33.9.0"
@@ -42,6 +43,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }

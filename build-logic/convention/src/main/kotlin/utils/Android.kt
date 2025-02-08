@@ -76,6 +76,11 @@ internal fun Project.configureAndroidLibrary(libraryExtension: LibraryExtension)
 internal fun Project.applyAndroidLibraryPlugins() {
     apply(plugin = libs.plugins.android.library.get().pluginId)
     apply(plugin = libs.plugins.kotlin.android.get().pluginId)
+    apply(plugin = libs.plugins.dependency.analysis.get().pluginId)
+}
+
+internal fun Project.applyAndroidApplicationPlugins() {
+    apply(plugin = libs.plugins.dependency.analysis.get().pluginId)
 }
 
 private fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
