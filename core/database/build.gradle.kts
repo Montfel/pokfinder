@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
     implementation(libs.kotlin.serialization.core)
+    implementation(libs.kotlin.serialization.json)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
