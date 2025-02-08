@@ -11,7 +11,8 @@ import com.montfel.pokfinder.core.database.model.entity.PokemonHomeRemoteKeysEnt
 
 @Database(
     entities = [PokemonHomeEntity::class, PokemonHomeRemoteKeysEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class PokfinderDatabase : RoomDatabase() {
