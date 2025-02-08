@@ -7,13 +7,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.core)
-    implementation(libs.coil)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.splash)
-
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
-    androidTestImplementation(libs.espresso)
 }

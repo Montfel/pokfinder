@@ -10,17 +10,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.core)
     implementation(libs.gson)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-    implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlin.serialization.core)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
     implementation(libs.room.runtime)
-
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
-    androidTestImplementation(libs.espresso)
 }

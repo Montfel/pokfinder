@@ -16,21 +16,11 @@ dependencies {
     implementation(projects.feature.home.domain)
 
     implementation(libs.apollo)
-    implementation(libs.core)
-    implementation(libs.hilt.android)
+    implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-    implementation(platform(libs.okhttp.bom))
-    implementation(libs.bundles.okhttp)
     implementation(libs.kotlin.coroutines)
-    implementation(libs.kotlin.serialization.json)
-    implementation(libs.paging.runtime)
-    implementation(libs.bundles.retrofit)
+    implementation(libs.paging.common)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
-    implementation(libs.room.paging)
     implementation(libs.room.runtime)
-
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
-    androidTestImplementation(libs.espresso)
 }

@@ -20,10 +20,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
-    implementation(libs.bundles.lifecycle)
-    implementation(libs.bundles.paging)
-
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
-    androidTestImplementation(libs.espresso)
+    implementation(libs.lifecycle.compose)
+    implementation(libs.paging.compose)
+    implementation(libs.paging.common)
 }

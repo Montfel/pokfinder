@@ -12,7 +12,6 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.core.common.domain)
     implementation(projects.core.database)
     implementation(projects.core.designsystem)
     implementation(projects.core.network)
@@ -24,21 +23,14 @@ dependencies {
 
     implementation(libs.activity)
     implementation(libs.core)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.bundles.compose)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
-    implementation(libs.hilt.navigation)
-    implementation(libs.bundles.lifecycle)
-    implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlin.serialization.core)
     implementation(libs.navigation)
     implementation(libs.bundles.review)
     implementation(libs.splash)
-
-    testImplementation(libs.truth)
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
 }

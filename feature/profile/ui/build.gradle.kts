@@ -13,17 +13,10 @@ dependencies {
 
     implementation(projects.feature.profile.domain)
 
-    implementation(libs.core)
     implementation(libs.coil)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.compiler)
-    implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
-    implementation(libs.bundles.lifecycle)
-    implementation(libs.bundles.paging)
-
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
-    androidTestImplementation(libs.espresso)
+    implementation(libs.lifecycle.compose)
 }

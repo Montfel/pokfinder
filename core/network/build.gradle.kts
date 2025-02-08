@@ -20,16 +20,10 @@ dependencies {
     implementation(projects.core.common.domain)
 
     implementation(libs.apollo)
-    implementation(libs.core)
-    implementation(libs.hilt.android)
+    implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.bundles.okhttp)
-    implementation(libs.kotlin.coroutines)
-    implementation(libs.kotlin.serialization.json)
-    implementation(libs.bundles.retrofit)
-
-    testImplementation(libs.junit.test)
-    androidTestImplementation(libs.junit.test.android)
-    androidTestImplementation(libs.espresso)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson.converter)
 }

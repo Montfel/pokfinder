@@ -15,18 +15,15 @@ compose = "2025.01.01"
 core = "1.15.0"
 dependencyAnalysis = "2.8.0"
 detekt = "1.23.6"
-espresso = "3.6.1"
 firebase = "33.9.0"
 firebaseCrashlyticsGradle = "3.0.3"
 googleServices = "4.4.2"
 gson = "2.11.0"
 hilt = "2.53.1"
 hiltNavigation = "1.2.0"
-junit = "4.13.2"
-junitAndroid = "1.2.1"
 kotlin = "2.1.0"
 kotlinCoroutines = "1.10.1"
-kotlinSerialization = "1.7.3"
+kotlinSerialization = "1.8.0"
 ksp = "2.1.0-1.0.29"
 lifecycle = "2.8.7"
 navigation = "2.8.6"
@@ -36,7 +33,6 @@ retrofit = "2.11.0"
 review = "2.0.2"
 room = "2.6.1"
 splash = "1.0.1"
-truth = "1.4.4"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -69,7 +65,6 @@ compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 core = { module = "androidx.core:core-ktx", version.ref = "core" }
-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
@@ -81,19 +76,15 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "hilt" }
 hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigation" }
-junit-test = { module = "junit:junit", version.ref = "junit" }
-junit-test-android = { module = "androidx.test.ext:junit", version.ref = "junitAndroid" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinSerialization" }
 lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
-lifecycle-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
 okhttp = { module = "com.squareup.okhttp3:okhttp" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
 paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 review = { module = "com.google.android.play:review", version.ref = "review" }
@@ -103,12 +94,8 @@ room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 splash = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
-truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 [bundles]
 compose = ["compose-material3", "compose-foundation", "compose-ui-tooling", "compose-ui-tooling-preview"]
-lifecycle = ["lifecycle-ktx", "lifecycle-compose"]
 okhttp = ["okhttp", "okhttp-logging-interceptor"]
-paging = ["paging-compose", "paging-runtime"]
-retrofit = ["retrofit", "gson", "retrofit-gson-converter"]
 review = ["review", "review-ktx"]
