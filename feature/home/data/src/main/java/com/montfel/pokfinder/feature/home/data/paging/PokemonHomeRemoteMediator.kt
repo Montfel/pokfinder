@@ -75,7 +75,7 @@ internal class PokemonHomeRemoteMediator(
             }
             MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         }.getOrElse { exception ->
-            return MediatorResult.Error(exception)
+            MediatorResult.Error(exception)
         }
     }
 
