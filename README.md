@@ -125,6 +125,7 @@ The following tools were used in the construction of the project:
 - **[Room](https://developer.android.com/training/data-storage/room)**
 - **[Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)**
 - **[Compose Navigation](https://developer.android.com/develop/ui/compose/navigation)**
+- Gradle: **[Kotlin-DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)** with **[Version Catalog](https://docs.gradle.org/current/userguide/platforms.html)** and **[Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)**
 
 #### Util
 
