@@ -8,25 +8,26 @@ app-version-code = "15"
 app-version-name = "1.2.5"
 
 activity = "1.10.1"
-agp = "8.8.2"
+agp = "8.9.0"
 apollo = "4.1.1"
 coil = "2.7.0"
-compose = "2025.02.00"
+compose = "2025.03.00"
 core = "1.15.0"
 dependencyAnalysis = "2.8.0"
-detekt = "1.23.6"
+detekt = "1.23.8"
 firebase = "33.10.0"
 firebaseCrashlyticsGradle = "3.0.3"
 googleServices = "4.4.2"
 gson = "2.11.0"
-hilt = "2.53.1"
+hilt = "2.55"
 hiltNavigation = "1.2.0"
-kotlin = "2.1.0"
+kotlin = "2.1.10"
 kotlinCoroutines = "1.10.1"
 kotlinSerialization = "1.8.0"
-ksp = "2.1.0-1.0.29"
+kover = "0.7.6"
+ksp = "2.1.10-1.0.31"
 lifecycle = "2.8.7"
-navigation = "2.8.8"
+navigation = "2.8.9"
 okhttp = "4.12.0"
 paging = "3.3.6"
 retrofit = "2.11.0"
@@ -47,6 +48,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Convention Plugins
@@ -71,6 +73,7 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 gradle-plugin-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 gradle-plugin-detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 gradle-plugin-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-plugin-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }

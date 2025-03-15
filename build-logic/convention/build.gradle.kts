@@ -10,6 +10,7 @@ dependencies {
     compileOnly(libs.gradle.plugin.android)
     compileOnly(libs.gradle.plugin.detekt)
     compileOnly(libs.gradle.plugin.kotlin)
+    compileOnly(libs.gradle.plugin.kover)
 
     @Suppress("USELESS_CAST")
     implementation(

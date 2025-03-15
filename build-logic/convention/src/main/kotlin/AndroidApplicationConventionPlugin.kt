@@ -6,6 +6,7 @@ import utils.applyAndroidApplicationPlugins
 import utils.configureAndroidApplication
 import utils.configureCompose
 import utils.configureDetekt
+import utils.configureKover
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -16,6 +17,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 configureAndroidApplication(this)
                 configureCompose(this)
                 configureDetekt()
+                configureKover()
             }
         }
     }
