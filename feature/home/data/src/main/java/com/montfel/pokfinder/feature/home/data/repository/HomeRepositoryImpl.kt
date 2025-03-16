@@ -13,7 +13,7 @@ import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.core.network.GenerationsQuery
 import com.montfel.pokfinder.core.network.TypesQuery
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
-import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
 import com.montfel.pokfinder.feature.home.data.mapper.toGeneration
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHome
 import com.montfel.pokfinder.feature.home.data.mapper.toType
@@ -33,7 +33,7 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 internal class HomeRepositoryImpl @Inject constructor(
-    private val service: HomeServiceImpl,
+    private val service: HomeService,
     private val pokfinderDatabase: PokfinderDatabase,
 ) : HomeRepository {
 

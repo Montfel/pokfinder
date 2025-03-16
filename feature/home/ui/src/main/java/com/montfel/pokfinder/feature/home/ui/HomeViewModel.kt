@@ -12,9 +12,9 @@ import com.montfel.pokfinder.core.common.domain.model.Type
 import com.montfel.pokfinder.core.common.domain.util.ResultType
 import com.montfel.pokfinder.feature.home.domain.model.Generation
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
-import com.montfel.pokfinder.feature.home.ui.model.SortOptions
 import com.montfel.pokfinder.feature.home.domain.repository.HomeRepository
 import com.montfel.pokfinder.feature.home.domain.usecase.GetPokemonsUseCase
+import com.montfel.pokfinder.feature.home.ui.model.SortOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
@@ -67,12 +67,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fetchPokemons() {
-        viewModelScope.launch {
-            pokemons = getPokemonsUseCase().cachedIn(viewModelScope)
+        pokemons = getPokemonsUseCase().cachedIn(viewModelScope)
 
-            _uiState.update {
-                it.copy(pokemonsPagingDataFlow = pokemons)
-            }
+        _uiState.update {
+            it.copy(pokemonsPagingDataFlow = pokemons)
         }
     }
 

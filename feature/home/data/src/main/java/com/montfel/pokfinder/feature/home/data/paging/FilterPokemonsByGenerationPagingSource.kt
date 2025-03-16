@@ -4,12 +4,12 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.montfel.pokfinder.core.network.FilterPokemonsByGenerationQuery
 import com.montfel.pokfinder.feature.home.data.Constants.ITEMS_PER_PAGE
-import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeServiceImpl
+import com.montfel.pokfinder.feature.home.data.datasource.remote.HomeService
 import com.montfel.pokfinder.feature.home.data.mapper.toPokemonHome
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 
 internal class FilterPokemonsByGenerationPagingSource(
-    private val service: HomeServiceImpl,
+    private val service: HomeService,
     private val ids: List<Int>,
 ) : PagingSource<Int, PokemonHome>() {
     override fun getRefreshKey(state: PagingState<Int, PokemonHome>): Int? {
