@@ -80,6 +80,8 @@ internal fun Project.applyAndroidLibraryPlugins() {
 }
 
 internal fun Project.applyAndroidApplicationPlugins() {
+    apply(plugin = libs.plugins.android.application.get().pluginId)
+    apply(plugin = libs.plugins.kotlin.android.get().pluginId)
     apply(plugin = libs.plugins.dependency.analysis.get().pluginId)
 }
 
