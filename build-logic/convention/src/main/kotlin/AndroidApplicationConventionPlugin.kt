@@ -8,9 +8,11 @@ import utils.configureAndroidApplication
 import utils.configureCompose
 import utils.configureDetekt
 import utils.configureKover
+import utils.configureKoverForRootProject
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        with(target.rootProject) { configureKoverForRootProject() }
         with(target) {
             applyAndroidApplicationPlugins()
             applyComposePlugins()
