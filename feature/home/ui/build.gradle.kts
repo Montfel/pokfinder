@@ -14,7 +14,7 @@ dependencies {
     implementation(projects.feature.home.domain)
 
     implementation(libs.core)
-    implementation(libs.coil)
+    implementation(libs.bundles.coil)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.compiler)

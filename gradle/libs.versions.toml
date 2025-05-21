@@ -8,14 +8,14 @@ app-version-code = "15"
 app-version-name = "1.2.5"
 
 activity = "1.10.1"
-agp = "8.9.2"
+agp = "8.9.3"
 apollo = "4.2.0"
-coil = "2.7.0"
-compose = "2025.05.00"
+coil = "3.1.0"
+compose = "2025.05.01"
 core = "1.16.0"
 dependencyAnalysis = "2.16.0"
 detekt = "1.23.8"
-firebase = "33.13.0"
+firebase = "33.14.0"
 firebaseCrashlyticsGradle = "3.0.3"
 googleServices = "4.4.2"
 gson = "2.13.0"
@@ -60,7 +60,8 @@ pokfinder-kotlin-library = { id = "pokfinder.kotlin.library", version = "unspeci
 [libraries]
 activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 apollo = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo" }
-coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
@@ -101,6 +102,7 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 splash = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
 
 [bundles]
+coil = ["coil-compose", "coil-network"]
 compose = ["compose-material3", "compose-foundation", "compose-ui-tooling", "compose-ui-tooling-preview"]
 okhttp = ["okhttp", "okhttp-logging-interceptor"]
 review = ["review", "review-ktx"]
