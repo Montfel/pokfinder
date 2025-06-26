@@ -37,7 +37,7 @@ application ideas and one of them is Pokédex.
 ## ⚙ Features
 
 - [x] Search for a Pokémon
-- [x] List all Pokémons
+- [x] List all Pokémon
 - [ ] Filter by
   - [x] Generation
   - [x] Type
@@ -116,15 +116,17 @@ The following tools were used in the construction of the project:
 
 #### Libraries
 
-- **[Hilt](https://dagger.dev/hilt/)**
 - **[Apollo](https://www.apollographql.com/)**
-- **[Retrofit](https://square.github.io/retrofit/)**
-- **[Jetpack Compose](https://developer.android.com/jetpack/compose)**
 - **[Coil](https://coil-kt.github.io/coil/)**
+- **[Detekt](https://detekt.dev/)**
 - **[Firebase](https://firebase.google.com/)**
-- **[Room](https://developer.android.com/training/data-storage/room)**
+- **[Hilt](https://dagger.dev/hilt/)**
+- **[Jetpack Compose](https://developer.android.com/jetpack/compose)**
+- **[Material3](https://m3.material.io/)**
+- **[Navigation3](https://developer.android.com/guide/navigation/navigation-3)**
 - **[Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)**
-- **[Compose Navigation](https://developer.android.com/develop/ui/compose/navigation)**
+- **[Retrofit](https://square.github.io/retrofit/)**
+- **[Room](https://developer.android.com/training/data-storage/room)**
 - Gradle: **[Kotlin-DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)** with **[Version Catalog](https://docs.gradle.org/current/userguide/platforms.html)** and **[Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)**
 
 #### Util

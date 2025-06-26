@@ -27,7 +27,8 @@ dependencies {
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
     implementation(libs.kotlin.serialization.core)
-    implementation(libs.navigation)
+    implementation(libs.navigation.runtime)
+    implementation(libs.navigation.ui)
     implementation(libs.bundles.review)
     implementation(libs.splash)
 }
