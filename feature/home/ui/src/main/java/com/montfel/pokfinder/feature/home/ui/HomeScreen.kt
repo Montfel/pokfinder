@@ -14,15 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -50,6 +47,7 @@ import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
 import com.montfel.pokfinder.feature.home.domain.model.PokemonHome
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.BottomSheetType
+import com.montfel.pokfinder.feature.home.ui.bottomsheet.components.BottomSheet
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.filter.FilterBottomSheet
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.generation.GenerationBottomSheet
 import com.montfel.pokfinder.feature.home.ui.bottomsheet.sort.SortBottomSheet
@@ -70,9 +68,6 @@ internal fun HomeScreen(
 ) {
     var bottomSheetType: BottomSheetType by remember { mutableStateOf(BottomSheetType.Generation) }
     val scope = rememberCoroutineScope()
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = true
-    )
     var isSheetOpen by rememberSaveable { mutableStateOf(false) }
     val context = LocalContext.current
     val displayMetrics = context.resources.displayMetrics
@@ -197,14 +192,7 @@ internal fun HomeScreen(
     }
 
     if (isSheetOpen) {
-        ModalBottomSheet(
-            containerColor = PokfinderTheme.palette.surface,
-            sheetState = sheetState,
-            onDismissRequest = {
-                isSheetOpen = false
-            },
-            shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
-        ) {
+        BottomSheet(onDismissRequest = { isSheetOpen = false }) {
             when (bottomSheetType) {
                 BottomSheetType.Generation -> {
                     GenerationBottomSheet(
