@@ -48,7 +48,7 @@ import com.montfel.pokfinder.core.designsystem.theme.WeightNormal
 
 sealed class AssetFromType(
     val typeColor: Color,
-    @DrawableRes val icon: Int,
+    @param:DrawableRes val icon: Int,
     val backgroundColor: Color = Color.White
 ) {
     data object Bug : AssetFromType(
