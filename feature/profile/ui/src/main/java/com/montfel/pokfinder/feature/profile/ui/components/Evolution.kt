@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -60,7 +58,7 @@ fun Evolution(
 
                 Column(horizontalAlignment = CenterHorizontally) {
                     Image(
-                        imageVector = Icons.AutoMirrored.Default.ArrowForward,
+                        painter = painterResource(R.drawable.ic_arrow_forward),
                         contentDescription = stringResource(id = R.string.evolution_arrow),
                         colorFilter = ColorFilter.tint(PokfinderTheme.palette.primaryVariantText),
                         alpha = 0.3f,

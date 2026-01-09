@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -46,7 +44,7 @@ fun SearchField(
             if (text.isNotEmpty()) {
                 IconButton(onClick = { onType("") }) {
                     Image(
-                        imageVector = Icons.Default.Close,
+                        painter = painterResource(R.drawable.ic_close),
                         contentDescription = stringResource(id = R.string.clear_text_field),
                         colorFilter = ColorFilter.tint(PokfinderTheme.palette.textFieldIcon),
                         modifier = Modifier.size(20.dp)

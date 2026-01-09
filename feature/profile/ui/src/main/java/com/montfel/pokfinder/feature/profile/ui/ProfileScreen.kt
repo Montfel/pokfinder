@@ -18,8 +18,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -44,6 +42,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.components.TypeCard
 import com.montfel.pokfinder.core.designsystem.model.AssetFromType
 import com.montfel.pokfinder.core.designsystem.resources.drawableDesignSystem
@@ -154,7 +153,7 @@ internal fun ProfileScreen(
             ) {
                 IconButton(onClick = { onEvent(ProfileEvent.NavigateBack) }) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                        painter = painterResource(R.drawable.ic_arrow_back),
                         contentDescription = stringResource(id = stringDesignSystem.back),
                         tint = PokfinderTheme.palette.primaryIcon
                     )
@@ -233,7 +232,8 @@ internal fun ProfileScreen(
                 containerColor = Color.Transparent,
                 divider = {},
                 indicator = { tabPositions ->
-                    val rightOffset = (tabPositions[selectedTab.ordinal].width - 100.dp).div(2.dp).dp
+                    val rightOffset =
+                        (tabPositions[selectedTab.ordinal].width - 100.dp).div(2.dp).dp
 
                     Box(
                         modifier = Modifier
@@ -298,12 +298,14 @@ internal fun ProfileScreen(
                             immunity = uiState.immunity,
                         )
                     }
+
                     ProfileTab.Stats -> {
                         Stats(
                             stats = uiState.profile?.stats ?: emptyList(),
                             typeColor = assetFromType.typeColor,
                         )
                     }
+
                     ProfileTab.Evolution -> {
                         uiState.evolutionChain?.let { chain ->
                             Evolution(

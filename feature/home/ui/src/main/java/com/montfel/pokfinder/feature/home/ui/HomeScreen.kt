@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -184,7 +182,7 @@ internal fun HomeScreen(
                     .padding(16.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
+                    painter = painterResource(R.drawable.ic_keyboard_arrow_up),
                     contentDescription = stringResource(id = R.string.button_scroll_top_page)
                 )
             }
