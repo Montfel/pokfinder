@@ -20,10 +20,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -227,18 +226,15 @@ internal fun ProfileScreen(
 
             Spacer(modifier = Modifier.height(44.dp))
 
-            TabRow(
+            PrimaryTabRow(
                 selectedTabIndex = selectedTab.ordinal,
                 containerColor = Color.Transparent,
                 divider = {},
-                indicator = { tabPositions ->
-                    val rightOffset =
-                        (tabPositions[selectedTab.ordinal].width - 100.dp).div(2.dp).dp
-
+                indicator = {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .tabIndicatorOffset(tabPositions[selectedTab.ordinal]),
+                            .tabIndicatorOffset(selectedTabIndex = selectedTab.ordinal),
                     ) {
                         Image(
                             painter = painterResource(id = drawableDesignSystem.ic_pokeball),
@@ -246,11 +242,12 @@ internal fun ProfileScreen(
                             colorFilter = ColorFilter.tint(Color.White),
                             alpha = 0.2f,
                             modifier = Modifier
+                                .align(Alignment.Center)
                                 .requiredSize(100.dp)
-                                .offset(y = 25.dp, x = rightOffset)
+                                .offset(y = 25.dp)
                         )
                     }
-                },
+                }
             ) {
                 tabs.forEach { tab ->
                     Tab(
