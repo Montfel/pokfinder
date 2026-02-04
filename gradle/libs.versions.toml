@@ -4,8 +4,8 @@ sdk-compile = "36"
 sdk-target = "36"
 
 app-namespace = "com.montfel.pokfinder"
-app-version-code = "15"
-app-version-name = "1.2.5"
+app-version-code = "16"
+app-version-name = "1.2.6"
 
 activity = "1.12.3"
 agp = "8.13.2"
