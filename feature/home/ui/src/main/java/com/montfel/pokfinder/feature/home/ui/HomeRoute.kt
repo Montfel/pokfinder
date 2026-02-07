@@ -3,7 +3,7 @@ package com.montfel.pokfinder.feature.home.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 
@@ -16,7 +16,7 @@ fun HomeRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pokemonName = viewModel.pokemonName
-    val pokemonsLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
+    val pokemonLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
 
     LaunchedEffect(key1 = Unit) {
         viewModel.onEvent(HomeEvent.CheckDeepLink(deepLink))
@@ -32,7 +32,7 @@ fun HomeRoute(
     HomeScreen(
         uiState = uiState,
         pokemonName = pokemonName,
-        pokemonLazyPagingItems = pokemonsLazyPagingItems,
+        pokemonLazyPagingItems = pokemonLazyPagingItems,
         onEvent = viewModel::onEvent
     )
 }

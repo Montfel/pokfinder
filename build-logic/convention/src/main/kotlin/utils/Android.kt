@@ -1,7 +1,6 @@
 package utils
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
@@ -42,6 +41,7 @@ internal fun Project.configureAndroidApplication(applicationExtension: Applicati
         }
         buildFeatures {
             buildConfig = true
+            compose = true
         }
 
         packaging {
@@ -75,18 +75,33 @@ internal fun Project.configureAndroidLibrary(libraryExtension: LibraryExtension)
 
 internal fun Project.applyAndroidLibraryPlugins() {
     apply(plugin = libs.plugins.android.library.get().pluginId)
-    apply(plugin = libs.plugins.kotlin.android.get().pluginId)
     apply(plugin = libs.plugins.dependency.analysis.get().pluginId)
 }
 
 internal fun Project.applyAndroidApplicationPlugins() {
     apply(plugin = libs.plugins.android.application.get().pluginId)
-    apply(plugin = libs.plugins.kotlin.android.get().pluginId)
     apply(plugin = libs.plugins.dependency.analysis.get().pluginId)
 }
 
-private fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
-    commonExtension.apply {
+internal fun Project.configureAndroid(libraryExtension: LibraryExtension) {
+    libraryExtension.apply {
+        compileSdk = libs.versions.sdk.compile.get().toInt()
+
+        defaultConfig {
+            minSdk = libs.versions.sdk.min.get().toInt()
+
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_21
+            targetCompatibility = JavaVersion.VERSION_21
+        }
+    }
+}
+
+private fun Project.configureAndroid(applicationExtension: ApplicationExtension) {
+    applicationExtension.apply {
         compileSdk = libs.versions.sdk.compile.get().toInt()
 
         defaultConfig {

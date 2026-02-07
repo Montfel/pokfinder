@@ -8,25 +8,26 @@ app-version-code = "16"
 app-version-name = "1.2.6"
 
 activity = "1.12.3"
-agp = "8.13.2"
+agp = "9.0.0"
 apollo = "4.4.1"
 coil = "3.3.0"
 compose = "2026.01.01"
 core = "1.17.0"
 dependencyAnalysis = "3.5.1"
 detekt = "1.23.8"
-firebase = "34.8.0"
+firebase = "34.9.0"
 firebaseCrashlyticsGradle = "3.0.6"
 googleServices = "4.4.4"
 gson = "2.13.2"
-hilt = "2.58"
+hilt = "2.59.1"
 hiltNavigation = "1.3.0"
-kotlin = "2.3.0"
+kotlin = "2.3.10"
 kotlinCoroutines = "1.10.2"
 kotlinSerialization = "1.10.0"
-kover = "0.9.5"
+kover = "0.9.6"
 ksp = "2.3.4"
 lifecycle = "2.10.0"
+material3 = "1.4.0"
 navigation = "1.0.0"
 okhttp = "5.3.2"
 paging = "3.4.0"
@@ -45,7 +46,6 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
@@ -64,7 +64,7 @@ coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" 
 coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
-compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 core = { module = "androidx.core:core-ktx", version.ref = "core" }

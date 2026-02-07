@@ -1,11 +1,11 @@
 package utils
 
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 
-internal fun configureCompose(commonExtension: CommonExtension<*, *, *, *, *, *>,) {
-    commonExtension.apply {
+internal fun configureCompose(libraryExtension: LibraryExtension) {
+    libraryExtension.apply {
         buildFeatures {
             compose = true
         }
