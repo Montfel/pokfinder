@@ -3,7 +3,7 @@ package com.montfel.pokfinder.feature.profile.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.montfel.pokfinder.core.designsystem.components.ErrorScreen
 import com.montfel.pokfinder.core.designsystem.components.LoadingScreen
@@ -13,7 +13,7 @@ fun ProfileRoute(
     id: Int,
     onNavigateToProfile: (id: Int) -> Unit,
     onNavigateBack: () -> Unit,
-    viewModel: ProfileViewModel = hiltViewModel(),
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
