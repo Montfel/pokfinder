@@ -29,6 +29,7 @@ dependencies {
     implementation(libs.kotlin.serialization.core)
     implementation(libs.navigation.runtime)
     implementation(libs.navigation.ui)
+    implementation(libs.navigation.lifecycle)
     implementation(libs.bundles.review)
     implementation(libs.splash)
 }
