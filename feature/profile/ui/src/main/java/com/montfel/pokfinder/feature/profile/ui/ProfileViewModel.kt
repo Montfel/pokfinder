@@ -41,6 +41,8 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun navigateToProfile(pokemonId: Int) {
+        if (pokemonId == _uiState.value.pokemonId) return
+
         viewModelScope.launch {
             _uiEvent.send(ProfileUiEvent.NavigateToProfile(pokemonId))
         }

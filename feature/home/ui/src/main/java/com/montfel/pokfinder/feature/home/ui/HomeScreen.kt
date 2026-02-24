@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.dropUnlessResumed
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
@@ -123,7 +124,9 @@ internal fun HomeScreen(
                 pokemon?.let {
                     PokemonCard(
                         pokemon = it,
-                        onClick = { onEvent(HomeEvent.NavigateToProfile(it.id)) }
+                        onClick = dropUnlessResumed {
+                            onEvent(HomeEvent.NavigateToProfile(it.id))
+                        }
                     )
                 }
             }

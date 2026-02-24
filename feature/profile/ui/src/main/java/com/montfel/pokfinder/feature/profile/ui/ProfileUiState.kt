@@ -1,9 +1,11 @@
 package com.montfel.pokfinder.feature.profile.ui
 
+import androidx.compose.runtime.Stable
 import com.montfel.pokfinder.feature.profile.domain.model.EvolutionChain
 import com.montfel.pokfinder.feature.profile.domain.model.PokemonProfile
 import com.montfel.pokfinder.feature.profile.domain.model.PokemonSpecies
 
+@Stable
 data class ProfileUiState(
     val pokemonId: Int? = null,
     val profile: PokemonProfile? = null,

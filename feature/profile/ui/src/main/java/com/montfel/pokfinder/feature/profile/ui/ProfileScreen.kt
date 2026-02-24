@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -61,10 +62,12 @@ internal fun ProfileScreen(
     val deviceLanguage = Locale.current.language
     val assetFromType = AssetFromType.getAsset(uiState.profile?.types?.firstOrNull()?.name)
     var selectedTab by rememberSaveable { mutableStateOf(ProfileTab.About) }
-    val tabs = if ((uiState.evolutionChain?.size ?: 0) > 1) {
-        ProfileTab.entries
-    } else {
-        ProfileTab.entries.dropLast(1)
+    val tabs = remember(uiState.evolutionChain) {
+        if ((uiState.evolutionChain?.size ?: 0) > 1) {
+            ProfileTab.entries
+        } else {
+            ProfileTab.entries.dropLast(1)
+        }
     }
 
     val species = uiState.species?.genera
@@ -252,7 +255,7 @@ internal fun ProfileScreen(
                 tabs.forEach { tab ->
                     Tab(
                         selected = selectedTab == tab,
-                        onClick = { selectedTab = ProfileTab.entries[tab.ordinal] },
+                        onClick = { selectedTab = tab },
                         modifier = Modifier.height(50.dp)
                     ) {
                         Text(

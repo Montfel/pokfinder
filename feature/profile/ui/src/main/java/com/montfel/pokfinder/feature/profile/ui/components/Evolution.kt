@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.dropUnlessResumed
 import coil3.compose.AsyncImage
 import com.montfel.pokfinder.core.designsystem.R
 import com.montfel.pokfinder.core.designsystem.theme.PokfinderTheme
@@ -94,7 +95,7 @@ fun PokemonEvolution(
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape)
-                .clickable { onClick(specie.id) }
+                .clickable(onClick = dropUnlessResumed { onClick(specie.id) })
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_pokeball),
