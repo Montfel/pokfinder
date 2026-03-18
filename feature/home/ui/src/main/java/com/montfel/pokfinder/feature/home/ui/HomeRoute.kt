@@ -15,7 +15,6 @@ fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val pokemonName = viewModel.pokemonName
     val pokemonLazyPagingItems = uiState.pokemonsPagingDataFlow.collectAsLazyPagingItems()
 
     LaunchedEffect(key1 = Unit) {
@@ -31,7 +30,6 @@ fun HomeRoute(
 
     HomeScreen(
         uiState = uiState,
-        pokemonName = pokemonName,
         pokemonLazyPagingItems = pokemonLazyPagingItems,
         onEvent = viewModel::onEvent
     )

@@ -25,6 +25,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -68,6 +69,16 @@ internal fun ProfileScreen(
         } else {
             ProfileTab.entries.dropLast(1)
         }
+    }
+
+    LaunchedEffect(tabs) {
+        if (selectedTab !in tabs) {
+            selectedTab = ProfileTab.About
+        }
+    }
+
+    val selectedTabIndex = remember(tabs, selectedTab) {
+        tabs.indexOf(selectedTab).coerceAtLeast(0)
     }
 
     val species = uiState.species?.genera
@@ -230,14 +241,14 @@ internal fun ProfileScreen(
             Spacer(modifier = Modifier.height(44.dp))
 
             PrimaryTabRow(
-                selectedTabIndex = selectedTab.ordinal,
+                selectedTabIndex = selectedTabIndex,
                 containerColor = Color.Transparent,
                 divider = {},
                 indicator = {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .tabIndicatorOffset(selectedTabIndex = selectedTab.ordinal),
+                            .tabIndicatorOffset(selectedTabIndex = selectedTabIndex),
                     ) {
                         Image(
                             painter = painterResource(id = drawableDesignSystem.ic_pokeball),

@@ -1,8 +1,5 @@
 package com.montfel.pokfinder.feature.home.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -41,9 +38,6 @@ class HomeViewModel @Inject constructor(
 
     private var hasCheckedDeepLink = false
 
-    var pokemonName by mutableStateOf("")
-        private set
-
     private var pokemons: Flow<PagingData<PokemonHome>> = emptyFlow()
 
     init {
@@ -53,11 +47,7 @@ class HomeViewModel @Inject constructor(
 
     fun onEvent(event: HomeEvent) {
         when (event) {
-            is HomeEvent.SearchPokemon -> {
-                updatePokemonName(event.query)
-                searchPokemon(event.query)
-            }
-
+            is HomeEvent.SearchPokemon -> searchPokemon(event.query)
             is HomeEvent.FilterByGeneration -> filterByGeneration(event.generation)
             is HomeEvent.SortPokemonList -> sortPokemonList(event.sortOption)
             is HomeEvent.NavigateToProfile -> navigateToProfile(event.pokemonId)
@@ -102,11 +92,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun updatePokemonName(query: String) {
-        pokemonName = query
-    }
-
     private fun searchPokemon(query: String) {
+        _uiState.update {
+            it.copy(searchQuery = query)
+        }
+
         viewModelScope.launch {
             if (query.isNotBlank()) {
                 val queryId = if (query.isDigitsOnly()) query.toInt() else 0

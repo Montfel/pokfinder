@@ -61,7 +61,6 @@ import kotlinx.coroutines.launch
 @Composable
 internal fun HomeScreen(
     uiState: HomeUiState,
-    pokemonName: String,
     pokemonLazyPagingItems: LazyPagingItems<PokemonHome>,
     onEvent: (HomeEvent) -> Unit,
 ) {
@@ -110,7 +109,7 @@ internal fun HomeScreen(
                 HomeHeader()
 
                 SearchField(
-                    text = pokemonName,
+                    text = uiState.searchQuery,
                     onType = { onEvent(HomeEvent.SearchPokemon(it)) },
                 )
             }
@@ -235,7 +234,6 @@ internal fun HomeScreen(
 private fun HomeScreenPreview() {
     HomeScreen(
         uiState = HomeUiState(),
-        pokemonName = "Lacey Dejesus",
         pokemonLazyPagingItems = flowOf(
             PagingData.from(
                 listOf(

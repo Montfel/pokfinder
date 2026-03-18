@@ -14,4 +14,5 @@ data class HomeUiState(
     val generations: List<Generation> = emptyList(),
     val generationSelected: Int = 0,
     val sortOptionSelected: SortOptions = SortOptions.SmallestNumber,
+    val searchQuery: String = ""
 )
