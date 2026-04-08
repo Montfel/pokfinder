@@ -3,6 +3,7 @@ query Evolution($id : Int!) {
         pokemon_v2_pokemonspecies {
             id
             name
+            evolves_from_species_id
             pokemon_v2_pokemonevolutions {
                 min_level
                 pokemon_v2_evolutiontrigger {
