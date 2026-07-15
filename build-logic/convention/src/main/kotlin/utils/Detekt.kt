@@ -29,10 +29,10 @@ internal fun Project.configureDetekt() {
         }
 
         tasks.withType<Detekt>().configureEach {
-            jvmTarget = JavaVersion.VERSION_21.toString()
+            jvmTarget = JavaVersion.VERSION_25.toString()
         }
         tasks.withType<DetektCreateBaselineTask>().configureEach {
-            jvmTarget = JavaVersion.VERSION_21.toString()
+            jvmTarget = JavaVersion.VERSION_25.toString()
         }
     }
 }
